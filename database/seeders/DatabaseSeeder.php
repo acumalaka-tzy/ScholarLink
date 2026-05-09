@@ -15,11 +15,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
+        // Create test user
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('Password123'),
+            'phone' => '08123456789',
+            'education_level' => 's1',
+            'role' => 'student',
         ]);
+
+        // Seed scholarships
+        $this->call(ScholarshipSeeder::class);
     }
 }
