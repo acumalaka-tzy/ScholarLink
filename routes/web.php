@@ -25,3 +25,13 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     })->name('dashboard');
 });
+
+// --- ROUTE BAGIAN (Katalog) ---
+// Ditaruh di luar middleware auth dulu agar bisa diakses tanpa login/database
+Route::get('/katalog', function () {
+    return view('katalog.index'); // Mengarah ke folder katalog file index
+})->name('katalog.index');
+
+Route::get('/katalog/detail', function () {
+    return view('katalog.detail'); // Mengarah ke folder katalog file detail
+})->name('katalog.detail');
