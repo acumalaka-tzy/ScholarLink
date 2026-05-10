@@ -15,14 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create test user
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => \Illuminate\Support\Facades\Hash::make('Password123'),
-            'phone' => '08123456789',
-            'education_level' => 's1',
-            'role' => 'student',
+        // User::factory(10)->create();
+
+        $this->call([
+            ProviderSeeder::class,
+            CategorySeeder::class,
+            ScholarshipSeeder::class,
         ]);
 
         // Seed scholarships
