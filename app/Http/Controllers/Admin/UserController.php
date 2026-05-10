@@ -37,21 +37,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
 {
-    User::create([
+    $user = User::create([
 
-        'nama' => $request->nama,
+    'nama' => $request->nama,
 
-        'email' => $request->email,
+    'email' => $request->email,
 
-        'password' => bcrypt($request->password),
+    'password' => bcrypt($request->password),
 
-        'role' => $request->role,
+    'role' => $request->role,
 
-        'status' => 'aktif',
+    'status' => 'aktif',
 
-        'tanggal_daftar' => now(),
+    'tanggal_daftar' => now(),
 
-    ]);
+]);
 
         return redirect('/admin/users')
             ->with('success', 'User berhasil ditambahkan');

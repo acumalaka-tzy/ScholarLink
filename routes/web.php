@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\CategoryController;
 
@@ -87,13 +88,21 @@ Route::prefix('admin')
 
         Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('admin.dashboard');
+        
+            Route::resource('users', UserController::class);
+            
+            Route::resource('providers', ProviderController::class);
 
+            Route::put(
+                'providers/{provider}/verify',
+                [ProviderController::class, 'verify']
+            )->name('providers.verify');
+
+            Route::put(
+                'providers/{provider}/reject',
+                [ProviderController::class, 'reject']
+            )->name('providers.reject');
 });
 
-Route::prefix('admin')
-    ->group(function () {
 
-        Route::resource('users', UserController::class);
-
-});
 
