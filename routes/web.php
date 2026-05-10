@@ -15,18 +15,23 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/scholarship', [ScholarshipController::class, 'index']);
+// Scholarship Routes
+Route::resource('scholarship', ScholarshipController::class);
 
 // Admin Dashboard
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth']);
+    ->middleware(['auth'])
+    ->name('admin.dashboard');
 
-Route::get('/categories', [CategoryController::class, 'index'])->name('kategori.index');
+// Categories
+Route::get('/categories', [CategoryController::class, 'index'])
+    ->name('kategori.index');
 
-Route::get('/scholarships', [ScholarshipController::class, 'index'])->name('scholarship.index');
-// Rute untuk menampilkan satu detail beasiswa
-Route::get('/categories/{id}', [ScholarshipController::class, 'show'])->name('kategori.detail');
+// Detail kategori
+Route::get('/categories/{id}', [ScholarshipController::class, 'show'])
+    ->name('kategori.detail');
 
+// Dummy pages
 Route::get('/applications', function () {
     return "Halaman Applications";
 });
@@ -59,27 +64,16 @@ Route::get('/admin-logs', function () {
     return "Halaman Admin Logs";
 });
 
-// Logout - for authenticated users only
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
-
-// Protected routes (require authentication)
+// Protected routes
 Route::middleware('auth')->group(function () {
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
 
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile', [ProfileController::class, 'update'])
+        ->name('profile.update');
 
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-});
-
-require __DIR__.'/auth.php';
-// Admin routes (require admin role)
-Route::prefix('admin')
-    ->group(function () {
-
-        Route::get('/dashboard', [DashboardController::class, 'index'])
-            ->name('admin.dashboard');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])
+        ->name('profile.destroy');
 
 });
-
