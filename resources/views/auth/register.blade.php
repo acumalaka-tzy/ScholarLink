@@ -121,6 +121,20 @@
                     <form method="POST" action="{{ route('register') }}" class="space-y-5">
                         @csrf
 
+                        <!-- Show Success Message -->
+                        @if(session('success'))
+                            <div class="bg-green-100 dark:bg-green-900/30 border-l-4 border-green-500 text-green-700 dark:text-green-300 p-4 rounded">
+                                <p class="font-semibold">✓ {{ session('success') }}</p>
+                            </div>
+                        @endif
+
+                        <!-- Show Error Message -->
+                        @if(session('error'))
+                            <div class="bg-red-100 dark:bg-red-900/30 border-l-4 border-red-500 text-red-700 dark:text-red-300 p-4 rounded">
+                                <p class="font-semibold">✗ {{ session('error') }}</p>
+                            </div>
+                        @endif
+
                         <!-- Name -->
                         <div>
                             <label for="name" class="block text-sm font-semibold text-gray-900 dark:text-white mb-2">Nama Lengkap</label>
@@ -238,8 +252,10 @@
                                 id="agree"
                                 name="agree"
                                 type="checkbox"
+                                value="1"
                                 required
-                                class="mt-1 w-4 h-4 text-indigo-600 rounded cursor-pointer"
+                                class="mt-1 w-4 h-4 text-indigo-600 rounded cursor-pointer @error('agree') border-red-500 @enderror"
+                                {{ old('agree') ? 'checked' : '' }}
                             >
                             <label for="agree" class="text-sm text-gray-700 dark:text-gray-300">
                                 Saya setuju dengan
