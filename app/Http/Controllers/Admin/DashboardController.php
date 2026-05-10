@@ -14,11 +14,11 @@ class DashboardController extends Controller
 {
     $totalUsers = User::count();
 
-    $totalProviders = 0;
+    $totalProviders = Provider::count();
 
-    $totalScholarships = 0;
+    $totalScholarships = Scholarship::count();
 
-    $totalApplications = 0;
+    $totalApplications = Application::count();
 
     $recentUsers = User::take(5)->get();
 
