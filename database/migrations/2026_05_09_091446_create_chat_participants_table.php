@@ -11,8 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('chat_participants', function (Blueprint $table) {
+     Schema::create('chat_participants', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('id_room');
+            $table->unsignedBigInteger('id_user');
+
+            $table->foreign('id_room')
+                ->references('id_room')
+                ->on('chat_rooms')
+                ->onDelete('cascade');
+
+            $table->foreign('id_user')
+                ->references('id_user')
+                ->on('users')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

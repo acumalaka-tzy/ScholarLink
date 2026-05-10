@@ -11,8 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admin_logs', function (Blueprint $table) {
-            $table->id();
+      Schema::create('admin_logs', function (Blueprint $table) {
+            $table->id('id_log');
+
+            $table->unsignedBigInteger('id_admin');
+
+            $table->text('aktivitas');
+            $table->text('keterangan')->nullable();
+            $table->timestamp('waktu')->useCurrent();
+
+            $table->foreign('id_admin')
+                ->references('id_user')
+                ->on('users')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

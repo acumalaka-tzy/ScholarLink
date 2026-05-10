@@ -12,7 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('documents', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_dokumen');
+
+            $table->unsignedBigInteger('id_application');
+
+            $table->string('jenis_dokumen');
+            $table->string('nama_file');
+            $table->string('file_path');
+            $table->timestamp('tanggal_upload')->useCurrent();
+
+            $table->foreign('id_application')
+                ->references('id_application')
+                ->on('applications')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

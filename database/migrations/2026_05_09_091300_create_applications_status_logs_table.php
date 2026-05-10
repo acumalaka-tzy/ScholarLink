@@ -11,8 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('applications_status_logs', function (Blueprint $table) {
-            $table->id();
+        Schema::create('application_status_log', function (Blueprint $table) {
+            $table->id('id_log');
+
+            $table->unsignedBigInteger('id_application');
+
+            $table->string('status');
+            $table->text('catatan')->nullable();
+            $table->timestamp('waktu')->useCurrent();
+
+            $table->foreign('id_application')
+                ->references('id_application')
+                ->on('applications')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }
