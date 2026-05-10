@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamp('waktu')->useCurrent();
 
             $table->foreign('id_admin')
-                ->references('id_user')
+                ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
 

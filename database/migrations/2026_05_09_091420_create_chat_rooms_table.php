@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('chat_rooms', function (Blueprint $table) {
+       Schema::create('chat_rooms', function (Blueprint $table) {
             $table->id('id_room');
 
             $table->unsignedBigInteger('id_beasiswa');
@@ -27,7 +27,7 @@ return new class extends Migration
                 ->onDelete('cascade');
 
             $table->foreign('dibuat_oleh')
-                ->references('id_user')
+                ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
 

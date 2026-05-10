@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('applications', function (Blueprint $table) {
+      Schema::create('applications', function (Blueprint $table) {
             $table->id('id_application');
 
             $table->unsignedBigInteger('id_user');
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('catatan')->nullable();
 
             $table->foreign('id_user')
-                ->references('id_user')
+                ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
 
@@ -32,7 +32,7 @@ return new class extends Migration
                 ->onDelete('cascade');
 
             $table->timestamps();
-    });
+        });
     }
 
     /**
