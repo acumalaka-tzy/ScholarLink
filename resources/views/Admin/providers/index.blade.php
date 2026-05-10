@@ -2,22 +2,22 @@
 
 @section('content')
 
-<div class="flex items-center justify-between mb-8">
+<div class="flex items-center justify-between mb-10">
 
     <div>
 
-        <h1 class="text-3xl font-bold text-gray-800">
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white">
             Manajemen Provider
         </h1>
 
-        <p class="text-gray-500 mt-1">
+        <p class="text-gray-500 dark:text-gray-400 mt-2 text-lg">
             Kelola seluruh provider ScholarLink
         </p>
 
     </div>
 
     <a href="{{ route('providers.create') }}"
-       class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg shadow">
+       class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 py-3 rounded-xl shadow-lg font-semibold transition transform hover:scale-105">
 
         + Tambah Provider
 
@@ -27,7 +27,7 @@
 
 @if(session('success'))
 
-    <div class="bg-green-100 text-green-700 px-5 py-4 rounded-lg mb-5">
+    <div class="bg-green-100 border border-green-300 text-green-700 px-5 py-4 rounded-2xl mb-6">
 
         {{ session('success') }}
 
@@ -36,175 +36,187 @@
 @endif
 
 <!-- Search -->
-<div class="bg-white p-5 rounded-xl shadow mb-6">
+<div class="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-5 mb-8 border border-gray-100 dark:border-slate-700">
 
     <input
         type="text"
         id="searchInput"
         placeholder="Cari provider..."
-        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        class="w-full bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-xl px-5 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
     >
 
 </div>
 
 <!-- Table -->
-<div class="bg-white rounded-xl shadow overflow-hidden">
+<div class="bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden border border-gray-100 dark:border-slate-700">
 
-    <table class="w-full">
+    <div class="overflow-x-auto">
 
-        <thead class="bg-gray-100">
+        <table class="w-full">
 
-            <tr>
-
-                <th class="text-left px-6 py-4">
-                    Nama Instansi
-                </th>
-
-                <th class="text-left px-6 py-4">
-                    Email
-                </th>
-
-                <th class="text-left px-6 py-4">
-                    No HP
-                </th>
-
-                <th class="text-left px-6 py-4">
-                    Alamat
-                </th>
-
-                <th class="text-left px-6 py-4">
-                    Status
-                </th>
-
-                <th class="text-center px-6 py-4">
-                    Action
-                </th>
-
-            </tr>
-
-        </thead>
-
-        <tbody>
-
-            @forelse ($providers as $provider)
-
-                <tr class="border-t hover:bg-gray-50 provider-row">
-
-                    <td class="px-6 py-4 provider-name">
-                        {{ $provider->nama_instansi }}
-                    </td>
-
-                    <td class="px-6 py-4">
-                        {{ $provider->email_kontak }}
-                    </td>
-
-                    <td class="px-6 py-4">
-                        {{ $provider->no_hp }}
-                    </td>
-
-                    <td class="px-6 py-4">
-                        {{ $provider->alamat }}
-                    </td>
-
-                    <td class="px-6 py-4">
-
-                        <span class="
-                            px-3 py-1 rounded-full text-sm
-
-                            @if($provider->status == 'verified')
-                                bg-green-100 text-green-600
-
-                            @elseif($provider->status == 'pending')
-                                bg-yellow-100 text-yellow-600
-
-                            @else
-                                bg-red-100 text-red-600
-                            @endif
-                        ">
-
-                            {{ ucfirst($provider->status) }}
-
-                        </span>
-
-                    </td>
-
-                    <td class="px-6 py-4">
-
-                        <div class="flex gap-2 justify-center">
-
-                            <!-- Verify -->
-                            <form action="{{ route('providers.verify', ['provider' => $provider->id_provider]) }}"
-                                  method="POST">
-
-                                @csrf
-                                @method('PUT')
-
-                                <button
-                                    class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm">
-
-                                    Verify
-
-                                </button>
-
-                            </form>
-
-                            <!-- Reject -->
-                            <form action="{{ route('providers.reject', ['provider' => $provider->id_provider]) }}"
-                                  method="POST">
-
-                                @csrf
-                                @method('PUT')
-
-                                <button
-                                    class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm">
-
-                                    Reject
-
-                                </button>
-
-                            </form>
-
-                            <!-- Delete -->
-                            <form action="{{ route('providers.destroy', ['provider' => $provider->id_provider]) }}"
-                                  method="POST">
-
-                                @csrf
-                                @method('DELETE')
-
-                                <button
-                                    onclick="return confirm('Yakin ingin menghapus provider ini?')"
-                                    class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm">
-
-                                    Delete
-
-                                </button>
-
-                            </form>
-
-                        </div>
-
-                    </td>
-
-                </tr>
-
-            @empty
+            <thead class="bg-gray-50 dark:bg-slate-900">
 
                 <tr>
 
-                    <td colspan="6"
-                        class="text-center py-8 text-gray-500">
+                    <th class="text-left px-6 py-5 text-gray-600 dark:text-gray-300 font-semibold">
+                        Nama Instansi
+                    </th>
 
-                        Tidak ada data provider
+                    <th class="text-left px-6 py-5 text-gray-600 dark:text-gray-300 font-semibold">
+                        Email
+                    </th>
 
-                    </td>
+                    <th class="text-left px-6 py-5 text-gray-600 dark:text-gray-300 font-semibold">
+                        No HP
+                    </th>
+
+                    <th class="text-left px-6 py-5 text-gray-600 dark:text-gray-300 font-semibold">
+                        Alamat
+                    </th>
+
+                    <th class="text-left px-6 py-5 text-gray-600 dark:text-gray-300 font-semibold">
+                        Status
+                    </th>
+
+                    <th class="text-center px-6 py-5 text-gray-600 dark:text-gray-300 font-semibold">
+                        Action
+                    </th>
 
                 </tr>
 
-            @endforelse
+            </thead>
 
-        </tbody>
+            <tbody>
 
-    </table>
+                @forelse ($providers as $provider)
+
+                    <tr class="border-t border-gray-100 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700/40 transition provider-row">
+
+                        <td class="px-6 py-5 provider-name text-gray-900 dark:text-white font-medium">
+                            {{ $provider->nama_instansi }}
+                        </td>
+
+                        <td class="px-6 py-5 text-gray-600 dark:text-gray-300">
+                            {{ $provider->email_kontak }}
+                        </td>
+
+                        <td class="px-6 py-5 text-gray-600 dark:text-gray-300">
+                            {{ $provider->no_hp }}
+                        </td>
+
+                        <td class="px-6 py-5 text-gray-600 dark:text-gray-300">
+                            {{ $provider->alamat }}
+                        </td>
+
+                        <td class="px-6 py-5">
+
+                            <span class="
+                                px-3 py-1 rounded-full text-sm font-semibold
+
+                                @if($provider->status == 'verified')
+                                    bg-green-100 text-green-600
+
+                                @elseif($provider->status == 'pending')
+                                    bg-yellow-100 text-yellow-600
+
+                                @else
+                                    bg-red-100 text-red-600
+                                @endif
+                            ">
+
+                                {{ ucfirst($provider->status) }}
+
+                            </span>
+
+                        </td>
+
+                        <td class="px-6 py-5">
+
+                            <div class="flex gap-2 justify-center">
+
+                                <!-- Edit -->
+                                <a href="{{ route('providers.edit', ['provider' => $provider->id_provider]) }}"
+                                   class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition">
+
+                                    Edit
+
+                                </a>
+
+                                <!-- Verify -->
+                                <form action="{{ route('providers.verify', ['provider' => $provider->id_provider]) }}"
+                                      method="POST">
+
+                                    @csrf
+                                    @method('PUT')
+
+                                    <button
+                                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition">
+
+                                        Verify
+
+                                    </button>
+
+                                </form>
+
+                                <!-- Reject -->
+                                <form action="{{ route('providers.reject', ['provider' => $provider->id_provider]) }}"
+                                      method="POST">
+
+                                    @csrf
+                                    @method('PUT')
+
+                                    <button
+                                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition">
+
+                                        Reject
+
+                                    </button>
+
+                                </form>
+
+                                <!-- Delete -->
+                                <form action="{{ route('providers.destroy', ['provider' => $provider->id_provider]) }}"
+                                      method="POST">
+
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button
+                                        onclick="return confirm('Yakin ingin menghapus provider ini?')"
+                                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition">
+
+                                        Delete
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                @empty
+
+                    <tr>
+
+                        <td colspan="6"
+                            class="text-center py-10 text-gray-500 dark:text-gray-400">
+
+                            Tidak ada data provider
+
+                        </td>
+
+                    </tr>
+
+                @endforelse
+
+            </tbody>
+
+        </table>
+
+    </div>
 
 </div>
 

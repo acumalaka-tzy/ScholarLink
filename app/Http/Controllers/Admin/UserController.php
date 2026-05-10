@@ -37,26 +37,51 @@ class UserController extends Controller
      */
     public function store(Request $request)
 {
-    $user = User::create([
+    $request->validate([
 
-    'nama' => $request->nama,
+        'nama' => 'required',
 
-    'email' => $request->email,
+        'email' => 'required|email',
 
-    'password' => bcrypt($request->password),
+        'password' => 'required|min:6',
 
-    'role' => $request->role,
+        'role' => 'required',
 
-    'status' => 'aktif',
+    ], [
 
-    'tanggal_daftar' => now(),
+        'nama.required' => 'Nama wajib diisi',
 
-]);
+        'email.required' => 'Email wajib diisi',
 
-        return redirect('/admin/users')
-            ->with('success', 'User berhasil ditambahkan');
-    }
+        'email.email' => 'Format email tidak valid',
 
+        'password.required' => 'Password wajib diisi',
+
+        'password.min' => 'Password minimal 6 karakter',
+
+        'role.required' => 'Role wajib dipilih',
+
+    ]);
+
+    User::create([
+
+        'nama' => $request->nama,
+
+        'email' => $request->email,
+
+        'password' => bcrypt($request->password),
+
+        'role' => $request->role,
+
+        'status' => 'aktif',
+
+        'tanggal_daftar' => now(),
+
+    ]);
+
+    return redirect()->route('users.index')
+        ->with('success', 'User berhasil ditambahkan');
+}
     /**
      * Display the specified resource.
      */
@@ -79,22 +104,37 @@ class UserController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
+{
+    $request->validate([
 
-        $user->update([
+        'nama' => 'required',
 
-            'nama' => $request->nama,
+        'email' => 'required|email',
 
-            'email' => $request->email,
+        'role' => 'required',
 
-            'role' => $request->role,
-    
-        ]);
+    ], [
 
-        return redirect('/admin/users')
-            ->with('success', 'User berhasil diupdate');
-    }
+        'nama.required' => 'Nama wajib diisi',
+
+        'email.required' => 'Email wajib diisi',
+
+        'email.email' => 'Format email tidak valid',
+
+        'role.required' => 'Role wajib dipilih',
+
+    ]);
+
+    $user = User::findOrFail($id);
+
+    $user->update([
+        'nama' => $request->nama,
+        'email' => $request->email,
+        'role' => $request->role,
+    ]);
+
+    return redirect()->route('users.index');
+}
 
     /**
      * Remove the specified resource from storage.

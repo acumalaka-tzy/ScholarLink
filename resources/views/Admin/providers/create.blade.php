@@ -7,10 +7,10 @@
 </h1>
 
 <form action="{{ route('providers.store') }}"
-      method="POST"
-      class="bg-white p-8 rounded-xl shadow">
+      method="POST">
 
     @csrf
+    @method('POST')
 
     <div class="mb-5">
 

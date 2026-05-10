@@ -9,7 +9,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white">
 
 <div class="flex">
 
@@ -23,7 +23,7 @@
         <ul class="space-y-4">
 
             <li>
-                <a href="/admin/dashboard" class="hover:text-blue-400">
+                <a href="/admin" class="hover:text-blue-400">
                     Dashboard
                 </a>
             </li>
