@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ScholarshipController;
+use App\Http\Controllers\CategoryController;
 
 // Home route - accessible to all users (authenticated and guests)
 Route::get('/', function () {
@@ -33,11 +34,11 @@ Route::get('/providers', function () {
     return "Halaman Providers";
 });
 
-Route::get('/categories', function () {
-    return "Halaman Categories";
-});
+Route::get('/categories', [CategoryController::class, 'index'])->name('kategori.index');
 
-Route::get('/scholarships', [ScholarshipController::class, 'index']);
+Route::get('/scholarships', [ScholarshipController::class, 'index'])->name('scholarship.index');
+// Rute untuk menampilkan satu detail beasiswa
+Route::get('/categories/{id}', [ScholarshipController::class, 'show'])->name('kategori.detail');
 
 Route::get('/applications', function () {
     return "Halaman Applications";
@@ -81,12 +82,3 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
 });
 
-// --- ROUTE BAGIAN (Katalog) ---
-// Ditaruh di luar middleware auth dulu agar bisa diakses tanpa login/database
-Route::get('/katalog', function () {
-    return view('katalog.index'); // Mengarah ke folder katalog file index
-})->name('katalog.index');
-
-Route::get('/katalog/detail', function () {
-    return view('katalog.detail'); // Mengarah ke folder katalog file detail
-})->name('katalog.detail');
