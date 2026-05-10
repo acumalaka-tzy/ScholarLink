@@ -4,6 +4,7 @@ use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,6 +21,48 @@ Route::get('/scholarship', [ScholarshipController::class, 'index']);
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth']);
 
+Route::get('/categories', [CategoryController::class, 'index'])->name('kategori.index');
+
+Route::get('/scholarships', [ScholarshipController::class, 'index'])->name('scholarship.index');
+// Rute untuk menampilkan satu detail beasiswa
+Route::get('/categories/{id}', [ScholarshipController::class, 'show'])->name('kategori.detail');
+
+Route::get('/applications', function () {
+    return "Halaman Applications";
+});
+
+Route::get('/documents', function () {
+    return "Halaman Documents";
+});
+
+Route::get('/application-status-logs', function () {
+    return "Halaman Application Status Logs";
+});
+
+Route::get('/favorites', function () {
+    return "Halaman Favorites";
+});
+
+Route::get('/chat-rooms', function () {
+    return "Halaman Chat Rooms";
+});
+
+Route::get('/chat-participants', function () {
+    return "Halaman Chat Participants";
+});
+
+Route::get('/messages', function () {
+    return "Halaman Messages";
+});
+
+Route::get('/admin-logs', function () {
+    return "Halaman Admin Logs";
+});
+
+// Logout - for authenticated users only
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+// Protected routes (require authentication)
 Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -31,3 +74,12 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+// Admin routes (require admin role)
+Route::prefix('admin')
+    ->group(function () {
+
+        Route::get('/dashboard', [DashboardController::class, 'index'])
+            ->name('admin.dashboard');
+
+});
+
