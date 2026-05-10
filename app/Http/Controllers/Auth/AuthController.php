@@ -31,13 +31,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
-            $user = Auth::user();
-            $redirectPath = match($user->role) {
-                'admin' => '/admin/dashboard',
-                'provider' => '/provider/dashboard',
-                default => '/dashboard',
-            };
-            return redirect()->intended($redirectPath)->with('success', 'Login berhasil!');
+            return redirect()->intended('/')->with('success', 'Login berhasil!');
         }
 
         return back()->withErrors([
@@ -63,9 +57,13 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'nullable|string|max:20',
             'education_level' => 'nullable|string|in:sma,d3,s1,s2,s3',
-            'role' => 'required|string|in:student,provider',
             'password' => ['required', 'confirmed', Password::min(8)->mixedCase()->numbers()],
-            'agree' => 'accepted',
+            'agree' => 'required',
+        ], [
+            'agree.required' => 'Anda harus setuju dengan Syarat & Ketentuan',
+            'password.required' => 'Password harus diisi',
+            'password.confirmed' => 'Konfirmasi password tidak sesuai',
+            'email.unique' => 'Email sudah terdaftar',
         ]);
 
         try {
@@ -74,15 +72,14 @@ class AuthController extends Controller
                 'email' => $validated['email'],
                 'phone' => $validated['phone'],
                 'education_level' => $validated['education_level'],
-                'role' => $validated['role'],
+                'role' => 'student',
                 'password' => Hash::make($validated['password']),
             ]);
 
-            Auth::login($user);
-            $redirectPath = $user->role === 'provider' ? '/provider/dashboard' : '/dashboard';
-            return redirect($redirectPath)->with('success', 'Pendaftaran berhasil! Selamat datang!');
+            // Redirect ke login setelah pendaftaran sukses
+            return redirect('/login')->with('success', 'Pendaftaran berhasil! Silakan login dengan akun Anda.');
         } catch (\Exception $e) {
-            return back()->with('error', 'Terjadi kesalahan saat pendaftaran. Silakan coba lagi.')->withInput();
+            return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
         }
     }
 

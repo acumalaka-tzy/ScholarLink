@@ -4,9 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ScholarshipController;
 
-// Home route
+// Home route - accessible to all users (authenticated and guests)
 Route::get('/', function () {
-    return view('home');
+    $scholarships = \App\Models\Scholarship::active()->get();
+    return view('home', ['scholarships' => $scholarships]);
 })->name('home');
 
 // Authentication routes
@@ -69,6 +70,9 @@ Route::get('/messages', function () {
 Route::get('/admin-logs', function () {
     return "Halaman Admin Logs";
 });
+
+// Logout - for authenticated users only
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
 // Protected routes (require authentication)
 Route::middleware('auth')->group(function () {

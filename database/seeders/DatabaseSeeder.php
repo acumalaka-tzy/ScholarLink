@@ -22,5 +22,8 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             ScholarshipSeeder::class,
         ]);
+
+        // Seed scholarships
+        $this->call(ScholarshipSeeder::class);
     }
 }
