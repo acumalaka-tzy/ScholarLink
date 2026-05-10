@@ -1,36 +1,25 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ScholarshipController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 
-
-// Home route - accessible to all users (authenticated and guests)
 Route::get('/', function () {
-    $scholarships = \App\Models\Scholarship::active()->get();
-    return view('home', ['scholarships' => $scholarships]);
-})->name('home');
-
-// Authentication routes
-    /*
-|--------------------------------------------------------------------------
-| ScholarLink Routes
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/users', function () {
-    return "Halaman Users";
+    return view('welcome');
 });
 
-Route::get('/profiles', function () {
-    return "Halaman Profiles";
-});
+// Dashboard biasa
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/providers', function () {
-    return "Halaman Providers";
-});
+Route::get('/scholarship', [ScholarshipController::class, 'index']);
+
+// Admin Dashboard
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth']);
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('kategori.index');
 
@@ -75,11 +64,16 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 
 // Protected routes (require authentication)
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
 });
 
+require __DIR__.'/auth.php';
 // Admin routes (require admin role)
 Route::prefix('admin')
     ->group(function () {
@@ -88,3 +82,4 @@ Route::prefix('admin')
             ->name('admin.dashboard');
 
 });
+

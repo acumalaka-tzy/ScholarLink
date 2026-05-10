@@ -10,11 +10,22 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         DB::table('categories')->insert([
+
             [
-                'nama_kategori' => 'Akademik',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]
+                'nama_kategori' => 'Teknologi',
+                'deskripsi' => 'Beasiswa bidang teknologi'
+            ],
+
+            [
+                'nama_kategori' => 'Bisnis',
+                'deskripsi' => 'Beasiswa bidang bisnis'
+            ],
+
+            [
+                'nama_kategori' => 'Kesehatan',
+                'deskripsi' => 'Beasiswa bidang kesehatan'
+            ],
+
         ]);
     }
 }

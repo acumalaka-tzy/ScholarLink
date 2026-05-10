@@ -8,40 +8,37 @@ use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         DB::table('users')->insert([
 
-    [
-        'nama' => 'Admin',
-        'email' => 'admin@gmail.com',
-        'password' => Hash::make('password'),
-        'role' => 'admin',
-        'status' => 'aktif',
-        'tanggal_daftar' => now(),
-    ],
+            [
+                'name' => 'Admin ScholarLink',
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make('password'),
+                'role' => 'admin',
+                'status' => 'aktif',
+                'tanggal_daftar' => now(),
+            ],
 
-    [
-        'nama' => 'Budi',
-        'email' => 'budi@gmail.com',
-        'password' => Hash::make('password'),
-        'role' => 'user',
-        'status' => 'aktif',
-        'tanggal_daftar' => now(),
-    ],
+            [
+                'name' => 'Budi Mahasiswa',
+                'email' => 'budi@gmail.com',
+                'password' => Hash::make('password'),
+                'role' => 'mahasiswa',
+                'status' => 'aktif',
+                'tanggal_daftar' => now(),
+            ],
 
-    [
-        'nama' => 'Siti',
-        'email' => 'siti@gmail.com',
-        'password' => Hash::make('password'),
-        'role' => 'user',
-        'status' => 'aktif',
-        'tanggal_daftar' => now(),
-    ],
+            [
+                'name' => 'Provider Scholarship',
+                'email' => 'provider@gmail.com',
+                'password' => Hash::make('password'),
+                'role' => 'provider',
+                'status' => 'aktif',
+                'tanggal_daftar' => now(),
+            ],
 
-    ]);
+        ]);
     }
 }
