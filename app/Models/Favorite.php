@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Favorite extends Model
 {
-    //
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function scholarship()
+    {
+        return $this->belongsTo(Scholarship::class, 'id_beasiswa');
+    }
 }
