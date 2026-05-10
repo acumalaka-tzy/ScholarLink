@@ -101,11 +101,6 @@
                 User
             </option>
 
-            <option value="provider"
-                {{ $user->role == 'provider' ? 'selected' : '' }}>
-                Provider
-            </option>
-
             <option value="admin"
                 {{ $user->role == 'admin' ? 'selected' : '' }}>
                 Admin

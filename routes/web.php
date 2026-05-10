@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ScholarshipController;
+use App\Http\Controllers\CategoryController;
 
 
 // Home route - accessible to all users (authenticated and guests)
@@ -32,11 +34,11 @@ Route::get('/providers', function () {
     return "Halaman Providers";
 });
 
-Route::get('/categories', function () {
-    return "Halaman Categories";
-});
+Route::get('/categories', [CategoryController::class, 'index'])->name('kategori.index');
 
-Route::get('/scholarships', [ScholarshipController::class, 'index']);
+Route::get('/scholarships', [ScholarshipController::class, 'index'])->name('scholarship.index');
+// Rute untuk menampilkan satu detail beasiswa
+Route::get('/categories/{id}', [ScholarshipController::class, 'show'])->name('kategori.detail');
 
 Route::get('/applications', function () {
     return "Halaman Applications";
@@ -86,12 +88,21 @@ Route::prefix('admin')
 
         Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('admin.dashboard');
+        
+            Route::resource('users', UserController::class);
+            
+            Route::resource('providers', ProviderController::class);
 
+            Route::put(
+                'providers/{provider}/verify',
+                [ProviderController::class, 'verify']
+            )->name('providers.verify');
+
+            Route::put(
+                'providers/{provider}/reject',
+                [ProviderController::class, 'reject']
+            )->name('providers.reject');
 });
 
-Route::prefix('admin')
-    ->group(function () {
 
-        Route::resource('users', UserController::class);
 
-});

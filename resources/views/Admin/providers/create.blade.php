@@ -3,10 +3,11 @@
 @section('content')
 
 <h1 class="text-3xl font-bold mb-8">
-    Tambah User
+    Tambah Provider
 </h1>
 
-<form action="{{ route('users.store') }}" method="POST"
+<form action="{{ route('providers.store') }}"
+      method="POST"
       class="bg-white p-8 rounded-xl shadow">
 
     @csrf
@@ -14,11 +15,11 @@
     <div class="mb-5">
 
         <label class="block mb-2 font-semibold">
-            Nama
+            Nama Instansi
         </label>
 
         <input type="text"
-               name="nama"
+               name="nama_instansi"
                class="w-full border rounded-lg px-4 py-3">
 
     </div>
@@ -30,7 +31,7 @@
         </label>
 
         <input type="email"
-               name="email"
+               name="email_kontak"
                class="w-full border rounded-lg px-4 py-3">
 
     </div>
@@ -38,11 +39,11 @@
     <div class="mb-5">
 
         <label class="block mb-2 font-semibold">
-            Password
+            No HP
         </label>
 
-        <input type="password"
-               name="password"
+        <input type="text"
+               name="no_hp"
                class="w-full border rounded-lg px-4 py-3">
 
     </div>
@@ -50,16 +51,36 @@
     <div class="mb-5">
 
         <label class="block mb-2 font-semibold">
-            Role
+            Website
         </label>
 
-        <select name="role"
-                class="w-full border rounded-lg px-4 py-3">
+        <input type="text"
+               name="website"
+               class="w-full border rounded-lg px-4 py-3">
 
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
+    </div>
 
-        </select>
+    <div class="mb-5">
+
+        <label class="block mb-2 font-semibold">
+            Alamat
+        </label>
+
+        <textarea
+            name="alamat"
+            class="w-full border rounded-lg px-4 py-3"></textarea>
+
+    </div>
+
+    <div class="mb-5">
+
+        <label class="block mb-2 font-semibold">
+            Deskripsi
+        </label>
+
+        <textarea
+            name="deskripsi_instansi"
+            class="w-full border rounded-lg px-4 py-3"></textarea>
 
     </div>
 
