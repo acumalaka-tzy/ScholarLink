@@ -320,67 +320,107 @@
     <section id="scholarships" class="py-20 md:py-28 bg-white dark:bg-slate-950">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h3 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Beasiswa Unggulan Bulan Ini</h3>
-                <p class="text-xl text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">Peluang emas untuk mengubah masa depan Anda</p>
+                <h3 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Katalog Beasiswa Terlengkap</h3>
+                <p class="text-xl text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">Temukan ribuan peluang beasiswa dari universitas terkemuka</p>
             </div>
-            <div class="grid md:grid-cols-2 gap-8 mb-12">
-                <div class="featured-scholarship text-white p-8 rounded-2xl card-hover cursor-pointer shadow-xl relative group overflow-hidden">
-                    <div class="relative z-10">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <p class="text-sm font-semibold text-pink-200 mb-2">PENUH</p>
-                                <h4 class="text-3xl font-bold">Beasiswa S1 UI</h4>
+
+            @if($scholarships->count() > 0)
+                <!-- Featured Scholarships Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    @foreach($scholarships->take(6) as $scholarship)
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden card-hover border border-gray-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-indigo-600 transition">
+                            <!-- Header -->
+                            <div class="h-24 bg-gradient-to-r {{ $scholarship->is_featured ? 'from-indigo-500 to-purple-600' : 'from-blue-500 to-cyan-600' }} relative overflow-hidden">
+                                <div class="absolute inset-0 opacity-10">
+                                    <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1200 120"><path d="M0,0 Q300,50 600,0 T1200,0 L1200,120 L0,120 Z" fill="currentColor"></path></svg>
+                                </div>
+                                @if($scholarship->is_featured)
+                                    <div class="absolute top-3 right-3 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                                        ⭐ Unggulan
+                                    </div>
+                                @endif
                             </div>
-                            <div class="bg-white/20 backdrop-blur px-4 py-2 rounded-full">
-                                <p class="text-sm font-bold">Terbuka</p>
+
+                            <!-- Content -->
+                            <div class="p-6">
+                                <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2 line-clamp-2">{{ $scholarship->name }}</h4>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">{{ $scholarship->university }} • {{ $scholarship->location }}</p>
+                                
+                                <!-- Details Grid -->
+                                <div class="grid grid-cols-2 gap-3 mb-6">
+                                    <div class="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 p-3 rounded-lg">
+                                        <p class="text-gray-600 dark:text-gray-400 text-xs font-semibold mb-1">JENJANG</p>
+                                        <p class="text-gray-900 dark:text-white font-bold text-sm">
+                                            @switch($scholarship->level)
+                                                @case('sma') SMA @break
+                                                @case('d3') Diploma 3 @break
+                                                @case('s1') Strata 1 @break
+                                                @case('s2') Strata 2 @break
+                                                @case('s3') Strata 3 @break
+                                                @default {{ $scholarship->level }}
+                                            @endswitch
+                                        </p>
+                                    </div>
+                                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-3 rounded-lg">
+                                        <p class="text-gray-600 dark:text-gray-400 text-xs font-semibold mb-1">BENEFIT</p>
+                                        <p class="text-gray-900 dark:text-white font-bold text-sm">{{ $scholarship->benefit_type }}</p>
+                                    </div>
+                                </div>
+
+                                <!-- Deadline -->
+                                <div class="flex items-center gap-2 mb-6 text-sm">
+                                    <span class="text-red-600 dark:text-red-400 font-bold">📅</span>
+                                    <span class="text-gray-700 dark:text-gray-300">
+                                        @if($scholarship->deadline->isPast())
+                                            <span class="text-red-600 dark:text-red-400 font-semibold">Sudah Ditutup</span>
+                                        @else
+                                            <span class="text-green-600 dark:text-green-400">{{ $scholarship->deadline->format('d M Y') }}</span>
+                                        @endif
+                                    </span>
+                                </div>
+
+                                <!-- Status Badge & Button -->
+                                <div class="flex gap-2">
+                                    @if($scholarship->available_slots)
+                                        <span class="inline-block bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-3 py-1 rounded-full text-xs font-semibold">
+                                            {{ $scholarship->available_slots }} Kuota
+                                        </span>
+                                    @endif
+                                </div>
+                                
+                                @auth
+                                    <button class="w-full mt-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-2 rounded-lg font-semibold transition transform hover:scale-105">
+                                        Lihat Detail & Daftar →
+                                    </button>
+                                @else
+                                    <button class="w-full mt-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-2 rounded-lg font-semibold transition transform hover:scale-105">
+                                        Lihat Detail →
+                                    </button>
+                                @endauth
                             </div>
                         </div>
-                        <p class="text-pink-100 text-lg mb-6">Universitas Indonesia - Jakarta</p>
-                        <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
-                            <div class="bg-white/10 backdrop-blur p-3 rounded-lg">
-                                <p class="text-pink-200 text-xs mb-1">Jenjang</p>
-                                <p class="font-bold">Strata 1</p>
-                            </div>
-                            <div class="bg-white/10 backdrop-blur p-3 rounded-lg">
-                                <p class="text-pink-200 text-xs mb-1">Benefit</p>
-                                <p class="font-bold">Penuh + Hidup</p>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm">Deadline: 31 Desember 2026</span>
-                            <button class="bg-white text-pink-600 px-4 py-2 rounded-lg font-bold hover:bg-pink-50 transition transform hover:scale-105">Lihat →</button>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
-                <div class="featured-scholarship text-white p-8 rounded-2xl card-hover cursor-pointer shadow-xl relative group overflow-hidden" style="background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);">
-                    <div class="relative z-10">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <p class="text-sm font-semibold text-blue-200 mb-2">MAGISTER</p>
-                                <h4 class="text-3xl font-bold">Beasiswa ITB</h4>
-                            </div>
-                            <div class="bg-white/20 backdrop-blur px-4 py-2 rounded-full">
-                                <p class="text-sm font-bold">Terbuka</p>
-                            </div>
-                        </div>
-                        <p class="text-blue-100 text-lg mb-6">Institut Teknologi Bandung - Jawa Barat</p>
-                        <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
-                            <div class="bg-white/10 backdrop-blur p-3 rounded-lg">
-                                <p class="text-blue-200 text-xs mb-1">Jenjang</p>
-                                <p class="font-bold">Magister</p>
-                            </div>
-                            <div class="bg-white/10 backdrop-blur p-3 rounded-lg">
-                                <p class="text-blue-200 text-xs mb-1">Benefit</p>
-                                <p class="font-bold">Penuh + Riset</p>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm">Deadline: 15 Januari 2027</span>
-                            <button class="bg-white text-blue-600 px-4 py-2 rounded-lg font-bold hover:bg-blue-50 transition transform hover:scale-105">Lihat →</button>
-                        </div>
-                    </div>
+
+                <!-- View All Button -->
+                <div class="text-center">
+                    @if($scholarships->count() > 6)
+                        @auth
+                            <a href="{{ route('dashboard') }}" class="inline-block px-8 py-3 border-2 border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 rounded-lg font-bold hover:bg-indigo-50 dark:hover:bg-slate-800 transition">
+                                Lihat Semua Beasiswa ({{ $scholarships->count() }}) →
+                            </a>
+                        @else
+                            <a href="{{ route('register') }}" class="inline-block px-8 py-3 border-2 border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 rounded-lg font-bold hover:bg-indigo-50 dark:hover:bg-slate-800 transition">
+                                Lihat Semua Beasiswa ({{ $scholarships->count() }}) →
+                            </a>
+                        @endauth
+                    @endif
                 </div>
-            </div>
+            @else
+                <div class="text-center py-12 bg-gray-50 dark:bg-slate-800/50 rounded-2xl border-2 border-dashed border-gray-300 dark:border-slate-700">
+                    <p class="text-gray-600 dark:text-gray-400 text-lg">Data beasiswa sedang dimuat...</p>
+                </div>
+            @endif
         </div>
     </section>
 

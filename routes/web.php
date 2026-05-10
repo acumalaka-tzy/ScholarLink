@@ -6,9 +6,10 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ScholarshipController;
 
 
-// Home route
+// Home route - accessible to all users (authenticated and guests)
 Route::get('/', function () {
-    return view('home');
+    $scholarships = \App\Models\Scholarship::active()->get();
+    return view('home', ['scholarships' => $scholarships]);
 })->name('home');
 
 // Authentication routes
@@ -17,10 +18,6 @@ Route::get('/', function () {
 | ScholarLink Routes
 |--------------------------------------------------------------------------
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/users', function () {
     return "Halaman Users";
@@ -71,6 +68,9 @@ Route::get('/messages', function () {
 Route::get('/admin-logs', function () {
     return "Halaman Admin Logs";
 });
+
+// Logout - for authenticated users only
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
 // Protected routes (require authentication)
 Route::middleware('auth')->group(function () {
