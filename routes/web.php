@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\CategoryController;
+
 
 // Home route - accessible to all users (authenticated and guests)
 Route::get('/', function () {
@@ -17,10 +19,6 @@ Route::get('/', function () {
 | ScholarLink Routes
 |--------------------------------------------------------------------------
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/users', function () {
     return "Halaman Users";
@@ -82,3 +80,11 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
 });
 
+// Admin routes (require admin role)
+Route::prefix('admin')
+    ->group(function () {
+
+        Route::get('/dashboard', [DashboardController::class, 'index'])
+            ->name('admin.dashboard');
+
+});
