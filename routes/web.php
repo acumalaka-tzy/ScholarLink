@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ScholarshipController;
 
@@ -85,5 +86,12 @@ Route::prefix('admin')
 
         Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('admin.dashboard');
+
+});
+
+Route::prefix('admin')
+    ->group(function () {
+
+        Route::resource('users', UserController::class);
 
 });

@@ -17,6 +17,10 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
+    protected $primaryKey = 'id_user';
+
+    public $timestamps = false;
+
     /**
      * Get the attributes that should be cast.
      *
@@ -29,4 +33,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    protected $fillable = [
+        'nama',
+        'email',
+        'password',
+        'role',
+        'status',
+        'tanggal_daftar',
+    ];
 }

@@ -29,25 +29,25 @@
             </li>
 
             <li>
-                <a href="#" class="hover:text-blue-400">
+                <a href="/admin/users" class="hover:text-blue-400">
                     Users
                 </a>
             </li>
 
             <li>
-                <a href="#" class="hover:text-blue-400">
+                <a href="/admin/providers" class="hover:text-blue-400">
                     Providers
                 </a>
             </li>
 
             <li>
-                <a href="#" class="hover:text-blue-400">
+                <a href="/admin/scholarships" class="hover:text-blue-400">
                     Scholarships
                 </a>
             </li>
 
             <li>
-                <a href="#" class="hover:text-blue-400">
+                <a href="/admin/monitoring " class="hover:text-blue-400">
                     Monitoring
                 </a>
             </li>
