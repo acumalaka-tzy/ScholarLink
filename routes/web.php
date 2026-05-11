@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Admin\DashboardController;
 
 Route::get('/', function () {
@@ -46,17 +47,18 @@ Route::middleware(['auth', 'provider'])->group(function () {
 
 Route::middleware(['auth', 'mahasiswa'])->group(function () {
 
+    // Dashboard mahasiswa
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 
+    // Favorites
     Route::get('/favorites', function () {
         return "Halaman Favorites";
     });
 
-    Route::get('/applications', function () {
-        return "Halaman Applications";
-    });
+    // Application Scholarship
+    Route::resource('applications', ApplicationController::class);
 
 });
 
@@ -115,6 +117,11 @@ Route::middleware('auth')->group(function () {
         ->name('profile.destroy');
 
 });
+
+
+// ==========================
+// LOGOUT TEST
+// ==========================
 
 Route::get('/logout-test', function () {
 
