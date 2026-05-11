@@ -1,27 +1,69 @@
 <?php
 
-use App\Http\Controllers\ScholarshipController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Admin\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Dashboard biasa
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-// Scholarship Routes
-Route::resource('scholarship', ScholarshipController::class);
+// ==========================
+// ADMIN AREA
+// ==========================
 
-// Admin Dashboard
-Route::get('/admin/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('admin.dashboard');
+Route::middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])
+        ->name('admin.dashboard');
+
+    Route::get('/admin-logs', function () {
+        return "Halaman Admin Logs";
+    });
+
+});
+
+
+// ==========================
+// PROVIDER AREA
+// ==========================
+
+Route::middleware(['auth', 'provider'])->group(function () {
+
+    // CRUD Scholarship
+    Route::resource('scholarship', ScholarshipController::class);
+
+});
+
+
+// ==========================
+// MAHASISWA AREA
+// ==========================
+
+Route::middleware(['auth', 'mahasiswa'])->group(function () {
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::get('/favorites', function () {
+        return "Halaman Favorites";
+    });
+
+    Route::get('/applications', function () {
+        return "Halaman Applications";
+    });
+
+});
+
+
+// ==========================
+// PUBLIC AREA
+// ==========================
 
 // Categories
 Route::get('/categories', [CategoryController::class, 'index'])
@@ -31,10 +73,10 @@ Route::get('/categories', [CategoryController::class, 'index'])
 Route::get('/categories/{id}', [ScholarshipController::class, 'show'])
     ->name('kategori.detail');
 
-// Dummy pages
-Route::get('/applications', function () {
-    return "Halaman Applications";
-});
+
+// ==========================
+// OTHER PAGES
+// ==========================
 
 Route::get('/documents', function () {
     return "Halaman Documents";
@@ -42,10 +84,6 @@ Route::get('/documents', function () {
 
 Route::get('/application-status-logs', function () {
     return "Halaman Application Status Logs";
-});
-
-Route::get('/favorites', function () {
-    return "Halaman Favorites";
 });
 
 Route::get('/chat-rooms', function () {
@@ -60,11 +98,11 @@ Route::get('/messages', function () {
     return "Halaman Messages";
 });
 
-Route::get('/admin-logs', function () {
-    return "Halaman Admin Logs";
-});
 
-// Protected routes
+// ==========================
+// PROFILE
+// ==========================
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'edit'])
@@ -77,3 +115,13 @@ Route::middleware('auth')->group(function () {
         ->name('profile.destroy');
 
 });
+
+Route::get('/logout-test', function () {
+
+    auth()->logout();
+
+    return redirect('/login');
+
+});
+
+require __DIR__.'/auth.php';

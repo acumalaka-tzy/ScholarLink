@@ -6,14 +6,14 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class MahasiswaMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check() && auth()->user()->role == 'admin') {
+        if (auth()->check() && auth()->user()->role == 'mahasiswa') {
             return $next($request);
         }
 
-        abort(403, 'Akses hanya untuk admin');
+        abort(403, 'Akses hanya untuk mahasiswa');
     }
 }
