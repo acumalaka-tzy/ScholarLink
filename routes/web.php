@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\CategoryController;
@@ -60,6 +61,9 @@ Route::middleware(['auth', 'mahasiswa'])->group(function () {
     // Application Scholarship
     Route::resource('applications', ApplicationController::class);
 
+    // Documents
+    Route::resource('documents', DocumentController::class);
+
 });
 
 
@@ -79,10 +83,6 @@ Route::get('/categories/{id}', [ScholarshipController::class, 'show'])
 // ==========================
 // OTHER PAGES
 // ==========================
-
-Route::get('/documents', function () {
-    return "Halaman Documents";
-});
 
 Route::get('/application-status-logs', function () {
     return "Halaman Application Status Logs";
