@@ -29,13 +29,4 @@ class Application extends Model
     {
         return $this->belongsTo(Scholarship::class, 'id_beasiswa', 'id_beasiswa');
     }
-
-    public function documents()
-    {
-        return $this->hasMany(
-            Document::class,
-            'id_application',
-            'id_application'
-        );
-    }
 }
