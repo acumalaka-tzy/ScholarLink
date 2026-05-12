@@ -16,10 +16,19 @@
             </p>
         </div>
 
-        <a href="{{ route('scholarship.create') }}"
-           class="bg-blue-600 hover:bg-blue-700 transition px-5 py-3 rounded-xl text-white font-semibold shadow-lg">
-            + Tambah Beasiswa
-        </a>
+        {{-- Tombol hanya untuk provider --}}
+        @auth
+            @if(auth()->user()->role == 'provider')
+
+                <a href="{{ route('scholarship.create') }}"
+                   class="bg-blue-600 hover:bg-blue-700 transition px-5 py-3 rounded-xl text-white font-semibold shadow-lg">
+
+                    + Tambah Beasiswa
+
+                </a>
+
+            @endif
+        @endauth
 
     </div>
 
@@ -30,6 +39,7 @@
         <div class="bg-white text-black rounded-2xl p-6 shadow-xl hover:scale-105 transition duration-300">
 
             <div class="mb-4">
+
                 <h2 class="text-2xl font-bold mb-2">
                     {{ $item->nama_beasiswa }}
                 </h2>
@@ -37,6 +47,7 @@
                 <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">
                     {{ $item->category->nama_kategori ?? '-' }}
                 </span>
+
             </div>
 
             <p class="text-gray-700 mb-5">
@@ -46,39 +57,110 @@
             <div class="space-y-2 text-sm">
 
                 <p>
-                    <span class="font-semibold">🏢 Provider:</span>
+                    <span class="font-semibold">
+                        🏢 Provider:
+                    </span>
+
                     {{ $item->provider->nama_instansi ?? '-' }}
                 </p>
 
                 <p>
-                    <span class="font-semibold">📅 Deadline:</span>
+                    <span class="font-semibold">
+                        📅 Deadline:
+                    </span>
+
                     {{ $item->deadline }}
                 </p>
 
-                <div class="flex gap-3 mt-6">
+            </div>
 
-                    <a href="{{ route('scholarship.edit', $item->id_beasiswa) }}"
-                    class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg">
-                        Edit
-                    </a>
 
-                    <form action="{{ route('scholarship.destroy', $item->id_beasiswa) }}"
-                        method="POST">
+            {{-- BUTTON AREA --}}
+            <div class="flex flex-wrap gap-3 mt-6">
 
-                        @csrf
-                        @method('DELETE')
+                {{-- KHUSUS PROVIDER --}}
+                @auth
 
-                        <button type="submit"
+                    @if(auth()->user()->role == 'provider')
+
+                        <a href="{{ route('scholarship.edit', $item->id_beasiswa) }}"
+                           class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg">
+
+                            Edit
+
+                        </a>
+
+                        <form
+                            action="{{ route('scholarship.destroy', $item->id_beasiswa) }}"
+                            method="POST">
+
+                            @csrf
+                            @method('DELETE')
+
+                            <button
+                                type="submit"
                                 onclick="return confirm('Yakin hapus beasiswa ini?')"
                                 class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">
 
-                            Delete
+                                Delete
 
-                        </button>
+                            </button>
 
-                    </form>
+                        </form>
 
-                </div>
+                    @endif
+
+                @endauth
+
+
+                {{-- KHUSUS MAHASISWA --}}
+                @auth
+
+                    @if(auth()->user()->role == 'mahasiswa')
+
+                        {{-- APPLY --}}
+                        <form
+                            action="{{ route('applications.store') }}"
+                            method="POST">
+
+                            @csrf
+
+                            <input
+                                type="hidden"
+                                name="id_beasiswa"
+                                value="{{ $item->id_beasiswa }}">
+
+                            <button
+                                type="submit"
+                                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
+
+                                Apply
+
+                            </button>
+
+                        </form>
+
+
+                        {{-- FAVORITE --}}
+                        <form
+                            action="{{ route('favorites.store', $item->id_beasiswa) }}"
+                            method="POST">
+
+                            @csrf
+
+                            <button
+                                type="submit"
+                                class="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg">
+
+                                Favorite
+
+                            </button>
+
+                        </form>
+
+                    @endif
+
+                @endauth
 
             </div>
 

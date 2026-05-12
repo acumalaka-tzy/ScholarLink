@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScholarshipController;
@@ -39,6 +40,16 @@ Route::middleware(['auth', 'provider'])->group(function () {
     // CRUD Scholarship
     Route::resource('scholarship', ScholarshipController::class);
 
+    Route::patch(
+    '/applications/{id}/approve',
+        [ApplicationController::class, 'approve']
+    )->name('applications.approve');
+
+    Route::patch(
+        '/applications/{id}/reject',
+        [ApplicationController::class, 'reject']
+    )->name('applications.reject');
+
 });
 
 
@@ -54,15 +65,29 @@ Route::middleware(['auth', 'mahasiswa'])->group(function () {
     })->name('dashboard');
 
     // Favorites
-    Route::get('/favorites', function () {
-        return "Halaman Favorites";
-    });
+    Route::post(
+        '/favorites/{id}',
+        [FavoriteController::class, 'store']
+    )->name('favorites.store');
 
-    // Application Scholarship
-    Route::resource('applications', ApplicationController::class);
+    Route::get(
+        '/favorites',
+        [FavoriteController::class, 'index']
+    )->name('favorites.index');
 
     // Documents
     Route::resource('documents', DocumentController::class);
+
+});
+
+
+// ==========================
+// APPLICATION AREA
+// ==========================
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::resource('applications', ApplicationController::class);
 
 });
 
@@ -79,6 +104,17 @@ Route::get('/categories', [CategoryController::class, 'index'])
 Route::get('/categories/{id}', [ScholarshipController::class, 'show'])
     ->name('kategori.detail');
 
+// Scholarship list
+Route::get(
+    '/scholarships',
+    [ScholarshipController::class, 'index']
+)->name('scholarships.index');
+
+// Detail scholarship
+Route::get(
+    '/scholarships/{id}',
+    [ScholarshipController::class, 'show']
+)->name('scholarships.show');
 
 // ==========================
 // OTHER PAGES

@@ -38,4 +38,13 @@ class Application extends Model
             'id_application'
         );
     }
+
+    public function statusLogs()
+    {
+        return $this->hasMany(
+            ApplicationStatusLog::class,
+            'id_application',
+            'id_application'
+        );
+    }
 }
