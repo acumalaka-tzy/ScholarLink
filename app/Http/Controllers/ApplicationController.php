@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\ApplicationStatusLog;
 use App\Models\Scholarship;
 use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
-    // Menampilkan semua application
+    // List applications
     public function index()
     {
         $applications = Application::with([
@@ -19,7 +20,7 @@ class ApplicationController extends Controller
         return view('applications.index', compact('applications'));
     }
 
-    // Form apply scholarship
+    // Form apply
     public function create()
     {
         $scholarships = Scholarship::all();
@@ -34,15 +35,83 @@ class ApplicationController extends Controller
             'id_beasiswa' => 'required'
         ]);
 
-        Application::create([
-            'id_user' => auth()->user()->id,
+        // Simpan application
+        $application = Application::create([
+
+            'id_user' => auth()->id(),
+
             'id_beasiswa' => $request->id_beasiswa,
+
             'tanggal_apply' => now(),
+
             'status' => 'pending',
-            'catatan' => null,
+
+        ]);
+
+        // Simpan log status
+        ApplicationStatusLog::create([
+
+            'id_application' => $application->id_application,
+
+            'status' => 'pending',
+
+            'catatan' => 'Application berhasil dibuat',
+
+            'tanggal_status' => now(),
+
         ]);
 
         return redirect('/applications')
             ->with('success', 'Berhasil apply scholarship');
+    }
+
+    // Approve
+    public function approve($id)
+    {
+        $application = Application::findOrFail($id);
+
+        $application->status = 'approved';
+
+        $application->save();
+
+        ApplicationStatusLog::create([
+
+            'id_application' => $application->id_application,
+
+            'status' => 'approved',
+
+            'catatan' => 'Application disetujui provider',
+
+            'tanggal_status' => now(),
+
+        ]);
+
+        return redirect('/applications')
+            ->with('success', 'Application approved');
+    }
+
+    // Reject
+    public function reject($id)
+    {
+        $application = Application::findOrFail($id);
+
+        $application->status = 'rejected';
+
+        $application->save();
+
+        ApplicationStatusLog::create([
+
+            'id_application' => $application->id_application,
+
+            'status' => 'rejected',
+
+            'catatan' => 'Application ditolak provider',
+
+            'tanggal_status' => now(),
+
+        ]);
+
+        return redirect('/applications')
+            ->with('success', 'Application rejected');
     }
 }
