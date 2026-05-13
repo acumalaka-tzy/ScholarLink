@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Models\Scholarship;
+
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ProfileController;
@@ -11,7 +13,11 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Admin\DashboardController;
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $scholarships = Scholarship::all();
+
+    return view('dashboard', compact('scholarships'));
+
 });
 
 
@@ -21,7 +27,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
 
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])
+    Route::get('/admin', [DashboardController::class, 'index'])
         ->name('admin.dashboard');
 
     Route::get('/admin-logs', function () {
