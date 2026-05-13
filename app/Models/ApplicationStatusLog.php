@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ApplicationStatusLog extends Model
 {
-    protected $table = 'application_status_log';
+    protected $table = 'application_status_logs';
 
     protected $primaryKey = 'id_log';
 
@@ -14,11 +14,17 @@ class ApplicationStatusLog extends Model
         'id_application',
         'status',
         'catatan',
-        'waktu'
+        'tanggal_status'
     ];
+
+    public $timestamps = true;
 
     public function application()
     {
-        return $this->belongsTo(Application::class, 'id_application');
+        return $this->belongsTo(
+            Application::class,
+            'id_application',
+            'id_application'
+        );
     }
 }
