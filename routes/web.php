@@ -75,6 +75,9 @@ Route::middleware(['auth', 'mahasiswa'])->group(function () {
         [FavoriteController::class, 'index']
     )->name('favorites.index');
 
+    // Documents
+    Route::resource('documents', DocumentController::class);
+
 });
 
 
@@ -116,10 +119,6 @@ Route::get(
 // ==========================
 // OTHER PAGES
 // ==========================
-
-Route::get('/documents', function () {
-    return "Halaman Documents";
-});
 
 Route::get('/application-status-logs', function () {
     return "Halaman Application Status Logs";
