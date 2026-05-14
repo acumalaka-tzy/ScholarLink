@@ -79,7 +79,7 @@
                     <tr class="border-t border-gray-100 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700/40 transition user-row">
 
                         <td class="px-6 py-5 user-name text-gray-900 dark:text-white font-medium">
-                            {{ $user->nama }}
+                            {{ $user->name }}
                         </td>
 
                         <td class="px-6 py-5 text-gray-600 dark:text-gray-300">
@@ -89,19 +89,20 @@
                         <td class="px-6 py-5">
 
                             <span class="
-                                px-3 py-1 rounded-full text-sm font-semibold
+                                px-4 py-1 rounded-full text-sm font-semibold
 
                                 @if($user->role == 'admin')
                                     bg-red-100 text-red-600
-                                @else
+
+                                @elseif($user->role == 'mahasiswa')
                                     bg-green-100 text-green-600
+
+                                @elseif($user->role == 'provider')
+                                    bg-gray-100 text-gray-600
                                 @endif
                             ">
-
                                 {{ ucfirst($user->role) }}
-
                             </span>
-
                         </td>
 
                         <td class="px-6 py-5">
@@ -126,14 +127,14 @@
 
                             <div class="flex items-center justify-center gap-3">
 
-                                <a href="{{ route('admin.users.edit', ['user' => $user->id_user]) }}"
+                                <a href="{{ route('admin.users.edit', ['user' => $user->id]) }}"
                                    class="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-xl text-sm font-semibold transition">
 
                                     Edit
 
                                 </a>
 
-                                <form action="{{ route('admin.users.destroy', ['user' => $user->id_user]) }}"
+                                <form action="{{ route('admin.users.destroy', ['user' => $user->id]) }}"
                                       method="POST">
 
                                     @csrf

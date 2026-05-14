@@ -22,4 +22,9 @@ class Provider extends Model
             'id_provider'
         );
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }

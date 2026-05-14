@@ -27,7 +27,7 @@
         </label>
 
         <input type="text"
-               name="nama"
+               name="name"
                class="w-full bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-xl px-5 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
 
     </div>
@@ -65,7 +65,8 @@
         <select name="role"
                 class="w-full bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-xl px-5 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
 
-            <option value="user">User</option>
+            <option value="mahasiswa">Mahasiswa</option>
+            <option value="provider">Provider</option>
             <option value="admin">Admin</option>
 
         </select>

@@ -11,12 +11,16 @@ use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProviderController;
+use App\Http\Controllers\Provider\ScholarshipController as ProviderScholarshipController;
+use App\Http\Controllers\Admin\ScholarshipController as AdminScholarshipController;
 
 Route::get('/', function () {
 
     $scholarships = Scholarship::all();
 
-    return view('dashboard', compact('scholarships'));
+    return view('home', compact('scholarships'));
 
 });
 
@@ -25,14 +29,32 @@ Route::get('/', function () {
 // ADMIN AREA
 // ==========================
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
 
-    Route::get('/admin', [DashboardController::class, 'index'])
-        ->name('admin.dashboard');
+        Route::get('/', [DashboardController::class, 'index'])
+            ->name('dashboard');
 
-    Route::get('/admin-logs', function () {
-        return "Halaman Admin Logs";
-    });
+        Route::resource('users', UserController::class);
+
+        Route::resource('providers', ProviderController::class);
+        
+        Route::put(
+                'providers/{provider}/approve',
+                [ProviderController::class, 'approve']
+            )->name('providers.approve');
+        Route::put(
+                'providers/{provider}/reject',
+                [ProviderController::class, 'reject']
+            )->name('providers.reject');
+
+        Route::resource('scholarships', AdminScholarshipController::class);
+
+        Route::get('/admin-logs', function () {
+            return "Halaman Admin Logs";
+        })->name('logs');
 
 });
 
@@ -41,20 +63,25 @@ Route::middleware(['auth', 'admin'])->group(function () {
 // PROVIDER AREA
 // ==========================
 
-Route::middleware(['auth', 'provider'])->group(function () {
+Route::middleware(['auth', 'provider'])
+    ->prefix('provider')
+    ->name('provider.')
+    ->group(function () {
 
-    // CRUD Scholarship
-    Route::resource('scholarship', ScholarshipController::class);
+        Route::resource(
+            'scholarships',
+            ScholarshipController::class
+        );
 
-    Route::patch(
-    '/applications/{id}/approve',
-        [ApplicationController::class, 'approve']
-    )->name('applications.approve');
+        Route::patch(
+            'applications/{id}/approve',
+            [ApplicationController::class, 'approve']
+        )->name('applications.approve');
 
-    Route::patch(
-        '/applications/{id}/reject',
-        [ApplicationController::class, 'reject']
-    )->name('applications.reject');
+        Route::patch(
+            'applications/{id}/reject',
+            [ApplicationController::class, 'reject']
+        )->name('applications.reject');
 
 });
 
@@ -169,7 +196,7 @@ Route::get('/logout-test', function () {
 
     auth()->logout();
 
-    return redirect('/login');
+    return redirect('/');
 
 });
 

@@ -16,7 +16,7 @@
 
     </div>
 
-    <a href="{{ route('providers.create') }}"
+    <a href="{{ route('admin.providers.create') }}"
        class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 py-3 rounded-2xl shadow-lg font-semibold transition duration-200 hover:scale-105 text-center">
 
         + Tambah Provider
@@ -141,68 +141,74 @@
 
                         </td>
 
-                        <td class="px-6 py-5 text-center">
+                     <td class="px-6 py-5 text-center">
 
-                            <div class="flex items-center justify-center gap-3 flex-wrap">
+    <div class="flex items-center justify-center gap-3 flex-wrap">
 
-                                <!-- Edit -->
-                                <a href="{{ route('providers.edit', ['provider' => $provider->id_provider]) }}"
-                                   
-                                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition duration-200 shadow-md hover:scale-105">
+        <!-- Edit -->
+        <a href="{{ route('admin.providers.edit', $provider->id_provider) }}"
+           class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition duration-200 shadow-md hover:scale-105">
 
-                                    Edit
-                                </a>
+            Edit
 
-                                <!-- Verify -->
-                                <form action="{{ route('providers.verify', ['provider' => $provider->id_provider]) }}"
-                                      method="POST">
+        </a>
 
-                                    @csrf
-                                    @method('PUT')
+        @if($provider->status == 'pending')
 
-                                    <button
-                                        class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition duration-200 shadow-md hover:scale-105">
+            <!-- Verify -->
+            <form action="{{ route('admin.providers.approve', $provider->id_provider) }}"
+                  method="POST">
 
-                                        Verify
+                @csrf
+                @method('PUT')
 
-                                    </button>
+                <button
+                    class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition duration-200 shadow-md hover:scale-105">
 
-                                </form>
+                    Verify
 
-                                <!-- Reject -->
-                                <form action="{{ route('providers.reject', ['provider' => $provider->id_provider]) }}"
-                                      method="POST">
+                </button>
 
-                                    <button
-                                        class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition duration-200 shadow-md hover:scale-105">
+            </form>
 
-                                        Reject
+            <!-- Reject -->
+            <form action="{{ route('admin.providers.reject', $provider->id_provider) }}"
+                  method="POST">
 
-                                    </button>
+                @csrf
+                @method('PUT')
 
-                                </form>
+                <button
+                    class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition duration-200 shadow-md hover:scale-105">
 
-                                <!-- Delete -->
-                                <form action="{{ route('providers.destroy', ['provider' => $provider->id_provider]) }}"
-                                      method="POST">
+                    Reject
 
-                                    @csrf
-                                    @method('DELETE')
+                </button>
 
-                                    <button
-                                        onclick="return confirm('Yakin ingin menghapus provider ini?')"
-                                        class="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition duration-200 shadow-md hover:scale-105">
+            </form>
 
-                                        Delete
+        @endif
 
-                                    </button>
+        <!-- Delete -->
+        <form action="{{ route('admin.providers.destroy', $provider->id_provider) }}"
+              method="POST">
 
-                                </form>
+            @csrf
+            @method('DELETE')
 
-                            </div>
+            <button
+                onclick="return confirm('Yakin ingin menghapus provider ini?')"
+                class="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition duration-200 shadow-md hover:scale-105">
 
-                        </td>
+                Delete
 
+            </button>
+
+        </form>
+
+    </div>
+
+</td>
                     </tr>
 
                 @empty

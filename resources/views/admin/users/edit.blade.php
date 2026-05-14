@@ -14,7 +14,7 @@
 
 </div>
 
-<form action="{{ route('admin.users.update', ['user' => $user->id_user]) }}"
+<form action="{{ route('admin.users.update', $user->id) }}"
       method="POST"
       class="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-8 border border-gray-100 dark:border-slate-700">
 
@@ -28,8 +28,8 @@
         </label>
 
         <input type="text"
-               name="nama"
-               value="{{ $user->nama }}"
+               name="name"
+               value="{{ $user->name }}"
                class="w-full bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-xl px-5 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
 
     </div>
@@ -83,20 +83,6 @@
 
     </div>
 
-    <div class="mb-6">
-
-        <label class="block mb-2 font-semibold text-gray-700 dark:text-gray-200">
-            Alamat
-        </label>
-
-        <input type="text"
-               name="alamat"
-               value="{{ $user->alamat }}"
-               placeholder="Masukkan alamat lengkap"
-               class="w-full bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-xl px-5 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
-
-    </div>
-
     <div class="mb-8">
 
         <label class="block mb-2 font-semibold text-gray-700 dark:text-gray-200">
@@ -106,9 +92,14 @@
         <select name="role"
                 class="w-full bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-xl px-5 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
 
-            <option value="user"
-                {{ $user->role == 'user' ? 'selected' : '' }}>
-                User
+            <option value="mahasiswa"
+                {{ $user->role == 'mahasiswa' ? 'selected' : '' }}>
+                Mahasiswa
+            </option>
+
+            <option value="provider"
+                {{ $user->role == 'provider' ? 'selected' : '' }}>
+                Provider
             </option>
 
             <option value="admin"
