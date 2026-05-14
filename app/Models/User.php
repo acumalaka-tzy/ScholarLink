@@ -52,4 +52,8 @@ class User extends Authenticatable
         return $this->hasMany(Message::class, 'id_user');
     }
     
+    public function provider()
+    {
+        return $this->hasOne(Provider::class);
+    }
 }

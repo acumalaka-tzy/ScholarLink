@@ -15,7 +15,10 @@ class Scholarship extends Model
         'deskripsi',
         'provider_id',
         'category_id',
-        'deadline',
+    ];
+
+    protected $casts = [
+        'deadline' => 'datetime',
     ];
 
     public function provider()
