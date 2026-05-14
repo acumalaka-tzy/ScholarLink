@@ -68,9 +68,16 @@ Route::middleware(['auth', 'provider'])
     ->name('provider.')
     ->group(function () {
 
+        Route::get(
+            '/',
+            function () {
+                return view('provider.dashboard');
+            }
+        )->name('dashboard');
+
         Route::resource(
             'scholarships',
-            ScholarshipController::class
+            ProviderScholarshipController::class
         );
 
         Route::patch(
