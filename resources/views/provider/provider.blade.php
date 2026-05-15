@@ -48,11 +48,11 @@
                {{ request()->routeIs('provider.scholarships.*') ? 'bg-slate-800/60 border-indigo-500/30 text-white' : 'border-transparent text-slate-400 hover:bg-slate-800/40 hover:text-white' }}">
                 <span class="text-2xl">🎓</span>
                 <span class="{{ request()->routeIs('provider.scholarships.*') ? 'font-semibold' : 'font-medium' }} text-lg">
-                    My Scholarships
+                    Scholarships
                 </span>
             </a>
 
-            <a href="#"
+            <a href="{{ route('provider.applications.index') }}"
                class="group flex items-center gap-4 px-5 py-4 rounded-2xl transition duration-300 border
                {{ request()->routeIs('provider.applications.*') ? 'bg-slate-800/60 border-indigo-500/30 text-white' : 'border-transparent text-slate-400 hover:bg-slate-800/40 hover:text-white' }}">
                 <span class="text-2xl">📄</span>
