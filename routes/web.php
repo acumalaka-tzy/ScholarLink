@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProviderController;
 use App\Http\Controllers\Provider\ScholarshipController as ProviderScholarshipController;
+use App\Http\Controllers\Provider\ApplicationController as ProviderApplicationController;
 use App\Http\Controllers\Admin\ScholarshipController as AdminScholarshipController;
 
 Route::get('/', function () {
@@ -80,14 +81,19 @@ Route::middleware(['auth', 'provider'])
             ProviderScholarshipController::class
         );
 
+        Route::resource(
+            'applications',
+            ProviderApplicationController::class
+        );
+
         Route::patch(
             'applications/{id}/approve',
-            [ApplicationController::class, 'approve']
+            [ProviderApplicationController::class, 'approve']
         )->name('applications.approve');
 
         Route::patch(
             'applications/{id}/reject',
-            [ApplicationController::class, 'reject']
+            [ProviderApplicationController::class, 'reject']
         )->name('applications.reject');
 
 });
