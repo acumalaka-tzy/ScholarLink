@@ -70,8 +70,11 @@ Route::middleware(['auth', 'provider'])
     ->prefix('provider')
     ->name('provider.')
     ->group(function () {
-        
-        Route::get('/', [ProviderDashboardController::class, 'index'])->name('dashboard');
+
+        Route::get(
+            '/',
+            [ProviderDashboardController::class, 'index']
+        )->name('dashboard');
 
         Route::resource(
             'scholarships',

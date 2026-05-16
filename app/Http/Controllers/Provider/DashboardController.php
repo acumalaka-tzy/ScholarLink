@@ -9,28 +9,48 @@ use App\Models\Application;
 
 class DashboardController extends Controller
 {
-    public function index()
-    {
-        $providerId = auth()->user()->provider->id_provider;
+public function index()
+{
+    $providerId = auth()->user()->provider->id_provider;
 
-        // 1. Hitung Total Scholarships
-        $totalScholarships = Scholarship::where('id_provider', $providerId)->count();
+    // Total scholarship
+    $totalScholarships = Scholarship::where(
+        'id_provider',
+        $providerId
+    )->count();
 
-        // 2. Hitung Active Scholarships
-        $activeScholarships = Scholarship::where('id_provider', $providerId)
-            ->where('status', 'active')
-            ->count();
+    // Active scholarship
+    $activeScholarships = Scholarship::where(
+        'id_provider',
+        $providerId
+    )
+    ->where('status', 'active')
+    ->count();
 
-        // 3. Hitung Total Applications yang masuk ke beasiswa milik provider ini
-        $totalApplications = Application::whereHas('scholarship', function($query) use ($providerId) {
+    // Total applications
+    $totalApplications = Application::whereHas(
+        'scholarship',
+        function($query) use ($providerId) {
             $query->where('id_provider', $providerId);
-        })->count();
+        }
+    )->count();
 
-        // Kirim semua data bersih ke view
-        return view('provider.dashboard', compact(
-            'totalScholarships', 
-            'activeScholarships', 
-            'totalApplications'
-        ));
-    }
+    // Recent applications
+    $applications = Application::whereHas(
+        'scholarship',
+        function($query) use ($providerId) {
+            $query->where('id_provider', $providerId);
+        }
+    )
+    ->latest()
+    ->take(5)
+    ->get();
+
+    return view('provider.dashboard', compact(
+        'totalScholarships',
+        'activeScholarships',
+        'totalApplications',
+        'applications'
+    ));
+}
 }

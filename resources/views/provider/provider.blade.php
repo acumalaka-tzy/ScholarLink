@@ -34,40 +34,56 @@
         <!-- Navigation -->
         <nav class="flex-1 px-5 py-6 space-y-3">
 
+            <!-- Dashboard -->
             <a href="{{ route('provider.dashboard') }}"
                class="group flex items-center gap-4 px-5 py-4 rounded-2xl transition duration-300 border 
                {{ request()->routeIs('provider.dashboard') ? 'bg-slate-800/60 border-indigo-500/30 text-white' : 'border-transparent text-slate-400 hover:bg-slate-800/40 hover:text-white' }}">
+
                 <span class="text-2xl">📊</span>
+
                 <span class="{{ request()->routeIs('provider.dashboard') ? 'font-semibold' : 'font-medium' }} text-lg">
                     Dashboard
                 </span>
+
             </a>
 
+            <!-- Scholarships -->
             <a href="{{ route('provider.scholarships.index') }}"
                class="group flex items-center gap-4 px-5 py-4 rounded-2xl transition duration-300 border
                {{ request()->routeIs('provider.scholarships.*') ? 'bg-slate-800/60 border-indigo-500/30 text-white' : 'border-transparent text-slate-400 hover:bg-slate-800/40 hover:text-white' }}">
+
                 <span class="text-2xl">🎓</span>
+
                 <span class="{{ request()->routeIs('provider.scholarships.*') ? 'font-semibold' : 'font-medium' }} text-lg">
                     Scholarships
                 </span>
+
             </a>
 
+            <!-- Applications -->
             <a href="{{ route('provider.applications.index') }}"
                class="group flex items-center gap-4 px-5 py-4 rounded-2xl transition duration-300 border
                {{ request()->routeIs('provider.applications.*') ? 'bg-slate-800/60 border-indigo-500/30 text-white' : 'border-transparent text-slate-400 hover:bg-slate-800/40 hover:text-white' }}">
+
                 <span class="text-2xl">📄</span>
-                <span class="font-medium text-lg">
+
+                <span class="{{ request()->routeIs('provider.applications.*') ? 'font-semibold' : 'font-medium' }} text-lg">
                     Applications
                 </span>
+
             </a>
 
+            <!-- Chat Rooms -->
             <a href="#"
                class="group flex items-center gap-4 px-5 py-4 rounded-2xl transition duration-300 border
-               {{ request()->routeIs('provider.chats.*') ? 'bg-slate-800/60 border-indigo-500/30 text-white' : 'border-transparent text-slate-400 hover:bg-slate-800/40 hover:text-white' }}">
+               border-transparent text-slate-400 hover:bg-slate-800/40 hover:text-white">
+
                 <span class="text-2xl">💬</span>
+
                 <span class="font-medium text-lg">
                     Chat Rooms
                 </span>
+
             </a>
 
         </nav>
@@ -95,7 +111,7 @@
 
     </aside>
 
-    <!-- Main -->
+    <!-- Main Content -->
     <div class="flex-1 flex flex-col">
 
         <!-- Topbar -->
@@ -115,6 +131,7 @@
 
             <div class="flex items-center gap-5">
 
+                <!-- User Info -->
                 <div class="hidden md:block text-right">
 
                     <p class="font-semibold text-lg">
@@ -127,6 +144,7 @@
 
                 </div>
 
+                <!-- Avatar -->
                 <div class="w-14 h-14 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center font-bold text-xl shadow-xl">
 
                     {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
@@ -153,6 +171,26 @@
 
         <!-- Content -->
         <main class="flex-1 p-10">
+
+            @if(session('success'))
+
+                <div class="mb-6 bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-6 py-4 rounded-2xl">
+
+                    {{ session('success') }}
+
+                </div>
+
+            @endif
+
+            @if(session('error'))
+
+                <div class="mb-6 bg-red-500/20 border border-red-500/30 text-red-400 px-6 py-4 rounded-2xl">
+
+                    {{ session('error') }}
+
+                </div>
+
+            @endif
 
             @yield('content')
 
