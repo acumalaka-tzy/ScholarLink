@@ -43,11 +43,15 @@ class ScholarshipController extends Controller
             'id_provider' =>
                 auth()->user()->provider->id_provider,
 
+            'id_kategori' => $request->id_kategori,
+
             'nama_beasiswa' => $request->nama_beasiswa,
             'deskripsi' => $request->deskripsi,
             'syarat' => $request->syarat,
             'benefit' => $request->benefit,
+            'tipe' => $request->tipe,
             'deadline' => $request->deadline,
+            'tanggal_dibuat' => now(),
             'status' => 'active',
 
         ]);

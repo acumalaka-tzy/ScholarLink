@@ -11,10 +11,16 @@ class Scholarship extends Model
     protected $table = 'scholarships';
 
     protected $fillable = [
+        'id_provider',
+        'id_kategori',
         'nama_beasiswa',
         'deskripsi',
-        'provider_id',
-        'category_id',
+        'syarat',
+        'benefit',
+        'tipe',
+        'deadline',
+        'tanggal_dibuat',
+        'status',
     ];
 
     protected $casts = [

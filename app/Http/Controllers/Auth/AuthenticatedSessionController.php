@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
             }
 
             if ($user->role == 'provider') {
-                return redirect('/scholarship');
+                return redirect()->route('provider.dashboard');
             }
 
             return redirect('/dashboard');
