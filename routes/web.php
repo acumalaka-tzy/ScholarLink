@@ -112,14 +112,15 @@ Route::middleware(['auth', 'mahasiswa'])->group(function () {
 
     // Favorites
     Route::post(
-        '/favorites/{id}',
-        [FavoriteController::class, 'store']
+        '/favorites/{id}', [FavoriteController::class, 'store']
     )->name('favorites.store');
 
     Route::get(
-        '/favorites',
-        [FavoriteController::class, 'index']
+        '/favorites', [FavoriteController::class, 'index']
     )->name('favorites.index');
+
+    Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy'])
+    ->name('favorites.destroy');
 
     // Documents
     Route::resource('documents', DocumentController::class);
@@ -134,6 +135,12 @@ Route::middleware(['auth', 'mahasiswa'])->group(function () {
 Route::middleware(['auth'])->group(function () {
 
     Route::resource('applications', ApplicationController::class);
+
+    Route::post('/applications/{id}/approve', [ApplicationController::class, 'approve'])
+    ->name('applications.approve');
+
+    Route::post('/applications/{id}/reject', [ApplicationController::class, 'reject'])
+    ->name('applications.reject');
 
 });
 
