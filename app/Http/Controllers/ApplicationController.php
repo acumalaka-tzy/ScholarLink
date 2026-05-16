@@ -74,6 +74,8 @@ class ApplicationController extends Controller
 
         $application->save();
 
+        return back();
+
         ApplicationStatusLog::create([
 
             'id_application' => $application->id_application,
