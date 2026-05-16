@@ -15,7 +15,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProviderController;
 use App\Http\Controllers\Provider\ScholarshipController as ProviderScholarshipController;
 use App\Http\Controllers\Provider\ApplicationController as ProviderApplicationController;
+use App\Http\Controllers\Provider\DashboardController as ProviderDashboardController;
 use App\Http\Controllers\Admin\ScholarshipController as AdminScholarshipController;
+
 
 Route::get('/', function () {
 
@@ -68,13 +70,8 @@ Route::middleware(['auth', 'provider'])
     ->prefix('provider')
     ->name('provider.')
     ->group(function () {
-
-        Route::get(
-            '/',
-            function () {
-                return view('provider.dashboard');
-            }
-        )->name('dashboard');
+        
+        Route::get('/', [ProviderDashboardController::class, 'index'])->name('dashboard');
 
         Route::resource(
             'scholarships',
