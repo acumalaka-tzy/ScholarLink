@@ -10,34 +10,54 @@
             Edit Beasiswa
         </h1>
 
-        <form action="{{ route('scholarship.update', $scholarship->id_beasiswa) }}"
+        <form action="{{ route('provider.scholarships.update', $scholarship->id_beasiswa) }}"
               method="POST">
 
             @csrf
             @method('PUT')
 
+            {{-- Nama Beasiswa --}}
             <div class="mb-5">
+
                 <label class="block mb-2 font-semibold">
                     Nama Beasiswa
                 </label>
 
                 <input type="text"
                        name="nama_beasiswa"
-                       value="{{ $scholarship->nama_beasiswa }}"
+                       value="{{ old('nama_beasiswa', $scholarship->nama_beasiswa) }}"
                        class="w-full border rounded-xl px-4 py-3">
+
+                @error('nama_beasiswa')
+                    <p class="text-red-500 mt-1">
+                        {{ $message }}
+                    </p>
+                @enderror
+
             </div>
 
+            {{-- Deskripsi --}}
             <div class="mb-5">
+
                 <label class="block mb-2 font-semibold">
                     Deskripsi
                 </label>
 
                 <textarea name="deskripsi"
                           rows="4"
-                          class="w-full border rounded-xl px-4 py-3">{{ $scholarship->deskripsi }}</textarea>
+                          class="w-full border rounded-xl px-4 py-3">{{ old('deskripsi', $scholarship->deskripsi) }}</textarea>
+
+                @error('deskripsi')
+                    <p class="text-red-500 mt-1">
+                        {{ $message }}
+                    </p>
+                @enderror
+
             </div>
 
+            {{-- Provider --}}
             <div class="mb-5">
+
                 <label class="block mb-2 font-semibold">
                     Provider
                 </label>
@@ -57,9 +77,18 @@
                     @endforeach
 
                 </select>
+
+                @error('provider_id')
+                    <p class="text-red-500 mt-1">
+                        {{ $message }}
+                    </p>
+                @enderror
+
             </div>
 
+            {{-- Kategori --}}
             <div class="mb-5">
+
                 <label class="block mb-2 font-semibold">
                     Kategori
                 </label>
@@ -79,22 +108,40 @@
                     @endforeach
 
                 </select>
+
+                @error('category_id')
+                    <p class="text-red-500 mt-1">
+                        {{ $message }}
+                    </p>
+                @enderror
+
             </div>
 
+            {{-- Deadline --}}
             <div class="mb-8">
+
                 <label class="block mb-2 font-semibold">
                     Deadline
                 </label>
 
                 <input type="date"
                        name="deadline"
-                       value="{{ $scholarship->deadline }}"
+                       value="{{ old('deadline', $scholarship->deadline) }}"
                        class="w-full border rounded-xl px-4 py-3">
+
+                @error('deadline')
+                    <p class="text-red-500 mt-1">
+                        {{ $message }}
+                    </p>
+                @enderror
+
             </div>
 
             <button type="submit"
                     class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-xl font-semibold">
+
                 Update Beasiswa
+
             </button>
 
         </form>
@@ -102,15 +149,5 @@
     </div>
 
 </div>
-
-    <input type="text"
-        name="nama_beasiswa"
-        class="w-full border rounded-xl px-4 py-3">
-
-    @error('nama_beasiswa')
-        <p class="text-red-500 mt-1">
-            {{ $message }}
-        </p>
-    @enderror
 
 @endsection

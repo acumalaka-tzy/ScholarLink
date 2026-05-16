@@ -20,7 +20,7 @@
         @auth
             @if(auth()->user()->role == 'provider')
 
-                <a href="{{ route('scholarship.create') }}"
+                <a href="{{ route('provider.scholarships.create') }}"
                    class="bg-blue-600 hover:bg-blue-700 transition px-5 py-3 rounded-xl text-white font-semibold shadow-lg">
 
                     + Tambah Beasiswa
@@ -74,7 +74,6 @@
 
             </div>
 
-
             {{-- BUTTON AREA --}}
             <div class="flex flex-wrap gap-3 mt-6">
 
@@ -83,7 +82,7 @@
 
                     @if(auth()->user()->role == 'provider')
 
-                        <a href="{{ route('scholarship.edit', $item->id_beasiswa) }}"
+                        <a href="{{ route('provider.scholarships.edit', $item->id_beasiswa) }}"
                            class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg">
 
                             Edit
@@ -91,7 +90,7 @@
                         </a>
 
                         <form
-                            action="{{ route('scholarship.destroy', $item->id_beasiswa) }}"
+                            action="{{ route('provider.scholarships.destroy', $item->id_beasiswa) }}"
                             method="POST">
 
                             @csrf
@@ -111,7 +110,6 @@
                     @endif
 
                 @endauth
-
 
                 {{-- KHUSUS MAHASISWA --}}
                 @auth
@@ -139,7 +137,6 @@
                             </button>
 
                         </form>
-
 
                         {{-- FAVORITE --}}
                         <form
