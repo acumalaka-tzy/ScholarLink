@@ -206,17 +206,72 @@
                     <a href="#" class="nav-link text-gray-700 dark:text-gray-300 font-medium hover:text-indigo-600">Tentang</a>
                 </div>
                 <div class="flex gap-3 items-center">
-                    @auth
-                        <a href="{{ route('dashboard') }}" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 font-medium">Dashboard</a>
-                        <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-                            @csrf
-                            <button type="submit" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 font-medium">Logout</button>
-                        </form>
-                    @else
-                        <a href="{{ route('login') }}" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 font-medium px-4 py-2 rounded-lg transition">Masuk</a>
-                        <a href="{{ route('register') }}" class="btn-primary text-white px-6 py-2 rounded-lg font-medium">Daftar</a>
-                    @endauth
-                </div>
+
+    @auth
+
+        @if (Auth::user()->role == 'admin')
+
+            <a href="{{ route('admin.dashboard') }}"
+               class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 font-medium">
+
+                Dashboard
+
+            </a>
+
+        @elseif (Auth::user()->role == 'provider')
+
+            <a href="{{ route('provider.dashboard') }}"
+               class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 font-medium">
+
+                Dashboard
+
+            </a>
+
+        @else
+
+            <a href="{{ route('dashboard') }}"
+               class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 font-medium">
+
+                Dashboard
+
+            </a>
+
+        @endif
+
+        <form method="POST"
+              action="{{ route('logout') }}"
+              style="display: inline;">
+
+            @csrf
+
+            <button type="submit"
+                    class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 font-medium">
+
+                Logout
+
+            </button>
+
+        </form>
+
+    @else
+
+        <a href="{{ route('login') }}"
+           class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 font-medium px-4 py-2 rounded-lg transition">
+
+            Masuk
+
+        </a>
+
+        <a href="{{ route('register') }}"
+           class="btn-primary text-white px-6 py-2 rounded-lg font-medium">
+
+            Daftar
+
+        </a>
+
+    @endauth
+
+</div>
             </div>
         </div>
     </nav>

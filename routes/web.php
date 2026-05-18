@@ -103,12 +103,17 @@ Route::middleware(['auth', 'provider'])
 // MAHASISWA AREA
 // ==========================
 
-Route::middleware(['auth', 'mahasiswa'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
-    // Dashboard mahasiswa
+    // Dashboard umum
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+});
+
+
+Route::middleware(['auth', 'mahasiswa'])->group(function () {
 
     // Favorites
     Route::post(

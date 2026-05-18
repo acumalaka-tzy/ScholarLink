@@ -133,6 +133,37 @@
 
             </div>
 
+            {{-- Kategori --}}
+<div>
+
+    <label class="block mb-3 font-semibold text-slate-200">
+        Kategori
+    </label>
+
+    <div class="relative">
+
+        <select
+            name="id_kategori"
+            class="w-full appearance-none rounded-2xl border border-indigo-500/20 bg-slate-900 text-white px-5 py-4 shadow-lg focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 outline-none transition duration-200">
+
+            @foreach ($categories as $category)
+
+                <option value="{{ $category->id_kategori }}">
+                    {{ $category->nama_kategori }}
+                </option>
+
+            @endforeach
+
+        </select>
+
+        <div class="absolute inset-y-0 right-5 flex items-center text-indigo-400 pointer-events-none">
+            ▼
+        </div>
+
+    </div>
+
+</div>
+
             {{-- Status --}}
             <div>
 

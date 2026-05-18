@@ -21,7 +21,7 @@
         <!-- Logo -->
         <div class="px-8 py-8 border-b border-white/10">
 
-            <h1 class="text-5xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <h1 class="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                 ScholarLink
             </h1>
 

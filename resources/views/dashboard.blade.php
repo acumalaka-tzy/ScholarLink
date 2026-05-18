@@ -269,77 +269,103 @@
         </div>
 
         <!-- RIGHT -->
-        <div>
+<div>
 
-            <div class="rounded-[2rem]
-            bg-white dark:bg-slate-900
-            border border-slate-200 dark:border-white/10
-            p-8 shadow-xl">
+    <div class="rounded-[2rem]
+    bg-white dark:bg-slate-900
+    border border-slate-200 dark:border-white/10
+    p-8 shadow-xl">
 
-                <div class="flex items-center gap-4 mb-8">
+        <div class="flex items-center gap-4 mb-8">
 
-                    <div class="w-16 h-16 rounded-2xl
-                    bg-gradient-to-br from-indigo-500 to-pink-500
-                    flex items-center justify-center text-white text-2xl font-bold">
+            <div class="w-16 h-16 rounded-2xl
+            bg-gradient-to-br from-indigo-500 to-pink-500
+            flex items-center justify-center text-white text-2xl font-bold">
 
-                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
 
-                    </div>
+            </div>
 
-                    <div>
+            <div>
 
-                        <h4 class="text-2xl font-bold dark:text-white">
-                            {{ Auth::user()->name }}
-                        </h4>
+                <h4 class="text-2xl font-bold dark:text-white">
+                    {{ Auth::user()->name }}
+                </h4>
 
-                        <p class="text-slate-500 dark:text-slate-400">
-                            {{ Auth::user()->email }}
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div class="space-y-5">
-
-                    <div class="flex justify-between">
-
-                        <span class="text-slate-500 dark:text-slate-400">
-                            Role
-                        </span>
-
-                        <span class="font-semibold dark:text-white">
-                            Mahasiswa
-                        </span>
-
-                    </div>
-
-                    <div class="flex justify-between">
-
-                        <span class="text-slate-500 dark:text-slate-400">
-                            Status
-                        </span>
-
-                        <span class="text-green-500 font-semibold">
-                            Active
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <button class="w-full mt-8 py-4 rounded-2xl
-                bg-gradient-to-r from-indigo-600 to-pink-500
-                text-white font-bold hover:scale-[1.02]
-                transition duration-300">
-
-                    Edit Profile
-
-                </button>
+                <p class="text-slate-500 dark:text-slate-400">
+                    {{ Auth::user()->email }}
+                </p>
 
             </div>
 
         </div>
+
+        <div class="space-y-5">
+
+            <div class="flex justify-between">
+
+                <span class="text-slate-500 dark:text-slate-400">
+                    Role
+                </span>
+
+                <span class="font-semibold dark:text-white">
+                    {{ ucfirst(Auth::user()->role_name) }}
+                </span>
+
+            </div>
+
+            <div class="flex justify-between">
+
+                <span class="text-slate-500 dark:text-slate-400">
+                    Status
+                </span>
+
+                <span class="text-green-500 font-semibold">
+                    Active
+                </span>
+
+            </div>
+
+        </div>
+
+        <button class="w-full mt-8 py-4 rounded-2xl
+        bg-gradient-to-r from-indigo-600 to-pink-500
+        text-white font-bold hover:scale-[1.02]
+        transition duration-300">
+
+            Edit Profile
+
+        </button>
+
+        @if (Auth::user()->role_name == 'admin')
+
+            <a href="{{ route('admin.dashboard') }}"
+               class="block w-full mt-4 py-4 rounded-2xl
+               bg-red-600 text-center text-white font-bold
+               hover:bg-red-700 transition duration-300">
+
+                Masuk Admin Dashboard
+
+            </a>
+
+        @endif
+
+        @if (Auth::user()->role_name == 'provider')
+
+            <a href="{{ route('provider.dashboard') }}"
+               class="block w-full mt-4 py-4 rounded-2xl
+               bg-green-600 text-center text-white font-bold
+               hover:bg-green-700 transition duration-300">
+
+                Masuk Provider Dashboard
+
+            </a>
+
+        @endif
+
+    </div>
+
+</div>
 
     </div>
 
