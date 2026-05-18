@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Models\Scholarship;
 
+use App\Http\Controllers\ChatRoomController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ProfileController;
@@ -122,6 +123,9 @@ Route::middleware(['auth', 'mahasiswa'])->group(function () {
     Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy'])
     ->name('favorites.destroy');
 
+    Route::delete('/favorites/{id}',[FavoriteController::class, 'destroy'])
+    ->name('favorites.destroy');
+
     // Documents
     Route::resource('documents', DocumentController::class);
 
@@ -177,16 +181,18 @@ Route::get('/application-status-logs', function () {
     return "Halaman Application Status Logs";
 });
 
-Route::get('/chat-rooms', function () {
-    return "Halaman Chat Rooms";
-});
+Route::middleware(['auth'])->group(function () {
+    Route::get('/chat-rooms', [ChatRoomController::class, 'index'])
+        ->name('chat-rooms.index');
 
-Route::get('/chat-participants', function () {
-    return "Halaman Chat Participants";
-});
+    Route::post('/chat-rooms', [ChatRoomController::class, 'store'])
+        ->name('chat-rooms.store');
 
-Route::get('/messages', function () {
-    return "Halaman Messages";
+    Route::get('/chat-rooms/{id}', [ChatRoomController::class, 'show'])
+        ->name('chat-rooms.show');
+
+    Route::post('/chat-rooms/{id}/messages', [ChatRoomController::class, 'sendMessage'])
+        ->name('chat-rooms.messages.store');
 });
 
 

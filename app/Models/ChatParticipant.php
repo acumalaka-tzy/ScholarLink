@@ -10,16 +10,16 @@ class ChatParticipant extends Model
 
     protected $fillable = [
         'id_room',
-        'id_user'
+        'id_user',
     ];
 
     public function room()
     {
-        return $this->belongsTo(ChatRoom::class, 'id_room');
+        return $this->belongsTo(ChatRoom::class, 'id_room', 'id_room');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->belongsTo(User::class, 'id_user', 'id');
     }
 }

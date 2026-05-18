@@ -37,6 +37,8 @@ return new class extends Migration
             ->on('categories')
             ->onDelete('cascade');
 
+        $table->enum('status', ['aktif', 'nonaktif', 'ditutup'])->default('aktif');
+
         $table->timestamps();
     });
     }

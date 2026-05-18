@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Scholarship extends Model
 {
-    protected $primaryKey = 'id_beasiswa';
-
     protected $table = 'scholarships';
+
+    protected $primaryKey = 'id_beasiswa';
 
     protected $fillable = [
         'id_provider',
@@ -23,9 +23,13 @@ class Scholarship extends Model
         'status',
     ];
 
-    protected $casts = [
-        'deadline' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'deadline' => 'date',
+            'tanggal_dibuat' => 'date',
+        ];
+    }
 
     public function provider()
     {
@@ -34,7 +38,7 @@ class Scholarship extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'id_kategori', 'id_kategory');
+        return $this->belongsTo(Category::class, 'id_kategori', 'id_kategori');
     }
 
     public function applications()
@@ -52,5 +56,3 @@ class Scholarship extends Model
         return $this->hasMany(ChatRoom::class, 'id_beasiswa', 'id_beasiswa');
     }
 }
-
-

@@ -19,6 +19,7 @@ return new class extends Migration
         $table->string('email_kontak')->nullable();
         $table->string('no_hp')->nullable();
         $table->text('alamat')->nullable();
+        $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
         $table->timestamps();
     });
     }

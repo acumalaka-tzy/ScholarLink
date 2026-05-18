@@ -4,36 +4,47 @@ namespace App\Http\Controllers;
 
 use App\Models\Favorite;
 use App\Models\Scholarship;
-use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
-    // Simpan favorite
+    public function index()
+    {
+        $favorites = Favorite::with('scholarship.provider', 'scholarship.category')
+            ->where('id_user', auth()->id())
+            ->latest()
+            ->get();
+
+        return view('favorites.index', compact('favorites'));
+    }
+
     public function store($id)
     {
-        Favorite::create([
+        abort_if(auth()->user()->role !== 'mahasiswa', 403);
 
+        $scholarship = Scholarship::where('id_beasiswa', $id)
+            ->where('status', 'aktif')
+            ->firstOrFail();
+
+        Favorite::firstOrCreate([
             'id_user' => auth()->id(),
-
-            'id_beasiswa' => $id
-
+            'id_beasiswa' => $scholarship->id_beasiswa,
         ]);
 
         return redirect()
             ->back()
-            ->with('success', 'Berhasil tambah favorite');
+            ->with('success', 'Berhasil tambah favorite.');
     }
 
-    // List favorites
-    public function index()
+    public function destroy($id)
     {
-        $favorites = Favorite::with('scholarship')
-            ->where('id_user', auth()->id())
-            ->get();
+        abort_if(auth()->user()->role !== 'mahasiswa', 403);
 
-        return view(
-            'favorites.index',
-            compact('favorites')
-        );
+        Favorite::where('id_favorite', $id)
+            ->where('id_user', auth()->id())
+            ->delete();
+
+        return redirect()
+            ->back()
+            ->with('success', 'Favorite berhasil dihapus.');
     }
 }
