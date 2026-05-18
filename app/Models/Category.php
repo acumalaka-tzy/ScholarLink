@@ -18,7 +18,7 @@ class Category extends Model
     {
         return $this->hasMany(
             Scholarship::class,
-            'category_id',
+            'id_kategori',
             'id_kategori'
         );
     }

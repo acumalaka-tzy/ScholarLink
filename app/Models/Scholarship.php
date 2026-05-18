@@ -34,7 +34,7 @@ class Scholarship extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'id_kategori', 'id_kategory');
+        return $this->belongsTo(Category::class, 'id_kategori', 'id_kategori');
     }
 
     public function applications()
