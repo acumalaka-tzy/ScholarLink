@@ -6,125 +6,153 @@ use App\Models\Application;
 use App\Models\ApplicationStatusLog;
 use App\Models\Scholarship;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ApplicationController extends Controller
 {
-    // List applications
     public function index()
     {
-        $applications = Application::with([
+        $user = auth()->user();
+
+        $query = Application::with([
             'user',
-            'scholarship'
-        ])->get();
+            'scholarship.provider',
+            'scholarship.category',
+        ]);
+
+        if ($user->role === 'mahasiswa') {
+            $query->where('id_user', $user->id);
+        }
+
+        if ($user->role === 'provider') {
+            $provider = $user->provider;
+
+            abort_if(! $provider, 403, 'Akun provider belum terhubung dengan data provider.');
+
+            $query->whereHas('scholarship', function ($q) use ($provider) {
+                $q->where('id_provider', $provider->id_provider);
+            });
+        }
+
+        $applications = $query->latest()->get();
 
         return view('applications.index', compact('applications'));
     }
 
-    // Form apply
     public function create()
     {
-        $scholarships = Scholarship::all();
+        abort_if(auth()->user()->role !== 'mahasiswa', 403);
+
+        $scholarships = Scholarship::with(['provider', 'category'])
+            ->where('status', 'aktif')
+            ->whereDate('deadline', '>=', now())
+            ->latest()
+            ->get();
 
         return view('applications.create', compact('scholarships'));
     }
 
-    // Simpan application
     public function store(Request $request)
     {
+        abort_if(auth()->user()->role !== 'mahasiswa', 403);
+
         $request->validate([
-            'id_beasiswa' => 'required'
+            'id_beasiswa' => [
+                'required',
+                'exists:scholarships,id_beasiswa',
+                Rule::unique('applications', 'id_beasiswa')
+                    ->where(fn ($query) => $query->where('id_user', auth()->id())),
+            ],
+        ], [
+            'id_beasiswa.unique' => 'Kamu sudah pernah apply beasiswa ini.',
         ]);
 
-        // Simpan application
+        $scholarship = Scholarship::where('id_beasiswa', $request->id_beasiswa)
+            ->where('status', 'aktif')
+            ->whereDate('deadline', '>=', now())
+            ->firstOrFail();
+
         $application = Application::create([
-
             'id_user' => auth()->id(),
-
-            'id_beasiswa' => $request->id_beasiswa,
-
+            'id_beasiswa' => $scholarship->id_beasiswa,
             'tanggal_apply' => now(),
-
             'status' => 'pending',
-
+            'catatan' => null,
         ]);
 
-        // Simpan log status
         ApplicationStatusLog::create([
-
             'id_application' => $application->id_application,
-
             'status' => 'pending',
-
             'catatan' => 'Application berhasil dibuat',
-
             'tanggal_status' => now(),
-
         ]);
-
-        return redirect('/applications')
-            ->with('success', 'Berhasil apply scholarship');
-    }
-
-    // Approve
-    public function approve($id)
-    {
-        $application = Application::findOrFail($id);
-
-        $application->status = 'approved';
-
-        $application->save();
-
-        return back();
-
-        ApplicationStatusLog::create([
-
-            'id_application' => $application->id_application,
-
-            'status' => 'approved',
-
-            'catatan' => 'Application disetujui provider',
-
-            'tanggal_status' => now(),
-
-        ]);
-
-        return redirect('/applications')
-            ->with('success', 'Application approved');
-    }
-
-    public function destroy($id)
-    {
-        $application = Application::findOrFail($id);
-
-        $application->delete();
 
         return redirect()
             ->route('applications.index')
-            ->with('success', 'Application berhasil dibatalkan');
+            ->with('success', 'Berhasil apply beasiswa.');
     }
 
-    // Reject
-    public function reject($id)
+    public function approve($id)
     {
-        $application = Application::findOrFail($id);
+        $application = $this->findApplicationForProviderOrAdmin($id);
 
-        $application->status = 'rejected';
-
-        $application->save();
-
-        ApplicationStatusLog::create([
-
-            'id_application' => $application->id_application,
-
-            'status' => 'rejected',
-
-            'catatan' => 'Application ditolak provider',
-
-            'tanggal_status' => now(),
-
+        $application->update([
+            'status' => 'approved',
+            'catatan' => 'Application disetujui provider',
         ]);
 
-        return redirect('/applications')
-            ->with('success', 'Application rejected');
+        ApplicationStatusLog::create([
+            'id_application' => $application->id_application,
+            'status' => 'approved',
+            'catatan' => 'Application disetujui provider',
+            'tanggal_status' => now(),
+        ]);
+
+        return redirect()
+            ->route('applications.index')
+            ->with('success', 'Application approved.');
+    }
+
+    public function reject($id)
+    {
+        $application = $this->findApplicationForProviderOrAdmin($id);
+
+        $application->update([
+            'status' => 'rejected',
+            'catatan' => 'Application ditolak provider',
+        ]);
+
+        ApplicationStatusLog::create([
+            'id_application' => $application->id_application,
+            'status' => 'rejected',
+            'catatan' => 'Application ditolak provider',
+            'tanggal_status' => now(),
+        ]);
+
+        return redirect()
+            ->route('applications.index')
+            ->with('success', 'Application rejected.');
+    }
+
+    private function findApplicationForProviderOrAdmin($id): Application
+    {
+        $user = auth()->user();
+
+        abort_if(! in_array($user->role, ['admin', 'provider']), 403);
+
+        $query = Application::with('scholarship.provider')
+            ->where('id_application', $id);
+
+        if ($user->role === 'provider') {
+            $provider = $user->provider;
+
+            abort_if(! $provider, 403, 'Akun provider belum terhubung dengan data provider.');
+
+            $query->whereHas('scholarship', function ($q) use ($provider) {
+                $q->where('id_provider', $provider->id_provider);
+            });
+        }
+
+        return $query->firstOrFail();
     }
 }

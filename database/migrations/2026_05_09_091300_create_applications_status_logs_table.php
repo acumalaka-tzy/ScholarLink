@@ -28,6 +28,8 @@ return new class extends Migration
                 ->on('applications')
                 ->onDelete('cascade');
 
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+
         });
     }
 

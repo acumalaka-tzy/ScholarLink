@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Document extends Model
 {
+    protected $table = 'documents';
+
     protected $primaryKey = 'id_dokumen';
 
     protected $fillable = [
@@ -16,8 +18,15 @@ class Document extends Model
         'tanggal_upload',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'tanggal_upload' => 'datetime',
+        ];
+    }
+
     public function application()
     {
-        return $this->belongsTo(Application::class, 'id_application');
+        return $this->belongsTo(Application::class, 'id_application', 'id_application');
     }
 }

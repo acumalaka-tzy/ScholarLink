@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
 
-            $table->string('role')->default('mahasiswa');
-            $table->string('status')->default('aktif');
+            $table->enum('role', ['admin', 'provider', 'mahasiswa'])->default('mahasiswa');
+            $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');
             $table->timestamp('tanggal_daftar')->useCurrent();
 
             $table->timestamp('email_verified_at')->nullable();
