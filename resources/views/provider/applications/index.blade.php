@@ -2,83 +2,53 @@
 
 @section('content')
 
-{{-- SUCCESS MESSAGE --}}
-@if(session('success'))
+<div class="mb-8">
 
-    <div class="bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 p-4 rounded-2xl mb-6 shadow-lg flex justify-between items-center">
+    <h1 class="text-4xl font-black text-white mb-2">
+        Applications
+    </h1>
 
-        <span>
-            <strong>Success!</strong>
-            {{ session('success') }}
-        </span>
+    <p class="text-slate-400">
+        Kelola application mahasiswa untuk scholarship provider
+    </p>
 
-        <button onclick="this.parentElement.remove()"
-                class="text-emerald-300 font-bold text-xl">
+</div>
 
-            &times;
+<div class="glass-card rounded-3xl overflow-hidden">
 
-        </button>
+    <div class="overflow-x-auto">
 
-    </div>
+        <table class="w-full min-w-[760px]">
 
-@endif
+            <thead>
 
-<div class="p-6">
+                <tr class="border-b border-slate-700 text-left text-slate-300">
 
-    {{-- PAGE TITLE --}}
-    <div class="mb-8">
+                    <th class="p-5">Mahasiswa</th>
+                    <th class="p-5">Scholarship</th>
+                    <th class="p-5">Status</th>
+                    <th class="p-5">Action</th>
 
-        <h1 class="text-4xl font-bold text-white mb-2">
-            Applications
-        </h1>
+                </tr>
 
-        <p class="text-slate-400">
-            Kelola application mahasiswa untuk scholarship provider
-        </p>
+            </thead>
 
-    </div>
+            <tbody>
 
-    {{-- TABLE CARD --}}
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl overflow-hidden">
+                @forelse($applications as $application)
 
-        <div class="overflow-x-auto">
+                    <tr class="border-b border-slate-800 hover:bg-slate-800/40 transition">
 
-            <table class="w-full text-left text-white">
+                        <!-- Student -->
+                        <td class="p-5">
 
-                {{-- TABLE HEADER --}}
-                <thead class="bg-slate-800/80 border-b border-slate-700">
+                            <div class="flex items-center gap-3">
 
-                    <tr>
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center font-black">
 
-                        <th class="p-5 font-semibold text-slate-300">
-                            Mahasiswa
-                        </th>
+                                    {{ strtoupper(substr($application->user->name ?? 'M', 0, 1)) }}
 
-                        <th class="p-5 font-semibold text-slate-300">
-                            Scholarship
-                        </th>
-
-                        <th class="p-5 font-semibold text-slate-300">
-                            Status
-                        </th>
-
-                        <th class="p-5 font-semibold text-slate-300">
-                            Action
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                {{-- TABLE BODY --}}
-                <tbody>
-
-                    @forelse($applications as $application)
-
-                        <tr class="border-b border-slate-800 hover:bg-slate-800/40 transition duration-200">
-
-                            {{-- STUDENT --}}
-                            <td class="p-5">
+                                </div>
 
                                 <div>
 
@@ -92,122 +62,122 @@
 
                                 </div>
 
-                            </td>
+                            </div>
 
-                            {{-- SCHOLARSHIP --}}
-                            <td class="p-5">
+                        </td>
 
-                                <span class="font-medium">
-                                    {{ $application->scholarship->nama_beasiswa ?? '-' }}
+                        <!-- Scholarship -->
+                        <td class="p-5">
+
+                            <span class="font-medium">
+                                {{ $application->scholarship->nama_beasiswa ?? '-' }}
+                            </span>
+
+                        </td>
+
+                        <!-- Status -->
+                        <td class="p-5">
+
+                            @if($application->status == 'pending')
+
+                                <span class="px-4 py-2 rounded-full text-sm font-semibold bg-yellow-500/15 text-yellow-300 border border-yellow-400/20">
+                                    Pending
                                 </span>
 
-                            </td>
+                            @elseif($application->status == 'approved')
 
-                            {{-- STATUS --}}
-                            <td class="p-5">
+                                <span class="px-4 py-2 rounded-full text-sm font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-400/20">
+                                    Approved
+                                </span>
 
-                                @if($application->status == 'pending')
+                            @elseif($application->status == 'rejected')
 
-                                    <span class="bg-yellow-500/20 text-yellow-400 px-4 py-2 rounded-full text-sm font-semibold border border-yellow-500/30">
+                                <span class="px-4 py-2 rounded-full text-sm font-semibold bg-rose-500/15 text-rose-300 border border-rose-400/20">
+                                    Rejected
+                                </span>
 
-                                        Pending
+                            @endif
 
-                                    </span>
+                        </td>
 
-                                @elseif($application->status == 'approved')
+                        <!-- Action -->
+                        <td class="p-5">
 
-                                    <span class="bg-emerald-500/20 text-emerald-400 px-4 py-2 rounded-full text-sm font-semibold border border-emerald-500/30">
+                            @if($application->status == 'pending')
 
-                                        Approved
+                                <div class="flex flex-wrap gap-3">
 
-                                    </span>
+                                    <!-- Approve -->
+                                    <form action="{{ route('provider.applications.approve', $application->id_application) }}"
+                                          method="POST">
 
-                                @elseif($application->status == 'rejected')
+                                        @csrf
+                                        @method('PATCH')
 
-                                    <span class="bg-red-500/20 text-red-400 px-4 py-2 rounded-full text-sm font-semibold border border-red-500/30">
+                                        <button type="submit"
+                                                class="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 transition font-semibold shadow-lg shadow-emerald-500/20">
 
-                                        Rejected
+                                            Approve
 
-                                    </span>
+                                        </button>
 
-                                @endif
+                                    </form>
 
-                            </td>
+                                    <!-- Reject -->
+                                    <form action="{{ route('provider.applications.reject', $application->id_application) }}"
+                                          method="POST">
 
-                            {{-- ACTION --}}
-                            <td class="p-5">
+                                        @csrf
+                                        @method('PATCH')
 
-                                @if($application->status == 'pending')
+                                        <button type="submit"
+                                                class="px-5 py-2 rounded-xl bg-rose-500 hover:bg-rose-600 transition font-semibold shadow-lg shadow-rose-500/20">
 
-                                    <div class="flex flex-wrap gap-3">
+                                            Reject
 
-                                        {{-- APPROVE --}}
-                                        <form action="{{ route('provider.applications.approve', $application->id_application) }}"
-                                              method="POST">
+                                        </button>
 
-                                            @csrf
-                                            @method('PATCH')
+                                    </form>
 
-                                            <button type="submit"
-                                                    class="bg-emerald-500 hover:bg-emerald-600 px-5 py-2 rounded-xl text-white text-sm font-semibold transition duration-200 shadow-lg">
+                                </div>
 
-                                                Approve
+                            @else
 
-                                            </button>
+                                <span class="text-slate-500 italic">
+                                    No Action
+                                </span>
 
-                                        </form>
+                            @endif
 
-                                        {{-- REJECT --}}
-                                        <form action="{{ route('provider.applications.reject', $application->id_application) }}"
-                                              method="POST">
+                        </td>
 
-                                            @csrf
-                                            @method('PATCH')
+                    </tr>
 
-                                            <button type="submit"
-                                                    class="bg-red-500 hover:bg-red-600 px-5 py-2 rounded-xl text-white text-sm font-semibold transition duration-200 shadow-lg">
+                @empty
 
-                                                Reject
+                    <tr>
 
-                                            </button>
+                        <td colspan="4" class="py-14 text-center">
 
-                                        </form>
+                            <div class="text-5xl mb-4">📭</div>
 
-                                    </div>
-
-                                @else
-
-                                    <span class="text-slate-500 italic">
-                                        No Action
-                                    </span>
-
-                                @endif
-
-                            </td>
-
-                        </tr>
-
-                    @empty
-
-                        {{-- EMPTY STATE --}}
-                        <tr>
-
-                            <td colspan="4"
-                                class="text-center py-12 text-slate-500">
-
+                            <p class="font-bold text-lg">
                                 Belum ada application masuk
+                            </p>
 
-                            </td>
+                            <p class="text-slate-400 mt-1">
+                                Application mahasiswa akan muncul di sini.
+                            </p>
 
-                        </tr>
+                        </td>
 
-                    @endforelse
+                    </tr>
 
-                </tbody>
+                @endforelse
 
-            </table>
+            </tbody>
 
-        </div>
+        </table>
 
     </div>
 
