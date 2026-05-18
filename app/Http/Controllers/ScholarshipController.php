@@ -22,6 +22,19 @@ class ScholarshipController extends Controller
         );
     }
 
+    public function show($id)
+    {
+        $scholarship = Scholarship::with([
+            'provider',
+            'category'
+        ])->findOrFail($id);
+
+        return view(
+            'scholarships.show',
+            compact('scholarship')
+        );
+    }
+
     public function create()
     {
         $providers = Provider::all();

@@ -92,6 +92,17 @@ class ApplicationController extends Controller
             ->with('success', 'Application approved');
     }
 
+    public function destroy($id)
+    {
+        $application = Application::findOrFail($id);
+
+        $application->delete();
+
+        return redirect()
+            ->route('applications.index')
+            ->with('success', 'Application berhasil dibatalkan');
+    }
+
     // Reject
     public function reject($id)
     {

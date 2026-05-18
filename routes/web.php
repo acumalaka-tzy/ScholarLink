@@ -122,6 +122,9 @@ Route::middleware(['auth', 'mahasiswa'])->group(function () {
     Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy'])
     ->name('favorites.destroy');
 
+    Route::delete('/favorites/{id}',[FavoriteController::class, 'destroy'])
+    ->name('favorites.destroy');
+
     // Documents
     Route::resource('documents', DocumentController::class);
 

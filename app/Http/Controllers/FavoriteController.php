@@ -36,4 +36,16 @@ class FavoriteController extends Controller
             compact('favorites')
         );
     }
+
+    public function destroy($id)
+    {
+        $favorite = Favorite::findOrFail($id);
+
+        $favorite->delete();
+
+        return redirect()->back()->with(
+            'success',
+            'Favorite berhasil dihapus'
+        );
+    }
 }
