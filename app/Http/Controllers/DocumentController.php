@@ -8,52 +8,55 @@ use Illuminate\Http\Request;
 
 class DocumentController extends Controller
 {
-    // Menampilkan semua document
     public function index()
     {
-        $documents = Document::with('application')->get();
+        $documents = Document::with('application')
+            ->whereHas('application', function ($query) {
+                $query->where('id_user', auth()->id());
+            })
+            ->get();
 
         return view('documents.index', compact('documents'));
     }
 
-    // Form upload document
     public function create()
     {
-        $applications = Application::all();
+        $applications = Application::where('id_user', auth()->id())->get();
 
         return view('documents.create', compact('applications'));
     }
 
-    // Simpan document
     public function store(Request $request)
     {
         $request->validate([
             'id_application' => 'required',
             'jenis_dokumen' => 'required',
-            'file' => 'required|mimes:pdf,jpg,jpeg,png|max:2048'
+            'file' => 'required|file|mimes:pdf,doc,docx,png,jpg,jpeg'
         ]);
 
-        // Upload file
-        $file = $request->file('file');
+        $filePath = $request->file('file')->store('documents', 'public');
 
-        $filename = time() . '_' . $file->getClientOriginalName();
-
-        $path = $file->storeAs(
-            'documents',
-            $filename,
-            'public'
-        );
-
-        // Simpan database
         Document::create([
             'id_application' => $request->id_application,
             'jenis_dokumen' => $request->jenis_dokumen,
-            'nama_file' => $filename,
-            'file_path' => $path,
+            'nama_file' => $request->file('file')->getClientOriginalName(),
+            'file_path' => $filePath,
             'tanggal_upload' => now(),
         ]);
 
-        return redirect('/documents')
-            ->with('success', 'Document berhasil diupload');
+        return redirect()
+            ->route('documents.index')
+            ->with('success', 'Document uploaded!');
+    }
+
+    public function destroy($id)
+    {
+        $document = Document::findOrFail($id);
+
+        $document->delete();
+
+        return redirect()
+            ->route('documents.index')
+            ->with('success', 'Document deleted!');
     }
 }
