@@ -34,17 +34,17 @@ class User extends Authenticatable
 
     public function profile()
     {
-        return $this->hasOne(Profile::class, 'id_user');
+        return $this->hasOne(Profile::class, 'user_id', 'id');
     }
 
     public function applications()
     {
-        return $this->hasMany(Application::class, 'id_user');
+        return $this->hasMany(Application::class, 'id_user', 'id');
     }
 
     public function favorites()
     {
-        return $this->hasMany(Favorite::class, 'id_user');
+        return $this->hasMany(Favorite::class, 'id_user', 'id');
     }
 
     public function messages()
