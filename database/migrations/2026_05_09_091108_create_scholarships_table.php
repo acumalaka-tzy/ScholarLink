@@ -25,7 +25,7 @@ return new class extends Migration
         $table->string('tipe');
         $table->date('deadline');
         $table->date('tanggal_dibuat');
-        $table->string('status');
+        $table->enum('status', ['aktif', 'nonaktif', 'ditutup'])->default('aktif');
 
         $table->foreign('id_provider')
             ->references('id_provider')
@@ -36,8 +36,6 @@ return new class extends Migration
             ->references('id_kategori')
             ->on('categories')
             ->onDelete('cascade');
-
-        $table->enum('status', ['aktif', 'nonaktif', 'ditutup'])->default('aktif');
 
         $table->timestamps();
     });

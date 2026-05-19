@@ -27,6 +27,8 @@ return new class extends Migration
                 ->on('scholarships')
                 ->onDelete('cascade');
 
+            $table->unique(['id_user', 'id_beasiswa']);
+
             $table->timestamps();
         });
     }

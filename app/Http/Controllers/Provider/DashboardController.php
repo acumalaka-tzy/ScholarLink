@@ -24,7 +24,7 @@ public function index()
         'id_provider',
         $providerId
     )
-    ->where('status', 'active')
+   ->where('status', 'aktif')
     ->count();
 
     // Total applications
@@ -36,15 +36,23 @@ public function index()
     )->count();
 
     // Recent applications
-    $applications = Application::whereHas(
+    $recentApplications = Application::whereHas(
         'scholarship',
-        function($query) use ($providerId) {
+        function ($query) use ($providerId) {
             $query->where('id_provider', $providerId);
         }
     )
+    ->with(['user', 'scholarship'])
     ->latest()
     ->take(5)
     ->get();
+
+    return view('provider.dashboard', compact(
+        'totalScholarships',
+        'activeScholarships',
+        'totalApplications',
+        'recentApplications'
+    ));
 
     return view('provider.dashboard', compact(
         'totalScholarships',

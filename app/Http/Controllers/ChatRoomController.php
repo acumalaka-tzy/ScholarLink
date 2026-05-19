@@ -66,15 +66,17 @@ class ChatRoomController extends Controller
             'pesan' => 'required|string|max:2000',
         ]);
 
+        $chatRoom = ChatRoom::where('id_room', $id)->firstOrFail();
+
         Message::create([
-            'id_room' => $id,
+            'id_room' => $chatRoom->id_room,
             'id_user' => auth()->id(),
             'pesan' => $request->pesan,
             'waktu_kirim' => now(),
         ]);
 
         return redirect()
-            ->route('chat-rooms.show', $id)
+            ->route('chat-rooms.show', $chatRoom->id_room)
             ->with('success', 'Pesan berhasil dikirim.');
     }
 }
