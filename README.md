@@ -413,7 +413,46 @@ Sebelum project di-upload ke GitHub, pastikan:
 
 ## 👥 Kontributor
 
-Project ini dikembangkan oleh tim **ScholarLink** sebagai aplikasi web pengelolaan beasiswa berbasis Laravel.
+Project **ScholarLink** dikembangkan oleh:
+
+## 👥 Kontributor
+
+Project **ScholarLink** dikembangkan oleh tim berikut:
+
+| No | Nama | NIM | Status | Peran / Tugas |
+|---|---|---|---|---|
+| 1 | Gabriel Saurman Parhusip | 251402043 | Aktif | Backend Developer |
+| 2 | Rodotua Naomi Mutiara Simamora | 251402030 | Aktif | Database & Backend Core Lead |
+| 3 | Charles | 251402081 | Aktif | Backend Developer |
+| 4 | Aldiva Roelya Padang | 251402007 | Aktif | Frontend Developer |
+| 5 | Patricia Putri Josephine Situmeang | 251402119 | Aktif | Frontend Developer |
+
+### Pembagian Tugas
+
+#### 🗄️ Database & Backend Core Lead
+**Rodotua Naomi Mutiara Simamora**
+- Merancang struktur database utama.
+- Mengelola relasi antar tabel.
+- Menyusun migration dan struktur tabel.
+- Mengatur alur backend utama.
+- Memastikan integrasi database dengan fitur aplikasi.
+- Mengelola logic inti pada fitur application, document, favorite, dan chat room.
+
+#### ⚙️ Backend Developer
+**Gabriel Saurman Parhusip** dan **Charles**
+- Membantu pengembangan controller dan route.
+- Mengelola logic backend sesuai kebutuhan fitur.
+- Membantu integrasi fitur admin, provider, dan mahasiswa.
+- Membantu proses debugging backend.
+- Membantu pengujian fitur berbasis role.
+
+#### 🎨 Frontend Developer
+**Aldiva Roelya Padang** dan **Patricia Putri Josephine Situmeang**
+- Mendesain tampilan halaman aplikasi.
+- Membuat tampilan responsive.
+- Mengatur layout halaman home, dashboard, auth, dan fitur utama.
+- Menyesuaikan tampilan UI agar lebih menarik dan mudah digunakan.
+- Membantu integrasi tampilan dengan data dari backend.
 
 ---
 
