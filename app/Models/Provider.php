@@ -11,14 +11,20 @@ class Provider extends Model
     protected $primaryKey = 'id_provider';
 
     protected $fillable = [
-        'nama_instansi',
+    'nama_instansi',
+    'email_kontak',
+    'no_hp',
+    'website',
+    'alamat',
+    'deskripsi_instansi',
+    'status',
     ];
 
     public function scholarships()
     {
         return $this->hasMany(
             Scholarship::class,
-            'provider_id',
+            'id_provider',
             'id_provider'
         );
     }

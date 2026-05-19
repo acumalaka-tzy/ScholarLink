@@ -16,12 +16,6 @@
 
     </div>
 
-    <a href="{{ route('admin.providers.create') }}"
-       class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 py-3 rounded-2xl shadow-lg font-semibold transition duration-200 hover:scale-105 text-center">
-
-        + Tambah Provider
-
-    </a>
 
 </div>
 
@@ -145,11 +139,11 @@
 
     <div class="flex items-center justify-center gap-3 flex-wrap">
 
-        <!-- Edit -->
-        <a href="{{ route('admin.providers.edit', $provider->id_provider) }}"
-           class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition duration-200 shadow-md hover:scale-105">
+        <!-- Detail -->
+        <a href="{{ route('admin.providers.show', $provider->id_provider) }}"
+            class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition duration-200 shadow-md hover:scale-105">
 
-            Edit
+            Detail
 
         </a>
 

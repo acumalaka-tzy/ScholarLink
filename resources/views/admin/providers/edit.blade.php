@@ -14,7 +14,7 @@
 
 </div>
 
-<form action="{{ route('providers.update', ['provider' => $provider->id_provider]) }}"
+<form action="{{ route('admin.providers.update', ['provider' => $provider->id_provider]) }}"
       method="POST"
       class="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-gray-100 dark:border-slate-700 p-8">
 
@@ -120,7 +120,7 @@
 
         </button>
 
-        <a href="{{ route('providers.index') }}"
+        <a href="{{ route('admin.providers.index') }}"
            class="bg-gray-200 hover:bg-gray-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-gray-700 dark:text-white px-6 py-3 rounded-2xl font-semibold transition duration-200">
 
             Kembali

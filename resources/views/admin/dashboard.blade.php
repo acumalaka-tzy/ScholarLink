@@ -159,4 +159,106 @@
 
 </div>
 
+<div class="h-10"></div>
+
+<!-- Recent Providers -->
+<div class="bg-slate-800 border border-slate-700 rounded-2xl shadow-lg overflow-hidden mt-10">
+
+    <div class="px-6 py-5 border-b border-slate-700">
+
+        <h2 class="text-2xl font-bold text-white">
+            Recent Providers
+        </h2>
+
+        <p class="text-slate-400 text-sm mt-1">
+            Provider terbaru ScholarLink
+        </p>
+
+    </div>
+
+    <div class="overflow-x-auto">
+
+        <table class="w-full">
+
+            <thead class="bg-slate-900">
+
+                <tr>
+
+                    <th class="text-left px-6 py-4 text-slate-300">
+                        Instansi
+                    </th>
+
+                    <th class="text-left px-6 py-4 text-slate-300">
+                        Email
+                    </th>
+
+                    <th class="text-left px-6 py-4 text-slate-300">
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @forelse ($recentProviders as $provider)
+
+                    <tr class="border-t border-slate-700 hover:bg-slate-700/40 transition">
+
+                        <td class="px-6 py-4 text-white">
+                            {{ $provider->nama_instansi }}
+                        </td>
+
+                        <td class="px-6 py-4 text-slate-300">
+                            {{ $provider->email_kontak }}
+                        </td>
+
+                        <td class="px-6 py-4">
+
+                            <span class="
+                                px-3 py-1 rounded-full text-xs font-semibold
+
+                                @if($provider->status == 'verified')
+                                    bg-emerald-100 text-emerald-600
+
+                                @elseif($provider->status == 'pending')
+                                    bg-amber-100 text-amber-600
+
+                                @else
+                                    bg-rose-100 text-rose-600
+                                @endif
+                            ">
+
+                                {{ ucfirst($provider->status) }}
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                @empty
+
+                    <tr>
+
+                        <td colspan="3"
+                            class="text-center py-10 text-slate-400">
+
+                            Belum ada data provider
+
+                        </td>
+
+                    </tr>
+
+                @endforelse
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
 @endsection

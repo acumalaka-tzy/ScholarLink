@@ -42,7 +42,8 @@ Route::middleware(['auth', 'admin'])
 
         Route::resource('users', UserController::class);
 
-        Route::resource('providers', ProviderController::class);
+        Route::resource('providers', ProviderController::class)
+            ->except(['create', 'store']);
         
         Route::put(
                 'providers/{provider}/approve',

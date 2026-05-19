@@ -52,18 +52,35 @@
 
     </div>
 
-    <div class="mb-6">
+            <div>
+                <label class="block mb-3 font-semibold text-slate-200">
+                    Tipe
+                </label>
+                <div class="relative">
+                    <select
+                        name="tipe"
+                        class="w-full appearance-none rounded-2xl border border-indigo-500/20 bg-slate-900 text-white px-5 py-4 shadow-lg focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 outline-none transition duration-200">
+                       
+                        <option value="Fully Funded">
+                            🎓 Fully Funded
+                        </option>
 
-        <label class="block mb-2 font-semibold">
-            Tipe Beasiswa
-        </label>
+                        <option value="Partial">
+                            💰 Partial
+                        </option>
 
-        <input type="text"
-            name="tipe"
-            class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-5 py-3 text-white">
+                        <option value="Exchange">
+                            🌍 Exchange
+                        </option>
+
+                    </select>
+                    <div class="absolute inset-y-0 right-5 flex items-center text-indigo-400 pointer-events-none">  ▼
+                    </div>
+                </div>
+
+            </div>
             
-
-    </div>
+            <div class="h-6"></div>
 
     <div class="mb-6">
 

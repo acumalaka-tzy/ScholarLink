@@ -22,12 +22,15 @@ class DashboardController extends Controller
 
     $recentUsers = User::take(5)->get();
 
+    $recentProviders = Provider::take(5)->get();
+
     return view('admin.dashboard', compact(
         'totalUsers',
         'totalProviders',
         'totalScholarships',
         'totalApplications',
-        'recentUsers'
+        'recentUsers',
+        'recentProviders',
     ));
 }
 }
