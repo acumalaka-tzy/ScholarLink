@@ -27,6 +27,8 @@ return new class extends Migration
             ->on('users')
             ->onDelete('cascade');
 
+        $table->unique(['id_room', 'id_user']);
+
         $table->timestamps();
     });
     }

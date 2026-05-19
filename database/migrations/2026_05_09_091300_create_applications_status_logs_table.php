@@ -14,7 +14,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('id_application');
 
-            $table->string('status');
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
 
             $table->text('catatan')->nullable();
 
@@ -27,8 +27,6 @@ return new class extends Migration
                 ->references('id_application')
                 ->on('applications')
                 ->onDelete('cascade');
-
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
 
         });
     }

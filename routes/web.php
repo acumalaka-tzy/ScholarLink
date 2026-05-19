@@ -21,11 +21,13 @@ use App\Http\Controllers\Admin\ScholarshipController as AdminScholarshipControll
 
 
 Route::get('/', function () {
-
-    $scholarships = Scholarship::all();
+    $scholarships = Scholarship::with(['provider', 'category'])
+        ->where('status', 'aktif')
+        ->orderByDesc('tanggal_dibuat')
+        ->take(6)
+        ->get();
 
     return view('home', compact('scholarships'));
-
 })->name('home');
 
 
@@ -120,9 +122,6 @@ Route::middleware(['auth', 'mahasiswa'])->group(function () {
         '/favorites', [FavoriteController::class, 'index']
     )->name('favorites.index');
 
-    Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy'])
-    ->name('favorites.destroy');
-
     Route::delete('/favorites/{id}',[FavoriteController::class, 'destroy'])
     ->name('favorites.destroy');
 
@@ -191,8 +190,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/chat-rooms/{id}', [ChatRoomController::class, 'show'])
         ->name('chat-rooms.show');
 
-    Route::post('/chat-rooms/{id}/messages', [ChatRoomController::class, 'sendMessage'])
-        ->name('chat-rooms.messages.store');
+   Route::post('/chat-rooms/{id}/messages', [ChatRoomController::class, 'sendMessage'])
+    ->name('chat-rooms.messages.store');
 });
 
 
@@ -218,12 +217,12 @@ Route::middleware('auth')->group(function () {
 // LOGOUT TEST
 // ==========================
 
-Route::get('/logout-test', function () {
+// Route::get('/logout-test', function () {
 
-    auth()->logout();
+//     auth()->logout();
 
-    return redirect('/');
+//     return redirect('/');
 
-});
+// });
 
 require __DIR__.'/auth.php';

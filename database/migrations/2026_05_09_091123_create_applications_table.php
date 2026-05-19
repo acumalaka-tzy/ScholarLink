@@ -18,7 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('id_beasiswa');
 
             $table->timestamp('tanggal_apply')->useCurrent();
-            $table->string('status')->nullable();
+            $table->enum('status', ['pending', 'approved', 'rejected'])
+                ->default('pending');
             $table->text('catatan')->nullable();
 
             $table->foreign('id_user')
@@ -30,6 +31,8 @@ return new class extends Migration
                 ->references('id_beasiswa')
                 ->on('scholarships')
                 ->onDelete('cascade');
+
+            $table->unique(['id_user', 'id_beasiswa']);
 
             $table->timestamps();
         });

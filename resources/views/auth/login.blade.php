@@ -1,47 +1,238 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ScholarLink</title>
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+    <style>
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        .login-bg {
+            background:
+                radial-gradient(circle at top left, rgba(99, 102, 241, 0.25), transparent 35%),
+                radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.25), transparent 35%),
+                linear-gradient(135deg, #020617 0%, #0f172a 55%, #111827 100%);
+        }
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+        .glass-card {
+            background: rgba(15, 23, 42, 0.82);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+        }
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+        .gradient-text {
+            background: linear-gradient(135deg, #818cf8 0%, #c084fc 55%, #fb7185 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            transition: all 0.25s ease;
+        }
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 30px rgba(99, 102, 241, 0.35);
+        }
+    </style>
+</head>
+
+<body class="login-bg min-h-screen text-white">
+
+    <div class="min-h-screen grid lg:grid-cols-2">
+
+        <!-- Left Section -->
+        <div class="hidden lg:flex flex-col justify-between p-12 relative overflow-hidden">
+
+            <div>
+                <a href="{{ route('home') }}" class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center font-black text-xl shadow-lg shadow-purple-500/30">
+                        S
+                    </div>
+
+                    <div>
+                        <h1 class="text-3xl font-black gradient-text">
+                            ScholarLink
+                        </h1>
+                        <p class="text-slate-400 text-sm">
+                            Platform Beasiswa Terpercaya
+                        </p>
+                    </div>
                 </a>
-            @endif
+            </div>
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
+            <div class="max-w-xl">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/15 border border-indigo-400/30 text-indigo-300 text-sm font-semibold mb-6">
+                    🎓 Welcome Back
+                </div>
+
+                <h2 class="text-5xl font-black leading-tight mb-6">
+                    Masuk dan lanjutkan <span class="gradient-text">perjalanan beasiswa</span> kamu.
+                </h2>
+
+                <p class="text-slate-300 text-lg leading-relaxed">
+                    Pantau pendaftaran, kelola dokumen, simpan beasiswa favorit, dan akses fitur ScholarLink sesuai role akun kamu.
+                </p>
+
+                <div class="grid grid-cols-3 gap-4 mt-10">
+                    <div class="glass-card rounded-2xl p-5">
+                        <p class="text-3xl font-black">1K+</p>
+                        <p class="text-slate-400 text-sm mt-1">Beasiswa</p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-5">
+                        <p class="text-3xl font-black">500+</p>
+                        <p class="text-slate-400 text-sm mt-1">Penerima</p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-5">
+                        <p class="text-3xl font-black">24/7</p>
+                        <p class="text-slate-400 text-sm mt-1">Akses</p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-slate-500 text-sm">
+                © 2026 ScholarLink. Semua hak dilindungi.
+            </p>
         </div>
-    </form>
-</x-guest-layout>
+
+        <!-- Right Section -->
+        <div class="flex items-center justify-center px-6 py-12">
+
+            <div class="w-full max-w-md">
+
+                <div class="lg:hidden text-center mb-8">
+                    <a href="{{ route('home') }}" class="inline-flex items-center justify-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center font-black text-xl">
+                            S
+                        </div>
+
+                        <span class="text-3xl font-black gradient-text">
+                            ScholarLink
+                        </span>
+                    </a>
+                </div>
+
+                <div class="glass-card rounded-3xl p-8">
+
+                    <div class="mb-8">
+                        <h2 class="text-3xl font-black">
+                            Masuk Akun
+                        </h2>
+
+                        <p class="text-slate-400 mt-2">
+                            Gunakan email dan password yang sudah terdaftar.
+                        </p>
+                    </div>
+
+                    @if (session('status'))
+                        <div class="mb-5 p-4 rounded-2xl bg-emerald-500/15 border border-emerald-400/25 text-emerald-300 text-sm">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="mb-5 p-4 rounded-2xl bg-rose-500/15 border border-rose-400/25 text-rose-300 text-sm">
+                            <ul class="list-disc list-inside">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('login') }}" class="space-y-5">
+                        @csrf
+
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-slate-300 mb-2">
+                                Email
+                            </label>
+
+                            <input
+                                id="email"
+                                type="email"
+                                name="email"
+                                value="{{ old('email') }}"
+                                required
+                                autofocus
+                                autocomplete="username"
+                                placeholder="contoh@email.com"
+                                class="w-full rounded-2xl bg-slate-950/80 border border-slate-700 px-5 py-4 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                            >
+                        </div>
+
+                        <div>
+                            <label for="password" class="block text-sm font-semibold text-slate-300 mb-2">
+                                Password
+                            </label>
+
+                            <input
+                                id="password"
+                                type="password"
+                                name="password"
+                                required
+                                autocomplete="current-password"
+                                placeholder="Masukkan password"
+                                class="w-full rounded-2xl bg-slate-950/80 border border-slate-700 px-5 py-4 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                            >
+                        </div>
+
+                        <div class="flex items-center justify-between gap-4">
+                            <label class="flex items-center gap-2 text-sm text-slate-400">
+                                <input
+                                    type="checkbox"
+                                    name="remember"
+                                    class="rounded bg-slate-950 border-slate-700 text-indigo-600 focus:ring-indigo-500"
+                                >
+                                Remember me
+                            </label>
+
+                            @if (Route::has('password.request'))
+                                <a href="{{ route('password.request') }}" class="text-sm text-indigo-300 hover:text-indigo-200 font-semibold">
+                                    Lupa password?
+                                </a>
+                            @endif
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn-primary w-full py-4 rounded-2xl font-black text-white"
+                        >
+                            LOG IN
+                        </button>
+                    </form>
+
+                    <div class="mt-7 text-center">
+                        <p class="text-slate-400 text-sm">
+                            Belum punya akun?
+                            <a href="{{ route('register') }}" class="text-indigo-300 hover:text-indigo-200 font-bold">
+                                Daftar sekarang
+                            </a>
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="mt-6 text-center">
+                    <a href="{{ route('home') }}" class="text-slate-400 hover:text-white text-sm font-semibold">
+                        ← Kembali ke halaman utama
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

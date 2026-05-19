@@ -8,7 +8,7 @@ use App\Models\Application;
 
 class DashboardController extends Controller
 {
-    public function index()
+  public function index()
     {
         $providerId = auth()->user()->provider->id_provider;
 
@@ -23,7 +23,7 @@ class DashboardController extends Controller
             'id_provider',
             $providerId
         )
-        ->where('status', 'active')
+        ->where('status', 'aktif') 
         ->count();
 
         // Total applications
@@ -41,6 +41,7 @@ class DashboardController extends Controller
                 $query->where('id_provider', $providerId);
             }
         )
+        ->with(['user', 'scholarship']) 
         ->latest()
         ->take(5)
         ->get();
