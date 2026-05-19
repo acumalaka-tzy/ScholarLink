@@ -1,21 +1,26 @@
-🎓 ScholarLink
+# 🎓 ScholarLink
 
 **ScholarLink** adalah aplikasi web berbasis **Laravel** untuk mengelola informasi beasiswa, pendaftaran beasiswa, dokumen pendaftar, daftar favorit, dashboard berbasis role, serta fitur chat room antara provider dan mahasiswa.
 
 Aplikasi ini dirancang untuk membantu mahasiswa menemukan beasiswa yang sesuai, melakukan pendaftaran secara online, mengunggah dokumen pendukung, memantau status pendaftaran, dan berkomunikasi melalui ruang diskusi beasiswa.
 
-✨ Preview Singkat
+---
+
+## ✨ Preview Singkat
 
 ScholarLink memiliki tiga jenis pengguna utama:
 
 | Role | Fungsi Utama |
+|---|---|
 | **Admin** | Mengelola user, provider, dan data beasiswa |
 | **Provider** | Mengelola beasiswa, melihat application, approve/reject pendaftar, dan membuat chat room |
 | **Mahasiswa** | Melihat beasiswa, apply, upload dokumen, menyimpan favorit, dan mengikuti chat room |
 
-🚀 Fitur Utama
+---
 
-🔐 Authentication
+## 🚀 Fitur Utama
+
+### 🔐 Authentication
 
 ScholarLink menggunakan **Laravel Breeze** sebagai sistem autentikasi.
 
@@ -30,7 +35,9 @@ Fitur autentikasi yang tersedia:
 - Verify Email
 - Redirect otomatis berdasarkan role
 
-🧑‍💼 Admin Panel
+---
+
+### 🧑‍💼 Admin Panel
 
 Admin memiliki akses untuk mengelola data utama aplikasi.
 
@@ -42,7 +49,9 @@ Fitur admin:
 - Melihat data aplikasi secara umum
 - Mengakses dashboard admin
 
-🏢 Provider Panel
+---
+
+### 🏢 Provider Panel
 
 Provider dapat mengelola program beasiswa dan pendaftar.
 
@@ -58,7 +67,9 @@ Fitur provider:
 - Membuat chat room beasiswa
 - Melihat statistik beasiswa dan pendaftaran
 
-🎓 Mahasiswa Area
+---
+
+### 🎓 Mahasiswa Area
 
 Mahasiswa dapat mencari dan mendaftar beasiswa dengan mudah.
 
@@ -73,7 +84,9 @@ Fitur mahasiswa:
 - Mengakses chat rooms
 - Mengirim pesan di chat room
 
-💬 Chat Rooms
+---
+
+### 💬 Chat Rooms
 
 Fitur chat room digunakan sebagai ruang diskusi antara user yang berkaitan dengan program beasiswa.
 
@@ -85,11 +98,15 @@ Fitur chat room:
 - Pesan ditampilkan berdasarkan room
 - Terhubung dengan data beasiswa
 
-⭐ Favorites
+---
+
+### ⭐ Favorites
 
 Mahasiswa dapat menyimpan beasiswa yang diminati ke daftar favorit agar lebih mudah ditemukan kembali.
 
-📁 Document Upload
+---
+
+### 📁 Document Upload
 
 Mahasiswa dapat mengunggah dokumen pendukung untuk application beasiswa.
 
@@ -100,9 +117,12 @@ Contoh dokumen:
 - Transkrip nilai
 - Dokumen pendukung lainnya
 
-🛠️ Teknologi yang Digunakan
+---
+
+## 🛠️ Teknologi yang Digunakan
 
 | Teknologi | Keterangan |
+|---|---|
 | **Laravel 13** | Framework utama backend |
 | **PHP 8.3** | Bahasa pemrograman backend |
 | **MySQL** | Database utama |
@@ -112,11 +132,14 @@ Contoh dokumen:
 | **Vite** | Asset bundler |
 | **Laragon** | Local development environment |
 
-🗄️ Struktur Database Utama
+---
+
+## 🗄️ Struktur Database Utama
 
 Beberapa tabel utama yang digunakan dalam aplikasi:
 
 | Tabel | Fungsi |
+|---|---|
 | `users` | Menyimpan akun pengguna |
 | `providers` | Menyimpan data provider beasiswa |
 | `categories` | Menyimpan kategori beasiswa |
@@ -130,7 +153,9 @@ Beberapa tabel utama yang digunakan dalam aplikasi:
 | `application_status_logs` | Menyimpan riwayat status application |
 | `admin_logs` | Menyimpan aktivitas admin |
 
-📌 Alur Sistem
+---
+
+## 📌 Alur Sistem
 
 ### Alur Mahasiswa
 
@@ -146,7 +171,7 @@ Register / Login
 → Kirim pesan
 ```
 
-Alur Provider
+### Alur Provider
 
 ```text
 Login provider
@@ -159,7 +184,7 @@ Login provider
 → Berkomunikasi dengan user
 ```
 
-Alur Admin
+### Alur Admin
 
 ```text
 Login admin
@@ -170,28 +195,30 @@ Login admin
 → Monitoring data aplikasi
 ```
 
-⚙️ Instalasi Project
+---
 
-1. Clone Repository
+## ⚙️ Instalasi Project
+
+### 1. Clone Repository
 
 ```bash
 git clone https://github.com/username/scholarlink.git
 cd scholarlink
 ```
 
-2. Install Dependency Laravel
+### 2. Install Dependency Laravel
 
 ```bash
 composer install
 ```
 
-3. Install Dependency Frontend
+### 3. Install Dependency Frontend
 
 ```bash
 npm install
 ```
 
-4. Copy File Environment
+### 4. Copy File Environment
 
 ```bash
 cp .env.example .env
@@ -203,13 +230,13 @@ Untuk Windows, jika command di atas tidak bisa, gunakan:
 copy .env.example .env
 ```
 
-5. Generate Application Key
+### 5. Generate Application Key
 
 ```bash
 php artisan key:generate
 ```
 
-6. Atur Database di `.env`
+### 6. Atur Database di `.env`
 
 ```env
 DB_CONNECTION=mysql
@@ -220,25 +247,25 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-7. Jalankan Migration dan Seeder
+### 7. Jalankan Migration dan Seeder
 
 ```bash
 php artisan migrate --seed
 ```
 
-8. Jalankan Storage Link
+### 8. Jalankan Storage Link
 
 ```bash
 php artisan storage:link
 ```
 
-9. Jalankan Vite
+### 9. Jalankan Vite
 
 ```bash
 npm run dev
 ```
 
-10. Jalankan Server Laravel
+### 10. Jalankan Server Laravel
 
 ```bash
 php artisan serve
@@ -250,25 +277,27 @@ Akses aplikasi melalui:
 http://127.0.0.1:8000
 ```
 
-👤 Akun Demo
+---
+
+## 👤 Akun Demo
 
 Gunakan akun berikut untuk testing aplikasi.
 
-Admin
+### Admin
 
 ```text
 Email    : admin@gmail.com
 Password : password
 ```
 
-rovider
+### Provider
 
 ```text
 Email    : provider@gmail.com
 Password : password
 ```
 
-Mahasiswa
+### Mahasiswa
 
 ```text
 Email    : mahasiswa@gmail.com
@@ -277,9 +306,12 @@ Password : password
 
 > Catatan: Sesuaikan akun demo dengan data yang ada di seeder project.
 
-🧭 Route Utama
+---
+
+## 🧭 Route Utama
 
 | Halaman | URL |
+|---|---|
 | Home | `/` |
 | Login | `/login` |
 | Register | `/register` |
@@ -292,7 +324,9 @@ Password : password
 | Favorites | `/favorites` |
 | Chat Rooms | `/chat-rooms` |
 
-📂 Struktur Folder Penting
+---
+
+## 📂 Struktur Folder Penting
 
 ```text
 app/
@@ -322,13 +356,16 @@ routes/
 └── web.php
 ```
 
-✅ Status Project
+---
+
+## ✅ Status Project
 
 Project ini sudah memiliki fitur utama untuk sistem pengelolaan beasiswa berbasis web.
 
 Progress fitur saat ini:
 
 | Fitur | Status |
+|---|---|
 | Authentication | ✅ Selesai |
 | Role-based redirect | ✅ Selesai |
 | Home page | ✅ Selesai |
@@ -342,7 +379,9 @@ Progress fitur saat ini:
 | Realtime chat | ⏳ Pengembangan selanjutnya |
 | Notification system | ⏳ Pengembangan selanjutnya |
 
-🔮 Rencana Pengembangan
+---
+
+## 🔮 Rencana Pengembangan
 
 Beberapa fitur yang dapat dikembangkan selanjutnya:
 
@@ -357,7 +396,9 @@ Beberapa fitur yang dapat dikembangkan selanjutnya:
 - Tampilan mobile yang lebih optimal
 - Email notification untuk status application
 
-🔒 Catatan Keamanan
+---
+
+## 🔒 Catatan Keamanan
 
 Sebelum project di-upload ke GitHub, pastikan:
 
@@ -368,20 +409,21 @@ Sebelum project di-upload ke GitHub, pastikan:
 - Role access sudah dibatasi dengan middleware
 - Upload dokumen dibatasi tipe dan ukuran file
 
-👥 Kontributor
+---
+
+## 👥 Kontributor
 
 Project ini dikembangkan oleh tim **ScholarLink** sebagai aplikasi web pengelolaan beasiswa berbasis Laravel.
-1. Gabriel Saurman Parhusip_251402043
-2. Charles_251402081
-3. Rodotua Naomi Mutiara Simamora_251402030
-4. Aldiva Roelya Padang_251402007
-5. Patricia Putri Josephine Situmeang_251402119
 
-📄 Lisensi
+---
+
+## 📄 Lisensi
 
 Project ini dibuat untuk kebutuhan pembelajaran, pengembangan aplikasi web, dan demonstrasi sistem pengelolaan beasiswa.
 
-💡 Deskripsi Singkat Repository
+---
+
+## 💡 Deskripsi Singkat Repository
 
 ```text
 ScholarLink adalah aplikasi web Laravel untuk mengelola beasiswa, application mahasiswa, dokumen, favorites, dashboard admin/provider/mahasiswa, dan chat rooms.
