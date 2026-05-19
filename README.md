@@ -194,6 +194,11 @@ Login admin
 → Kelola beasiswa
 → Monitoring data aplikasi
 ```
+---
+
+## ERD (Entity Relationship Diagram)
+
+<img width="1703" height="1264" alt="ERD ScholarLink Final1" src="https://github.com/user-attachments/assets/d17ec4ed-0d8d-4941-8f4e-710fda5464ef" />
 
 ---
 
