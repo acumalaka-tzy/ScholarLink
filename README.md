@@ -202,7 +202,7 @@ Login admin
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/username/scholarlink.git
+git clone https://github.com/acumalaka-tzy/scholarlink.git
 cd scholarlink
 ```
 
@@ -410,10 +410,6 @@ Sebelum project di-upload ke GitHub, pastikan:
 - Upload dokumen dibatasi tipe dan ukuran file
 
 ---
-
-## 👥 Kontributor
-
-Project **ScholarLink** dikembangkan oleh:
 
 ## 👥 Kontributor
 
