@@ -16,7 +16,7 @@
 
 <form action="{{ route('provider.scholarships.store') }}"
       method="POST"
-      class="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-xl">
+      class="glass-card rounded-3xl p-8">
 
     @csrf
 
@@ -42,11 +42,13 @@
             name="id_kategori"
             class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-5 py-3 text-white">
 
-            <option value="">-- Pilih Kategori --</option>
+            <option value="" selected>-- Pilih Kategori --</option>
 
-            <option value="1">Teknologi</option>
-            <option value="2">Bisnis</option>
-            <option value="3">Kesehatan</option>
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}"
+                    {{ $category->nama_kategori }}
+                </option>
+            @endforeach
 
         </select>
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Scholarship;
+use App\Models\Category;
 
 class ScholarshipController extends Controller
 {
@@ -30,7 +31,9 @@ class ScholarshipController extends Controller
      */
     public function create()
     {
-        return view('provider.scholarships.create');
+        $categories = Category::all();
+
+        return view('provider.scholarships.create', compact('categories'));
     }
 
     /**
