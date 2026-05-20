@@ -24,7 +24,7 @@
     </div>
 @endif
 
-<div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl overflow-x-auto">
+<div class="glass-card rounded-3xl p-6 overflow-x-auto">
     <table class="w-full text-left border-collapse">
         <thead>
             <tr class="border-b border-slate-800 text-slate-400 font-semibold text-sm">

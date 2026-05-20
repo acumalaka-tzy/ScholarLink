@@ -16,7 +16,7 @@
 
 <form action="{{ route('provider.scholarships.update', $scholarship->id_beasiswa) }}"
       method="POST"
-      class="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-xl">
+      class="glass-card rounded-3xl p-8"
 
     @csrf
     @method('PUT')
