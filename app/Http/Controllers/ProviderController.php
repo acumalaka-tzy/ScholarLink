@@ -8,7 +8,7 @@ use App\Models\Category;
 use App\Models\Provider;
 use Illuminate\Http\Request;
 
-class ScholarshipController extends Controller
+class ProviderController extends Controller
 {
     // LIST
     public function index()
