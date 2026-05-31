@@ -1,4 +1,4 @@
-# 🎓 ScholarLink
+<img width="1600" height="769" alt="Screenshot 2026-05-31 140122" src="https://github.com/user-attachments/assets/72164b4e-4b6e-43c1-b42f-ef7eb66eaad4" /># 🎓 ScholarLink
 
 **ScholarLink** adalah aplikasi web berbasis **Laravel** untuk mengelola informasi beasiswa, pendaftaran beasiswa, dokumen pendaftar, daftar favorit, dashboard berbasis role, serta fitur chat room antara provider dan mahasiswa.
 
@@ -198,7 +198,9 @@ Login admin
 
 ## ERD (Entity Relationship Diagram)
 
-<img width="1703" height="1264" alt="ERD ScholarLink Final1" src="https://github.com/user-attachments/assets/d17ec4ed-0d8d-4941-8f4e-710fda5464ef" />
+<img width="1600" height="769" alt="Screenshot 2026-05-31 140122" src="https://github.com/user-attachments/assets/127c9bbe-4db3-4e83-8cd9-c1749c893654" />
+
+https://drawsql.app/teams/naomi23/diagrams/database-tubes-sbd
 
 ---
 
