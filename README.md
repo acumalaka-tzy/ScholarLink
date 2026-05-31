@@ -1,4 +1,4 @@
-<img width="1600" height="769" alt="Screenshot 2026-05-31 140122" src="https://github.com/user-attachments/assets/72164b4e-4b6e-43c1-b42f-ef7eb66eaad4" /># 🎓 ScholarLink
+🎓 ScholarLink
 
 **ScholarLink** adalah aplikasi web berbasis **Laravel** untuk mengelola informasi beasiswa, pendaftaran beasiswa, dokumen pendaftar, daftar favorit, dashboard berbasis role, serta fitur chat room antara provider dan mahasiswa.
 
