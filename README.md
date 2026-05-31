@@ -1,4 +1,4 @@
-🎓 ScholarLink
+## 🎓 SCHOLARLINK
 
 **ScholarLink** adalah aplikasi web berbasis **Laravel** untuk mengelola informasi beasiswa, pendaftaran beasiswa, dokumen pendaftar, daftar favorit, dashboard berbasis role, serta fitur chat room antara provider dan mahasiswa.
 
