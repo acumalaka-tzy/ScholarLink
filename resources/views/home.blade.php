@@ -3,149 +3,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ScholarLink - Platform Beasiswa Terpercaya</title>
+    <title>ScholarLink - Platform Beasiswa Terpercaya & Berwarna</title>
+    
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=nunito:400,500,600,700,800,900" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
-        * {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .gradient-hero {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .gradient-hero::before {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
-            top: -100px;
-            right: -100px;
-            border-radius: 50%;
-        }
-
-        .gradient-hero::after {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, transparent 70%);
-            bottom: -50px;
-            left: -50px;
-            border-radius: 50%;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .card-hover {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.4);
-        }
-
-        .animate-fade {
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .animate-fade-delay {
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
-            transition: all 0.3s ease;
-        }
-
-        .card-hover:hover .feature-icon {
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            transform: scale(1.1);
-        }
-
-        .stat-number {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff 0%, #e0e7ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-link {
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #6366f1, #a855f7);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
+        body, * {
+            font-family: 'Nunito', sans-serif !important;
         }
     </style>
 </head>
-
-<body class="bg-white dark:bg-slate-950">
+<body class="bg-[#f4f7f9] text-gray-900 antialiased selection:bg-blue-600 selection:text-white">
 
     @php
         $dashboardRoute = null;
-
         if (auth()->check()) {
             $dashboardRoute = match(auth()->user()->role) {
                 'admin' => route('admin.dashboard'),
@@ -155,625 +31,379 @@
         }
     @endphp
 
-    <!-- Navigation -->
-    <nav class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50 border-b border-gray-200/50 dark:border-slate-800/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="w-full bg-white px-6 py-4 flex items-center justify-between shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
+            
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-cyan-400 rounded-lg flex items-center justify-center text-white font-black text-xl shadow-md">
+                    S
+                </div>
+                <span class="text-2xl font-black tracking-tight text-gray-900">
+                    ScholarLink
+                </span>
+            </div>
 
-            <div class="flex justify-between h-16 items-center">
+            <div class="hidden md:flex gap-8 items-center">
+                <a href="#features" class="text-gray-600 font-bold hover:text-cyan-600 transition">Fitur</a>
+                <a href="#scholarships" class="text-gray-600 font-bold hover:text-cyan-600 transition">Beasiswa</a>
+                <a href="#about" class="text-gray-600 font-bold hover:text-cyan-600 transition">Tentang</a>
+            </div>
 
-                <div class="flex items-center gap-2">
-                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg">
-                        S
+            <div class="flex gap-4 items-center">
+                @auth
+                    <div class="hidden lg:flex gap-4 mr-4 border-r border-gray-200 pr-4">
+                        @if(auth()->user()->role === 'mahasiswa')
+                            <a href="{{ route('applications.index') }}" class="text-sm font-bold text-gray-600 hover:text-cyan-600">Application</a>
+                            <a href="{{ route('documents.index') }}" class="text-sm font-bold text-gray-600 hover:text-cyan-600">Document</a>
+                        @elseif(auth()->user()->role === 'provider')
+                            <a href="{{ route('provider.scholarships.index') }}" class="text-sm font-bold text-gray-600 hover:text-cyan-600">Beasiswa Saya</a>
+                        @elseif(auth()->user()->role === 'admin')
+                            <a href="{{ route('admin.users.index') }}" class="text-sm font-bold text-gray-600 hover:text-cyan-600">Users</a>
+                        @endif
                     </div>
 
-                    <h1 class="text-xl font-bold text-gray-900 dark:text-white">
-                        ScholarLink
-                    </h1>
-                </div>
-
-                <div class="hidden md:flex gap-8 items-center">
-                    <a href="#features" class="nav-link text-gray-700 dark:text-gray-300 font-medium hover:text-indigo-600">
-                        Fitur
+                    <a href="{{ $dashboardRoute }}" class="text-sm font-black text-gray-700 hover:text-cyan-600 transition">Dashboard</a>
+                    
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="border-2 border-red-100 text-red-500 px-4 py-2 rounded-full text-sm font-bold hover:bg-red-100 transition">
+                            Logout
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="text-sm font-black text-gray-700 hover:text-cyan-600 hidden sm:block transition">Masuk</a>
+                    <a href="{{ route('register') }}" class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-2 rounded-full text-sm font-bold hover:from-blue-700 hover:to-cyan-700 transition shadow-md shadow-blue-600/20">
+                        Daftar Gratis
                     </a>
-
-                    <a href="#scholarships" class="nav-link text-gray-700 dark:text-gray-300 font-medium hover:text-indigo-600">
-                        Beasiswa
-                    </a>
-
-                    <a href="#about" class="nav-link text-gray-700 dark:text-gray-300 font-medium hover:text-indigo-600">
-                        Tentang
-                    </a>
-                </div>
-
-                <div class="flex gap-3 items-center">
-                    @auth
-                        @if(auth()->user()->role === 'mahasiswa')
-                            <a href="{{ route('applications.index') }}" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 font-medium">
-                                Application
-                            </a>
-
-                            <a href="{{ route('documents.index') }}" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 font-medium">
-                                Document
-                            </a>
-
-                            <a href="{{ route('favorites.index') }}" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 font-medium">
-                                Favorites
-                            </a>
-                        @endif
-
-                        @if(auth()->user()->role === 'provider')
-                            <a href="{{ route('provider.scholarships.index') }}" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 font-medium">
-                                Beasiswa Saya
-                            </a>
-
-                            <a href="{{ route('provider.applications.index') }}" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 font-medium">
-                                Lamaran Masuk
-                            </a>
-                        @endif
-
-                        @if(auth()->user()->role === 'admin')
-                            <a href="{{ route('admin.users.index') }}" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 font-medium">
-                                Users
-                            </a>
-
-                            <a href="{{ route('admin.providers.index') }}" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 font-medium">
-                                Providers
-                            </a>
-                        @endif
-
-                        <a href="{{ $dashboardRoute }}" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 font-medium">
-                            Dashboard
-                        </a>
-
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <button type="submit" class="text-gray-700 dark:text-gray-300 hover:text-red-600 font-medium">
-                                Logout
-                            </button>
-                        </form>
-                    @else
-                        <a href="{{ route('login') }}" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 font-medium px-4 py-2 rounded-lg transition">
-                            Masuk
-                        </a>
-
-                        <a href="{{ route('register') }}" class="btn-primary text-white px-6 py-2 rounded-lg font-medium">
-                            Daftar
-                        </a>
-                    @endauth
-                </div>
-
+                @endauth
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="gradient-hero text-white py-24 md:py-32">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hero-content">
-
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-
-                <div class="animate-fade">
-                    <div class="inline-block mb-4 px-4 py-2 rounded-full bg-indigo-500/20 border border-indigo-400/50">
-                        <span class="text-sm font-semibold text-indigo-300">
-                            🎓 Platform Beasiswa Terpercaya
-                        </span>
-                    </div>
-
-                    <h2 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
-                        Raih <span class="gradient-text">Mimpi Pendidikan</span> Anda
-                    </h2>
-
-                    <p class="text-xl text-slate-300 mb-8 leading-relaxed">
-                        Temukan dan daftarkan diri Anda untuk berbagai peluang beasiswa dari instansi terpercaya.
-                    </p>
-
+    <section class="max-w-7xl mx-auto px-6 py-12 lg:py-20 relative overflow-hidden">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            
+            <div class="max-w-xl">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 text-orange-700 font-bold text-sm mb-6 border border-orange-200">
+                    <i class="bi bi-mortarboard-fill"></i> Platform Beasiswa Terpercaya & Berwarna
+                </div>
+                
+                <h1 class="text-5xl lg:text-6xl font-black leading-tight mb-6 text-gray-900">
+                    Raih <br>
+                    <span class="text-orange-600">Mimpi Pendidikan</span> <br>
+                    Anda
+                </h1>
+                
+                <p class="text-gray-600 mb-8 text-lg leading-relaxed max-w-md font-bold">
+                    Temukan dan daftarkan diri Anda untuk berbagai peluang beasiswa dari instansi terpercaya. Kami bantu Anda wujudkan masa depan.
+                </p>
+                
+                <div class="flex gap-4 flex-wrap">
                     @auth
-                        <div class="flex gap-4 flex-wrap">
-                            <a href="#scholarships" class="bg-white text-indigo-600 px-8 py-3 rounded-lg font-bold hover:bg-slate-100 transition transform hover:scale-105">
-                                Lihat Beasiswa
-                            </a>
-
-                            <a href="{{ $dashboardRoute }}" class="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition">
-                                Dashboard Saya
-                            </a>
-                        </div>
+                        <a href="#scholarships" class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-4 rounded-xl font-black hover:from-blue-700 hover:to-cyan-700 transition shadow-lg shadow-blue-600/30">
+                            Lihat Beasiswa
+                        </a>
+                        <a href="{{ $dashboardRoute }}" class="bg-white border-2 border-gray-200 text-gray-800 px-8 py-4 rounded-xl font-black hover:border-gray-300 transition">
+                            Dashboard Saya
+                        </a>
                     @else
-                        <div class="flex gap-4 flex-wrap">
-                            <a href="{{ route('register') }}" class="bg-white text-indigo-600 px-8 py-3 rounded-lg font-bold hover:bg-slate-100 transition transform hover:scale-105">
-                                Mulai Sekarang
-                            </a>
-
-                            <a href="{{ route('login') }}" class="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition">
-                                Masuk
-                            </a>
-                        </div>
+                        <a href="{{ route('register') }}" class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-4 rounded-xl font-black hover:from-blue-700 hover:to-cyan-700 transition shadow-lg shadow-blue-600/30">
+                            Mulai Sekarang
+                        </a>
+                        <a href="{{ route('login') }}" class="bg-white border-2 border-gray-200 text-gray-800 px-8 py-4 rounded-xl font-black hover:border-gray-300 transition">
+                            Masuk Akun
+                        </a>
                     @endauth
-
-                    <div class="mt-12 flex gap-8 text-sm">
-                        <div>
-                            <p class="text-slate-300">Pengguna Aktif</p>
-                            <p class="text-2xl font-bold">10,000+</p>
-                        </div>
-
-                        <div>
-                            <p class="text-slate-300">Beasiswa Tersedia</p>
-                            <p class="text-2xl font-bold">1,000+</p>
-                        </div>
-
-                        <div>
-                            <p class="text-slate-300">Penerima Beasiswa</p>
-                            <p class="text-2xl font-bold">500+</p>
-                        </div>
-                    </div>
                 </div>
-
-                <div class="animate-fade-delay hidden md:block">
-                    <div class="relative h-96 rounded-2xl overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-purple-600/20 backdrop-blur-3xl"></div>
-
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-72 h-72 rounded-full bg-gradient-to-br from-indigo-500/30 to-purple-600/30 blur-xl"></div>
-                        </div>
-
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="bg-white/10 border border-white/20 rounded-2xl p-8 backdrop-blur-md text-center">
-                                <div class="text-7xl mb-4">🎓</div>
-                                <h3 class="text-2xl font-bold">ScholarLink</h3>
-                                <p class="text-slate-300 mt-2">Your Scholarship Partner</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
+            <div class="relative bg-gradient-to-br from-cyan-200 via-[#d1e9f6] to-cyan-200 rounded-[3rem] p-8 flex justify-center items-center h-[500px]">
+                <div class="absolute top-12 left-[-1rem] lg:left-[-2rem] bg-gradient-to-r from-orange-300 to-pink-300 rounded-2xl p-5 shadow-xl flex flex-col gap-1 z-10 animate-bounce" style="animation-duration: 3s;">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-10 h-10 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center font-black text-xl"><i class="bi bi-people-fill"></i></div>
+                        <span class="font-black text-2xl text-gray-900">10,000+</span>
+                    </div>
+                    <p class="text-sm text-gray-700 font-bold">Pengguna Aktif</p>
+                </div>
+
+                <div class="absolute bottom-24 right-[-1rem] lg:right-[-2rem] bg-gradient-to-r from-blue-300 to-magenta-300 rounded-2xl p-5 shadow-xl flex flex-col gap-1 z-10">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-black text-xl"><i class="bi bi-journals"></i></div>
+                        <span class="font-black text-2xl text-gray-900">1,000+</span>
+                    </div>
+                    <p class="text-sm text-gray-700 font-bold">Beasiswa Tersedia</p>
+                </div>
+
+                <div class="absolute bottom-8 left-8 bg-gradient-to-r from-green-300 to-cyan-300 rounded-2xl p-4 shadow-xl flex items-center gap-3 z-10">
+                    <div class="text-green-700">
+                        <i class="bi bi-check-circle-fill text-3xl"></i>
+                    </div>
+                    <div>
+                        <span class="font-black text-lg text-gray-900 block">500+</span>
+                        <span class="text-xs text-gray-700 font-bold">Penerima Beasiswa</span>
+                    </div>
+                </div>
+
+                <div class="w-full h-full bg-white/40 rounded-3xl border-4 border-white/60 flex items-center justify-center shadow-inner">
+                    <span class="text-blue-500 font-black text-center px-4">
+                        [Insert Vibrant Student Image Here]
+                    </span>
+                </div>
+            </div>
         </div>
     </section>
 
     @auth
         @if(auth()->user()->role === 'mahasiswa')
-            <section class="py-14 bg-white dark:bg-slate-950">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                    <div class="text-center mb-10">
-                        <h3 class="text-3xl font-bold text-gray-900 dark:text-white">
-                            Menu Mahasiswa
-                        </h3>
-
-                        <p class="text-gray-600 dark:text-slate-400 mt-2">
-                            Akses fitur pendaftaran beasiswa langsung dari halaman utama.
-                        </p>
+            <section class="py-16 bg-white relative">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h3 class="text-3xl font-black text-gray-900 mb-3">Menu Mahasiswa</h3>
+                        <p class="text-gray-500 font-bold">Akses fitur pendaftaran beasiswa langsung dari halaman utama.</p>
                     </div>
 
-                    <div class="grid md:grid-cols-3 gap-6">
-
-                        <a href="{{ route('applications.index') }}" class="block bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-slate-700 hover:border-indigo-500 transition card-hover">
-                            <div class="text-4xl mb-4">📄</div>
-
-                            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                                Application
-                            </h4>
-
-                            <p class="text-gray-600 dark:text-slate-400 mb-5">
-                                Lihat status pendaftaran beasiswa yang sudah kamu ajukan.
-                            </p>
-
-                            <span class="inline-block px-5 py-2 bg-indigo-600 text-white rounded-lg font-semibold">
-                                Buka Application
-                            </span>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <a href="{{ route('applications.index') }}" class="bg-gradient-to-br from-blue-100 to-cyan-100 rounded-3xl p-8 border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col">
+                            <div class="w-14 h-14 bg-white text-blue-600 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-md border border-blue-100"><i class="bi bi-file-earmark-text-fill"></i></div>
+                            <h4 class="text-xl font-black text-gray-900 mb-3">Application</h4>
+                            <p class="text-gray-600 mb-6 text-sm flex-grow font-bold">Lihat status pendaftaran beasiswa yang sudah kamu ajukan.</p>
+                            <span class="text-blue-700 font-black text-sm">Buka Application &rarr;</span>
                         </a>
 
-                        <a href="{{ route('documents.index') }}" class="block bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-slate-700 hover:border-indigo-500 transition card-hover">
-                            <div class="text-4xl mb-4">📁</div>
-
-                            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                                Document
-                            </h4>
-
-                            <p class="text-gray-600 dark:text-slate-400 mb-5">
-                                Upload dan kelola dokumen pendukung pendaftaran.
-                            </p>
-
-                            <span class="inline-block px-5 py-2 bg-purple-600 text-white rounded-lg font-semibold">
-                                Buka Document
-                            </span>
+                        <a href="{{ route('documents.index') }}" class="bg-gradient-to-br from-orange-100 to-magenta-100 rounded-3xl p-8 border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col">
+                            <div class="w-14 h-14 bg-white text-orange-500 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-md border border-orange-100"><i class="bi bi-folder-fill"></i></div>
+                            <h4 class="text-xl font-black text-gray-900 mb-3">Document</h4>
+                            <p class="text-gray-600 mb-6 text-sm flex-grow font-bold">Upload dan kelola dokumen pendukung pendaftaran.</p>
+                            <span class="text-orange-600 font-black text-sm">Buka Document &rarr;</span>
                         </a>
 
-                        <a href="{{ route('favorites.index') }}" class="block bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-slate-700 hover:border-indigo-500 transition card-hover">
-                            <div class="text-4xl mb-4">⭐</div>
-
-                            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                                Favorites
-                            </h4>
-
-                            <p class="text-gray-600 dark:text-slate-400 mb-5">
-                                Simpan dan lihat daftar beasiswa favorit kamu.
-                            </p>
-
-                            <span class="inline-block px-5 py-2 bg-pink-600 text-white rounded-lg font-semibold">
-                                Buka Favorites
-                            </span>
+                        <a href="{{ route('favorites.index') }}" class="bg-gradient-to-br from-yellow-100 to-pink-100 rounded-3xl p-8 border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col">
+                            <div class="w-14 h-14 bg-white text-yellow-500 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-md border border-yellow-100"><i class="bi bi-star-fill"></i></div>
+                            <h4 class="text-xl font-black text-gray-900 mb-3">Favorites</h4>
+                            <p class="text-gray-600 mb-6 text-sm flex-grow font-bold">Simpan dan lihat daftar beasiswa favorit kamu.</p>
+                            <span class="text-pink-600 font-black text-sm">Buka Favorites &rarr;</span>
                         </a>
-
                     </div>
                 </div>
             </section>
         @endif
     @endauth
 
-    <!-- Features Section -->
-    <section id="features" class="py-20 md:py-28 bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="features" class="py-20 bg-[#f4f7f9] relative">
+        <div class="absolute -top-12 -right-12 w-64 h-64 bg-cyan-100 rounded-full blur-3xl opacity-60"></div>
+        <div class="absolute -bottom-12 -left-12 w-64 h-64 bg-magenta-100 rounded-full blur-3xl opacity-60"></div>
 
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center mb-16">
-                <h3 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-                    Mengapa Memilih ScholarLink?
-                </h3>
-
-                <p class="text-xl text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
-                    Kami menyediakan semua yang Anda butuhkan untuk menemukan dan mendapatkan beasiswa impian.
-                </p>
+                <h3 class="text-4xl font-black text-gray-900 mb-4">Mengapa ScholarLink Adalah Kunci Anda?</h3>
+                <p class="text-gray-600 font-bold max-w-2xl mx-auto">Kami menyediakan semua yang Anda butuhkan untuk menemukan dan mendapatkan beasiswa impian.</p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="group card-hover bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-slate-700">
-                    <div class="feature-icon mb-6">🎯</div>
-                    <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                        Banyak Pilihan Beasiswa
-                    </h4>
-                    <p class="text-gray-600 dark:text-slate-400 leading-relaxed">
-                        Temukan peluang beasiswa berdasarkan kategori, provider, dan kebutuhan pendidikan Anda.
-                    </p>
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="bg-white p-10 rounded-3xl shadow-sm border border-gray-100">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm"><i class="bi bi-bullseye"></i></div>
+                    <h4 class="text-xl font-black text-gray-900 mb-3">Banyak Pilihan</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed font-bold">Temukan peluang beasiswa berdasarkan kategori, provider, dan kebutuhan pendidikan Anda.</p>
                 </div>
 
-                <div class="group card-hover bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-slate-700">
-                    <div class="feature-icon mb-6">🔒</div>
-                    <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                        Aman & Terpercaya
-                    </h4>
-                    <p class="text-gray-600 dark:text-slate-400 leading-relaxed">
-                        Data pengguna dan dokumen pendaftaran dikelola dengan sistem yang aman.
-                    </p>
+                <div class="bg-white p-10 rounded-3xl shadow-sm border border-gray-100">
+                    <div class="w-16 h-16 bg-green-100 text-green-700 rounded-full flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm"><i class="bi bi-shield-lock-fill"></i></div>
+                    <h4 class="text-xl font-black text-gray-900 mb-3">Aman & Terpercaya</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed font-bold">Data pengguna dan dokumen pendaftaran dikelola dengan sistem yang terenkripsi dan aman.</p>
                 </div>
 
-                <div class="group card-hover bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-slate-700">
-                    <div class="feature-icon mb-6">⚡</div>
-                    <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                        Proses Mudah
-                    </h4>
-                    <p class="text-gray-600 dark:text-slate-400 leading-relaxed">
-                        Pengajuan beasiswa dapat dilakukan secara online dengan alur yang sederhana.
-                    </p>
+                <div class="bg-white p-10 rounded-3xl shadow-sm border border-gray-100">
+                    <div class="w-16 h-16 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm"><i class="bi bi-lightning-charge-fill"></i></div>
+                    <h4 class="text-xl font-black text-gray-900 mb-3">Proses Mudah</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed font-bold">Pengajuan beasiswa dapat dilakukan secara online dengan alur yang sangat sederhana.</p>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- Scholarships Section -->
-    <section id="scholarships" class="py-20 md:py-28 bg-white dark:bg-slate-950">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            <div class="text-center mb-16">
-                <h3 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-                    Katalog Beasiswa Terbaru
-                </h3>
-
-                <p class="text-xl text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
-                    Temukan peluang beasiswa aktif dari berbagai provider.
-                </p>
+    <section id="scholarships" class="py-20 bg-[#fff8f8]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h3 class="text-4xl font-black text-gray-900 mb-4">Katalog Beasiswa Terbaru</h3>
+                    <p class="text-gray-600 font-bold">Temukan peluang beasiswa aktif dari berbagai provider.</p>
+                </div>
+                <a href="{{ route('scholarships.index') }}" class="hidden md:inline-block border-2 border-orange-200 text-orange-700 px-6 py-2 rounded-full font-black hover:border-orange-600 hover:text-orange-600 transition">
+                    Lihat Semua &rarr;
+                </a>
             </div>
 
-            @php
-                $scholarships = $scholarships ?? collect();
-            @endphp
+            @php $scholarships = $scholarships ?? collect(); @endphp
 
             @if($scholarships->count() > 0)
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
                     @foreach($scholarships->take(6) as $scholarship)
                         @php
-                            $deadline = $scholarship->deadline
-                                ? \Carbon\Carbon::parse($scholarship->deadline)
-                                : null;
+                            $deadline = $scholarship->deadline ? \Carbon\Carbon::parse($scholarship->deadline) : null;
                         @endphp
 
-                        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden card-hover border border-gray-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-indigo-600 transition">
-
-                            <div class="h-24 bg-gradient-to-r from-indigo-500 to-purple-600 relative overflow-hidden">
-                                <div class="absolute inset-0 opacity-10">
-                                    <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1200 120">
-                                        <path d="M0,0 Q300,50 600,0 T1200,0 L1200,120 L0,120 Z" fill="currentColor"></path>
-                                    </svg>
-                                </div>
-
+                        <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition duration-300 flex flex-col h-full">
+                            
+                            <div class="p-6 pb-4 border-b border-gray-50 relative">
                                 @if($scholarship->status === 'aktif')
-                                    <div class="absolute top-3 right-3 bg-green-400 text-green-900 px-3 py-1 rounded-full text-xs font-bold">
-                                        Aktif
-                                    </div>
+                                    <div class="absolute top-6 right-6 bg-green-200 text-green-900 px-3 py-1 rounded-full text-xs font-black shadow-sm">Aktif</div>
                                 @else
-                                    <div class="absolute top-3 right-3 bg-red-400 text-red-900 px-3 py-1 rounded-full text-xs font-bold">
-                                        Ditutup
-                                    </div>
+                                    <div class="absolute top-6 right-6 bg-red-200 text-red-900 px-3 py-1 rounded-full text-xs font-black shadow-sm">Ditutup</div>
                                 @endif
-                            </div>
-
-                            <div class="p-6">
-                                <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2 line-clamp-2">
+                                
+                                <p class="text-orange-600 text-xs font-black uppercase tracking-wider mb-2">
+                                    {{ $scholarship->category->nama_kategori ?? 'Umum' }}
+                                </p>
+                                <h4 class="text-xl font-black text-gray-900 mb-1 line-clamp-2">
                                     {{ $scholarship->nama_beasiswa }}
                                 </h4>
-
-                                <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-                                    {{ $scholarship->provider->nama_instansi ?? 'Provider tidak tersedia' }}
-                                    •
-                                    {{ $scholarship->category->nama_kategori ?? 'Kategori tidak tersedia' }}
+                                <p class="text-gray-500 text-sm font-bold">
+                                    by {{ $scholarship->provider->nama_instansi ?? 'Provider' }}
                                 </p>
+                            </div>
 
-                                <p class="text-gray-600 dark:text-gray-400 text-sm mb-5 line-clamp-3">
+                            <div class="p-6 flex-grow">
+                                <p class="text-gray-600 text-sm mb-6 line-clamp-3 leading-relaxed font-semibold">
                                     {{ \Illuminate\Support\Str::limit($scholarship->deskripsi, 120) }}
                                 </p>
 
-                                <div class="grid grid-cols-2 gap-3 mb-6">
-                                    <div class="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 p-3 rounded-lg">
-                                        <p class="text-gray-600 dark:text-gray-400 text-xs font-semibold mb-1">
-                                            TIPE
-                                        </p>
-
-                                        <p class="text-gray-900 dark:text-white font-bold text-sm">
-                                            {{ $scholarship->tipe ?? '-' }}
-                                        </p>
+                                <div class="space-y-3 mb-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 bg-blue-100 text-blue-700 rounded flex items-center justify-center text-sm shadow-inner border border-blue-200"><i class="bi bi-lightbulb-fill"></i></div>
+                                        <div>
+                                            <p class="text-[10px] text-gray-500 font-black uppercase tracking-wide">Tipe</p>
+                                            <p class="text-sm font-black text-gray-900">{{ $scholarship->tipe ?? '-' }}</p>
+                                        </div>
                                     </div>
-
-                                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-3 rounded-lg">
-                                        <p class="text-gray-600 dark:text-gray-400 text-xs font-semibold mb-1">
-                                            BENEFIT
-                                        </p>
-
-                                        <p class="text-gray-900 dark:text-white font-bold text-sm line-clamp-1">
-                                            {{ \Illuminate\Support\Str::limit($scholarship->benefit ?? '-', 35) }}
-                                        </p>
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 bg-green-100 text-green-700 rounded flex items-center justify-center text-sm shadow-inner border border-green-200"><i class="bi bi-cash-stack"></i></div>
+                                        <div>
+                                            <p class="text-[10px] text-gray-500 font-black uppercase tracking-wide">Benefit</p>
+                                            <p class="text-sm font-black text-gray-900 line-clamp-1">{{ $scholarship->benefit ?? '-' }}</p>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="flex items-center gap-2 mb-6 text-sm">
-                                    <span class="text-red-600 dark:text-red-400 font-bold">
-                                        📅
-                                    </span>
-
-                                    <span class="text-gray-700 dark:text-gray-300">
-                                        @if($deadline)
-                                            @if($deadline->isPast())
-                                                <span class="text-red-600 dark:text-red-400 font-semibold">
-                                                    Sudah Ditutup
-                                                </span>
-                                            @else
-                                                <span class="text-green-600 dark:text-green-400 font-semibold">
-                                                    Deadline: {{ $deadline->format('d M Y') }}
-                                                </span>
-                                            @endif
-                                        @else
-                                            <span class="text-gray-500">
-                                                Deadline belum tersedia
-                                            </span>
-                                        @endif
-                                    </span>
+                            <div class="p-6 pt-0 mt-auto">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-gray-400"><i class="bi bi-calendar-event-fill"></i></span>
+                                        <span class="text-sm font-black {{ $deadline && $deadline->isPast() ? 'text-red-500' : 'text-gray-700' }}">
+                                            {{ $deadline ? $deadline->format('d M Y') : 'Belum tersedia' }}
+                                        </span>
+                                    </div>
                                 </div>
-
-                                <a
-                                    href="{{ route('scholarships.show', $scholarship->id_beasiswa) }}"
-                                    class="block text-center w-full mt-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-2 rounded-lg font-semibold transition transform hover:scale-105"
-                                >
-                                    @auth
-                                        Lihat Detail & Daftar →
-                                    @else
-                                        Lihat Detail →
-                                    @endauth
+                                <a href="{{ route('scholarships.show', $scholarship->id_beasiswa) }}" class="block text-center w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-3 rounded-xl font-black transition">
+                                    @auth Lihat Detail & Daftar @else Lihat Detail @endauth
                                 </a>
                             </div>
                         </div>
                     @endforeach
-
                 </div>
-
-                <div class="text-center">
-                    <a
-                        href="{{ route('scholarships.index') }}"
-                        class="inline-block px-8 py-3 border-2 border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 rounded-lg font-bold hover:bg-indigo-50 dark:hover:bg-slate-800 transition"
-                    >
-                        Lihat Semua Beasiswa →
+                <div class="text-center md:hidden">
+                    <a href="{{ route('scholarships.index') }}" class="inline-block border-2 border-orange-200 text-orange-700 px-8 py-3 rounded-full font-black hover:border-orange-600 hover:text-orange-600 transition">
+                        Lihat Semua Beasiswa
                     </a>
                 </div>
             @else
-                <div class="text-center py-12 bg-gray-50 dark:bg-slate-800/50 rounded-2xl border-2 border-dashed border-gray-300 dark:border-slate-700">
-                    <p class="text-gray-600 dark:text-gray-400 text-lg">
-                        Belum ada data beasiswa.
-                    </p>
+                <div class="text-center py-16 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
+                    <p class="text-gray-500 font-bold text-lg">Belum ada data beasiswa saat ini.</p>
                 </div>
             @endif
-
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="gradient-hero text-white py-20 md:py-28 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="about" class="py-20 bg-[#f4f7f9] relative">
+        <div class="absolute -top-12 -left-12 w-64 h-64 rounded-full blur-3xl opacity-30 bg-gradient-to-r from-cyan-300 to-magenta-300"></div>
+        <div class="absolute -bottom-12 -right-12 w-64 h-64 rounded-full blur-3xl opacity-30 bg-gradient-to-r from-orange-300 to-green-300"></div>
 
-            <div class="grid md:grid-cols-4 gap-8 text-center">
-                <div>
-                    <p class="stat-number">50+</p>
-                    <p class="text-slate-300 text-lg mt-2">Universitas Mitra</p>
-                </div>
-
-                <div>
-                    <p class="stat-number">1000+</p>
-                    <p class="text-slate-300 text-lg mt-2">Beasiswa Aktif</p>
-                </div>
-
-                <div>
-                    <p class="stat-number">10K+</p>
-                    <p class="text-slate-300 text-lg mt-2">Peserta Aktif</p>
-                </div>
-
-                <div>
-                    <p class="stat-number">500+</p>
-                    <p class="text-slate-300 text-lg mt-2">Penerima Beasiswa</p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- How It Works -->
-    <section id="about" class="py-20 md:py-28 bg-gradient-to-b from-white via-indigo-50 to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center mb-16">
-                <h3 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-                    Proses Sederhana 4 Langkah
-                </h3>
-
-                <p class="text-xl text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
-                    Mulai dari mendaftar hingga mendapatkan beasiswa impian Anda.
-                </p>
+                <h3 class="text-4xl font-black text-gray-900 mb-4">Proses Sederhana 4 Langkah</h3>
+                <p class="text-gray-600 font-bold max-w-2xl mx-auto">Mulai dari mendaftar hingga mendapatkan beasiswa impian Anda.</p>
             </div>
 
-            <div class="grid md:grid-cols-4 gap-6 relative">
-                <div class="text-center relative">
-                    <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-lg">
-                        1
-                    </div>
-                    <h4 class="font-bold text-gray-900 dark:text-white mb-3 text-lg">
-                        Daftar
-                    </h4>
-                    <p class="text-gray-600 dark:text-slate-400 text-sm">
-                        Buat akun dan lengkapi data diri Anda.
-                    </p>
-                </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 relative">
+                <div class="hidden md:block absolute top-8 left-16 right-16 h-1 bg-gradient-to-r from-blue-200 via-orange-200 to-magenta-200 z-0 rounded-full"></div>
 
-                <div class="text-center relative">
-                    <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-lg">
-                        2
-                    </div>
-                    <h4 class="font-bold text-gray-900 dark:text-white mb-3 text-lg">
-                        Cari
-                    </h4>
-                    <p class="text-gray-600 dark:text-slate-400 text-sm">
-                        Jelajahi beasiswa sesuai kebutuhan Anda.
-                    </p>
+                <div class="text-center relative z-10">
+                    <div class="bg-gradient-to-br from-blue-600 to-cyan-500 text-white rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-black border-4 border-[#f4f7f9] shadow-md">1</div>
+                    <h4 class="font-black text-gray-900 mb-2">Daftar</h4>
+                    <p class="text-gray-600 font-bold text-sm">Buat akun & lengkapi data.</p>
                 </div>
-
-                <div class="text-center relative">
-                    <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-lg">
-                        3
-                    </div>
-                    <h4 class="font-bold text-gray-900 dark:text-white mb-3 text-lg">
-                        Lamar
-                    </h4>
-                    <p class="text-gray-600 dark:text-slate-400 text-sm">
-                        Kirim aplikasi dan dokumen pendukung.
-                    </p>
+                <div class="text-center relative z-10">
+                    <div class="bg-gradient-to-br from-orange-500 to-pink-500 text-white rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-black border-4 border-[#f4f7f9] shadow-md">2</div>
+                    <h4 class="font-black text-gray-900 mb-2">Cari</h4>
+                    <p class="text-gray-600 font-bold text-sm">Jelajahi opsi beasiswa.</p>
                 </div>
-
-                <div class="text-center relative">
-                    <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-lg">
-                        4
-                    </div>
-                    <h4 class="font-bold text-gray-900 dark:text-white mb-3 text-lg">
-                        Pantau
-                    </h4>
-                    <p class="text-gray-600 dark:text-slate-400 text-sm">
-                        Pantau status pendaftaran melalui dashboard.
-                    </p>
+                <div class="text-center relative z-10">
+                    <div class="bg-gradient-to-br from-cyan-600 to-green-500 text-white rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-black border-4 border-[#f4f7f9] shadow-md">3</div>
+                    <h4 class="font-black text-gray-900 mb-2">Lamar</h4>
+                    <p class="text-gray-600 font-bold text-sm">Kirim aplikasi online.</p>
+                </div>
+                <div class="text-center relative z-10">
+                    <div class="bg-gradient-to-br from-magenta-600 to-purple-600 text-white rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-black border-4 border-[#f4f7f9] shadow-md">4</div>
+                    <h4 class="font-black text-gray-900 mb-2">Pantau</h4>
+                    <p class="text-gray-600 font-bold text-sm">Cek status di dashboard.</p>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-20 md:py-28 bg-white dark:bg-slate-950">
-        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-
-            <h3 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-                Siap Mengubah Masa Depan?
-            </h3>
-
-            <p class="text-xl text-gray-600 dark:text-slate-400 mb-8 leading-relaxed">
-                Bergabunglah dengan ScholarLink dan temukan peluang beasiswa terbaik untuk masa depan Anda.
-            </p>
-
+    <section class="py-24 bg-gradient-to-r from-blue-600 via-magenta-600 to-orange-600 text-white text-center px-6">
+        <div class="max-w-3xl mx-auto">
+            <h3 class="text-4xl md:text-5xl font-black mb-6">Siap Mengubah Masa Depan Anda Secara Berwarna?</h3>
+            <p class="text-blue-50 mb-10 text-lg font-bold leading-relaxed">Bergabunglah dengan ScholarLink, di mana platform berpadu dengan gairah untuk menemukan peluang beasiswa terbaik bagi masa depan pendidikan Anda.</p>
             @auth
-                <a href="{{ $dashboardRoute }}" class="btn-primary text-white px-10 py-4 rounded-lg font-bold inline-block text-lg">
+                <a href="{{ $dashboardRoute }}" class="bg-white text-blue-700 px-10 py-4 rounded-xl font-black inline-block text-lg shadow-lg hover:scale-105 transition duration-300">
                     Jelajahi Beasiswa Sekarang
                 </a>
             @else
-                <a href="{{ route('register') }}" class="btn-primary text-white px-10 py-4 rounded-lg font-bold inline-block text-lg">
+                <a href="{{ route('register') }}" class="bg-white text-blue-700 px-10 py-4 rounded-xl font-black inline-block text-lg shadow-lg hover:scale-105 transition duration-300">
                     Daftar Gratis Sekarang
                 </a>
             @endauth
-
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-slate-950 text-white py-16 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            <div class="grid md:grid-cols-4 gap-12 mb-12">
-                <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold">
-                            S
-                        </div>
-
-                        <h4 class="font-bold text-lg">
-                            ScholarLink
-                        </h4>
-                    </div>
-
-                    <p class="text-slate-400 text-sm">
-                        Platform terpercaya untuk menemukan beasiswa impian Anda.
-                    </p>
+    <footer class="bg-gradient-to-br from-cyan-100 via-[#d1e9f6] to-cyan-100 text-gray-900 py-16 border-t border-cyan-200">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12 mb-12">
+            <div>
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-cyan-400 rounded-lg flex items-center justify-center text-white font-black">S</div>
+                    <h4 class="font-black text-xl text-gray-900">ScholarLink</h4>
                 </div>
-
-                <div>
-                    <h4 class="font-bold mb-4">Produk</h4>
-
-                    <ul class="text-slate-400 text-sm space-y-2">
-                        <li><a href="#scholarships" class="hover:text-white transition">Cari Beasiswa</a></li>
-                        <li><a href="#features" class="hover:text-white transition">Fitur</a></li>
-                        <li><a href="#about" class="hover:text-white transition">Cara Kerja</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="font-bold mb-4">Perusahaan</h4>
-
-                    <ul class="text-slate-400 text-sm space-y-2">
-                        <li><a href="#" class="hover:text-white transition">Tentang Kami</a></li>
-                        <li><a href="#" class="hover:text-white transition">Blog</a></li>
-                        <li><a href="#" class="hover:text-white transition">Kontak</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="font-bold mb-4">Kontak</h4>
-
-                    <ul class="text-slate-400 text-sm space-y-2">
-                        <li>📧 info@scholarlink.id</li>
-                        <li>📱 +62 812-3456-7890</li>
-                        <li>📍 Indonesia</li>
-                    </ul>
-                </div>
+                <p class="text-gray-700 text-sm font-bold leading-relaxed">Platform terpercaya dan bersemangat untuk menemukan beasiswa impian Anda.</p>
             </div>
-
-            <div class="border-t border-slate-800 pt-8 text-center text-slate-400 text-sm">
-                <p>
-                    &copy; 2026 ScholarLink. Semua hak dilindungi.
-                </p>
+            <div>
+                <h4 class="font-black text-gray-900 mb-6">Produk</h4>
+                <ul class="text-gray-700 text-sm space-y-3 font-bold">
+                    <li><a href="#scholarships" class="hover:text-blue-600 transition">Cari Beasiswa</a></li>
+                    <li><a href="#features" class="hover:text-blue-600 transition">Fitur</a></li>
+                    <li><a href="#about" class="hover:text-blue-600 transition">Cara Kerja</a></li>
+                </ul>
             </div>
-
+            <div>
+                <h4 class="font-black text-gray-900 mb-6">Perusahaan</h4>
+                <ul class="text-gray-700 text-sm space-y-3 font-bold">
+                    <li><a href="#" class="hover:text-blue-600 transition">Tentang Kami</a></li>
+                    <li><a href="#" class="hover:text-blue-600 transition">Blog</a></li>
+                    <li><a href="#" class="hover:text-blue-600 transition">Kontak</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-black text-gray-900 mb-6">Kontak</h4>
+                <ul class="text-gray-700 text-sm space-y-3 font-bold">
+                    <li><i class="bi bi-envelope-fill mr-2 text-cyan-600"></i> info@scholarlink.id</li>
+                    <li><i class="bi bi-telephone-fill mr-2 text-cyan-600"></i> +62 812-3456-7890</li>
+                    <li><i class="bi bi-geo-alt-fill mr-2 text-cyan-600"></i> Indonesia</li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 border-t border-cyan-200 pt-8 text-center text-gray-600 text-sm font-black">
+            &copy; 2026 ScholarLink. Semua hak dilindungi secara berwarna.
         </div>
     </footer>
 
@@ -781,17 +411,12 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (event) {
                 event.preventDefault();
-
                 const target = document.querySelector(this.getAttribute('href'));
-
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
     </script>
-
 </body>
 </html>
