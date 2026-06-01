@@ -27,7 +27,7 @@ class ProviderSeeder extends Seeder
         Provider::updateOrCreate(
             ['email_kontak' => 'microsoft@gmail.com'],
             [
-                'user_id' => null,
+                'user_id' => $providerUser?->id,
                 'nama_instansi' => 'Microsoft Education',
                 'deskripsi_instansi' => 'Program pendidikan global',
                 'website' => 'https://microsoft.com',

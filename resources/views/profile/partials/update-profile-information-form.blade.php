@@ -47,7 +47,7 @@
                         <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
                             <i class="bi bi-person-fill"></i>
                         </div>
-                        <input id="name" name="name" type="text" value="{{ old('name', $user->name) }}" required autofocus autocomplete="name" placeholder="Masukkan nama lengkap" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-5 text-gray-900 font-bold placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
+                        <input id="name" name="name" type="text" value="{{ old('name', Auth::user()->name) }}" required autofocus autocomplete="name" placeholder="Masukkan nama lengkap" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-5 text-gray-900 font-bold placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
                     </div>
                     <x-input-error class="mt-3" :messages="$errors->get('name')" />
                 </div>
@@ -58,11 +58,11 @@
                         <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
                             <i class="bi bi-envelope-fill"></i>
                         </div>
-                        <input id="email" name="email" type="email" value="{{ old('email', $user->email) }}" required autocomplete="username" placeholder="Masukkan email aktif" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-5 text-gray-900 font-bold placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
+                        <input id="email" name="email" type="email" value="{{ old('email', Auth::user()->email) }}" required autocomplete="username" placeholder="Masukkan email aktif" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-5 text-gray-900 font-bold placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
                     </div>
                     <x-input-error class="mt-3" :messages="$errors->get('email')" />
 
-                    @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
+                    @if (Auth::user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! Auth::user()->hasVerifiedEmail())
                         <div class="mt-6 bg-orange-50 border border-orange-200 rounded-3xl p-6">
                             <div class="flex items-start gap-4">
                                 <div class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center text-2xl flex-shrink-0">
