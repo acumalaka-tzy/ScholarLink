@@ -48,4 +48,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Favorite::class, 'id_user', 'id');
     }
+
+    // ======================================================================
+    // RELASI BARU: Menghubungkan User ke tabel Profiles kelompokmu
+    // ======================================================================
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'user_id', 'id');
+    }
 }
