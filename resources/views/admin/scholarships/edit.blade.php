@@ -133,8 +133,8 @@
                     </div>
                     <select name="status" class="w-full appearance-none bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-12 py-4 font-bold text-gray-900 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
                         <option value="aktif" {{ old('status', $scholarship->status) == 'aktif' ? 'selected' : '' }}>Aktif</option>
-                        <option value="draft" {{ old('status', $scholarship->status) == 'draft' ? 'selected' : '' }}>Draft</option>
-                        <option value="tutup" {{ old('status', $scholarship->status) == 'tutup' ? 'selected' : '' }}>Tutup</option>
+                        <option value="nonaktif" {{ old('status', $scholarship->status) == 'nonaktif' ? 'selected' : '' }}>nonAktif</option>
+                        <option value="ditutup" {{ old('status', $scholarship->status) == 'ditutup' ? 'selected' : '' }}>Tutup</option>
                     </select>
                     <div class="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
                         <i class="bi bi-chevron-down"></i>

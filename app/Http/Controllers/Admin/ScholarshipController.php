@@ -25,7 +25,7 @@ class ScholarshipController extends Controller
         $request->validate([
             'nama_beasiswa' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'status' => 'required|in:aktif,nonaktif',
+            'status' => 'required|in:aktif,nonaktif,ditutup',
         ]);
 
         Scholarship::create($request->all());
@@ -49,7 +49,7 @@ class ScholarshipController extends Controller
         $request->validate([
             'nama_beasiswa' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'status' => 'required|in:aktif,nonaktif',
+            'status' => 'required|in:aktif,nonaktif,ditutup',
         ]);
 
         $scholarship->update($request->all());

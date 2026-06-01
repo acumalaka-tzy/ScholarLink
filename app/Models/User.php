@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Favorite::class, 'id_user', 'id');
     }
+
+    public function getDisplayNameAttribute()
+    {
+        return explode(' ', trim($this->name))[0];
+    }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Scholarship;
 use App\Models\Category;
 use App\Models\Provider;
+use App\Models\Application;
 use Illuminate\Http\Request;
 
 class ProviderController extends Controller
@@ -108,5 +109,16 @@ class ProviderController extends Controller
         return redirect()
             ->route('provider.scholarships.index')
             ->with('success', 'Scholarship berhasil dihapus');
+    }
+
+    // SHOW
+    public function show($id)
+    {
+        $scholarship = Scholarship::with([
+            'provider',
+            'category'
+        ])->findOrFail($id);
+
+        return view('provider.scholarships.show', compact('scholarship'));
     }
 }

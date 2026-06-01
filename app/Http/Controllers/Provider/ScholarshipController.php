@@ -55,7 +55,7 @@ class ScholarshipController extends Controller
             'tipe' => $request->tipe,
             'deadline' => $request->deadline,
             'tanggal_dibuat' => now(),
-            'status' => 'active',
+            'status' => 'aktif',
 
         ]);
 

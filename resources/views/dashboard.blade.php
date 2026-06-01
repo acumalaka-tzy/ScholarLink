@@ -19,7 +19,7 @@
                     Student Dashboard
                 </div>
                 <h2 class="text-4xl md:text-6xl font-black text-white leading-tight">
-                    Selamat Datang, <span class="text-orange-100">{{ Auth::user()->name }}</span>
+                    Selamat Datang, <span class="text-orange-100">{{ Auth::user()->display_name ?? Auth::user()->name }}</span>
                 </h2>
                 <p class="text-blue-50 text-lg mt-6 max-w-2xl leading-relaxed font-bold">
                     Jelajahi peluang beasiswa terbaik dan pantau seluruh aplikasi Anda dalam satu dashboard modern dan profesional.
@@ -40,7 +40,7 @@
                         <i class="bi bi-person-circle"></i>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-black text-white">{{ Auth::user()->name }}</h3>
+                        <h3 class="text-2xl font-black text-white">{{ Auth::user()->display_name ?? Auth::user()->name }}</h3>
                         <p class="text-blue-100 font-bold mt-1">{{ Auth::user()->email }}</p>
                     </div>
                 </div>

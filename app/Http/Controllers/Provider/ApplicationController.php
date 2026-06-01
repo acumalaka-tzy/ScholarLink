@@ -79,4 +79,11 @@ class ApplicationController extends Controller
             ->back()
             ->with('success', 'Application rejected');
     }
+
+    public function show($id)
+    {
+        $application = Application::with(['user', 'scholarship'])->findOrFail($id);
+
+        return view('provider.applications.show', compact('application'));
+    }
 }
