@@ -1,203 +1,140 @@
 @extends('layouts.app')
 
 @section('content')
-
-<div class="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 py-10 px-4 sm:px-6 lg:px-10">
-
-    {{-- HEADER --}}
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10">
-
-        <div>
-            <h1 class="text-4xl font-extrabold text-white mb-2">
-                📄 My Applications
-            </h1>
-
-            <p class="text-slate-300 text-lg">
-                Pantau status pengajuan beasiswa kamu secara realtime.
-            </p>
-        </div>
-
-        <div class="bg-white/10 backdrop-blur-md border border-white/10 px-5 py-3 rounded-2xl">
-            <p class="text-slate-300 text-sm">
-                Total Applications
-            </p>
-
-            <h2 class="text-3xl font-bold text-white">
-                {{ $applications->count() }}
-            </h2>
-        </div>
-
+<div class="min-h-screen bg-[#f4f7f9] py-10 px-4 sm:px-6 lg:px-10 overflow-hidden">
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-orange-200 rounded-full blur-3xl opacity-30"></div>
     </div>
 
-    {{-- EMPTY STATE --}}
-    @if($applications->count() == 0)
-
-        <div class="bg-white/10 backdrop-blur-lg border border-white/10 rounded-3xl p-14 text-center">
-
-            <div class="text-7xl mb-6">
-                📭
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-10">
+        <div>
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 text-orange-700 font-bold text-sm mb-4 border border-orange-200">
+                <div class="w-6 h-6 rounded-full bg-orange-500 text-white flex items-center justify-center text-xs">
+                    <i class="bi bi-file-earmark-text-fill"></i>
+                </div>
+                My Applications
             </div>
 
-            <h2 class="text-3xl font-bold text-white mb-3">
-                Belum Ada Application
-            </h2>
-
-            <p class="text-slate-300 mb-8">
-                Kamu belum mengajukan beasiswa apapun.
-            </p>
-
-            <a href="{{ route('scholarships.index') }}"
-               class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 transition px-7 py-4 rounded-2xl text-white font-semibold shadow-lg">
-
-                🔍 Cari Beasiswa
-
-            </a>
-
+            <div class="flex items-center gap-5">
+                <div class="w-16 h-16 rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-3xl shadow-lg shadow-blue-500/20">
+                    <i class="bi bi-journal-check"></i>
+                </div>
+                <div>
+                    <h1 class="text-4xl font-black text-gray-900">My Applications</h1>
+                    <p class="text-gray-500 font-bold mt-2 text-lg">Pantau status pengajuan beasiswa kamu secara realtime.</p>
+                </div>
+            </div>
         </div>
 
+        <div class="bg-white border border-gray-100 rounded-[2rem] px-7 py-5 shadow-xl min-w-[220px]">
+            <p class="text-gray-500 text-sm font-bold mb-2">Total Applications</p>
+            <div class="flex items-center gap-4">
+                <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl">
+                    <i class="bi bi-file-earmark-check-fill"></i>
+                </div>
+                <h2 class="text-4xl font-black text-gray-900">{{ $applications->count() }}</h2>
+            </div>
+        </div>
+    </div>
+
+    @if($applications->count() == 0)
+        <div class="bg-white border border-gray-100 rounded-[2rem] p-16 text-center shadow-2xl">
+            <div class="w-28 h-28 mx-auto rounded-full bg-gray-100 text-gray-400 flex items-center justify-center text-5xl mb-8">
+                <i class="bi bi-inbox-fill"></i>
+            </div>
+            <h2 class="text-4xl font-black text-gray-900 mb-4">Belum Ada Application</h2>
+            <p class="text-gray-500 font-bold text-lg mb-10">Kamu belum mengajukan beasiswa apapun.</p>
+            <a href="{{ route('scholarships.index') }}" class="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 transition px-8 py-4 rounded-2xl text-white font-black shadow-xl shadow-blue-500/20 hover:scale-[1.02]">
+                <i class="bi bi-search"></i> Cari Beasiswa
+            </a>
+        </div>
     @else
-
-        {{-- GRID --}}
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-
             @foreach($applications as $application)
+                <div class="group bg-white border border-gray-100 rounded-[2rem] p-8 shadow-2xl hover:scale-[1.02] transition duration-300 overflow-hidden relative">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-600 via-cyan-400 to-orange-400"></div>
 
-                <div class="group relative overflow-hidden bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-7 hover:scale-[1.02] transition duration-300 shadow-2xl">
-
-                    {{-- Glow --}}
-                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-r from-blue-500/10 to-purple-500/10"></div>
-
-                    {{-- CONTENT --}}
-                    <div class="relative z-10">
-
-                        {{-- TITLE --}}
-                        <div class="mb-6">
-
-                            <h2 class="text-2xl font-bold text-white mb-2">
-                                {{ $application->scholarship->nama_beasiswa }}
-                            </h2>
-
-                            <p class="text-slate-300 line-clamp-2">
-                                {{ $application->scholarship->deskripsi }}
-                            </p>
-
-                        </div>
-
-                        {{-- INFO --}}
-                        <div class="space-y-4 mb-6">
-
-                            <div class="flex items-center justify-between">
-
-                                <span class="text-slate-400">
-                                    👨‍🎓 Mahasiswa
-                                </span>
-
-                                <span class="text-white font-semibold">
-                                    {{ $application->user->name }}
-                                </span>
-
+                    <div class="flex items-start justify-between gap-4 mb-7">
+                        <div class="flex items-start gap-4">
+                            <div class="w-16 h-16 rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-3xl shadow-lg shadow-blue-500/20 flex-shrink-0">
+                                <i class="bi bi-mortarboard-fill"></i>
                             </div>
-
-                            <div class="flex items-center justify-between">
-
-                                <span class="text-slate-400">
-                                    🏢 Provider
-                                </span>
-
-                                <span class="text-white font-semibold">
-                                    {{ $application->scholarship->provider->nama_instansi ?? '-' }}
-                                </span>
-
+                            <div>
+                                <h2 class="text-2xl font-black text-gray-900 mb-2">{{ $application->scholarship->nama_beasiswa }}</h2>
+                                <p class="text-gray-500 font-bold line-clamp-2">{{ $application->scholarship->deskripsi }}</p>
                             </div>
-
-                            <div class="flex items-center justify-between">
-
-                                <span class="text-slate-400">
-                                    📅 Tanggal Apply
-                                </span>
-
-                                <span class="text-white font-semibold">
-                                    {{ \Carbon\Carbon::parse($application->tanggal_apply)->format('d M Y') }}
-                                </span>
-
-                            </div>
-
                         </div>
-
-                        {{-- STATUS --}}
-                        <div class="mb-7">
-
-                            @if($application->status == 'pending')
-
-                                <span class="inline-flex items-center gap-2 bg-yellow-500/20 text-yellow-300 border border-yellow-400/20 px-4 py-2 rounded-full text-sm font-semibold">
-
-                                    ⏳ Pending
-
-                                </span>
-
-                            @elseif($application->status == 'approved')
-
-                                <span class="inline-flex items-center gap-2 bg-green-500/20 text-green-300 border border-green-400/20 px-4 py-2 rounded-full text-sm font-semibold">
-
-                                    ✅ Approved
-
-                                </span>
-
-                            @elseif($application->status == 'rejected')
-
-                                <span class="inline-flex items-center gap-2 bg-red-500/20 text-red-300 border border-red-400/20 px-4 py-2 rounded-full text-sm font-semibold">
-
-                                    ❌ Rejected
-
-                                </span>
-
-                            @endif
-
-                        </div>
-
-                        {{-- ACTIONS --}}
-                        <div class="flex flex-wrap gap-3">
-
-                            <a href="{{ route('scholarships.show', $application->scholarship->id_beasiswa) }}"
-                               class="flex-1 min-w-[140px] text-center bg-blue-600 hover:bg-blue-700 transition text-white py-3 rounded-2xl font-semibold shadow-lg">
-
-                                Detail
-
-                            </a>
-
-                            @if($application->status == 'pending')
-
-                                <form action="{{ route('applications.destroy', $application->id_application) }}"
-                                      method="POST"
-                                      class="flex-1 min-w-[140px]">
-
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button type="submit"
-                                            onclick="return confirm('Batalkan application ini?')"
-                                            class="w-full bg-red-500 hover:bg-red-600 transition text-white py-3 rounded-2xl font-semibold shadow-lg">
-
-                                        Cancel
-
-                                    </button>
-
-                                </form>
-
-                            @endif
-
-                        </div>
-
                     </div>
 
+                    <div class="space-y-5 mb-8">
+                        <div class="flex items-center justify-between gap-4">
+                            <div class="flex items-center gap-3 text-gray-500 font-bold">
+                                <div class="w-10 h-10 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center">
+                                    <i class="bi bi-person-fill"></i>
+                                </div>
+                                Mahasiswa
+                            </div>
+                            <span class="font-black text-gray-900 text-right">{{ $application->user->name }}</span>
+                        </div>
+
+                        <div class="flex items-center justify-between gap-4">
+                            <div class="flex items-center gap-3 text-gray-500 font-bold">
+                                <div class="w-10 h-10 rounded-2xl bg-cyan-100 text-cyan-600 flex items-center justify-center">
+                                    <i class="bi bi-buildings-fill"></i>
+                                </div>
+                                Provider
+                            </div>
+                            <span class="font-black text-gray-900 text-right">{{ $application->scholarship->provider->nama_instansi ?? '-' }}</span>
+                        </div>
+
+                        <div class="flex items-center justify-between gap-4">
+                            <div class="flex items-center gap-3 text-gray-500 font-bold">
+                                <div class="w-10 h-10 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center">
+                                    <i class="bi bi-calendar-event-fill"></i>
+                                </div>
+                                Tanggal Apply
+                            </div>
+                            <span class="font-black text-gray-900 text-right">
+                                {{ \Carbon\Carbon::parse($application->tanggal_apply)->format('d M Y') }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        @if($application->status == 'pending')
+                            <span class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-yellow-100 text-yellow-700 border border-yellow-200 text-sm font-black">
+                                <i class="bi bi-hourglass-split"></i> Pending
+                            </span>
+                        @elseif($application->status == 'approved')
+                            <span class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-green-100 text-green-700 border border-green-200 text-sm font-black">
+                                <i class="bi bi-check-circle-fill"></i> Approved
+                            </span>
+                        @elseif($application->status == 'rejected')
+                            <span class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-red-100 text-red-700 border border-red-200 text-sm font-black">
+                                <i class="bi bi-x-circle-fill"></i> Rejected
+                            </span>
+                        @endif
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="{{ route('scholarships.show', $application->scholarship->id_beasiswa) }}" class="flex-1 min-w-[150px] text-center bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 transition text-white py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20">
+                            <i class="bi bi-eye-fill mr-2"></i> Detail
+                        </a>
+
+                        @if($application->status == 'pending')
+                            <form action="{{ route('applications.destroy', $application->id_application) }}" method="POST" class="flex-1 min-w-[150px]">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" onclick="return confirm('Batalkan application ini?')" class="w-full bg-red-100 hover:bg-red-200 transition text-red-700 py-4 rounded-2xl font-black border border-red-200">
+                                    <i class="bi bi-trash-fill mr-2"></i> Cancel
+                                </button>
+                            </form>
+                        @endif
+                    </div>
                 </div>
-
             @endforeach
-
         </div>
-
     @endif
-
 </div>
-
 @endsection
