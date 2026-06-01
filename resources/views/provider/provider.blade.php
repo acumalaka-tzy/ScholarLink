@@ -3,303 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>ScholarLink Provider</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=nunito:400,500,600,700,800,900" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
-        * {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            overflow-x: hidden;
-        }
-
-        .glass-card {
-            background: rgba(15, 23, 42, 0.78);
-            backdrop-filter: blur(18px);
-            border: 1px solid rgba(148, 163, 184, 0.18);
-        }
-
-        .sidebar-link {
-            transition: all 0.25s ease;
-        }
-
-        .sidebar-link:hover {
-            transform: translateX(6px);
-            background: rgba(99, 102, 241, 0.16);
-            color: #ffffff;
-        }
-
-        .sidebar-link.active {
-            background: linear-gradient(
-                135deg,
-                rgba(99, 102, 241, 0.28),
-                rgba(168, 85, 247, 0.28)
-            );
-
-            color: #ffffff;
-            border: 1px solid rgba(129, 140, 248, 0.45);
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.18);
-        }
-
-        .gradient-text {
-            background: linear-gradient(
-                135deg,
-                #818cf8 0%,
-                #c084fc 50%,
-                #fb7185 100%
-            );
-
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .mobile-sidebar {
-            transition: transform 0.3s ease;
-        }
-
-        #sidebar {
-            overflow-y: auto;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(99,102,241,0.5) transparent;
-        }
-
-        #sidebar::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        #sidebar::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        #sidebar::-webkit-scrollbar-thumb {
-            background: #4f46e5;
-            border-radius: 999px;
-        }
+        body, * { font-family: 'Nunito', sans-serif !important; }
+        body { overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #2563eb, #06b6d4); border-radius: 999px; }
     </style>
 </head>
 
-<body class="min-h-screen bg-slate-950 text-white">
+<body class="min-h-screen bg-[#f4f7f9] text-gray-900">
 
-@php
-    $providerName = Auth::user()->name ?? 'Provider Scholarship';
-@endphp
+@php $providerName = Auth::user()->name ?? 'Provider Scholarship'; @endphp
+
+<div class="fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
+    <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-orange-200 rounded-full blur-3xl opacity-30"></div>
+</div>
 
 <div class="min-h-screen flex">
+    <div id="overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
 
-    <!-- Overlay -->
-    <div id="overlay"
-         class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden lg:hidden">
-    </div>
-
-    <!-- Sidebar -->
-    <aside id="sidebar"
-           class="mobile-sidebar fixed lg:static inset-y-0 left-0 z-50 w-72 bg-slate-950/95 backdrop-blur-xl border-r border-slate-800 transform -translate-x-full lg:translate-x-0 flex flex-col h-screen">
-
-        <!-- Logo -->
-        <div class="p-7 border-b border-slate-800">
-
-            <a href="{{ url('/') }}" class="flex items-center gap-3">
-
-                <div class="shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center font-black text-2xl shadow-lg shadow-purple-500/30">
-                    S
+    <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-50 w-80 bg-white/95 backdrop-blur-2xl border-r border-gray-200 transform -translate-x-full lg:translate-x-0 transition duration-300 flex flex-col h-screen overflow-y-auto">
+        <div class="p-8 border-b border-gray-100">
+            <a href="{{ url('/') }}" class="flex items-center gap-4">
+                <div class="w-14 h-14 rounded-[1.5rem] bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-2xl shadow-xl shadow-blue-500/20">
+                    <i class="bi bi-mortarboard-fill"></i>
                 </div>
-
                 <div>
-                    <h1 class="text-3xl font-black gradient-text leading-none">
-                        ScholarLink
-                    </h1>
-
-                    <p class="text-sm text-slate-400 mt-2">
-                        Provider Area
-                    </p>
+                    <h1 class="text-3xl font-black text-gray-900 tracking-tight">ScholarLink</h1>
+                    <p class="text-sm text-gray-500 font-bold mt-1">Provider Area</p>
                 </div>
-
             </a>
-
         </div>
 
-        <!-- Navigation -->
-        <nav class="flex-1 p-5 space-y-3">
+        <nav id="nav-links" class="flex-1 p-6 space-y-3">
+            @php
+                $menu = [
+                    ['route' => 'provider.dashboard', 'icon' => 'bi-grid-fill', 'label' => 'Dashboard', 'sub' => 'Provider Overview', 'color' => 'blue'],
+                    ['route' => 'provider.scholarships.index', 'icon' => 'bi-mortarboard-fill', 'label' => 'Scholarships', 'sub' => 'Manage Programs', 'color' => 'cyan'],
+                    ['route' => 'provider.applications.index', 'icon' => 'bi-file-earmark-check-fill', 'label' => 'Applications', 'sub' => 'Student Applications', 'color' => 'purple'],
+                    ['route' => 'chat-rooms.index', 'icon' => 'bi-chat-dots-fill', 'label' => 'Chat Rooms', 'sub' => 'Student Discussions', 'color' => 'pink'],
+                ];
+            @endphp
 
-            <a href="{{ route('provider.dashboard') }}"
-               class="sidebar-link {{ request()->routeIs('provider.dashboard') ? 'active' : '' }} flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-300 font-bold">
+            @foreach($menu as $item)
+                <a href="{{ route($item['route']) }}" class="{{ request()->routeIs(str_replace('index', '*', $item['route'])) ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/20' : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600' }} flex items-center gap-4 px-5 py-4 rounded-2xl font-black transition duration-300">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl {{ request()->routeIs(str_replace('index', '*', $item['route'])) ? 'bg-white/15' : 'bg-'.$item['color'].'-100 text-'.$item['color'].'-600' }}">
+                        <i class="bi {{ $item['icon'] }}"></i>
+                    </div>
+                    <div>
+                        <p class="text-lg">{{ $item['label'] }}</p>
+                        <p class="text-xs opacity-70 font-bold mt-1">{{ $item['sub'] }}</p>
+                    </div>
+                </a>
+            @endforeach
 
-                <span class="text-2xl">📊</span>
-                <span>Dashboard</span>
-
+            <a href="{{ url('/') }}" class="flex items-center gap-4 px-5 py-4 rounded-2xl font-black text-gray-600 hover:bg-orange-50 hover:text-orange-500 transition duration-300">
+                <div class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-500 flex items-center justify-center text-xl"><i class="bi bi-house-door-fill"></i></div>
+                <div>
+                    <p class="text-lg">Home Website</p>
+                    <p class="text-xs opacity-70 font-bold mt-1">Back to Homepage</p>
+                </div>
             </a>
-
-            <a href="{{ route('provider.scholarships.index') }}"
-               class="sidebar-link {{ request()->routeIs('provider.scholarships.*') ? 'active' : '' }} flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-300 font-bold">
-
-                <span class="text-2xl">🎓</span>
-                <span>Scholarships</span>
-
-            </a>
-
-            <a href="{{ route('provider.applications.index') }}"
-               class="sidebar-link {{ request()->routeIs('provider.applications.*') ? 'active' : '' }} flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-300 font-bold">
-
-                <span class="text-2xl">📄</span>
-                <span>Applications</span>
-
-            </a>
-
-            <a href="{{ route('chat-rooms.index') }}"
-               class="sidebar-link {{ request()->routeIs('chat-rooms.*') ? 'active' : '' }} flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-300 font-bold">
-
-                <span class="text-2xl">💬</span>
-                <span>Chat Rooms</span>
-
-            </a>
-
-            <a href="{{ url('/') }}"
-               class="sidebar-link flex items-center gap-4 px-5 py-4 rounded-2xl text-slate-300 font-bold">
-
-                <span class="text-2xl">🏠</span>
-                <span>Home Website</span>
-
-            </a>
-
         </nav>
 
-        <!-- User -->
-        <div class="mt-auto p-5 border-t border-slate-800 bg-slate-950/60 backdrop-blur-xl">
-
-            <div class="rounded-3xl bg-gradient-to-br from-indigo-600/30 to-purple-700/30 border border-indigo-400/20 p-5 mb-4">
-
-                <p class="text-sm text-slate-400">
-                    Logged in as
-                </p>
-
-                <h3 class="text-lg font-black mt-2 break-words">
-                    {{ $providerName }}
-                </h3>
-
-                <p class="text-sm text-indigo-300 mt-1">
-                    Provider
-                </p>
-
+        <div class="p-6 border-t border-gray-100 bg-white/70 backdrop-blur-xl">
+            <div class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-blue-600 to-cyan-500 p-6 text-white shadow-2xl shadow-blue-500/20 mb-5">
+                <div class="relative flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-[1.5rem] bg-white/15 backdrop-blur-md flex items-center justify-center text-2xl font-black border border-white/20">
+                        {{ strtoupper(substr($providerName, 0, 1)) }}
+                    </div>
+                    <div>
+                        <p class="text-sm text-white/80 font-bold">Logged in as</p>
+                        <h3 class="text-xl font-black truncate mt-1">{{ $providerName }}</h3>
+                    </div>
+                </div>
             </div>
-
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-
-                <button type="submit"
-                        class="w-full py-3 rounded-2xl bg-rose-500 hover:bg-rose-600 transition font-bold shadow-lg shadow-rose-500/20">
-
-                    Logout
-
-                </button>
+                <button type="submit" class="w-full py-4 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-black shadow-xl shadow-red-500/20 transition">Logout</button>
             </form>
-
         </div>
-
     </aside>
 
-    <!-- Main -->
-    <main class="flex-1 min-w-0">
-
-        <!-- Topbar -->
-        <header class="sticky top-0 z-30 bg-slate-950/90 backdrop-blur-xl border-b border-slate-800">
-
-            <div class="px-5 lg:px-10 py-5 flex items-center justify-between gap-4">
-
-                <div class="flex items-center gap-4 min-w-0">
-
-                    <button id="openSidebar"
-                            class="lg:hidden shrink-0 w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center">
-
-                        ☰
-
+    <main class="flex-1 min-w-0 flex flex-col">
+        <header class="sticky top-0 z-30 bg-white/80 backdrop-blur-2xl border-b border-gray-200 shadow-sm">
+            <div class="px-5 lg:px-10 py-5 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <button id="openSidebar" class="lg:hidden w-14 h-14 rounded-2xl bg-white border border-gray-200 shadow-lg flex items-center justify-center text-2xl text-gray-700">
+                        <i class="bi bi-list"></i>
                     </button>
-
-                    <div class="min-w-0">
-
-                        <h2 class="text-2xl lg:text-3xl font-black truncate">
-                            Provider Panel
-                        </h2>
-
-                        <p class="text-slate-400 text-sm lg:text-base mt-1 hidden sm:block">
-                            Manage scholarships, applications, and student communication
-                        </p>
-
-                    </div>
-
+                    <h2 class="text-3xl font-black text-gray-900">Provider Panel</h2>
                 </div>
-
-                <div class="hidden sm:flex items-center gap-4">
-
-                    <div class="text-right">
-
-                        <h3 class="font-bold">
-                            {{ $providerName }}
-                        </h3>
-
-                        <p class="text-sm text-slate-400">
-                            Provider
-                        </p>
-
-                    </div>
-
-                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center font-black text-xl shadow-lg shadow-purple-500/30">
-
-                        {{ strtoupper(substr($providerName, 0, 1)) }}
-
-                    </div>
-
-                </div>
-
             </div>
-
         </header>
 
-        <!-- Content -->
-        <section class="p-5 lg:p-10">
-
-            @if(session('success'))
-                <div class="mb-6 bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-6 py-4 rounded-2xl">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            @if(session('error'))
-                <div class="mb-6 bg-red-500/20 border border-red-500/30 text-red-400 px-6 py-4 rounded-2xl">
-                    {{ session('error') }}
-                </div>
-            @endif
-
+        <section class="flex-1 p-5 lg:p-10">
             @yield('content')
-
         </section>
-
     </main>
-
 </div>
 
 <script>
-    const openSidebar = document.getElementById('openSidebar');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
+    const toggle = () => {
+        sidebar.classList.toggle('-translate-x-full');
+        overlay.classList.toggle('hidden');
+    };
+    document.getElementById('openSidebar').addEventListener('click', toggle);
+    overlay.addEventListener('click', toggle);
 
-    if (openSidebar && sidebar && overlay) {
-
-        openSidebar.addEventListener('click', () => {
-            sidebar.classList.remove('-translate-x-full');
-            overlay.classList.remove('hidden');
+    document.querySelectorAll('#nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            if(window.innerWidth < 1024) toggle();
         });
-
-        overlay.addEventListener('click', () => {
-            sidebar.classList.add('-translate-x-full');
-            overlay.classList.add('hidden');
-        });
-
-    }
+    });
 </script>
-
 </body>
 </html>
