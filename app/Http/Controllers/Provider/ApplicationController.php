@@ -87,11 +87,4 @@ class ApplicationController extends Controller
             ->route('provider.applications.index')
             ->with('success', 'Application rejected successfully.');
     }
-
-    public function show($id)
-    {
-        $application = Application::with(['user', 'scholarship'])->findOrFail($id);
-
-        return view('provider.applications.show', compact('application'));
-    }
 }
