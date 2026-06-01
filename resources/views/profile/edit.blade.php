@@ -50,7 +50,7 @@
                             <div class="w-full mt-10 space-y-4">
                                 <div class="bg-gray-50 border border-gray-100 rounded-2xl px-5 py-4 flex items-center justify-between">
                                     <span class="text-gray-500 font-bold">Joined</span>
-                                    <span class="text-gray-900 font-black">{{ Auth::user()->created_at->format('d M Y') }}</span>
+                                    <span class="text-gray-900 font-black">{{ Auth::user()->tanggal_daftar ? Auth::user()->tanggal_daftar->format('d M Y') : 'N/A' }}</span>
                                 </div>
                                 <div class="bg-gray-50 border border-gray-100 rounded-2xl px-5 py-4 flex items-center justify-between">
                                     <span class="text-gray-500 font-bold">Email Status</span>
