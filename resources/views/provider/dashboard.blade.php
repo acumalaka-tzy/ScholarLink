@@ -1,289 +1,148 @@
 @extends('provider.provider')
 
 @section('content')
-
-<!-- Welcome -->
-<div class="mb-8 lg:mb-10">
-
-    <div class="glass-card rounded-3xl p-7 lg:p-10 relative overflow-hidden">
-
-        <div class="absolute top-0 right-0 w-72 h-72 bg-indigo-500/20 rounded-full blur-3xl"></div>
-
-        <div class="absolute bottom-0 left-0 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl"></div>
-
-        <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-
-            <div>
-
-                <p class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/15 border border-indigo-400/25 text-indigo-300 text-sm font-semibold mb-5">
-                    🚀 Provider Dashboard
-                </p>
-
-                <h1 class="text-4xl lg:text-5xl font-black leading-tight">
-                    Selamat Datang di <span class="gradient-text">ScholarLink</span>
-                </h1>
-
-                <p class="text-slate-300 mt-4 max-w-2xl">
-                    Kelola beasiswa, pantau lamaran mahasiswa, dan berinteraksi melalui fitur yang tersedia di panel provider.
-                </p>
-
-            </div>
-
-            <div class="flex flex-wrap gap-3">
-
-                <a href="{{ route('provider.scholarships.create') }}"
-                   class="px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 transition font-bold shadow-lg shadow-indigo-500/25">
-
-                    + Tambah Beasiswa
-
-                </a>
-
-                <a href="{{ route('provider.applications.index') }}"
-                   class="px-6 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 border border-slate-700 transition font-bold">
-
-                    Lihat Lamaran
-
-                </a>
-
-            </div>
-
-        </div>
-
+<div class="min-h-screen bg-[#f4f7f9] px-4 sm:px-6 lg:px-10 py-10 overflow-hidden">
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-orange-200 rounded-full blur-3xl opacity-30"></div>
     </div>
 
-</div>
-
-<!-- Stats -->
-<div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-6 mb-8 lg:mb-10">
-
-    <a href="{{ route('provider.scholarships.index') }}"
-       class="glass-card rounded-3xl p-7 block hover:-translate-y-1 transition">
-
-        <div class="flex items-center justify-between mb-6">
-
-            <div class="w-14 h-14 rounded-2xl bg-indigo-500/15 flex items-center justify-center text-3xl">
-                🎓
-            </div>
-
-            <span class="text-xs px-3 py-1 rounded-full bg-indigo-500/15 text-indigo-300 border border-indigo-400/20">
-                Scholarships
-            </span>
-
-        </div>
-
-        <p class="text-slate-400 font-medium">
-            Total Scholarships
-        </p>
-
-        <h3 class="text-5xl font-black mt-2">
-            {{ $totalScholarships }}
-        </h3>
-
-    </a>
-
-    <a href="{{ route('provider.scholarships.index') }}"
-       class="glass-card rounded-3xl p-7 block hover:-translate-y-1 transition">
-
-        <div class="flex items-center justify-between mb-6">
-
-            <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 flex items-center justify-center text-3xl">
-                ✅
-            </div>
-
-            <span class="text-xs px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-400/20">
-                Active
-            </span>
-
-        </div>
-
-        <p class="text-slate-400 font-medium">
-            Active Scholarships
-        </p>
-
-        <h3 class="text-5xl font-black mt-2 text-emerald-400">
-            {{ $activeScholarships }}
-        </h3>
-
-    </a>
-
-    <a href="{{ route('provider.applications.index') }}"
-       class="glass-card rounded-3xl p-7 block hover:-translate-y-1 transition">
-
-        <div class="flex items-center justify-between mb-6">
-
-            <div class="w-14 h-14 rounded-2xl bg-purple-500/15 flex items-center justify-center text-3xl">
-                📄
-            </div>
-
-            <span class="text-xs px-3 py-1 rounded-full bg-purple-500/15 text-purple-300 border border-purple-400/20">
-                Applications
-            </span>
-
-        </div>
-
-        <p class="text-slate-400 font-medium">
-            Total Applications
-        </p>
-
-        <h3 class="text-5xl font-black mt-2 text-indigo-400">
-            {{ $totalApplications }}
-        </h3>
-
-    </a>
-
-</div>
-
-<!-- Recent Applications -->
-<div class="glass-card rounded-3xl p-6 lg:p-8">
-
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-7">
-
-        <div>
-
-            <h2 class="text-2xl lg:text-3xl font-black">
-                Recent Applications
-            </h2>
-
-            <p class="text-slate-400 mt-1">
-                Daftar mahasiswa yang baru apply
-            </p>
-
-        </div>
-
-        <a href="{{ route('provider.applications.index') }}"
-           class="px-5 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 transition font-bold text-center">
-
-            Lihat Semua
-
-        </a>
-
-    </div>
-
-    <div class="overflow-x-auto">
-
-        <table class="w-full min-w-[760px]">
-
-            <thead>
-
-                <tr class="border-b border-slate-700 text-left text-slate-300">
-
-                    <th class="py-4 px-3">Mahasiswa</th>
-                    <th class="py-4 px-3">Scholarship</th>
-                    <th class="py-4 px-3">Status</th>
-                    <th class="py-4 px-3">Tanggal</th>
-                    <th class="py-4 px-3 text-right">Aksi</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                @forelse($recentApplications as $application)
-
-                    <tr class="border-b border-slate-800 hover:bg-slate-800/45 transition">
-
-                        <td class="py-4 px-3">
-
-                            <div class="flex items-center gap-3">
-
-                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center font-black">
-
-                                    {{ strtoupper(substr($application->user->name ?? 'M', 0, 1)) }}
-
-                                </div>
-
-                                <div>
-
-                                    <p class="font-bold">
-                                        {{ $application->user->name ?? 'Mahasiswa' }}
-                                    </p>
-
-                                    <p class="text-xs text-slate-400">
-                                        {{ $application->user->email ?? '-' }}
-                                    </p>
-
-                                </div>
-
+    <div class="max-w-7xl mx-auto">
+        <div class="mb-10">
+            <div class="relative overflow-hidden bg-white border border-gray-100 rounded-[2.5rem] shadow-[0_25px_80px_rgba(15,23,42,0.08)] p-8 lg:p-10">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-600 via-cyan-400 to-orange-400"></div>
+                <div class="absolute top-0 right-0 w-72 h-72 bg-cyan-100 rounded-full blur-3xl opacity-40"></div>
+                <div class="absolute bottom-0 left-0 w-72 h-72 bg-orange-100 rounded-full blur-3xl opacity-40"></div>
+                
+                <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+                    <div>
+                        <div class="inline-flex items-center gap-3 bg-blue-50 border border-blue-100 rounded-full px-5 py-3 mb-6 shadow-sm">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-sm">
+                                <i class="bi bi-speedometer2"></i>
                             </div>
+                            <span class="text-blue-700 text-sm font-black tracking-wide">Provider Dashboard</span>
+                        </div>
+                        <h1 class="text-5xl lg:text-6xl font-black leading-tight tracking-tight text-gray-900">
+                            Welcome to <span class="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">ScholarLink</span>
+                        </h1>
+                        <p class="text-gray-500 mt-5 max-w-3xl text-lg leading-relaxed font-bold">
+                            Kelola scholarship, pantau application mahasiswa, dan berinteraksi dengan sistem provider modern ScholarLink secara profesional.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="{{ route('provider.scholarships.create') }}" class="group relative overflow-hidden inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 via-cyan-500 to-orange-400 hover:scale-[1.03] transition duration-300 px-7 py-5 rounded-2xl font-black text-white shadow-[0_15px_50px_rgba(59,130,246,0.3)]">
+                            <span class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition"></span>
+                            <span class="relative flex items-center gap-3"><i class="bi bi-plus-circle-fill text-xl"></i> Tambah Beasiswa</span>
+                        </a>
+                        <a href="{{ route('provider.applications.index') }}" class="inline-flex items-center gap-3 bg-white border border-gray-200 hover:border-cyan-400 hover:bg-cyan-50 transition px-7 py-5 rounded-2xl font-black text-gray-700 shadow-lg">
+                            <i class="bi bi-folder-check text-xl text-cyan-600"></i> Lihat Lamaran
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                        </td>
+        <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-10">
+            <a href="{{ route('provider.scholarships.index') }}" class="group relative overflow-hidden bg-white border border-gray-100 rounded-[2rem] p-7 shadow-[0_20px_60px_rgba(15,23,42,0.06)] hover:-translate-y-1 transition duration-300">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-600 to-cyan-500"></div>
+                <div class="flex items-center justify-between mb-7">
+                    <div class="w-16 h-16 rounded-[1.5rem] bg-blue-100 text-blue-600 flex items-center justify-center text-3xl shadow-lg"><i class="bi bi-mortarboard-fill"></i></div>
+                    <span class="text-xs px-4 py-2 rounded-full bg-blue-100 text-blue-700 border border-blue-200 font-black">Scholarships</span>
+                </div>
+                <p class="text-gray-500 font-bold">Total Scholarships</p>
+                <h3 class="text-6xl font-black text-gray-900 mt-3">{{ $totalScholarships }}</h3>
+            </a>
 
-                        <td class="py-4 px-3">
-                            {{ $application->scholarship->nama_beasiswa ?? '-' }}
-                        </td>
+            <a href="{{ route('provider.scholarships.index') }}" class="group relative overflow-hidden bg-white border border-gray-100 rounded-[2rem] p-7 shadow-[0_20px_60px_rgba(15,23,42,0.06)] hover:-translate-y-1 transition duration-300">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-green-500 to-emerald-500"></div>
+                <div class="flex items-center justify-between mb-7">
+                    <div class="w-16 h-16 rounded-[1.5rem] bg-green-100 text-green-600 flex items-center justify-center text-3xl shadow-lg"><i class="bi bi-check-circle-fill"></i></div>
+                    <span class="text-xs px-4 py-2 rounded-full bg-green-100 text-green-700 border border-green-200 font-black">Active</span>
+                </div>
+                <p class="text-gray-500 font-bold">Active Scholarships</p>
+                <h3 class="text-6xl font-black text-green-600 mt-3">{{ $activeScholarships }}</h3>
+            </a>
 
-                        <td class="py-4 px-3">
+            <a href="{{ route('provider.applications.index') }}" class="group relative overflow-hidden bg-white border border-gray-100 rounded-[2rem] p-7 shadow-[0_20px_60px_rgba(15,23,42,0.06)] hover:-translate-y-1 transition duration-300">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-purple-500 to-fuchsia-500"></div>
+                <div class="flex items-center justify-between mb-7">
+                    <div class="w-16 h-16 rounded-[1.5rem] bg-purple-100 text-purple-600 flex items-center justify-center text-3xl shadow-lg"><i class="bi bi-file-earmark-check-fill"></i></div>
+                    <span class="text-xs px-4 py-2 rounded-full bg-purple-100 text-purple-700 border border-purple-200 font-black">Applications</span>
+                </div>
+                <p class="text-gray-500 font-bold">Total Applications</p>
+                <h3 class="text-6xl font-black text-purple-600 mt-3">{{ $totalApplications }}</h3>
+            </a>
+        </div>
 
-                            @if($application->status === 'approved')
+        <div class="relative overflow-hidden bg-white border border-gray-100 rounded-[2.5rem] shadow-[0_25px_80px_rgba(15,23,42,0.08)]">
+            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-600 via-cyan-400 to-orange-400"></div>
+            <div class="p-6 lg:p-8 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                    <h2 class="text-3xl font-black text-gray-900">Recent Applications</h2>
+                    <p class="text-gray-500 mt-2 font-bold">Daftar mahasiswa yang baru melakukan application</p>
+                </div>
+                <a href="{{ route('provider.applications.index') }}" class="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:scale-[1.03] transition duration-300 px-6 py-4 rounded-2xl font-black text-white shadow-lg shadow-blue-500/20">
+                    <i class="bi bi-arrow-right-circle-fill"></i> Lihat Semua
+                </a>
+            </div>
 
-                                <span class="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 text-xs font-bold border border-emerald-400/20">
-                                    Approved
-                                </span>
-
-                            @elseif($application->status === 'rejected')
-
-                                <span class="px-3 py-1 rounded-full bg-rose-500/15 text-rose-300 text-xs font-bold border border-rose-400/20">
-                                    Rejected
-                                </span>
-
-                            @else
-
-                                <span class="px-3 py-1 rounded-full bg-yellow-500/15 text-yellow-300 text-xs font-bold border border-yellow-400/20">
-                                    Pending
-                                </span>
-
-                            @endif
-
-                        </td>
-
-                        <td class="py-4 px-3 text-slate-300">
-
-                            {{ $application->created_at ? $application->created_at->format('d M Y H:i') : '-' }}
-
-                        </td>
-
-                        <td class="py-4 px-3 text-right">
-
-                            <a href="{{ route('provider.applications.show', $application->id_application) }}"
-                               class="inline-flex px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 transition font-semibold text-sm">
-
-                                Detail
-
-                            </a>
-
-                        </td>
-
-                    </tr>
-
-                @empty
-
-                    <tr>
-
-                        <td colspan="5" class="py-12 text-center">
-
-                            <div class="text-5xl mb-4">📭</div>
-
-                            <p class="font-bold text-lg">
-                                Belum ada lamaran masuk
-                            </p>
-
-                            <p class="text-slate-400 mt-1">
-                                Lamaran mahasiswa akan muncul di sini.
-                            </p>
-
-                        </td>
-
-                    </tr>
-
-                @endforelse
-
-            </tbody>
-
-        </table>
-
+            <div class="overflow-x-auto">
+                <table class="w-full min-w-[900px]">
+                    <thead class="bg-gray-50 border-b border-gray-100">
+                        <tr>
+                            <th class="py-5 px-6 text-left text-sm font-black uppercase tracking-wider text-gray-500">Mahasiswa</th>
+                            <th class="py-5 px-6 text-left text-sm font-black uppercase tracking-wider text-gray-500">Scholarship</th>
+                            <th class="py-5 px-6 text-left text-sm font-black uppercase tracking-wider text-gray-500">Status</th>
+                            <th class="py-5 px-6 text-left text-sm font-black uppercase tracking-wider text-gray-500">Tanggal</th>
+                            <th class="py-5 px-6 text-right text-sm font-black uppercase tracking-wider text-gray-500">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($recentApplications as $application)
+                            <tr class="border-b border-gray-100 hover:bg-cyan-50/40 transition duration-300">
+                                <td class="py-5 px-6">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-14 h-14 rounded-[1.2rem] bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-xl font-black shadow-xl shadow-blue-500/20">
+                                            {{ strtoupper(substr($application->user->name ?? 'M', 0, 1)) }}
+                                        </div>
+                                        <div>
+                                            <h3 class="font-black text-gray-900 text-lg">{{ $application->user->name ?? 'Mahasiswa' }}</h3>
+                                            <p class="text-sm text-gray-500 font-bold mt-1">{{ $application->user->email ?? '-' }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-5 px-6"><p class="font-black text-gray-900">{{ $application->scholarship->nama_beasiswa ?? '-' }}</p></td>
+                                <td class="py-5 px-6">
+                                    @if($application->status === 'approved')
+                                        <span class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-green-100 border border-green-200 text-green-700 font-black text-sm"><i class="bi bi-check-circle-fill"></i> Approved</span>
+                                    @elseif($application->status === 'rejected')
+                                        <span class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-red-100 border border-red-200 text-red-700 font-black text-sm"><i class="bi bi-x-circle-fill"></i> Rejected</span>
+                                    @else
+                                        <span class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-yellow-100 border border-yellow-200 text-yellow-700 font-black text-sm"><i class="bi bi-hourglass-split"></i> Pending</span>
+                                    @endif
+                                </td>
+                                <td class="py-5 px-6 text-gray-500 font-bold">{{ $application->created_at ? $application->created_at->format('d M Y H:i') : '-' }}</td>
+                                <td class="py-5 px-6 text-right">
+                                    <a href="{{ route('provider.applications.show', $application->id_application) }}" class="inline-flex items-center gap-3 bg-gray-100 hover:bg-gray-200 border border-gray-200 transition px-5 py-3 rounded-2xl font-black text-gray-700">
+                                        <i class="bi bi-eye-fill"></i> Detail
+                                    </a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="py-24 px-6">
+                                    <div class="flex flex-col items-center justify-center text-center">
+                                        <div class="w-40 h-40 rounded-full bg-gradient-to-br from-blue-100 to-cyan-100 border border-gray-200 flex items-center justify-center text-blue-600 text-7xl shadow-2xl shadow-blue-500/10 mb-10"><i class="bi bi-inbox-fill"></i></div>
+                                        <h2 class="text-5xl font-black text-gray-900 mb-5">No Applications Yet</h2>
+                                        <p class="text-gray-500 text-lg max-w-3xl leading-relaxed font-bold">Belum ada application mahasiswa. Semua application terbaru akan muncul di dashboard ini.</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
 </div>
-
 @endsection
