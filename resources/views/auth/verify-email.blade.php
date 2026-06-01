@@ -1,105 +1,154 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Email - ScholarLink</title>
+    <title>Verifikasi Email - ScholarLink</title>
+
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=nunito:400,500,600,700,800,900" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
-        * { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-
-        .auth-bg {
-            background:
-                radial-gradient(circle at top left, rgba(99, 102, 241, 0.25), transparent 35%),
-                radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.25), transparent 35%),
-                linear-gradient(135deg, #020617 0%, #0f172a 55%, #111827 100%);
-        }
-
-        .glass-card {
-            background: rgba(15, 23, 42, 0.82);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(148, 163, 184, 0.18);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #818cf8 0%, #c084fc 55%, #fb7185 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            transition: all 0.25s ease;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 16px 30px rgba(99, 102, 241, 0.35);
+        body, * {
+            font-family: 'Nunito', sans-serif !important;
         }
     </style>
 </head>
+<body class="bg-[#f4f7f9] text-gray-900 antialiased overflow-x-hidden">
 
-<body class="auth-bg min-h-screen text-white">
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-orange-200 rounded-full blur-3xl opacity-30"></div>
+    </div>
 
-    <div class="min-h-screen flex items-center justify-center px-6 py-12">
+    <div class="min-h-screen grid lg:grid-cols-2">
 
-        <div class="w-full max-w-md">
-
-            <div class="text-center mb-8">
-                <a href="{{ route('home') }}" class="inline-flex items-center justify-center gap-3">
-                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center font-black text-xl">
+        <div class="hidden lg:flex flex-col justify-between p-12 relative overflow-hidden">
+            <div>
+                <a href="{{ route('home') }}" class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-cyan-400 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg">
                         S
                     </div>
-
-                    <span class="text-3xl font-black gradient-text">
-                        ScholarLink
-                    </span>
+                    <div>
+                        <h1 class="text-3xl font-black tracking-tight text-gray-900">ScholarLink</h1>
+                        <p class="text-gray-500 font-bold text-sm">Platform Beasiswa Terpercaya</p>
+                    </div>
                 </a>
             </div>
 
-            <div class="glass-card rounded-3xl p-8 text-center">
-
-                <div class="text-6xl mb-5">
-                    📩
+            <div class="max-w-xl">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 text-orange-700 font-bold text-sm mb-6 border border-orange-200">
+                    <i class="bi bi-patch-check-fill"></i> Konfirmasi Identitas
                 </div>
-
-                <h2 class="text-3xl font-black">
-                    Verifikasi Email
+                <h2 class="text-5xl font-black leading-tight text-gray-900 mb-6">
+                    Satu langkah lagi untuk <span class="text-orange-600">aktifkan akun</span> Anda.
                 </h2>
-
-                <p class="text-slate-400 mt-3 leading-relaxed">
-                    Terima kasih sudah mendaftar. Silakan verifikasi email kamu melalui link yang sudah kami kirim.
+                <p class="text-gray-600 text-lg leading-relaxed font-bold mb-10">
+                    Silakan lakukan verifikasi email terlebih dahulu agar dapat menikmati akses penuh fitur simpan beasiswa favorit, unggah dokumen pendaftaran, hingga fitur diskusi kelompok.
                 </p>
 
-                @if (session('status') == 'verification-link-sent')
-                    <div class="mt-6 p-4 rounded-2xl bg-emerald-500/15 border border-emerald-400/25 text-emerald-300 text-sm text-left">
-                        Link verifikasi baru sudah dikirim ke email kamu.
+                <div class="grid grid-cols-3 gap-5">
+                    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl mb-4">
+                            <i class="bi bi-journals"></i>
+                        </div>
+                        <h3 class="text-2xl font-black text-gray-900">1K+</h3>
+                        <p class="text-sm text-gray-500 font-bold mt-1">Beasiswa</p>
                     </div>
-                @endif
 
-                <div class="mt-8 space-y-4">
-                    <form method="POST" action="{{ route('verification.send') }}">
-                        @csrf
+                    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+                        <div class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-500 flex items-center justify-center text-2xl mb-4">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <h3 class="text-2xl font-black text-gray-900">500+</h3>
+                        <p class="text-sm text-gray-500 font-bold mt-1">Awardee</p>
+                    </div>
 
-                        <button type="submit" class="btn-primary w-full py-4 rounded-2xl font-black text-white">
-                            KIRIM ULANG EMAIL VERIFIKASI
-                        </button>
-                    </form>
+                    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+                        <div class="w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-600 flex items-center justify-center text-2xl mb-4">
+                            <i class="bi bi-shield-check-fill"></i>
+                        </div>
+                        <h3 class="text-2xl font-black text-gray-900">Aman</h3>
+                        <p class="text-sm text-gray-500 font-bold mt-1">Terproteksi</p>
+                    </div>
+                </div>
+            </div>
 
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
+            <div>
+                <p class="text-gray-400 text-sm font-bold">© 2026 ScholarLink. Semua hak dilindungi.</p>
+            </div>
+        </div>
 
-                        <button type="submit" class="w-full py-4 rounded-2xl bg-slate-800 hover:bg-slate-700 border border-slate-700 transition font-black text-white">
-                            LOGOUT
-                        </button>
-                    </form>
+        <div class="flex items-center justify-center px-6 py-12">
+            <div class="w-full max-w-md">
+                
+                <div class="lg:hidden text-center mb-8">
+                    <a href="{{ route('home') }}" class="inline-flex items-center gap-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-cyan-400 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg">
+                            S
+                        </div>
+                        <span class="text-3xl font-black tracking-tight text-gray-900">ScholarLink</span>
+                    </a>
+                </div>
+
+                <div class="bg-white rounded-[2rem] shadow-xl border border-gray-100 p-8 md:p-10 text-center">
+                    
+                    <div class="w-20 h-20 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-[2rem] flex items-center justify-center text-white text-4xl shadow-lg shadow-blue-500/20 mx-auto mb-6">
+                        <i class="bi bi-envelope-check-fill"></i>
+                    </div>
+
+                    <h2 class="text-4xl font-black text-gray-900 mb-4">Verifikasi Email</h2>
+                    
+                    <p class="text-gray-500 font-bold leading-relaxed mb-2">
+                        Terima kasih telah bergabung bersama kami!
+                    </p>
+                    <p class="text-gray-500 font-medium leading-relaxed">
+                        Sebelum memulai, silakan verifikasi alamat email Anda dengan mengeklik tautan yang baru saja kami kirimkan ke kotak masuk Anda.
+                    </p>
+
+                    @if (session('status') == 'verification-link-sent')
+                        <div class="mt-6 bg-green-50 border border-green-200 rounded-2xl p-5 text-left">
+                            <div class="flex items-start gap-3">
+                                <div class="text-green-500 text-xl mt-0.5">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-black text-green-700 mb-1">Email Terkirim</h4>
+                                    <p class="text-sm text-green-600 font-bold">
+                                        Tautan verifikasi baru telah berhasil dikirimkan ke alamat email yang Anda daftarkan.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="mt-8 space-y-4">
+                        <form method="POST" action="{{ route('verification.send') }}">
+                            @csrf
+                            <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-4 rounded-2xl font-black text-lg transition shadow-lg shadow-blue-500/20 hover:shadow-xl hover:scale-[1.01]">
+                                KIRIM ULANG EMAIL VERIFIKASI
+                            </button>
+                        </form>
+
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="w-full bg-gray-50 hover:bg-gray-100 border-2 border-gray-200 text-gray-700 py-4 rounded-2xl font-black transition tracking-wide text-sm">
+                                <i class="bi bi-box-arrow-right mr-2"></i> KELUAR / LOGOUT
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="mt-6 text-center">
+                    <a href="{{ route('home') }}" class="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 text-sm font-black transition">
+                        <i class="bi bi-arrow-left"></i> Kembali ke halaman utama
+                    </a>
                 </div>
 
             </div>
-
         </div>
 
     </div>

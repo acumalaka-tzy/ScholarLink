@@ -1,348 +1,165 @@
 @extends('layouts.app')
 
 @section('content')
-
-<div class="space-y-10">
-
-    <!-- HERO -->
-    <div class="relative overflow-hidden rounded-[2rem]
-    bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500
-    p-10 md:p-14 shadow-[0_0_50px_rgba(168,85,247,0.45)]">
-
-        <div class="absolute top-0 right-0 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
-
-        <div class="relative z-10">
-
-            <h2 class="text-4xl md:text-6xl font-black text-white leading-tight">
-                Selamat Datang,
-                <span class="text-pink-200">
-                    {{ Auth::user()->name }}
-                </span> 👋
-            </h2>
-
-            <p class="text-indigo-100 text-lg mt-5 max-w-2xl leading-relaxed">
-                Jelajahi peluang beasiswa terbaik dan pantau seluruh aplikasi Anda dalam satu dashboard modern.
-            </p>
-
-            <div class="flex gap-4 mt-8">
-
-                <button class="px-6 py-3 rounded-2xl bg-white text-indigo-700 font-bold shadow-lg hover:scale-105 transition duration-300">
-                    Explore Scholarship
-                </button>
-
-                <button class="px-6 py-3 rounded-2xl border border-white/30 bg-white/10 backdrop-blur-xl text-white font-semibold hover:bg-white/20 transition">
-                    Edit Profile
-                </button>
-
-            </div>
-
-        </div>
-
+<div class="min-h-screen bg-[#f4f7f9] py-10 px-4 sm:px-6 lg:px-10 overflow-hidden">
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-orange-200 rounded-full blur-3xl opacity-30"></div>
     </div>
 
-    <!-- STATS -->
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-
-        <!-- Card -->
-        <div class="group rounded-[2rem] bg-white dark:bg-slate-900
-        border border-slate-200 dark:border-white/10
-        p-7 shadow-xl hover:shadow-[0_0_30px_rgba(99,102,241,0.25)]
-        hover:-translate-y-1 transition duration-300">
-
-            <div class="flex justify-between items-start">
-
-                <div>
-
-                    <p class="text-slate-500 dark:text-slate-400 font-medium">
-                        Total Beasiswa
-                    </p>
-
-                    <h3 class="text-5xl font-black mt-4 dark:text-white">
-                        1,250
-                    </h3>
-
+    <div class="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-r from-blue-600 via-cyan-500 to-orange-400 p-10 md:p-14 shadow-[0_25px_60px_rgba(59,130,246,0.35)] mb-10">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+        
+        <div class="relative z-10 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-10">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-white font-black text-sm mb-6">
+                    <div class="w-6 h-6 rounded-full bg-white text-blue-600 flex items-center justify-center text-xs">
+                        <i class="bi bi-stars"></i>
+                    </div>
+                    Student Dashboard
                 </div>
-
-                <div class="w-16 h-16 rounded-2xl
-                bg-indigo-500/10 flex items-center justify-center">
-
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         class="w-8 h-8 text-indigo-500"
-                         fill="none"
-                         viewBox="0 0 24 24"
-                         stroke="currentColor">
-
-                        <path stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422A12.083 12.083 0 0112 20.055a12.083 12.083 0 01-6.16-9.477L12 14zm0 0v6" />
-
-                    </svg>
-
+                <h2 class="text-4xl md:text-6xl font-black text-white leading-tight">
+                    Selamat Datang, <span class="text-orange-100">{{ Auth::user()->name }}</span>
+                </h2>
+                <p class="text-blue-50 text-lg mt-6 max-w-2xl leading-relaxed font-bold">
+                    Jelajahi peluang beasiswa terbaik dan pantau seluruh aplikasi Anda dalam satu dashboard modern dan profesional.
+                </p>
+                <div class="flex flex-wrap gap-4 mt-10">
+                    <a href="{{ route('scholarships.index') }}" class="px-7 py-4 rounded-2xl bg-white text-blue-700 font-black shadow-xl hover:scale-[1.03] transition duration-300">
+                        <i class="bi bi-search mr-2"></i> Explore Scholarship
+                    </a>
+                    <a href="{{ route('profile.edit') }}" class="px-7 py-4 rounded-2xl border border-white/30 bg-white/10 backdrop-blur-xl text-white font-black hover:bg-white/20 transition">
+                        <i class="bi bi-person-fill mr-2"></i> Edit Profile
+                    </a>
                 </div>
-
             </div>
 
-        </div>
-
-        <!-- Card -->
-        <div class="group rounded-[2rem] bg-white dark:bg-slate-900
-        border border-slate-200 dark:border-white/10
-        p-7 shadow-xl hover:shadow-[0_0_30px_rgba(236,72,153,0.25)]
-        hover:-translate-y-1 transition duration-300">
-
-            <div class="flex justify-between items-start">
-
-                <div>
-
-                    <p class="text-slate-500 dark:text-slate-400 font-medium">
-                        Aplikasi Anda
-                    </p>
-
-                    <h3 class="text-5xl font-black mt-4 dark:text-white">
-                        3
-                    </h3>
-
-                </div>
-
-                <div class="w-16 h-16 rounded-2xl
-                bg-pink-500/10 flex items-center justify-center">
-
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         class="w-8 h-8 text-pink-500"
-                         fill="none"
-                         viewBox="0 0 24 24"
-                         stroke="currentColor">
-
-                        <path stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-
-                    </svg>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- Card -->
-        <div class="group rounded-[2rem] bg-white dark:bg-slate-900
-        border border-slate-200 dark:border-white/10
-        p-7 shadow-xl hover:shadow-[0_0_30px_rgba(34,197,94,0.25)]
-        hover:-translate-y-1 transition duration-300">
-
-            <div class="flex justify-between items-start">
-
-                <div>
-
-                    <p class="text-slate-500 dark:text-slate-400 font-medium">
-                        Diterima
-                    </p>
-
-                    <h3 class="text-5xl font-black mt-4 text-green-500">
-                        1
-                    </h3>
-
-                </div>
-
-                <div class="w-16 h-16 rounded-2xl
-                bg-green-500/10 flex items-center justify-center">
-
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         class="w-8 h-8 text-green-500"
-                         fill="none"
-                         viewBox="0 0 24 24"
-                         stroke="currentColor">
-
-                        <path stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M5 13l4 4L19 7" />
-
-                    </svg>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- Card -->
-        <div class="rounded-[2rem]
-        bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500
-        p-7 text-white shadow-[0_0_40px_rgba(168,85,247,0.4)]">
-
-            <div class="flex justify-between items-start">
-
-                <div>
-
-                    <p class="text-indigo-100 font-medium">
-                        Profil Kelengkapan
-                    </p>
-
-                    <h3 class="text-5xl font-black mt-4">
-                        75%
-                    </h3>
-
-                </div>
-
-                <div class="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center">
-
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         class="w-8 h-8 text-white"
-                         fill="none"
-                         viewBox="0 0 24 24"
-                         stroke="currentColor">
-
-                        <path stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-
-                    </svg>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- CONTENT -->
-    <div class="grid xl:grid-cols-3 gap-8">
-
-        <!-- LEFT -->
-        <div class="xl:col-span-2 space-y-6">
-
-            <div class="flex items-center justify-between">
-
-                <h3 class="text-3xl font-black dark:text-white">
-                    Aplikasi Beasiswa
-                </h3>
-
-                <button class="px-5 py-3 rounded-2xl bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition">
-                    + Apply New
-                </button>
-
-            </div>
-
-            <!-- Application Card -->
-            <div class="rounded-[2rem]
-            bg-white dark:bg-slate-900
-            border border-slate-200 dark:border-white/10
-            p-8 shadow-xl hover:shadow-[0_0_35px_rgba(99,102,241,0.2)]
-            transition duration-300">
-
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-
+            <div class="bg-white/15 backdrop-blur-2xl border border-white/20 rounded-[2rem] p-8 min-w-[320px] shadow-2xl">
+                <div class="flex items-center gap-5 mb-8">
+                    <div class="w-20 h-20 rounded-3xl bg-white text-blue-600 flex items-center justify-center text-4xl shadow-xl">
+                        <i class="bi bi-person-circle"></i>
+                    </div>
                     <div>
-
-                        <div class="flex items-center gap-3 mb-4">
-
-                            <span class="px-4 py-2 rounded-full bg-green-500/10 text-green-500 text-sm font-bold">
-                                DITERIMA
-                            </span>
-
-                        </div>
-
-                        <h4 class="text-2xl font-bold dark:text-white">
-                            Beasiswa Penuh S1 - UI
-                        </h4>
-
-                        <p class="text-slate-500 dark:text-slate-400 mt-2">
-                            Universitas Indonesia
-                        </p>
-
+                        <h3 class="text-2xl font-black text-white">{{ Auth::user()->name }}</h3>
+                        <p class="text-blue-100 font-bold mt-1">{{ Auth::user()->email }}</p>
                     </div>
-
-                    <button class="px-5 py-3 rounded-2xl bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition">
-                        Lihat Detail
-                    </button>
-
                 </div>
-
-            </div>
-
-        </div>
-
-        <!-- RIGHT -->
-        <div>
-
-            <div class="rounded-[2rem]
-            bg-white dark:bg-slate-900
-            border border-slate-200 dark:border-white/10
-            p-8 shadow-xl">
-
-                <div class="flex items-center gap-4 mb-8">
-
-                    <div class="w-16 h-16 rounded-2xl
-                    bg-gradient-to-br from-indigo-500 to-pink-500
-                    flex items-center justify-center text-white text-2xl font-bold">
-
-                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-
-                    </div>
-
-                    <div>
-
-                        <h4 class="text-2xl font-bold dark:text-white">
-                            {{ Auth::user()->name }}
-                        </h4>
-
-                        <p class="text-slate-500 dark:text-slate-400">
-                            {{ Auth::user()->email }}
-                        </p>
-
-                    </div>
-
-                </div>
-
                 <div class="space-y-5">
-
-                    <div class="flex justify-between">
-
-                        <span class="text-slate-500 dark:text-slate-400">
-                            Role
-                        </span>
-
-                        <span class="font-semibold dark:text-white">
-                            Mahasiswa
-                        </span>
-
+                    <div class="flex items-center justify-between">
+                        <span class="text-blue-100 font-bold">Role</span>
+                        <span class="bg-white/20 px-4 py-2 rounded-full text-sm font-black text-white">Mahasiswa</span>
                     </div>
-
-                    <div class="flex justify-between">
-
-                        <span class="text-slate-500 dark:text-slate-400">
-                            Status
-                        </span>
-
-                        <span class="text-green-500 font-semibold">
-                            Active
-                        </span>
-
+                    <div class="flex items-center justify-between">
+                        <span class="text-blue-100 font-bold">Status</span>
+                        <span class="bg-green-400/20 text-green-100 px-4 py-2 rounded-full text-sm font-black border border-green-200/20">Active</span>
                     </div>
-
                 </div>
-
-                <button class="w-full mt-8 py-4 rounded-2xl
-                bg-gradient-to-r from-indigo-600 to-pink-500
-                text-white font-bold hover:scale-[1.02]
-                transition duration-300">
-
-                    Edit Profile
-
-                </button>
-
             </div>
-
         </div>
-
     </div>
 
-</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
+        <div class="bg-white rounded-[2rem] border border-gray-100 shadow-xl p-7 hover:scale-[1.02] transition">
+            <div class="flex items-center justify-between mb-6">
+                <div class="w-16 h-16 rounded-3xl bg-blue-100 text-blue-600 flex items-center justify-center text-3xl">
+                    <i class="bi bi-mortarboard-fill"></i>
+                </div>
+                <span class="text-sm font-black text-blue-600 bg-blue-50 px-4 py-2 rounded-full">Scholarships</span>
+            </div>
+            <p class="text-gray-500 font-bold text-sm mb-2">Total Beasiswa</p>
+            <h2 class="text-5xl font-black text-gray-900">1,250</h2>
+        </div>
 
+        <div class="bg-white rounded-[2rem] border border-gray-100 shadow-xl p-7 hover:scale-[1.02] transition">
+            <div class="flex items-center justify-between mb-6">
+                <div class="w-16 h-16 rounded-3xl bg-cyan-100 text-cyan-600 flex items-center justify-center text-3xl">
+                    <i class="bi bi-file-earmark-text-fill"></i>
+                </div>
+                <span class="text-sm font-black text-cyan-600 bg-cyan-50 px-4 py-2 rounded-full">Applications</span>
+            </div>
+            <p class="text-gray-500 font-bold text-sm mb-2">Aplikasi Anda</p>
+            <h2 class="text-5xl font-black text-gray-900">3</h2>
+        </div>
+
+        <div class="bg-white rounded-[2rem] border border-gray-100 shadow-xl p-7 hover:scale-[1.02] transition">
+            <div class="flex items-center justify-between mb-6">
+                <div class="w-16 h-16 rounded-3xl bg-green-100 text-green-600 flex items-center justify-center text-3xl">
+                    <i class="bi bi-check-circle-fill"></i>
+                </div>
+                <span class="text-sm font-black text-green-600 bg-green-50 px-4 py-2 rounded-full">Accepted</span>
+            </div>
+            <p class="text-gray-500 font-bold text-sm mb-2">Diterima</p>
+            <h2 class="text-5xl font-black text-green-600">1</h2>
+        </div>
+
+        <div class="bg-gradient-to-br from-blue-600 via-cyan-500 to-orange-400 rounded-[2rem] shadow-[0_20px_50px_rgba(59,130,246,0.3)] p-7 text-white hover:scale-[1.02] transition">
+            <div class="flex items-center justify-between mb-6">
+                <div class="w-16 h-16 rounded-3xl bg-white/20 flex items-center justify-center text-3xl">
+                    <i class="bi bi-bar-chart-fill"></i>
+                </div>
+                <span class="text-sm font-black bg-white/20 px-4 py-2 rounded-full">Profile</span>
+            </div>
+            <p class="text-blue-100 font-bold text-sm mb-2">Profil Kelengkapan</p>
+            <h2 class="text-5xl font-black">75%</h2>
+        </div>
+    </div>
+
+    <div class="grid xl:grid-cols-3 gap-8">
+        <div class="xl:col-span-2 space-y-6">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                    <h3 class="text-3xl font-black text-gray-900">Aplikasi Beasiswa</h3>
+                    <p class="text-gray-500 font-bold mt-2">Pantau seluruh progress pengajuan Anda.</p>
+                </div>
+                <a href="{{ route('scholarships.index') }}" class="px-6 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black shadow-lg shadow-blue-500/20 hover:scale-[1.02] transition">
+                    <i class="bi bi-plus-circle-fill mr-2"></i> Apply New
+                </a>
+            </div>
+
+            <div class="bg-white rounded-[2rem] border border-gray-100 p-8 shadow-xl hover:shadow-2xl transition duration-300">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+                    <div>
+                        <div class="flex items-center gap-3 mb-5">
+                            <span class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-green-100 text-green-700 border border-green-200 text-sm font-black">
+                                <i class="bi bi-check-circle-fill"></i> DITERIMA
+                            </span>
+                        </div>
+                        <h4 class="text-3xl font-black text-gray-900">Beasiswa Penuh S1 - UI</h4>
+                        <p class="text-gray-500 font-bold mt-3">Universitas Indonesia</p>
+                    </div>
+                    <button class="px-6 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black shadow-lg shadow-blue-500/20 hover:scale-[1.02] transition">
+                        <i class="bi bi-eye-fill mr-2"></i> Lihat Detail
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="bg-white rounded-[2rem] border border-gray-100 p-8 shadow-xl">
+                <div class="flex items-center gap-5 mb-8">
+                    <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white text-4xl shadow-xl shadow-blue-500/20">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-2xl font-black text-gray-900">{{ Auth::user()->name }}</h4>
+                        <p class="text-gray-500 font-bold mt-1">{{ Auth::user()->email }}</p>
+                    </div>
+                </div>
+                <div class="space-y-5">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500 font-bold">Role</span>
+                        <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-black">Mahasiswa</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500 font-bold">Status</span>
+                        <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-black">Active</span>
+                    </div>
+                </div>
+                <a href="{{ route('profile.edit') }}" class="w-full mt-8 inline-flex items-center justify-center py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black hover:scale-[1.02] shadow-xl shadow-blue-500/20 transition duration-300">
+                    <i class="bi bi-pencil-square mr-2"></i> Edit Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

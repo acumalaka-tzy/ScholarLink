@@ -1,48 +1,90 @@
-<section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Update Password') }}
+<section class="space-y-8">
+    <div>
+        <div class="inline-flex items-center gap-3 bg-blue-100 border border-blue-200 rounded-full px-5 py-3 mb-6 shadow-sm">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-sm">
+                <i class="bi bi-shield-lock-fill"></i>
+            </div>
+            <span class="text-blue-700 text-sm font-black tracking-wide">Security Settings</span>
+        </div>
+
+        <h2 class="text-4xl font-black text-gray-900 leading-tight">
+            Update <span class="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">Password</span>
         </h2>
-
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
+        <p class="mt-5 text-gray-500 leading-relaxed text-lg max-w-3xl font-bold">
+            Gunakan password yang kuat dan aman untuk melindungi akun ScholarLink Anda dari akses yang tidak diinginkan.
         </p>
-    </header>
+    </div>
 
-    <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
-        @csrf
-        @method('put')
+    <div class="relative overflow-hidden bg-white border border-gray-100 rounded-[2.5rem] shadow-[0_25px_80px_rgba(15,23,42,0.08)]">
+        <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-600 via-cyan-400 to-orange-400"></div>
+        <div class="absolute top-0 right-0 w-72 h-72 bg-cyan-100 rounded-full blur-3xl opacity-40"></div>
+        <div class="absolute bottom-0 left-0 w-72 h-72 bg-orange-100 rounded-full blur-3xl opacity-40"></div>
 
-        <div>
-            <x-input-label for="update_password_current_password" :value="__('Current Password')" />
-            <x-text-input id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
-            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
+        <div class="relative p-8 sm:p-10">
+            <div class="flex items-start gap-5 mb-10">
+                <div class="w-20 h-20 rounded-[2rem] bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-4xl shadow-xl shadow-blue-500/20 flex-shrink-0">
+                    <i class="bi bi-key-fill"></i>
+                </div>
+                <div>
+                    <h3 class="text-3xl font-black text-gray-900 leading-tight">Change Your Password</h3>
+                    <p class="mt-3 text-gray-500 leading-relaxed font-bold max-w-2xl">
+                        Pastikan password baru memiliki kombinasi huruf, angka, dan simbol agar keamanan akun tetap terjaga.
+                    </p>
+                </div>
+            </div>
+
+            <form method="post" action="{{ route('password.update') }}" class="space-y-8">
+                @csrf
+                @method('put')
+
+                <div>
+                    <label class="block text-gray-700 font-black mb-3 text-lg">Current Password</label>
+                    <div class="relative">
+                        <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
+                            <i class="bi bi-lock-fill"></i>
+                        </div>
+                        <input id="update_password_current_password" name="current_password" type="password" autocomplete="current-password" placeholder="Masukkan password saat ini" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-5 text-gray-900 font-bold placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
+                    </div>
+                    <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-3" />
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-black mb-3 text-lg">New Password</label>
+                    <div class="relative">
+                        <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
+                            <i class="bi bi-shield-lock-fill"></i>
+                        </div>
+                        <input id="update_password_password" name="password" type="password" autocomplete="new-password" placeholder="Masukkan password baru" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-5 text-gray-900 font-bold placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
+                    </div>
+                    <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-3" />
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-black mb-3 text-lg">Confirm Password</label>
+                    <div class="relative">
+                        <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
+                            <i class="bi bi-check-circle-fill"></i>
+                        </div>
+                        <input id="update_password_password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" placeholder="Konfirmasi password baru" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-5 text-gray-900 font-bold placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
+                    </div>
+                    <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-3" />
+                </div>
+
+                <div class="flex flex-col sm:flex-row sm:items-center gap-5 pt-4">
+                    <button type="submit" class="group relative overflow-hidden inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 via-cyan-500 to-orange-400 hover:scale-[1.02] transition duration-300 px-8 py-5 rounded-2xl font-black text-white shadow-[0_15px_50px_rgba(59,130,246,0.3)]">
+                        <span class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition"></span>
+                        <span class="relative flex items-center gap-3">
+                            <i class="bi bi-save-fill"></i> Save Password
+                        </span>
+                    </button>
+
+                    @if (session('status') === 'password-updated')
+                        <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2500)" class="inline-flex items-center gap-3 bg-green-100 border border-green-200 text-green-700 px-5 py-4 rounded-2xl font-black shadow-sm">
+                            <i class="bi bi-check-circle-fill"></i> Password berhasil diperbarui
+                        </div>
+                    @endif
+                </div>
+            </form>
         </div>
-
-        <div>
-            <x-input-label for="update_password_password" :value="__('New Password')" />
-            <x-text-input id="update_password_password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
-        </div>
-
-        <div>
-            <x-input-label for="update_password_password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-            @if (session('status') === 'password-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
-            @endif
-        </div>
-    </form>
+    </div>
 </section>
