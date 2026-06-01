@@ -1,214 +1,176 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Rooms - ScholarLink</title>
+@extends('layouts.app')
 
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=nunito:400,500,600,700,800,900" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <style>
-        body, * {
-            font-family: 'Nunito', sans-serif !important;
-        }
-    </style>
-</head>
-<body class="min-h-screen bg-[#f4f7f9] overflow-x-hidden">
-
+@section('content')
+<div class="min-h-screen bg-[#f4f7f9] py-12 px-4 sm:px-6 lg:px-10 overflow-hidden">
     <div class="fixed inset-0 -z-10 overflow-hidden">
         <div class="absolute top-0 left-0 w-96 h-96 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
         <div class="absolute bottom-0 right-0 w-96 h-96 bg-orange-200 rounded-full blur-3xl opacity-30"></div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-10">
-
-        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10">
-            <div>
-                <a href="{{ url('/') }}" class="inline-flex items-center gap-2 text-blue-600 hover:text-cyan-600 font-black transition">
-                    <i class="bi bi-arrow-left"></i>
-                    Kembali ke Home
-                </a>
-                <div class="flex items-center gap-5 mt-6">
-                    <div class="w-16 h-16 rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-3xl shadow-xl shadow-blue-500/20">
-                        <i class="bi bi-chat-dots-fill"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-4xl font-black text-gray-900">Chat Rooms</h1>
-                        <p class="text-gray-500 font-bold mt-2 text-lg">
-                            Ruang diskusi beasiswa untuk provider dan mahasiswa.
-                        </p>
-                    </div>
+    <div class="max-w-6xl mx-auto">
+        <div class="mb-12 text-center">
+            <div class="inline-flex items-center gap-3 bg-white border border-gray-200 rounded-full px-5 py-3 mb-6 shadow-lg">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-sm">
+                    <i class="bi bi-cloud-arrow-up-fill"></i>
                 </div>
+                <span class="text-gray-700 text-sm font-black tracking-wide">
+                    ScholarLink Upload Center
+                </span>
             </div>
-
-            <a href="#create-room" class="inline-flex items-center justify-center gap-3 px-7 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 transition text-white font-black shadow-xl shadow-blue-500/20 hover:scale-[1.02]">
-                <i class="bi bi-plus-circle-fill"></i>
-                Buat Room
-            </a>
+            <h1 class="text-5xl sm:text-6xl font-black text-gray-900 tracking-tight leading-tight">
+                Upload Your
+                <span class="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                    Document
+                </span>
+            </h1>
+            <p class="text-gray-500 text-lg mt-6 max-w-3xl mx-auto leading-relaxed font-bold">
+                Upload dokumen persyaratan beasiswa dengan tampilan modern, aman, cepat, dan pengalaman upload yang lebih profesional.
+            </p>
         </div>
 
-        @if(session('success'))
-            <div class="mb-8 bg-green-50 border border-green-200 rounded-3xl p-6">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center text-2xl">
-                        <i class="bi bi-check-circle-fill"></i>
-                    </div>
-                    <div class="font-black text-green-700">
-                        {{ session('success') }}
-                    </div>
-                </div>
-            </div>
-        @endif
+        <div class="relative overflow-hidden bg-white border border-gray-100 rounded-[2.5rem] shadow-[0_25px_80px_rgba(15,23,42,0.08)]">
+            <div class="absolute top-0 left-0 w-80 h-80 bg-cyan-100 blur-3xl rounded-full opacity-50"></div>
+            <div class="absolute bottom-0 right-0 w-80 h-80 bg-orange-100 blur-3xl rounded-full opacity-50"></div>
 
-        @if($errors->any())
-            <div class="mb-8 bg-red-50 border border-red-200 rounded-3xl p-6">
-                <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-red-100 text-red-500 flex items-center justify-center text-2xl flex-shrink-0">
-                        <i class="bi bi-exclamation-circle-fill"></i>
+            <div class="relative grid grid-cols-1 lg:grid-cols-2">
+                <div class="hidden lg:flex flex-col justify-center p-14 border-r border-gray-100">
+                    <div class="w-28 h-28 rounded-[2rem] bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white text-6xl shadow-2xl shadow-blue-500/20 mb-10">
+                        <i class="bi bi-folder-fill"></i>
                     </div>
-                    <div>
-                        <h4 class="font-black text-red-700 text-lg mb-2">Terjadi Kesalahan</h4>
-                        <ul class="space-y-1 text-red-600 font-bold text-sm">
-                            @foreach($errors->all() as $error)
-                                <li>• {{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        @endif
-
-        <div id="create-room" class="bg-white border border-gray-100 rounded-[2rem] shadow-2xl overflow-hidden mb-10 scroll-mt-10">
-            <div class="h-2 bg-gradient-to-r from-blue-600 via-cyan-400 to-orange-400"></div>
-            <div class="p-8 md:p-10">
-                <div class="flex items-center gap-4 mb-8">
-                    <div class="w-16 h-16 rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-3xl shadow-xl shadow-blue-500/20">
-                        <i class="bi bi-plus-square-fill"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-3xl font-black text-gray-900">Buat Chat Room Baru</h2>
-                        <p class="text-gray-500 font-bold mt-1">Buat ruang diskusi baru untuk scholarship.</p>
-                    </div>
-                </div>
-
-                <form method="POST" action="{{ route('chat-rooms.store') }}" class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
-                    @csrf
-                    <div>
-                        <label class="block text-sm font-black text-gray-700 mb-3">Beasiswa</label>
-                        <div class="relative">
-                            <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                                <i class="bi bi-mortarboard-fill"></i>
-                            </div>
-                            <select name="id_beasiswa" required class="w-full appearance-none bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-12 py-4 font-bold text-gray-900 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
-                                <option value="">Pilih Beasiswa</option>
-                                @foreach($scholarships as $scholarship)
-                                    <option value="{{ $scholarship->id_beasiswa }}" {{ old('id_beasiswa') == $scholarship->id_beasiswa ? 'selected' : '' }}>
-                                        {{ $scholarship->nama_beasiswa }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <div class="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                                <i class="bi bi-chevron-down"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-black text-gray-700 mb-3">Nama Room</label>
-                        <div class="relative">
-                            <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
-                                <i class="bi bi-chat-left-text-fill"></i>
-                            </div>
-                            <input type="text" name="nama_room" value="{{ old('nama_room') }}" required placeholder="Contoh: Diskusi Beasiswa" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-4 font-bold text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-black text-gray-700 mb-3">Tipe</label>
-                        <div class="relative">
-                            <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                                <i class="bi bi-globe-americas"></i>
-                            </div>
-                            <select name="tipe" required class="w-full appearance-none bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-12 py-4 font-bold text-gray-900 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
-                                <option value="public" {{ old('tipe') === 'public' ? 'selected' : '' }}>Public</option>
-                                <option value="private" {{ old('tipe') === 'private' ? 'selected' : '' }}>Private</option>
-                            </select>
-                            <div class="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                                <i class="bi bi-chevron-down"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex items-end">
-                        <button type="submit" class="w-full inline-flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 transition text-white font-black shadow-xl shadow-blue-500/20 hover:scale-[1.02]">
-                            <i class="bi bi-save-fill"></i>
-                            Simpan
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-            @forelse($chatRooms as $room)
-                <a href="{{ route('chat-rooms.show', $room->id_room) }}" class="group block bg-white border border-gray-100 rounded-[2rem] p-8 shadow-2xl hover:shadow-[0_25px_60px_rgba(59,130,246,0.18)] hover:-translate-y-1 transition duration-300 overflow-hidden relative">
-                    <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-600 via-cyan-400 to-orange-400"></div>
-                    <div class="flex items-start justify-between gap-4 mb-6">
-                        <div class="w-16 h-16 rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-3xl shadow-lg shadow-blue-500/20">
-                            <i class="bi bi-chat-dots-fill"></i>
-                        </div>
-
-                        @if($room->tipe === 'private')
-                            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-100 text-red-700 border border-red-200 text-xs font-black">
-                                <i class="bi bi-lock-fill"></i>
-                                Private
-                            </span>
-                        @else
-                            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 text-green-700 border border-green-200 text-xs font-black">
-                                <i class="bi bi-globe-americas"></i>
-                                Public
-                            </span>
-                        @endif
-                    </div>
-
-                    <h2 class="text-2xl font-black text-gray-900 mb-3 group-hover:text-blue-600 transition">
-                        {{ $room->nama_room }}
+                    <h2 class="text-5xl font-black text-gray-900 leading-tight mb-6">
+                        Secure <br> Upload Center
                     </h2>
-                    <p class="text-gray-500 font-bold mb-6">
-                        {{ $room->scholarship->nama_beasiswa ?? '-' }}
+                    <p class="text-gray-500 text-lg leading-relaxed mb-12 font-bold">
+                        Pastikan semua dokumen persyaratan beasiswa kamu lengkap dan tersimpan aman di platform ScholarLink.
                     </p>
 
-                    <div class="flex items-center justify-between pt-5 border-t border-gray-100">
-                        <div class="flex items-center gap-2 text-gray-500 font-bold text-sm">
-                            <i class="bi bi-chat-left-dots-fill text-blue-600"></i>
-                            {{ $room->messages->count() }} pesan
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-5">
+                            <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl">
+                                <i class="bi bi-file-earmark-richtext-fill"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-gray-900 font-black">Multi File Support</h3>
+                                <p class="text-gray-500 font-bold text-sm mt-1">PDF, DOCX, JPG, PNG</p>
+                            </div>
                         </div>
-                        <div class="flex items-center gap-2 text-gray-500 font-bold text-sm">
-                            <i class="bi bi-calendar-event-fill text-orange-500"></i>
-                            {{ $room->tanggal_dibuat ? \Carbon\Carbon::parse($room->tanggal_dibuat)->format('d M Y') : '-' }}
+                        <div class="flex items-center gap-5">
+                            <div class="w-14 h-14 rounded-2xl bg-cyan-100 text-cyan-600 flex items-center justify-center text-2xl">
+                                <i class="bi bi-shield-lock-fill"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-gray-900 font-black">Safe Storage</h3>
+                                <p class="text-gray-500 font-bold text-sm mt-1">Dokumen tersimpan aman</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-5">
+                            <div class="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center text-2xl">
+                                <i class="bi bi-lightning-charge-fill"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-gray-900 font-black">Fast Process</h3>
+                                <p class="text-gray-500 font-bold text-sm mt-1">Upload cepat & responsif</p>
+                            </div>
                         </div>
                     </div>
-                </a>
-            @empty
-                <div class="md:col-span-2 xl:col-span-3 bg-white border border-gray-100 rounded-[2rem] p-16 text-center shadow-2xl">
-                    <div class="w-28 h-28 mx-auto rounded-full bg-gray-100 text-gray-400 flex items-center justify-center text-5xl mb-8">
-                        <i class="bi bi-chat-square-dots-fill"></i>
-                    </div>
-                    <h2 class="text-4xl font-black text-gray-900 mb-4">Belum Ada Chat Room</h2>
-                    <p class="text-gray-500 font-bold text-lg mb-8">Isi form di atas lalu klik Simpan.</p>
-                    <a href="#create-room" class="inline-flex items-center gap-3 px-7 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black shadow-xl shadow-blue-500/20 hover:scale-[1.02] transition">
-                        <i class="bi bi-plus-circle-fill"></i>
-                        Buat Room
-                    </a>
                 </div>
-            @endforelse
+
+                <div class="p-6 sm:p-10 lg:p-14">
+                    @if(session('success'))
+                        <div class="mb-8 bg-green-50 border border-green-200 rounded-3xl p-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center text-2xl">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="font-black text-green-700">
+                                    {{ session('success') }}
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('documents.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8">
+                        @csrf
+
+                        <div>
+                            <label class="block text-gray-700 font-black mb-3 text-lg">
+                                Scholarship Application
+                            </label>
+                            <div class="relative">
+                                <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+                                    <i class="bi bi-mortarboard-fill"></i>
+                                </div>
+                                <select name="id_application" class="w-full appearance-none bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-12 py-4 font-bold text-gray-900 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
+                                    @foreach($applications as $application)
+                                        <option value="{{ $application->id_application }}">
+                                            {{ $application->scholarship->nama_beasiswa }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <div class="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+                                    <i class="bi bi-chevron-down"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-black mb-3 text-lg">
+                                Document Type
+                            </label>
+                            <div class="relative">
+                                <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
+                                    <i class="bi bi-file-earmark-text-fill"></i>
+                                </div>
+                                <input type="text" name="jenis_dokumen" placeholder="Contoh: CV, Transkrip, Sertifikat" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-4 font-bold text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
+                            </div>
+                            @error('jenis_dokumen')
+                                <p class="text-red-500 font-bold mt-3 text-sm">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-black mb-3 text-lg">
+                                Upload File
+                            </label>
+                            <div class="relative border-2 border-dashed border-gray-300 hover:border-cyan-500 transition duration-300 rounded-[2rem] bg-gray-50 p-10 text-center group">
+                                <div class="flex flex-col items-center">
+                                    <div class="w-28 h-28 rounded-full bg-gradient-to-br from-blue-100 to-cyan-100 text-blue-600 flex items-center justify-center text-6xl mb-8 group-hover:scale-110 transition duration-300 shadow-lg">
+                                        <i class="bi bi-cloud-arrow-up-fill"></i>
+                                    </div>
+                                    <h3 class="text-3xl font-black text-gray-900 mb-4">
+                                        Drag & Drop File
+                                    </h3>
+                                    <p class="text-gray-500 font-bold mb-8">
+                                        atau klik tombol di bawah untuk memilih file
+                                    </p>
+                                    <input type="file" name="file" class="block w-full text-gray-600 font-bold file:mr-4 file:py-4 file:px-7 file:rounded-2xl file:border-0 file:bg-gradient-to-r file:from-blue-600 file:to-cyan-500 file:text-white file:font-black hover:file:opacity-90 file:shadow-lg file:shadow-blue-500/20">
+                                    <p class="text-gray-400 text-sm mt-6 font-bold">
+                                        Supported: PDF, DOCX, JPG, PNG
+                                    </p>
+                                </div>
+                            </div>
+                            @error('file')
+                                <p class="text-red-500 font-bold mt-3 text-sm">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        <div class="pt-4">
+                            <button type="submit" class="group relative overflow-hidden w-full bg-gradient-to-r from-blue-600 via-cyan-500 to-orange-400 hover:scale-[1.02] transition duration-300 text-white py-5 rounded-2xl text-lg font-black shadow-[0_15px_50px_rgba(59,130,246,0.3)]">
+                                <span class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition"></span>
+                                <span class="relative flex items-center justify-center gap-3">
+                                    <i class="bi bi-send-fill"></i>
+                                    Upload Document
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
     </div>
-
-</body>
-</html>
+</div>
+@endsection
