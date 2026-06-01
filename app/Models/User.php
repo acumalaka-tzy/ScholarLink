@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return explode(' ', trim($this->name))[0];
     }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'user_id', 'id');
+    }
 }
