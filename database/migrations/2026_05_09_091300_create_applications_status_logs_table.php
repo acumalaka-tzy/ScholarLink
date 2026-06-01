@@ -18,6 +18,8 @@ return new class extends Migration
 
             $table->text('catatan')->nullable();
 
+            $table->string('link_group_wa')->nullable()->after('catatan');
+
             $table->timestamp('tanggal_status')
                   ->useCurrent();
 
