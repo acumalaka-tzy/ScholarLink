@@ -48,11 +48,12 @@
 
         <nav id="nav-links" class="flex-1 p-6 space-y-3">
             @php
+                $isProvider = Auth::user() && Auth::user()->role === 'provider';
                 $menu = [
                     ['route' => 'provider.dashboard', 'icon' => 'bi-grid-fill', 'label' => 'Dashboard', 'sub' => 'Provider Overview', 'color' => 'blue'],
                     ['route' => 'provider.scholarships.index', 'icon' => 'bi-mortarboard-fill', 'label' => 'Scholarships', 'sub' => 'Manage Programs', 'color' => 'cyan'],
                     ['route' => 'provider.applications.index', 'icon' => 'bi-file-earmark-check-fill', 'label' => 'Applications', 'sub' => 'Student Applications', 'color' => 'purple'],
-                    ['route' => 'chat-rooms.index', 'icon' => 'bi-chat-dots-fill', 'label' => 'Chat Rooms', 'sub' => 'Student Discussions', 'color' => 'pink'],
+                    ['route' => $isProvider ? 'provider.chat-rooms.index' : 'scholarships.index', 'icon' => 'bi-chat-dots-fill', 'label' => 'Chat Rooms', 'sub' => 'Student Discussions', 'color' => 'pink'],
                 ];
             @endphp
 
@@ -76,114 +77,60 @@
                 </div>
             </a>
         </nav>
-
     </aside>
 
     <main class="flex-1 min-w-0 flex flex-col h-screen overflow-hidden">
         <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-xl border-b border-gray-200 shadow-sm">
-    <div class="px-5 lg:px-8 py-4 flex items-center justify-between">
+            <div class="px-5 lg:px-8 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <button id="openSidebar" class="lg:hidden w-14 h-14 rounded-2xl bg-white border border-gray-200 shadow-lg flex items-center justify-center text-2xl text-gray-700">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <div>
+                        <h2 class="text-3xl font-black text-gray-900">Provider Panel</h2>
+                        <p class="text-gray-500 font-bold mt-1">Manage Scholarships Platform</p>
+                    </div>
+                </div>
 
-        <div class="flex items-center gap-4">
-            <button id="openSidebar"
-                class="lg:hidden w-14 h-14 rounded-2xl bg-white border border-gray-200 shadow-lg flex items-center justify-center text-2xl text-gray-700">
-                <i class="bi bi-list"></i>
-            </button>
-
-            <div>
-                <h2 class="text-3xl font-black text-gray-900">
-                    Provider Panel
-                </h2>
-
-                <p class="text-gray-500 font-bold mt-1">
-                    Manage Scholarships Platform
-                </p>
-            </div>
-        </div>
-
-        <div class="flex items-center gap-6 relative">
-
-            <div class="hidden md:block text-right">
-                <p class="font-black text-lg text-gray-900">
-                    {{ $providerName }}
-                </p>
-
-                <p class="text-gray-500 text-sm capitalize font-bold">
-                    Provider
-                </p>
-            </div>
-
-            <button onclick="toggleProfileMenu()"
-                class="w-16 h-16 rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center font-black text-2xl shadow-lg shadow-blue-500/20 hover:scale-105 transition">
-
-                {{ strtoupper(substr($providerName, 0, 1)) }}
-
-            </button>
-
-            <div id="profileMenu"
-                class="hidden absolute right-0 top-24 w-80 bg-white border border-gray-100 rounded-[2rem] shadow-2xl overflow-hidden">
-
-                <div class="p-6 border-b border-gray-100">
-
-                    <div class="flex items-center gap-4">
-
-                        <div class="w-16 h-16 rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center font-black text-2xl">
-                            {{ strtoupper(substr($providerName, 0, 1)) }}
-                        </div>
-
-                        <div>
-                            <h3 class="font-black text-lg text-gray-900">
-                                {{ Auth::user()->name }}
-                            </h3>
-
-                            <p class="text-gray-500 text-sm font-bold">
-                                {{ Auth::user()->email }}
-                            </p>
-                        </div>
-
+                <div class="flex items-center gap-6 relative">
+                    <div class="hidden md:block text-right">
+                        <p class="font-black text-lg text-gray-900">{{ $providerName }}</p>
+                        <p class="text-gray-500 text-sm capitalize font-bold">Provider</p>
                     </div>
 
-                </div>
+                    <button onclick="toggleProfileMenu()" class="w-16 h-16 rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center font-black text-2xl shadow-lg shadow-blue-500/20 hover:scale-105 transition">
+                        {{ strtoupper(substr($providerName, 0, 1)) }}
+                    </button>
 
-                <div class="p-4 space-y-2">
-
-                    <a href="{{ route('profile.edit') }}"
-                        class="flex items-center gap-4 px-5 py-4 rounded-2xl hover:bg-gray-100 transition">
-
-                        <div class="w-11 h-11 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center">
-                            <i class="bi bi-person-fill"></i>
-                        </div>
-
-                        <span class="font-black text-gray-700">
-                            My Profile
-                        </span>
-
-                    </a>
-
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-
-                        <button type="submit"
-                            class="w-full flex items-center gap-4 px-5 py-4 rounded-2xl hover:bg-red-50 transition">
-
-                            <div class="w-11 h-11 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center">
-                                <i class="bi bi-box-arrow-right"></i>
+                    <div id="profileMenu" class="hidden absolute right-0 top-24 w-80 bg-white border border-gray-100 rounded-[2rem] shadow-2xl overflow-hidden">
+                        <div class="p-6 border-b border-gray-100">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center font-black text-2xl">
+                                    {{ strtoupper(substr($providerName, 0, 1)) }}
+                                </div>
+                                <div>
+                                    <h3 class="font-black text-lg text-gray-900">{{ Auth::user()->name }}</h3>
+                                    <p class="text-gray-500 text-sm font-bold">{{ Auth::user()->email }}</p>
+                                </div>
                             </div>
-
-                            <span class="font-black text-red-600">
-                                Logout
-                            </span>
-
-                        </button>
-                    </form>
-
+                        </div>
+                        <div class="p-4 space-y-2">
+                            <a href="{{ route('profile.edit') }}" class="flex items-center gap-4 px-5 py-4 rounded-2xl hover:bg-gray-100 transition">
+                                <div class="w-11 h-11 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center"><i class="bi bi-person-fill"></i></div>
+                                <span class="font-black text-gray-700">My Profile</span>
+                            </a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="w-full flex items-center gap-4 px-5 py-4 rounded-2xl hover:bg-red-50 transition">
+                                    <div class="w-11 h-11 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center"><i class="bi bi-box-arrow-right"></i></div>
+                                    <span class="font-black text-red-600">Logout</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-
             </div>
-
-        </div>
-
-    </div>
-</header>
+        </header>
         <section class="flex-1 p-4 lg:p-6 overflow-y-auto overflow-x-hidden">
             @yield('content')
         </section>
