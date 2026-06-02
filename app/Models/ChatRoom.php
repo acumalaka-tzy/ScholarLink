@@ -41,4 +41,9 @@ class ChatRoom extends Model
     {
         return $this->hasMany(Message::class, 'id_room', 'id_room');
     }
+
+    public function participants()
+    {
+        return $this->hasMany(ChatParticipant::class, 'id_room', 'id_room');
+    }
 }
