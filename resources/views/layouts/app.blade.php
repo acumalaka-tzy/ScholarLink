@@ -36,23 +36,16 @@
         <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-orange-200 rounded-full blur-3xl opacity-30"></div>
     </div>
 
-    @auth
-        @include('layouts.navigation')
-    @endauth
+    @if(isset($slot))
+    {{ $slot }}
+@else
+    @yield('content')
+@endif
 
-    <main>
-        @if(isset($slot))
-            {{ $slot }}
-        @else
-            @yield('content')
-        @endif
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-[#f4f7f9] py-6 mt-10">
-        <div class="max-w-7xl mx-auto text-center text-gray-500 text-sm">
-            &copy; {{ date('Y') }} ScholarLink. All rights reserved.
-        </div>
-    </footer>
+     <!-- Footer -->
+     <x-slot name="footer">
+        <div class="bg-[#f4f7f9] py-6 mt-10">
+            <div class="max-w-7xl mx-auto text-center text-gray-500 text-sm">
+                &copy; {{ date('Y') }} ScholarLink. All rights reserved.
 </body>
 </html>
