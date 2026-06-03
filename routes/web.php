@@ -9,7 +9,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ApplicationController;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProviderController;
 use App\Http\Controllers\Provider\ScholarshipController as ProviderScholarshipController;
@@ -33,7 +34,7 @@ Route::middleware(['auth', 'admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
         Route::resource('users', UserController::class);
         Route::resource('providers', ProviderController::class);
         Route::put('providers/{provider}/approve', [ProviderController::class, 'approve'])->name('providers.approve');
@@ -63,7 +64,7 @@ Route::middleware(['auth', 'provider'])
 Route::middleware(['auth'])->group(function () {
     // Mahasiswa
     Route::middleware(['mahasiswa'])->group(function () {
-        Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::post('/favorites/{id}', [FavoriteController::class, 'store'])->name('favorites.store');
         Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
         Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');

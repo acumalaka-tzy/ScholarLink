@@ -116,22 +116,51 @@
                 </a>
             </div>
 
-            <div class="bg-white rounded-lg sm:rounded-[2rem] border border-gray-100 p-4 sm:p-8 shadow-xl hover:shadow-2xl transition duration-300">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 sm:gap-8">
-                    <div>
-                        <div class="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-5">
-                            <span class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-3 rounded-full bg-green-100 text-green-700 border border-green-200 text-xs sm:text-sm font-black">
-                                <i class="bi bi-check-circle-fill"></i> <span class="hidden xs:inline">DITERIMA</span><span class="inline xs:hidden">Terima</span>
-                            </span>
+            @if($applications->count() > 0)
+                <div class="space-y-4 sm:space-y-6">
+                    @foreach($applications as $application)
+                        <div class="bg-white rounded-lg sm:rounded-[2rem] border border-gray-100 p-4 sm:p-8 shadow-xl hover:shadow-2xl transition duration-300">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 sm:gap-8">
+                                <div>
+                                    <div class="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-5">
+                                        <span class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-black
+                                            @if($application->status === 'diterima') bg-green-100 text-green-700 border border-green-200
+                                            @elseif($application->status === 'ditolak') bg-red-100 text-red-700 border border-red-200
+                                            @elseif($application->status === 'menunggu') bg-yellow-100 text-yellow-700 border border-yellow-200
+                                            @else bg-blue-100 text-blue-700 border border-blue-200 @endif">
+                                            @if($application->status === 'diterima')
+                                                <i class="bi bi-check-circle-fill"></i> <span class="hidden xs:inline">DITERIMA</span><span class="inline xs:hidden">Terima</span>
+                                            @elseif($application->status === 'ditolak')
+                                                <i class="bi bi-x-circle-fill"></i> <span class="hidden xs:inline">DITOLAK</span><span class="inline xs:hidden">Tolak</span>
+                                            @elseif($application->status === 'menunggu')
+                                                <i class="bi bi-clock-fill"></i> <span class="hidden xs:inline">MENUNGGU</span><span class="inline xs:hidden">Tunggu</span>
+                                            @else
+                                                <i class="bi bi-hourglass-split"></i> {{ ucfirst($application->status) }}
+                                            @endif
+                                        </span>
+                                    </div>
+                                    <h4 class="text-lg sm:text-3xl font-black text-gray-900">{{ $application->scholarship->nama_beasiswa ?? 'Beasiswa' }}</h4>
+                                    <p class="text-gray-500 font-bold text-xs sm:text-base mt-2 sm:mt-3">{{ $application->scholarship->provider->nama_provider ?? 'Provider' }}</p>
+                                </div>
+                                <a href="{{ route('applications.show', $application->id_application) }}" class="px-4 sm:px-6 py-2.5 sm:py-4 rounded-lg sm:rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black shadow-lg shadow-blue-500/20 hover:scale-[1.02] transition text-xs sm:text-base w-full sm:w-auto text-center">
+                                    <i class="bi bi-eye-fill mr-1 sm:mr-2"></i> <span class="hidden xs:inline">Lihat Detail</span><span class="inline xs:hidden">Lihat</span>
+                                </a>
+                            </div>
                         </div>
-                        <h4 class="text-lg sm:text-3xl font-black text-gray-900">Beasiswa Penuh S1 - UI</h4>
-                        <p class="text-gray-500 font-bold text-xs sm:text-base mt-2 sm:mt-3">Universitas Indonesia</p>
-                    </div>
-                    <button class="px-4 sm:px-6 py-2.5 sm:py-4 rounded-lg sm:rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black shadow-lg shadow-blue-500/20 hover:scale-[1.02] transition text-xs sm:text-base w-full sm:w-auto">
-                        <i class="bi bi-eye-fill mr-1 sm:mr-2"></i> <span class="hidden xs:inline">Lihat Detail</span><span class="inline xs:hidden">Lihat</span>
-                    </button>
+                    @endforeach
                 </div>
-            </div>
+            @else
+                <div class="bg-white rounded-lg sm:rounded-[2rem] border border-gray-100 p-8 sm:p-12 shadow-xl text-center">
+                    <div class="w-20 h-20 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="bi bi-inbox text-blue-600 text-4xl"></i>
+                    </div>
+                    <h4 class="text-lg sm:text-2xl font-black text-gray-900 mb-3">Belum Ada Aplikasi</h4>
+                    <p class="text-gray-500 font-bold text-sm sm:text-base mb-6">Mulai cari dan ajukan beasiswa impian Anda sekarang!</p>
+                    <a href="{{ route('scholarships.index') }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg sm:rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black shadow-lg shadow-blue-500/20 hover:scale-[1.02] transition">
+                        <i class="bi bi-plus-circle-fill"></i> <span class="hidden xs:inline">Cari Beasiswa</span><span class="inline xs:hidden">Cari</span>
+                    </a>
+                </div>
+            @endif
         </div>
 
         <div>
