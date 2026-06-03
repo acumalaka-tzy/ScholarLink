@@ -145,7 +145,11 @@
                             <span class="absolute inset-y-0 left-0 flex items-center pl-3 md:pl-4 text-gray-400 pointer-events-none">
                                 <i class="bi bi-lock-fill text-sm md:text-base"></i>
                             </span>
-                            <input type="password" id="password" name="password" required class="w-full pl-10 md:pl-11 pr-3 md:pr-4 py-2.5 md:py-3 bg-gray-50 border-2 border-gray-100 rounded-lg md:rounded-xl font-semibold text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white transition text-sm md:text-base">
+                            <input type="password" id="password" name="password" required class="w-full pl-10 md:pl-11 pr-10 md:pr-12 py-2.5 md:py-3 bg-gray-50 border-2 border-gray-100 rounded-lg md:rounded-xl font-semibold text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white transition text-sm md:text-base">
+                            
+                            <button type="button" id="togglePasswordBtn" class="absolute inset-y-0 right-0 flex items-center pr-3 md:pr-4 text-gray-400 hover:text-gray-600 focus:outline-none transition">
+                                <i class="bi bi-eye-slash-fill text-sm md:text-base" id="togglePasswordIcon"></i>
+                            </button>
                         </div>
                         @error('password')
                             <p class="text-red-500 text-xs font-bold mt-1">{{ $message }}</p>
@@ -158,7 +162,11 @@
                             <span class="absolute inset-y-0 left-0 flex items-center pl-3 md:pl-4 text-gray-400 pointer-events-none">
                                 <i class="bi bi-shield-lock-fill text-sm md:text-base"></i>
                             </span>
-                            <input type="password" id="password_confirmation" name="password_confirmation" required class="w-full pl-10 md:pl-11 pr-3 md:pr-4 py-2.5 md:py-3 bg-gray-50 border-2 border-gray-100 rounded-lg md:rounded-xl font-semibold text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white transition text-sm md:text-base">
+                            <input type="password" id="password_confirmation" name="password_confirmation" required class="w-full pl-10 md:pl-11 pr-10 md:pr-12 py-2.5 md:py-3 bg-gray-50 border-2 border-gray-100 rounded-lg md:rounded-xl font-semibold text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white transition text-sm md:text-base">
+                            
+                            <button type="button" id="toggleConfirmPasswordBtn" class="absolute inset-y-0 right-0 flex items-center pr-3 md:pr-4 text-gray-400 hover:text-gray-600 focus:outline-none transition">
+                                <i class="bi bi-eye-slash-fill text-sm md:text-base" id="toggleConfirmPasswordIcon"></i>
+                            </button>
                         </div>
                     </div>
 
@@ -171,5 +179,32 @@
 
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function setupPasswordToggle(buttonId, inputId, iconId) {
+                const toggleBtn = document.getElementById(buttonId);
+                const passwordInput = document.getElementById(inputId);
+                const toggleIcon = document.getElementById(iconId);
+
+                if (toggleBtn && passwordInput && toggleIcon) {
+                    toggleBtn.addEventListener('click', function () {
+                        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                        passwordInput.setAttribute('type', type);
+
+                        if (type === 'password') {
+                            toggleIcon.classList.remove('bi-eye-fill');
+                            toggleIcon.classList.add('bi-eye-slash-fill');
+                        } else {
+                            toggleIcon.classList.remove('bi-eye-slash-fill');
+                            toggleIcon.classList.add('bi-eye-fill');
+                        }
+                    });
+                }
+            }
+
+            setupPasswordToggle('togglePasswordBtn', 'password', 'togglePasswordIcon');
+            setupPasswordToggle('toggleConfirmPasswordBtn', 'password_confirmation', 'toggleConfirmPasswordIcon');
+        });
+    </script>
 </body>
 </html>
