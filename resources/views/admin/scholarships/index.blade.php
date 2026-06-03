@@ -21,6 +21,10 @@
                 </div>
             </div>
         </div>
+
+        <a href="{{ route('admin.scholarships.create') }}" class="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-7 py-4 rounded-2xl shadow-lg shadow-blue-500/20 font-black transition hover:scale-[1.02] text-center">
+            + Tambah Beasiswa
+        </a>
     </div>
 
     @if(session('success'))
@@ -88,9 +92,9 @@
                                     <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 text-green-700 text-xs font-black border border-green-200">
                                         <i class="bi bi-check-circle-fill"></i> Aktif
                                     </span>
-                                @elseif($scholarship->status == 'nonaktif')
+                                @elseif($scholarship->status == 'draft')
                                     <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-100 text-yellow-700 text-xs font-black border border-yellow-200">
-                                        <i class="bi bi-clock-fill"></i> Nonaktif
+                                        <i class="bi bi-clock-fill"></i> Draft
                                     </span>
                                 @else
                                     <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-100 text-red-700 text-xs font-black border border-red-200">

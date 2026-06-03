@@ -128,7 +128,7 @@
                     </div>
 
                     <div class="flex flex-wrap gap-4">
-                        <a href="{{ route('scholarships.show', $application->scholarship->id_beasiswa) }}" class="flex-1 min-w-[150px] text-center bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 transition text-white py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20">
+                        <a href="{{ route('applications.show', $application->id_application) }}" class="flex-1 min-w-[150px] text-center bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 transition text-white py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20">
                             <i class="bi bi-eye-fill mr-2"></i> Detail
                         </a>
 

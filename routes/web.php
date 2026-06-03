@@ -80,6 +80,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('applications', ApplicationController::class);
     Route::post('/applications/{id}/approve', [ApplicationController::class, 'approve'])->name('applications.approve');
     Route::post('/applications/{id}/reject', [ApplicationController::class, 'reject'])->name('applications.reject');
+    Route::get('/documents/{id}/download', [DocumentController::class, 'download'])->name('documents.download');
+    Route::delete('/documents/{id}', [DocumentController::class, 'destroy'])->name('documents.destroy');
+    Route::post('/applications/{id}/documents', [DocumentController::class, 'store'])->name('documents.store');
 });
 
 // ==========================
