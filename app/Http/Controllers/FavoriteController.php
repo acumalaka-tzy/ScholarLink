@@ -25,10 +25,21 @@ class FavoriteController extends Controller
             ->where('status', 'aktif')
             ->firstOrFail();
 
-        Favorite::firstOrCreate([
+        $favorite = Favorite::firstOrCreate([
             'id_user' => auth()->id(),
             'id_beasiswa' => $scholarship->id_beasiswa,
         ]);
+
+        // Check if this is AJAX request
+        if (request()->ajax() || request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => $favorite->wasRecentlyCreated 
+                    ? 'Berhasil tambah ke favorite!' 
+                    : 'Sudah ada di favorite',
+                'is_new' => $favorite->wasRecentlyCreated,
+            ]);
+        }
 
         return redirect()
             ->back()
@@ -39,9 +50,21 @@ class FavoriteController extends Controller
     {
         abort_if(auth()->user()->role !== 'mahasiswa', 403);
 
-        Favorite::where('id_favorite', $id)
+        $favorite = Favorite::where('id_favorite', $id)
             ->where('id_user', auth()->id())
-            ->delete();
+            ->first();
+
+        abort_if(!$favorite, 404);
+
+        $favorite->delete();
+
+        // Check if this is AJAX request
+        if (request()->ajax() || request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Berhasil hapus dari favorite!',
+            ]);
+        }
 
         return redirect()
             ->back()

@@ -48,7 +48,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('applications.store') }}" method="POST" class="space-y-5 sm:space-y-7">
+                <form action="{{ route('applications.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5 sm:space-y-7">
                     @csrf
 
                     <div>
@@ -83,6 +83,29 @@
                         <x-input-error class="mt-2" :messages="$errors->get('catatan')" />
                     </div>
 
+                    {{-- Document Upload Section --}}
+                    <div class="border-t border-gray-200 pt-5 sm:pt-7">
+                        <div class="mb-4 sm:mb-6">
+                            <div class="flex items-center gap-2 sm:gap-3 mb-2">
+                                <div class="w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-base sm:text-xl flex-shrink-0">
+                                    <i class="bi bi-file-earmark-arrow-up-fill"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-gray-700 font-black text-xs sm:text-lg">Upload Dokumen Pendukung</h3>
+                                    <p class="text-gray-500 text-xs sm:text-sm font-bold">Tambahkan dokumen yang dibutuhkan untuk aplikasi</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="documents-container" class="space-y-4 sm:space-y-6 mb-4">
+                            {{-- Document entries will be added here dynamically --}}
+                        </div>
+
+                        <button type="button" onclick="addDocumentField()" class="flex items-center gap-2 text-purple-600 hover:text-purple-700 font-black text-xs sm:text-base hover:underline transition">
+                            <i class="bi bi-plus-circle-fill"></i> Tambah Dokumen
+                        </button>
+                    </div>
+
                     <div class="bg-blue-50 border border-blue-100 rounded-lg sm:rounded-3xl p-4 sm:p-6">
                         <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
                             <div class="w-12 sm:w-14 h-12 sm:h-14 rounded-lg sm:rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-lg sm:text-2xl flex-shrink-0">
@@ -90,10 +113,12 @@
                             </div>
                             <div>
                                 <h3 class="text-gray-900 font-black text-xs sm:text-lg mb-2">Tips Pengajuan</h3>
-                                <p class="text-gray-600 text-xs sm:text-sm leading-relaxed font-bold">
-                                    Pastikan data dan dokumen kamu sudah lengkap sebelum mengirim application. 
-                                    Pengajuan yang lengkap memiliki peluang lebih besar untuk diterima.
-                                </p>
+                                <ul class="text-gray-600 text-xs sm:text-sm leading-relaxed font-bold space-y-1">
+                                    <li>• Upload dokumen dalam format PDF, DOC, DOCX, atau gambar (JPG, JPEG, PNG)</li>
+                                    <li>• Ukuran file maksimal 5MB per dokumen</li>
+                                    <li>• Dokumen harus jelas dan mudah dibaca</li>
+                                    <li>• Pastikan data dan dokumen kamu sudah lengkap sebelum mengirim</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -111,4 +136,97 @@
         </div>
     </div>
 </div>
+
+<script>
+let documentCount = 0;
+
+function addDocumentField() {
+    const container = document.getElementById('documents-container');
+    const id = documentCount++;
+
+    const documentHTML = `
+        <div class="document-entry bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 rounded-lg sm:rounded-2xl p-4 sm:p-6 relative" id="document-${id}">
+            <button type="button" onclick="removeDocumentField(${id})" class="absolute top-2 sm:top-4 right-2 sm:right-4 w-7 sm:w-9 h-7 sm:h-9 rounded-lg bg-red-100 text-red-500 hover:bg-red-200 flex items-center justify-center transition font-bold">
+                <i class="bi bi-x-lg text-sm sm:text-base"></i>
+            </button>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 font-black mb-2 text-xs sm:text-base">Jenis Dokumen</label>
+                    <input type="text" name="documents[${id}][jenis_dokumen]" placeholder="Contoh: Ijazah, Transkrip Nilai, KTP" class="w-full bg-white border-2 border-gray-200 rounded-lg sm:rounded-2xl px-3 sm:px-5 py-2 sm:py-3 font-bold text-gray-900 placeholder:text-gray-400 placeholder:text-xs sm:placeholder:text-base focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition text-xs sm:text-base" required>
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-black mb-2 text-xs sm:text-base">Upload File</label>
+                    <div class="relative">
+                        <input type="file" name="documents[${id}][file]" class="hidden" id="file-input-${id}" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onchange="updateFileName(${id})" required>
+                        <label for="file-input-${id}" class="flex items-center justify-center gap-2 sm:gap-3 bg-white border-2 border-dashed border-purple-300 rounded-lg sm:rounded-2xl px-4 sm:px-6 py-4 sm:py-6 cursor-pointer hover:border-purple-500 hover:bg-purple-50 transition group">
+                            <div class="w-8 sm:w-10 h-8 sm:h-10 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center group-hover:scale-110 transition">
+                                <i class="bi bi-cloud-arrow-up-fill text-base sm:text-lg"></i>
+                            </div>
+                            <div class="text-left">
+                                <p class="text-purple-600 font-black text-xs sm:text-base group-hover:text-purple-700">Klik atau drag file</p>
+                                <p class="text-gray-500 text-xs font-bold">PDF, DOC, DOCX, JPG (Max 5MB)</p>
+                            </div>
+                        </label>
+                        <p class="mt-2 text-xs sm:text-sm text-gray-500 font-bold file-name-${id}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    container.insertAdjacentHTML('beforeend', documentHTML);
+}
+
+function removeDocumentField(id) {
+    const element = document.getElementById(`document-${id}`);
+    if (element) {
+        element.style.opacity = '0';
+        element.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            element.remove();
+        }, 300);
+    }
+}
+
+function updateFileName(id) {
+    const fileInput = document.getElementById(`file-input-${id}`);
+    const fileNameDisplay = document.querySelector(`.file-name-${id}`);
+    if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+        fileNameDisplay.textContent = `✓ ${file.name} (${sizeMB} MB)`;
+        fileNameDisplay.classList.add('text-green-600');
+    }
+}
+
+// Allow drag and drop
+document.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+});
+
+document.addEventListener('drop', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+});
+</script>
+
+<style>
+.document-entry {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
 @endsection

@@ -87,4 +87,47 @@ class DocumentController extends Controller
             ->route('documents.index')
             ->with('success', 'Dokumen berhasil diupload.');
     }
+
+    public function download($id)
+    {
+        $document = Document::findOrFail($id);
+        $application = $document->application;
+        $user = auth()->user();
+
+        // Authorization check
+        if ($user->role === 'mahasiswa' && $application->id_user !== $user->id) {
+            abort(403, 'Unauthorized');
+        }
+
+        if ($user->role === 'provider') {
+            $provider = $user->provider;
+            abort_if(! $provider, 403, 'Akun provider belum terhubung dengan data provider.');
+            abort_if($application->scholarship->id_provider !== $provider->id_provider, 403, 'Unauthorized');
+        }
+
+        return response()->download(
+            storage_path('app/public/' . $document->file_path),
+            $document->nama_file
+        );
+    }
+
+    public function destroy($id)
+    {
+        $document = Document::findOrFail($id);
+        $application = $document->application;
+
+        // Only owner can delete their own documents
+        abort_if(auth()->user()->id !== $application->id_user, 403, 'Unauthorized');
+
+        // Can only delete if application is still pending
+        abort_if($application->status !== 'pending', 403, 'Tidak dapat menghapus dokumen setelah aplikasi diproses.');
+
+        // Delete file from storage
+        \Illuminate\Support\Facades\Storage::disk('public')->delete($document->file_path);
+
+        // Delete document record
+        $document->delete();
+
+        return back()->with('success', 'Dokumen berhasil dihapus.');
+    }
 }

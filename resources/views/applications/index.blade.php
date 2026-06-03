@@ -17,6 +17,36 @@
         </a>
     </div>
 
+    {{-- Success Notification Alert --}}
+    @if(session('success'))
+        <div id="success-alert" class="mb-6 sm:mb-8 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg sm:rounded-2xl p-4 sm:p-6 shadow-lg animate-bounce-in">
+            <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+                <div class="w-10 sm:w-12 h-10 sm:h-12 rounded-lg sm:rounded-2xl bg-green-100 text-green-600 flex items-center justify-center text-xl sm:text-2xl flex-shrink-0">
+                    <i class="bi bi-check-circle-fill"></i>
+                </div>
+                <div class="flex-1">
+                    <h4 class="font-black text-green-700 text-sm sm:text-lg mb-1">Aplikasi Berhasil Dikirim! 🎉</h4>
+                    <p class="text-green-600 font-bold text-xs sm:text-base mb-3">{{ session('success') }}</p>
+                    <div class="flex flex-wrap gap-2">
+                        <div class="inline-flex items-center gap-2 bg-white border border-green-200 rounded-lg px-3 py-2 text-xs sm:text-sm font-bold text-green-700">
+                            <i class="bi bi-info-circle-fill"></i>
+                            <span>Cek status aplikasi Anda di bawah</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="document.getElementById('success-alert').remove()" class="text-green-400 hover:text-green-600 transition text-lg sm:text-xl flex-shrink-0">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast('✨ Aplikasi beasiswa berhasil dikirim ke penyedia dan admin! Pantau status di bawah.', 'success', 5000);
+            });
+        </script>
+    @endif
+
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 sm:gap-5 mb-8 sm:mb-10">
         <div>
             <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-orange-100 text-orange-700 font-bold text-xs sm:text-sm mb-3 sm:mb-4 border border-orange-200">
@@ -128,7 +158,7 @@
                     </div>
 
                     <div class="flex flex-wrap gap-4">
-                        <a href="{{ route('scholarships.show', $application->scholarship->id_beasiswa) }}" class="flex-1 min-w-[150px] text-center bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 transition text-white py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20">
+                        <a href="{{ route('applications.show', $application->id_application) }}" class="flex-1 min-w-[150px] text-center bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 transition text-white py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20">
                             <i class="bi bi-eye-fill mr-2"></i> Detail
                         </a>
 
