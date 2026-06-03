@@ -159,11 +159,7 @@
                                 <div class="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
                                     <i class="bi bi-lock-fill text-sm md:text-base"></i>
                                 </div>
-                                <input id="password" type="password" name="password" required autocomplete="current-password" placeholder="Masukkan password" class="w-full bg-gray-50 border-2 border-gray-200 rounded-lg md:rounded-2xl pl-10 md:pl-14 pr-10 md:pr-14 py-2.5 md:py-4 font-bold text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition text-sm md:text-base">
-                                
-                                <button type="button" id="togglePasswordBtn" class="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none transition">
-                                    <i class="bi bi-eye-slash-fill text-sm md:text-base" id="togglePasswordIcon"></i>
-                                </button>
+                                <input id="password" type="password" name="password" required autocomplete="current-password" placeholder="Masukkan password" class="w-full bg-gray-50 border-2 border-gray-200 rounded-lg md:rounded-2xl pl-10 md:pl-14 pr-4 md:pr-5 py-2.5 md:py-4 font-bold text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition text-sm md:text-base">
                             </div>
                         </div>
 
@@ -203,26 +199,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const togglePasswordBtn = document.getElementById('togglePasswordBtn');
-            const passwordInput = document.getElementById('password');
-            const togglePasswordIcon = document.getElementById('togglePasswordIcon');
-
-            togglePasswordBtn.addEventListener('click', function () {
-                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordInput.setAttribute('type', type);
-
-                if (type === 'password') {
-                    togglePasswordIcon.classList.remove('bi-eye-fill');
-                    togglePasswordIcon.classList.add('bi-eye-slash-fill');
-                } else {
-                    togglePasswordIcon.classList.remove('bi-eye-slash-fill');
-                    togglePasswordIcon.classList.add('bi-eye-fill');
-                }
-            });
-        });
-    </script>
 </body>
 </html>
