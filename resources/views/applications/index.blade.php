@@ -1,52 +1,62 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-[#f4f7f9] py-10 px-4 sm:px-6 lg:px-10 overflow-hidden">
+<div class="min-h-screen bg-[#f4f7f9] py-6 sm:py-10 px-3 sm:px-6 lg:px-10 overflow-hidden">
     <div class="fixed inset-0 -z-10 overflow-hidden">
-        <div class="absolute top-0 left-0 w-96 h-96 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-orange-200 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute top-0 left-0 w-64 sm:w-96 h-64 sm:h-96 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute bottom-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-orange-200 rounded-full blur-3xl opacity-30"></div>
     </div>
 
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-10">
+    {{-- Back Button --}}
+    <div class="mb-4 sm:mb-8">
+        <a href="{{ route('dashboard') }}" class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-black text-xs sm:text-base transition group">
+            <span class="w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl bg-white group-hover:bg-gray-100 flex items-center justify-center border border-gray-200">
+                <i class="bi bi-arrow-left text-sm sm:text-base"></i>
+            </span>
+            Kembali ke Dashboard
+        </a>
+    </div>
+
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 sm:gap-5 mb-8 sm:mb-10">
         <div>
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 text-orange-700 font-bold text-sm mb-4 border border-orange-200">
-                <div class="w-6 h-6 rounded-full bg-orange-500 text-white flex items-center justify-center text-xs">
+            <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-orange-100 text-orange-700 font-bold text-xs sm:text-sm mb-3 sm:mb-4 border border-orange-200">
+                <div class="w-5 sm:w-6 h-5 sm:h-6 rounded-full bg-orange-500 text-white flex items-center justify-center text-xs">
                     <i class="bi bi-file-earmark-text-fill"></i>
                 </div>
                 My Applications
             </div>
 
-            <div class="flex items-center gap-5">
-                <div class="w-16 h-16 rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-3xl shadow-lg shadow-blue-500/20">
+            <div class="flex items-center gap-3 sm:gap-5">
+                <div class="w-12 sm:w-16 h-12 sm:h-16 rounded-lg sm:rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-2xl sm:text-3xl shadow-lg shadow-blue-500/20">
                     <i class="bi bi-journal-check"></i>
                 </div>
                 <div>
-                    <h1 class="text-4xl font-black text-gray-900">My Applications</h1>
-                    <p class="text-gray-500 font-bold mt-2 text-lg">Pantau status pengajuan beasiswa kamu secara realtime.</p>
+                    <h1 class="text-xl sm:text-4xl font-black text-gray-900">My Applications</h1>
+                    <p class="text-gray-500 font-bold mt-1 sm:mt-2 text-xs sm:text-lg">Pantau status pengajuan beasiswa kamu secara realtime.</p>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white border border-gray-100 rounded-[2rem] px-7 py-5 shadow-xl min-w-[220px]">
-            <p class="text-gray-500 text-sm font-bold mb-2">Total Applications</p>
-            <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl">
+        <div class="bg-white border border-gray-100 rounded-lg sm:rounded-[2rem] px-4 sm:px-7 py-4 sm:py-5 shadow-xl">
+            <p class="text-gray-500 text-xs sm:text-sm font-bold mb-2">Total Applications</p>
+            <div class="flex items-center gap-3 sm:gap-4">
+                <div class="w-10 sm:w-14 h-10 sm:h-14 rounded-lg sm:rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-lg sm:text-2xl">
                     <i class="bi bi-file-earmark-check-fill"></i>
                 </div>
-                <h2 class="text-4xl font-black text-gray-900">{{ $applications->count() }}</h2>
+                <h2 class="text-2xl sm:text-4xl font-black text-gray-900">{{ $applications->count() }}</h2>
             </div>
         </div>
     </div>
 
     @if($applications->count() == 0)
-        <div class="bg-white border border-gray-100 rounded-[2rem] p-16 text-center shadow-2xl">
-            <div class="w-28 h-28 mx-auto rounded-full bg-gray-100 text-gray-400 flex items-center justify-center text-5xl mb-8">
+        <div class="bg-white border border-gray-100 rounded-lg sm:rounded-[2rem] p-8 sm:p-16 text-center shadow-2xl">
+            <div class="w-20 sm:w-28 h-20 sm:h-28 mx-auto rounded-full bg-gray-100 text-gray-400 flex items-center justify-center text-4xl sm:text-5xl mb-6 sm:mb-8">
                 <i class="bi bi-inbox-fill"></i>
             </div>
-            <h2 class="text-4xl font-black text-gray-900 mb-4">Belum Ada Application</h2>
-            <p class="text-gray-500 font-bold text-lg mb-10">Kamu belum mengajukan beasiswa apapun.</p>
-            <a href="{{ route('scholarships.index') }}" class="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 transition px-8 py-4 rounded-2xl text-white font-black shadow-xl shadow-blue-500/20 hover:scale-[1.02]">
-                <i class="bi bi-search"></i> Cari Beasiswa
+            <h2 class="text-2xl sm:text-4xl font-black text-gray-900 mb-2 sm:mb-4">Belum Ada Application</h2>
+            <p class="text-gray-500 font-bold text-xs sm:text-lg mb-6 sm:mb-10">Kamu belum mengajukan beasiswa apapun.</p>
+            <a href="{{ route('scholarships.index') }}" class="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 transition px-4 sm:px-8 py-2.5 sm:py-4 rounded-lg sm:rounded-2xl text-white font-black shadow-xl shadow-blue-500/20 hover:scale-[1.02] text-xs sm:text-base">
+                <i class="bi bi-search"></i> <span class="hidden xs:inline">Cari Beasiswa</span><span class="inline xs:hidden">Cari</span>
             </a>
         </div>
     @else
