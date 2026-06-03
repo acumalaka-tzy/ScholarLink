@@ -22,12 +22,18 @@ class DashboardController extends Controller
 
     $recentUsers = User::take(5)->get();
 
+    $recentApplications = Application::with(['user', 'scholarship.provider', 'scholarship.category'])
+        ->latest()
+        ->take(5)
+        ->get();
+
     return view('admin.dashboard', compact(
         'totalUsers',
         'totalProviders',
         'totalScholarships',
         'totalApplications',
-        'recentUsers'
+        'recentUsers',
+        'recentApplications'
     ));
 }
 }
