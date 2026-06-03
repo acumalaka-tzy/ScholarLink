@@ -1,41 +1,51 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-[#f4f7f9] py-10 px-4 md:px-10 overflow-hidden">
+<div class="min-h-screen bg-[#f4f7f9] py-6 sm:py-10 px-3 sm:px-6 lg:px-10 overflow-hidden">
     <div class="fixed inset-0 -z-10 overflow-hidden">
-        <div class="absolute top-0 left-0 w-96 h-96 bg-pink-200 rounded-full blur-3xl opacity-30"></div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute top-0 left-0 w-64 sm:w-96 h-64 sm:h-96 bg-pink-200 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute bottom-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
     </div>
 
     <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-12">
+        {{-- Back Button --}}
+        <div class="mb-4 sm:mb-8">
+            <a href="{{ route('scholarships.index') }}" class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-black text-xs sm:text-base transition group">
+                <span class="w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl bg-white group-hover:bg-gray-100 flex items-center justify-center border border-gray-200">
+                    <i class="bi bi-arrow-left text-sm sm:text-base"></i>
+                </span>
+                Kembali ke Beasiswa
+            </a>
+        </div>
+
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 sm:gap-6 mb-8 sm:mb-12">
             <div>
-                <div class="inline-flex items-center gap-3 bg-white border border-gray-200 rounded-full px-5 py-3 mb-6 shadow-lg">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 text-white flex items-center justify-center text-sm">
+                <div class="inline-flex items-center gap-2 sm:gap-3 bg-white border border-gray-200 rounded-full px-3 sm:px-5 py-2 sm:py-3 mb-3 sm:mb-6 shadow-lg">
+                    <div class="w-6 sm:w-8 h-6 sm:h-8 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 text-white flex items-center justify-center text-xs sm:text-sm">
                         <i class="bi bi-heart-fill"></i>
                     </div>
-                    <span class="text-gray-700 text-sm font-black tracking-wide">
+                    <span class="text-gray-700 text-xs sm:text-sm font-black tracking-wide">
                         ScholarLink Favorites
                     </span>
                 </div>
-                <h1 class="text-5xl sm:text-6xl font-black text-gray-900 leading-tight tracking-tight">
+                <h1 class="text-2xl sm:text-5xl md:text-6xl font-black text-gray-900 leading-tight tracking-tight">
                     Favorite
                     <span class="bg-gradient-to-r from-pink-500 to-rose-500 bg-clip-text text-transparent">
                         Scholarships
                     </span>
                 </h1>
-                <p class="text-gray-500 mt-5 text-lg max-w-3xl leading-relaxed font-bold">
+                <p class="text-gray-500 mt-2 sm:mt-5 text-xs sm:text-lg max-w-3xl leading-relaxed font-bold">
                     Simpan beasiswa favoritmu dan akses lebih cepat dengan tampilan modern dan pengalaman terbaik.
                 </p>
             </div>
 
-            <div class="bg-white border border-gray-100 px-7 py-5 rounded-[2rem] shadow-xl min-w-[240px]">
-                <p class="text-gray-500 text-sm font-bold mb-2">Total Favorite</p>
-                <div class="flex items-center gap-4">
-                    <div class="w-16 h-16 rounded-3xl bg-pink-100 text-pink-600 flex items-center justify-center text-3xl">
+            <div class="bg-white border border-gray-100 px-4 sm:px-7 py-4 sm:py-5 rounded-lg sm:rounded-[2rem] shadow-xl">
+                <p class="text-gray-500 text-xs sm:text-sm font-bold mb-2">Total Favorite</p>
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <div class="w-12 sm:w-16 h-12 sm:h-16 rounded-2xl sm:rounded-3xl bg-pink-100 text-pink-600 flex items-center justify-center text-2xl sm:text-3xl">
                         <i class="bi bi-heart-fill"></i>
                     </div>
-                    <h2 class="text-5xl font-black text-gray-900">
+                    <h2 class="text-3xl sm:text-5xl font-black text-gray-900">
                         {{ $favorites->count() }}
                     </h2>
                 </div>
@@ -43,11 +53,11 @@
         </div>
 
         @if($favorites->count() == 0)
-            <div class="relative overflow-hidden bg-white border border-gray-100 rounded-[2.5rem] shadow-[0_25px_80px_rgba(15,23,42,0.08)]">
-                <div class="absolute top-0 left-0 w-72 h-72 bg-pink-100 rounded-full blur-3xl opacity-50"></div>
-                <div class="absolute bottom-0 right-0 w-72 h-72 bg-cyan-100 rounded-full blur-3xl opacity-50"></div>
+            <div class="relative overflow-hidden bg-white border border-gray-100 rounded-xl sm:rounded-[2.5rem] shadow-[0_25px_80px_rgba(15,23,42,0.08)]">
+                <div class="absolute top-0 left-0 w-48 sm:w-72 h-48 sm:h-72 bg-pink-100 rounded-full blur-3xl opacity-50"></div>
+                <div class="absolute bottom-0 right-0 w-48 sm:w-72 h-48 sm:h-72 bg-cyan-100 rounded-full blur-3xl opacity-50"></div>
                 
-                <div class="relative py-24 px-8 flex flex-col items-center text-center">
+                <div class="relative py-12 sm:py-24 px-4 sm:px-8 flex flex-col items-center text-center">
                     <div class="w-40 h-40 rounded-full bg-gradient-to-br from-pink-100 to-rose-100 border border-pink-200 flex items-center justify-center text-pink-500 text-7xl shadow-2xl shadow-pink-500/10 mb-10">
                         <i class="bi bi-heartbreak-fill"></i>
                     </div>
