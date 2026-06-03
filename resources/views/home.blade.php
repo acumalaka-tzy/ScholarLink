@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ScholarLink - Platform Beasiswa Terpercaya & Berwarna</title>
     
+    <link rel="icon" href="{{ asset('images/logobaru.png') }}" type="image/png">
+
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=nunito:400,500,600,700,800,900" rel="stylesheet" />
     
@@ -35,9 +37,10 @@
         <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
             
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-cyan-400 rounded-lg flex items-center justify-center text-white font-black text-xl shadow-md">
-                    S
-                </div>
+                <img src="{{ asset('images/logobaru.png') }}" 
+                    alt="ScholarLink Logo" 
+                    class="w-10 h-10 object-cover rounded-full border border-gray-200">
+                
                 <span class="text-2xl font-black tracking-tight text-gray-900">
                     ScholarLink
                 </span>
