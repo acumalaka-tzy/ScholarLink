@@ -52,105 +52,60 @@
             </div>
         </div>
 
-        <form action="{{ route('admin.scholarships.update', $scholarship->id_beasiswa) }}" method="POST" class="p-8 md:p-10 space-y-7">
+        <form action="{{ route('admin.scholarships.update', $scholarship->id_beasiswa) }}"
+            method="POST"
+            class="p-8 md:p-10 space-y-6">
             @csrf
             @method('PUT')
 
-            <div>
-                <label class="block text-sm font-black text-gray-700 mb-3">Nama Beasiswa</label>
-                <div class="relative">
-                    <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
-                        <i class="bi bi-patch-check-fill"></i>
-                    </div>
-                    <input type="text" name="nama_beasiswa" value="{{ old('nama_beasiswa', $scholarship->nama_beasiswa) }}" placeholder="Contoh: Beasiswa LPDP 2026" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-4 font-bold text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
-                </div>
-            </div>
+            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+                <h3 class="font-black text-lg text-gray-900 mb-4">
+                    Detail Beasiswa
+                </h3>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label class="block text-sm font-black text-gray-700 mb-3">Tipe</label>
-                    <div class="relative">
-                        <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                            <i class="bi bi-globe-americas"></i>
-                        </div>
-                        <select name="tipe" class="w-full appearance-none bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-12 py-4 font-bold text-gray-900 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
-                            <option value="Fully Funded" {{ old('tipe', $scholarship->tipe) == 'Fully Funded' ? 'selected' : '' }}>Fully Funded</option>
-                            <option value="Partial" {{ old('tipe', $scholarship->tipe) == 'Partial' ? 'selected' : '' }}>Partial</option>
-                            <option value="Exchange" {{ old('tipe', $scholarship->tipe) == 'Exchange' ? 'selected' : '' }}>Exchange</option>
-                        </select>
-                        <div class="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-black text-gray-700 mb-3">Deadline</label>
-                    <div class="relative">
-                        <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                            <i class="bi bi-calendar-event-fill"></i>
-                        </div>
-                        <input type="date" name="deadline" value="{{ old('deadline', \Carbon\Carbon::parse($scholarship->deadline)->format('Y-m-d')) }}" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-4 font-bold text-gray-900 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
-                    </div>
+                <div class="space-y-3">
+                    <p><strong>Nama:</strong> {{ $scholarship->nama_beasiswa }}</p>
+                    <p><strong>Tipe:</strong> {{ $scholarship->tipe }}</p>
+                    <p><strong>Deadline:</strong> {{ $scholarship->deadline }}</p>
                 </div>
             </div>
 
             <div>
-                <label class="block text-sm font-black text-gray-700 mb-3">Deskripsi</label>
-                <div class="relative">
-                    <div class="absolute left-5 top-6 text-gray-400 pointer-events-none">
-                        <i class="bi bi-card-text"></i>
-                    </div>
-                    <textarea name="deskripsi" rows="5" placeholder="Deskripsi lengkap beasiswa..." class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-4 font-bold text-gray-900 placeholder:text-gray-400 resize-none focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">{{ old('deskripsi', $scholarship->deskripsi) }}</textarea>
-                </div>
+                <label class="block text-sm font-black text-gray-700 mb-3">
+                    Status Beasiswa
+                </label>
+
+                <select name="status"
+                        class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4 font-bold">
+                    <option value="aktif"
+                        {{ $scholarship->status == 'aktif' ? 'selected' : '' }}>
+                        Aktif
+                    </option>
+
+                    <option value="nonaktif"
+                        {{ $scholarship->status == 'nonaktif' ? 'selected' : '' }}>
+                        Nonaktif
+                    </option>
+
+                    <option value="ditutup"
+                        {{ $scholarship->status == 'ditutup' ? 'selected' : '' }}>
+                        Ditutup
+                    </option>
+                </select>
             </div>
 
-            <div>
-                <label class="block text-sm font-black text-gray-700 mb-3">Syarat</label>
-                <div class="relative">
-                    <div class="absolute left-5 top-6 text-gray-400 pointer-events-none">
-                        <i class="bi bi-list-check"></i>
-                    </div>
-                    <textarea name="syarat" rows="5" placeholder="Masukkan syarat beasiswa..." class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-4 font-bold text-gray-900 placeholder:text-gray-400 resize-none focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">{{ old('syarat', $scholarship->syarat) }}</textarea>
-                </div>
-            </div>
-
-            <div>
-                <label class="block text-sm font-black text-gray-700 mb-3">Benefit</label>
-                <div class="relative">
-                    <div class="absolute left-5 top-6 text-gray-400 pointer-events-none">
-                        <i class="bi bi-gift-fill"></i>
-                    </div>
-                    <textarea name="benefit" rows="5" placeholder="Masukkan benefit beasiswa..." class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-4 font-bold text-gray-900 placeholder:text-gray-400 resize-none focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">{{ old('benefit', $scholarship->benefit) }}</textarea>
-                </div>
-            </div>
-
-            <div>
-                <label class="block text-sm font-black text-gray-700 mb-3">Status</label>
-                <div class="relative">
-                    <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                        <i class="bi bi-check-circle-fill"></i>
-                    </div>
-                    <select name="status" class="w-full appearance-none bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-12 py-4 font-bold text-gray-900 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
-                        <option value="aktif" {{ old('status', $scholarship->status) == 'aktif' ? 'selected' : '' }}>Aktif</option>
-                        <option value="nonaktif" {{ old('status', $scholarship->status) == 'nonaktif' ? 'selected' : '' }}>nonAktif</option>
-                        <option value="ditutup" {{ old('status', $scholarship->status) == 'ditutup' ? 'selected' : '' }}>Tutup</option>
-                    </select>
-                    <div class="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                        <i class="bi bi-chevron-down"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pt-4 flex flex-wrap gap-4">
-                <button type="submit" class="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-8 py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20 transition hover:scale-[1.02]">
-                    Update Beasiswa
+            <div class="flex gap-4">
+                <button type="submit"
+                    class="bg-blue-600 text-white px-8 py-4 rounded-2xl font-black">
+                    Update Status
                 </button>
-                <a href="{{ route('admin.scholarships.index') }}" class="bg-gray-100 hover:bg-gray-200 border border-gray-200 text-gray-700 px-8 py-4 rounded-2xl font-black transition">
+
+                <a href="{{ route('admin.scholarships.index') }}"
+                class="bg-gray-100 px-8 py-4 rounded-2xl font-black">
                     Kembali
                 </a>
             </div>
         </form>
-    </div>
-</div>
+            </div>
+        </div>
 @endsection

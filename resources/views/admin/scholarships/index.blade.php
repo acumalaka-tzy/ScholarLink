@@ -21,10 +21,6 @@
                 </div>
             </div>
         </div>
-
-        <a href="{{ route('admin.scholarships.create') }}" class="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-7 py-4 rounded-2xl shadow-lg shadow-blue-500/20 font-black transition hover:scale-[1.02] text-center">
-            + Tambah Beasiswa
-        </a>
     </div>
 
     @if(session('success'))
