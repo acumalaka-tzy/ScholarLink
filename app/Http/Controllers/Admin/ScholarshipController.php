@@ -15,6 +15,25 @@ class ScholarshipController extends Controller
         return view('admin.scholarships.index', compact('scholarships'));
     }
 
+    public function create()
+    {
+        return view('admin.scholarships.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama_beasiswa' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'status' => 'required|in:aktif,nonaktif,ditutup',
+        ]);
+
+        Scholarship::create($request->all());
+
+        return redirect()->route('admin.scholarships.index')
+                         ->with('success', 'Beasiswa berhasil ditambahkan.');
+    }
+
     public function show(Scholarship $scholarship)
     {
         return view('admin.scholarships.show', compact('scholarship'));
@@ -28,15 +47,22 @@ class ScholarshipController extends Controller
     public function update(Request $request, Scholarship $scholarship)
     {
         $request->validate([
+            'nama_beasiswa' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
             'status' => 'required|in:aktif,nonaktif,ditutup',
         ]);
 
-        $scholarship->update([
-            'status' => $request->status,
-        ]);
+        $scholarship->update($request->all());
 
-        return redirect()
-            ->route('admin.scholarships.index')
-            ->with('success', 'Status beasiswa berhasil diperbarui.');
+        return redirect()->route('admin.scholarships.index')
+                         ->with('success', 'Beasiswa berhasil diperbarui.');
+    }
+
+    public function destroy(Scholarship $scholarship)
+    {
+        $scholarship->delete();
+
+        return redirect()->route('admin.scholarships.index')
+                         ->with('success', 'Beasiswa berhasil dihapus.');
     }
 }
