@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>ScholarLink</title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -47,5 +48,10 @@
         <div class="bg-[#f4f7f9] py-6 mt-10">
             <div class="max-w-7xl mx-auto text-center text-gray-500 text-sm">
                 &copy; {{ date('Y') }} ScholarLink. All rights reserved.
+    </x-slot>
+    @endif
+
+    {{-- Toast Notification Component --}}
+    <x-toast />
 </body>
 </html>

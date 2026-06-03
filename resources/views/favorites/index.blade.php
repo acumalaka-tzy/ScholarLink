@@ -142,13 +142,9 @@
                                     Detail
                                 </a>
 
-                                <form action="{{ route('favorites.destroy', $favorite->id_favorite) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" onclick="return confirm('Hapus dari favorite?')" class="w-16 h-16 rounded-2xl bg-red-100 hover:bg-red-200 transition text-red-600 text-2xl border border-red-200 flex items-center justify-center">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>
-                                </form>
+                                <button type="button" onclick="removeFromFavorite({{ $favorite->id_favorite }}, this)" class="w-16 h-16 rounded-2xl bg-red-100 hover:bg-red-200 transition text-red-600 text-2xl border border-red-200 flex items-center justify-center">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -157,4 +153,58 @@
         @endif
     </div>
 </div>
+
+<script>
+    function removeFromFavorite(favoriteId, button) {
+        if (!confirm('Hapus dari favorite?')) return;
+        
+        const formData = new FormData();
+        formData.append('_token', document.querySelector('meta[name="csrf-token"]')?.content || '');
+        formData.append('_method', 'DELETE');
+        
+        button.disabled = true;
+        button.classList.add('opacity-50', 'cursor-not-allowed');
+        
+        fetch(`/favorites/${favoriteId}`, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json',
+            },
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showToast(data.message, 'success', 3000);
+                
+                // Remove the card with animation
+                const card = button.closest('.group');
+                if (card) {
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        card.remove();
+                        
+                        // Reload page if no more favorites
+                        const container = document.querySelector('[class*="grid"]');
+                        if (container && container.children.length === 0) {
+                            setTimeout(() => location.reload(), 500);
+                        }
+                    }, 300);
+                }
+            } else {
+                showToast(data.message || 'Error', 'error', 3000);
+                button.disabled = false;
+                button.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showToast('Terjadi kesalahan', 'error', 3000);
+            button.disabled = false;
+            button.classList.remove('opacity-50', 'cursor-not-allowed');
+        });
+    }
+</script>
 @endsection

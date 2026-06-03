@@ -65,18 +65,56 @@
                                 <i class="bi bi-chat-dots-fill"></i> Ruang Diskusi
                         </a>
 
-                        <form action="{{ route('favorites.store', $scholarship->id_beasiswa) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="bg-pink-500 hover:bg-pink-600 px-6 py-3 rounded-2xl font-black text-white shadow-lg">
-                                <i class="bi bi-heart-fill"></i> Favorite
-                            </button>
-                        </form>
+                        <button type="button" onclick="addToFavorite({{ $scholarship->id_beasiswa }}, this)" class="bg-pink-500 hover:bg-pink-600 px-6 py-3 rounded-2xl font-black text-white shadow-lg transition">
+                            <i class="bi bi-heart-fill"></i> <span class="favorite-btn-text">Favorite</span>
+                        </button>
                     @endif
                 @endauth
                 <a href="{{ route('scholarships.index') }}" class="bg-gray-100 hover:bg-gray-200 px-6 py-3 rounded-2xl font-black text-gray-700">
                     <i class="bi bi-arrow-left"></i> Kembali
                 </a>
             </div>
+
+            <script>
+                function addToFavorite(scholarshipId, button) {
+                    const formData = new FormData();
+                    formData.append('_token', document.querySelector('meta[name="csrf-token"]')?.content || '');
+                    
+                    button.disabled = true;
+                    button.classList.add('opacity-50', 'cursor-not-allowed');
+                    
+                    fetch(`/favorites/${scholarshipId}`, {
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Accept': 'application/json',
+                        },
+                        body: formData,
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            showToast(data.message, 'success', 3000);
+                            
+                            // Change button appearance if newly added
+                            if (data.is_new) {
+                                button.classList.add('bg-pink-600');
+                                button.classList.remove('bg-pink-500');
+                            }
+                        } else {
+                            showToast(data.message || 'Error', 'error', 3000);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showToast('Terjadi kesalahan', 'error', 3000);
+                    })
+                    .finally(() => {
+                        button.disabled = false;
+                        button.classList.remove('opacity-50', 'cursor-not-allowed');
+                    });
+                }
+            </script>
         </div>
     </div>
 </div>
