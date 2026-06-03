@@ -117,7 +117,9 @@ class ApplicationController extends Controller
 
         return redirect()
             ->route('applications.index')
-            ->with('success', 'Berhasil apply beasiswa. Dokumen berhasil diunggah.');
+            ->with('success', "Berhasil apply beasiswa {$scholarship->nama_beasiswa}! Data aplikasi Anda telah dikirim ke penyedia beasiswa dan admin.")
+            ->with('scholarship_name', $scholarship->nama_beasiswa)
+            ->with('application_id', $application->id_application);
     }
 
     public function show($id)
