@@ -29,7 +29,7 @@
     </div>
 @endif
 
-<form action="{{ route('providers.store') }}" method="POST" class="bg-white rounded-[2rem] shadow-xl border border-gray-100 overflow-hidden">
+<form action="{{ route('admin.providers.store') }}" method="POST" class="bg-white rounded-[2rem] shadow-xl border border-gray-100 overflow-hidden">
     @csrf
 
     <div class="p-8 md:p-10 border-b border-gray-100">
@@ -101,7 +101,7 @@
             <button type="submit" class="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-8 py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20 transition hover:scale-[1.02]">
                 Simpan Provider
             </button>
-            <a href="{{ route('providers.index') }}" class="bg-gray-100 hover:bg-gray-200 border border-gray-200 text-gray-700 px-8 py-4 rounded-2xl font-black transition">
+            <a href="{{ route('admin.providers.index') }}" class="bg-gray-100 hover:bg-gray-200 border border-gray-200 text-gray-700 px-8 py-4 rounded-2xl font-black transition">
                 Kembali
             </a>
         </div>

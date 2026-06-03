@@ -23,24 +23,24 @@
 
 <body class="min-h-screen bg-[#f4f7f9] text-gray-900">
 
-@php $providerName = Auth::user()->name ?? 'Provider Scholarship'; @endphp
+@php $providerName = Auth::user()->display_name ?? 'Provider'; @endphp
 
 <div class="fixed inset-0 -z-10 overflow-hidden">
     <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
     <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-orange-200 rounded-full blur-3xl opacity-30"></div>
 </div>
 
-<div class="min-h-screen flex">
+<div class="min-h-screen flex overflow-hidden">
     <div id="overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
 
-    <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-50 w-80 bg-white/95 backdrop-blur-2xl border-r border-gray-200 transform -translate-x-full lg:translate-x-0 transition duration-300 flex flex-col h-screen overflow-y-auto">
+    <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-50 w-72 bg-white/95 backdrop-blur-2xl border-r border-gray-200 transform -translate-x-full lg:translate-x-0 transition duration-300 flex flex-col h-screen overflow-y-auto">
         <div class="p-8 border-b border-gray-100">
             <a href="{{ url('/') }}" class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-[1.5rem] bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-2xl shadow-xl shadow-blue-500/20">
+                <div class="w-12 h-12 rounded-[1.5rem] bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-2xl shadow-xl shadow-blue-500/20">
                     <i class="bi bi-mortarboard-fill"></i>
                 </div>
                 <div>
-                    <h1 class="text-3xl font-black text-gray-900 tracking-tight">ScholarLink</h1>
+                    <h1 class="text-2xl font-black text-gray-900 tracking-tight">ScholarLink</h1>
                     <p class="text-sm text-gray-500 font-bold mt-1">Provider Area</p>
                 </div>
             </a>
@@ -48,11 +48,12 @@
 
         <nav id="nav-links" class="flex-1 p-6 space-y-3">
             @php
+                $isProvider = Auth::user() && Auth::user()->role === 'provider';
                 $menu = [
                     ['route' => 'provider.dashboard', 'icon' => 'bi-grid-fill', 'label' => 'Dashboard', 'sub' => 'Provider Overview', 'color' => 'blue'],
                     ['route' => 'provider.scholarships.index', 'icon' => 'bi-mortarboard-fill', 'label' => 'Scholarships', 'sub' => 'Manage Programs', 'color' => 'cyan'],
                     ['route' => 'provider.applications.index', 'icon' => 'bi-file-earmark-check-fill', 'label' => 'Applications', 'sub' => 'Student Applications', 'color' => 'purple'],
-                    ['route' => 'chat-rooms.index', 'icon' => 'bi-chat-dots-fill', 'label' => 'Chat Rooms', 'sub' => 'Student Discussions', 'color' => 'pink'],
+                    ['route' => $isProvider ? 'provider.chat-rooms.index' : 'scholarships.index', 'icon' => 'bi-chat-dots-fill', 'label' => 'Chat Rooms', 'sub' => 'Student Discussions', 'color' => 'pink'],
                 ];
             @endphp
 
@@ -76,39 +77,61 @@
                 </div>
             </a>
         </nav>
-
-        <div class="p-6 border-t border-gray-100 bg-white/70 backdrop-blur-xl">
-            <div class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-blue-600 to-cyan-500 p-6 text-white shadow-2xl shadow-blue-500/20 mb-5">
-                <div class="relative flex items-center gap-4">
-                    <div class="w-16 h-16 rounded-[1.5rem] bg-white/15 backdrop-blur-md flex items-center justify-center text-2xl font-black border border-white/20">
-                        {{ strtoupper(substr($providerName, 0, 1)) }}
-                    </div>
-                    <div>
-                        <p class="text-sm text-white/80 font-bold">Logged in as</p>
-                        <h3 class="text-xl font-black truncate mt-1">{{ $providerName }}</h3>
-                    </div>
-                </div>
-            </div>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="w-full py-4 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-black shadow-xl shadow-red-500/20 transition">Logout</button>
-            </form>
-        </div>
     </aside>
 
-    <main class="flex-1 min-w-0 flex flex-col">
-        <header class="sticky top-0 z-30 bg-white/80 backdrop-blur-2xl border-b border-gray-200 shadow-sm">
-            <div class="px-5 lg:px-10 py-5 flex items-center justify-between">
+    <main class="flex-1 min-w-0 flex flex-col h-screen overflow-hidden">
+        <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-xl border-b border-gray-200 shadow-sm">
+            <div class="px-5 lg:px-8 py-4 flex items-center justify-between">
                 <div class="flex items-center gap-4">
                     <button id="openSidebar" class="lg:hidden w-14 h-14 rounded-2xl bg-white border border-gray-200 shadow-lg flex items-center justify-center text-2xl text-gray-700">
                         <i class="bi bi-list"></i>
                     </button>
-                    <h2 class="text-3xl font-black text-gray-900">Provider Panel</h2>
+                    <div>
+                        <h2 class="text-3xl font-black text-gray-900">Provider Panel</h2>
+                        <p class="text-gray-500 font-bold mt-1">Manage Scholarships Platform</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-6 relative">
+                    <div class="hidden md:block text-right">
+                        <p class="font-black text-lg text-gray-900">{{ $providerName }}</p>
+                        <p class="text-gray-500 text-sm capitalize font-bold">Provider</p>
+                    </div>
+
+                    <button onclick="toggleProfileMenu()" class="w-16 h-16 rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center font-black text-2xl shadow-lg shadow-blue-500/20 hover:scale-105 transition">
+                        {{ strtoupper(substr($providerName, 0, 1)) }}
+                    </button>
+
+                    <div id="profileMenu" class="hidden absolute right-0 top-24 w-80 bg-white border border-gray-100 rounded-[2rem] shadow-2xl overflow-hidden">
+                        <div class="p-6 border-b border-gray-100">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center font-black text-2xl">
+                                    {{ strtoupper(substr($providerName, 0, 1)) }}
+                                </div>
+                                <div>
+                                    <h3 class="font-black text-lg text-gray-900">{{ Auth::user()->name }}</h3>
+                                    <p class="text-gray-500 text-sm font-bold">{{ Auth::user()->email }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 space-y-2">
+                            <a href="{{ route('profile.edit') }}" class="flex items-center gap-4 px-5 py-4 rounded-2xl hover:bg-gray-100 transition">
+                                <div class="w-11 h-11 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center"><i class="bi bi-person-fill"></i></div>
+                                <span class="font-black text-gray-700">My Profile</span>
+                            </a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="w-full flex items-center gap-4 px-5 py-4 rounded-2xl hover:bg-red-50 transition">
+                                    <div class="w-11 h-11 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center"><i class="bi bi-box-arrow-right"></i></div>
+                                    <span class="font-black text-red-600">Logout</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
-
-        <section class="flex-1 p-5 lg:p-10">
+        <section class="flex-1 p-4 lg:p-6 overflow-y-auto overflow-x-hidden">
             @yield('content')
         </section>
     </main>
@@ -128,6 +151,17 @@
         link.addEventListener('click', () => {
             if(window.innerWidth < 1024) toggle();
         });
+    });
+
+    function toggleProfileMenu() {
+        document.getElementById('profileMenu').classList.toggle('hidden');
+    }
+    
+    window.addEventListener('click', function(e) {
+        const menu = document.getElementById('profileMenu');
+        if (!e.target.closest('#profileMenu') && !e.target.closest('button')) {
+            menu.classList.add('hidden');
+        }
     });
 </script>
 </body>

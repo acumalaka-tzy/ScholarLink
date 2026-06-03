@@ -36,6 +36,7 @@
     </div>
 @endif
 
+
 <div class="bg-white rounded-[2rem] shadow-xl border border-gray-100 p-6 mb-8">
     <div class="relative">
         <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">

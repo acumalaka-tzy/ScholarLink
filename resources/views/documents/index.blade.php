@@ -1,41 +1,51 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-[#f4f7f9] px-4 sm:px-6 lg:px-10 py-10 overflow-hidden">
+<div class="min-h-screen bg-[#f4f7f9] px-3 sm:px-6 lg:px-10 py-6 sm:py-10 overflow-hidden">
     <div class="fixed inset-0 -z-10 overflow-hidden">
-        <div class="absolute top-0 left-0 w-96 h-96 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-orange-200 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute top-0 left-0 w-64 sm:w-96 h-64 sm:h-96 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute bottom-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-orange-200 rounded-full blur-3xl opacity-30"></div>
     </div>
 
     <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-12">
+        {{-- Back Button --}}
+        <div class="mb-4 sm:mb-8">
+            <a href="{{ route('dashboard') }}" class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-black text-xs sm:text-base transition group">
+                <span class="w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl bg-white group-hover:bg-gray-100 flex items-center justify-center border border-gray-200">
+                    <i class="bi bi-arrow-left text-sm sm:text-base"></i>
+                </span>
+                Kembali ke Dashboard
+            </a>
+        </div>
+
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 sm:gap-6 mb-8 sm:mb-12">
             <div>
-                <div class="inline-flex items-center gap-3 bg-white border border-gray-200 rounded-full px-5 py-3 mb-6 shadow-lg">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-sm">
+                <div class="inline-flex items-center gap-2 sm:gap-3 bg-white border border-gray-200 rounded-full px-3 sm:px-5 py-2 sm:py-3 mb-3 sm:mb-6 shadow-lg">
+                    <div class="w-6 sm:w-8 h-6 sm:h-8 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-xs sm:text-sm">
                         <i class="bi bi-folder-fill"></i>
                     </div>
-                    <span class="text-gray-700 text-sm font-black tracking-wide">
+                    <span class="text-gray-700 text-xs sm:text-sm font-black tracking-wide">
                         ScholarLink Document Center
                     </span>
                 </div>
-                <h1 class="text-5xl sm:text-6xl font-black text-gray-900 leading-tight tracking-tight">
+                <h1 class="text-2xl sm:text-5xl md:text-6xl font-black text-gray-900 leading-tight tracking-tight">
                     My
                     <span class="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
                         Documents
                     </span>
                 </h1>
-                <p class="text-gray-500 mt-5 text-lg max-w-3xl leading-relaxed font-bold">
+                <p class="text-gray-500 mt-2 sm:mt-5 text-xs sm:text-lg max-w-3xl leading-relaxed font-bold">
                     Upload, manage, dan akses semua dokumen beasiswa kamu dengan tampilan modern dan pengalaman yang lebih nyaman.
                 </p>
             </div>
 
-            <div class="flex flex-wrap gap-4">
-                <a href="{{ route('documents.create') }}" class="group relative overflow-hidden inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 via-cyan-500 to-orange-400 px-8 py-5 rounded-2xl font-black text-white shadow-[0_15px_50px_rgba(59,130,246,0.3)] hover:scale-[1.03] transition duration-300">
+            <div class="flex flex-wrap gap-2 sm:gap-4">
+                <a href="{{ route('documents.create') }}" class="group relative overflow-hidden inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 via-cyan-500 to-orange-400 px-4 sm:px-8 py-2.5 sm:py-5 rounded-lg sm:rounded-2xl font-black text-white shadow-[0_15px_50px_rgba(59,130,246,0.3)] hover:scale-[1.03] transition duration-300 text-xs sm:text-base">
                     <span class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition"></span>
-                    <span class="relative text-xl">
+                    <span class="relative text-base sm:text-xl">
                         <i class="bi bi-cloud-arrow-up-fill"></i>
                     </span>
-                    <span class="relative">
+                    <span class="relative hidden xs:inline">
                         Upload Document
                     </span>
                 </a>
@@ -43,9 +53,9 @@
         </div>
 
         @if(session('success'))
-            <div class="mb-8 bg-green-50 border border-green-200 rounded-3xl p-6 shadow-lg">
-                <div class="flex items-center gap-4">
-                    <div class="w-14 h-14 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center text-2xl">
+            <div class="mb-6 sm:mb-8 bg-green-50 border border-green-200 rounded-lg sm:rounded-3xl p-4 sm:p-6 shadow-lg">
+                <div class="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
+                    <div class="w-10 sm:w-14 h-10 sm:h-14 rounded-lg sm:rounded-2xl bg-green-100 text-green-600 flex items-center justify-center text-lg sm:text-2xl flex-shrink-0">
                         <i class="bi bi-check-circle-fill"></i>
                     </div>
                     <div>

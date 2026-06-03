@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Provider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -34,17 +35,42 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => ['required', 'string', 'in:mahasiswa,provider'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->role,
         ]);
+
+        if ($user->role === 'provider') {
+            Provider::create([
+                'user_id' => $user->id,
+                'nama_instansi' => '',
+                'deskripsi_instansi' => '',
+                'website' => '',
+                'email_kontak' => '',
+                'no_hp' => '',
+                'alamat' => '',
+            ]);
+        }
 
         event(new Registered($user));
 
         Auth::login($user);
+
+        switch ($user->role) {
+            case 'admin':
+                return redirect()->route('admin.dashboard');
+
+            case 'provider':
+                return redirect()->route('provider.dashboard');
+
+            default:
+                return redirect()->route('dashboard');
+        }
 
         return redirect(route('dashboard', absolute: false));
     }

@@ -1,162 +1,191 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-[#f4f7f9] py-10 px-4 sm:px-6 lg:px-10 overflow-hidden">
+<div class="min-h-screen bg-[#f4f7f9] py-6 sm:py-10 px-3 sm:px-6 lg:px-10 overflow-hidden">
     <div class="fixed inset-0 -z-10 overflow-hidden">
-        <div class="absolute top-0 left-0 w-96 h-96 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-orange-200 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute top-0 left-0 w-64 sm:w-96 h-64 sm:h-96 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute bottom-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-orange-200 rounded-full blur-3xl opacity-30"></div>
     </div>
 
-    <div class="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-r from-blue-600 via-cyan-500 to-orange-400 p-10 md:p-14 shadow-[0_25px_60px_rgba(59,130,246,0.35)] mb-10">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+    <div class="relative overflow-hidden rounded-lg sm:rounded-[2.5rem] bg-gradient-to-r from-blue-600 via-cyan-500 to-orange-400 p-5 sm:p-10 md:p-14 shadow-[0_25px_60px_rgba(59,130,246,0.35)] mb-8 sm:mb-10">
+        <div class="absolute top-0 right-0 w-48 sm:w-96 h-48 sm:h-96 bg-white/10 rounded-full blur-3xl"></div>
         
-        <div class="relative z-10 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-10">
+        <div class="relative z-10 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-6 sm:gap-10">
             <div class="max-w-3xl">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-white font-black text-sm mb-6">
-                    <div class="w-6 h-6 rounded-full bg-white text-blue-600 flex items-center justify-center text-xs">
+                <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-white font-black text-xs sm:text-sm mb-3 sm:mb-6">
+                    <div class="w-5 sm:w-6 h-5 sm:h-6 rounded-full bg-white text-blue-600 flex items-center justify-center text-xs">
                         <i class="bi bi-stars"></i>
                     </div>
                     Student Dashboard
                 </div>
-                <h2 class="text-4xl md:text-6xl font-black text-white leading-tight">
-                    Selamat Datang, <span class="text-orange-100">{{ Auth::user()->name }}</span>
+                <h2 class="text-2xl sm:text-4xl md:text-6xl font-black text-white leading-tight">
+                    Selamat Datang, <span class="text-orange-100">{{ Auth::user()->display_name ?? Auth::user()->name }}</span>
                 </h2>
-                <p class="text-blue-50 text-lg mt-6 max-w-2xl leading-relaxed font-bold">
+                <p class="text-blue-50 text-xs sm:text-lg mt-3 sm:mt-6 max-w-2xl leading-relaxed font-bold">
                     Jelajahi peluang beasiswa terbaik dan pantau seluruh aplikasi Anda dalam satu dashboard modern dan profesional.
                 </p>
-                <div class="flex flex-wrap gap-4 mt-10">
-                    <a href="{{ route('scholarships.index') }}" class="px-7 py-4 rounded-2xl bg-white text-blue-700 font-black shadow-xl hover:scale-[1.03] transition duration-300">
-                        <i class="bi bi-search mr-2"></i> Explore Scholarship
+                <div class="flex flex-wrap gap-2 sm:gap-4 mt-5 sm:mt-10">
+                    <a href="{{ route('scholarships.index') }}" class="px-4 sm:px-7 py-2.5 sm:py-4 rounded-lg sm:rounded-2xl bg-white text-blue-700 font-black shadow-xl hover:scale-[1.03] transition duration-300 text-xs sm:text-base">
+                        <i class="bi bi-search mr-1 sm:mr-2"></i> <span class="hidden xs:inline">Explore Scholarship</span><span class="inline xs:hidden">Cari</span>
                     </a>
-                    <a href="{{ route('profile.edit') }}" class="px-7 py-4 rounded-2xl border border-white/30 bg-white/10 backdrop-blur-xl text-white font-black hover:bg-white/20 transition">
-                        <i class="bi bi-person-fill mr-2"></i> Edit Profile
+                    <a href="{{ route('profile.edit') }}" class="px-4 sm:px-7 py-2.5 sm:py-4 rounded-lg sm:rounded-2xl border border-white/30 bg-white/10 backdrop-blur-xl text-white font-black hover:bg-white/20 transition text-xs sm:text-base">
+                        <i class="bi bi-person-fill mr-1 sm:mr-2"></i> <span class="hidden xs:inline">Edit Profile</span><span class="inline xs:hidden">Profile</span>
                     </a>
                 </div>
             </div>
 
-            <div class="bg-white/15 backdrop-blur-2xl border border-white/20 rounded-[2rem] p-8 min-w-[320px] shadow-2xl">
-                <div class="flex items-center gap-5 mb-8">
-                    <div class="w-20 h-20 rounded-3xl bg-white text-blue-600 flex items-center justify-center text-4xl shadow-xl">
+            <div class="bg-white/15 backdrop-blur-2xl border border-white/20 rounded-lg sm:rounded-[2rem] p-4 sm:p-8 min-w-[280px] sm:min-w-[320px] shadow-2xl">
+                <div class="flex items-center gap-3 sm:gap-5 mb-6 sm:mb-8">
+                    <div class="w-14 sm:w-20 h-14 sm:h-20 rounded-2xl sm:rounded-3xl bg-white text-blue-600 flex items-center justify-center text-2xl sm:text-4xl shadow-xl">
                         <i class="bi bi-person-circle"></i>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-black text-white">{{ Auth::user()->name }}</h3>
-                        <p class="text-blue-100 font-bold mt-1">{{ Auth::user()->email }}</p>
+                        <h3 class="text-lg sm:text-2xl font-black text-white">{{ Auth::user()->display_name ?? Auth::user()->name }}</h3>
+                        <p class="text-blue-100 font-bold text-xs sm:text-base mt-1">{{ Auth::user()->email }}</p>
                     </div>
                 </div>
-                <div class="space-y-5">
+                <div class="space-y-3 sm:space-y-5">
                     <div class="flex items-center justify-between">
-                        <span class="text-blue-100 font-bold">Role</span>
-                        <span class="bg-white/20 px-4 py-2 rounded-full text-sm font-black text-white">Mahasiswa</span>
+                        <span class="text-blue-100 font-bold text-xs sm:text-base">Role</span>
+                        <span class="bg-white/20 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-black text-white">Mahasiswa</span>
                     </div>
                     <div class="flex items-center justify-between">
-                        <span class="text-blue-100 font-bold">Status</span>
-                        <span class="bg-green-400/20 text-green-100 px-4 py-2 rounded-full text-sm font-black border border-green-200/20">Active</span>
+                        <span class="text-blue-100 font-bold text-xs sm:text-base">Status</span>
+                        <span class="bg-green-400/20 text-green-100 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-black border border-green-200/20">Active</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
-        <div class="bg-white rounded-[2rem] border border-gray-100 shadow-xl p-7 hover:scale-[1.02] transition">
-            <div class="flex items-center justify-between mb-6">
-                <div class="w-16 h-16 rounded-3xl bg-blue-100 text-blue-600 flex items-center justify-center text-3xl">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-10">
+        <div class="bg-white rounded-lg sm:rounded-[2rem] border border-gray-100 shadow-xl p-5 sm:p-7 hover:scale-[1.02] transition">
+            <div class="flex items-center justify-between mb-4 sm:mb-6">
+                <div class="w-12 sm:w-16 h-12 sm:h-16 rounded-lg sm:rounded-3xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl sm:text-3xl">
                     <i class="bi bi-mortarboard-fill"></i>
                 </div>
-                <span class="text-sm font-black text-blue-600 bg-blue-50 px-4 py-2 rounded-full">Scholarships</span>
+                <span class="text-xs sm:text-sm font-black text-blue-600 bg-blue-50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">Scholarships</span>
             </div>
-            <p class="text-gray-500 font-bold text-sm mb-2">Total Beasiswa</p>
-            <h2 class="text-5xl font-black text-gray-900">1,250</h2>
+            <p class="text-gray-500 font-bold text-xs sm:text-sm mb-2">Total Beasiswa</p>
+            <h2 class="text-3xl sm:text-5xl font-black text-gray-900">1,250</h2>
         </div>
 
-        <div class="bg-white rounded-[2rem] border border-gray-100 shadow-xl p-7 hover:scale-[1.02] transition">
-            <div class="flex items-center justify-between mb-6">
-                <div class="w-16 h-16 rounded-3xl bg-cyan-100 text-cyan-600 flex items-center justify-center text-3xl">
+        <div class="bg-white rounded-lg sm:rounded-[2rem] border border-gray-100 shadow-xl p-5 sm:p-7 hover:scale-[1.02] transition">
+            <div class="flex items-center justify-between mb-4 sm:mb-6">
+                <div class="w-12 sm:w-16 h-12 sm:h-16 rounded-lg sm:rounded-3xl bg-cyan-100 text-cyan-600 flex items-center justify-center text-2xl sm:text-3xl">
                     <i class="bi bi-file-earmark-text-fill"></i>
                 </div>
-                <span class="text-sm font-black text-cyan-600 bg-cyan-50 px-4 py-2 rounded-full">Applications</span>
+                <span class="text-xs sm:text-sm font-black text-cyan-600 bg-cyan-50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">Applications</span>
             </div>
-            <p class="text-gray-500 font-bold text-sm mb-2">Aplikasi Anda</p>
-            <h2 class="text-5xl font-black text-gray-900">3</h2>
+            <p class="text-gray-500 font-bold text-xs sm:text-sm mb-2">Aplikasi Anda</p>
+            <h2 class="text-3xl sm:text-5xl font-black text-gray-900">3</h2>
         </div>
 
-        <div class="bg-white rounded-[2rem] border border-gray-100 shadow-xl p-7 hover:scale-[1.02] transition">
-            <div class="flex items-center justify-between mb-6">
-                <div class="w-16 h-16 rounded-3xl bg-green-100 text-green-600 flex items-center justify-center text-3xl">
+        <div class="bg-white rounded-lg sm:rounded-[2rem] border border-gray-100 shadow-xl p-5 sm:p-7 hover:scale-[1.02] transition">
+            <div class="flex items-center justify-between mb-4 sm:mb-6">
+                <div class="w-12 sm:w-16 h-12 sm:h-16 rounded-lg sm:rounded-3xl bg-green-100 text-green-600 flex items-center justify-center text-2xl sm:text-3xl">
                     <i class="bi bi-check-circle-fill"></i>
                 </div>
-                <span class="text-sm font-black text-green-600 bg-green-50 px-4 py-2 rounded-full">Accepted</span>
+                <span class="text-xs sm:text-sm font-black text-green-600 bg-green-50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">Accepted</span>
             </div>
-            <p class="text-gray-500 font-bold text-sm mb-2">Diterima</p>
-            <h2 class="text-5xl font-black text-green-600">1</h2>
+            <p class="text-gray-500 font-bold text-xs sm:text-sm mb-2">Diterima</p>
+            <h2 class="text-3xl sm:text-5xl font-black text-green-600">1</h2>
         </div>
 
-        <div class="bg-gradient-to-br from-blue-600 via-cyan-500 to-orange-400 rounded-[2rem] shadow-[0_20px_50px_rgba(59,130,246,0.3)] p-7 text-white hover:scale-[1.02] transition">
-            <div class="flex items-center justify-between mb-6">
-                <div class="w-16 h-16 rounded-3xl bg-white/20 flex items-center justify-center text-3xl">
+        <div class="bg-gradient-to-br from-blue-600 via-cyan-500 to-orange-400 rounded-lg sm:rounded-[2rem] shadow-[0_20px_50px_rgba(59,130,246,0.3)] p-5 sm:p-7 text-white hover:scale-[1.02] transition">
+            <div class="flex items-center justify-between mb-4 sm:mb-6">
+                <div class="w-12 sm:w-16 h-12 sm:h-16 rounded-lg sm:rounded-3xl bg-white/20 flex items-center justify-center text-2xl sm:text-3xl">
                     <i class="bi bi-bar-chart-fill"></i>
                 </div>
-                <span class="text-sm font-black bg-white/20 px-4 py-2 rounded-full">Profile</span>
+                <span class="text-xs sm:text-sm font-black bg-white/20 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">Profile</span>
             </div>
-            <p class="text-blue-100 font-bold text-sm mb-2">Profil Kelengkapan</p>
-            <h2 class="text-5xl font-black">75%</h2>
+            <p class="text-blue-100 font-bold text-xs sm:text-sm mb-2">Profil Kelengkapan</p>
+            <h2 class="text-3xl sm:text-5xl font-black">75%</h2>
         </div>
     </div>
 
-    <div class="grid xl:grid-cols-3 gap-8">
-        <div class="xl:col-span-2 space-y-6">
-            <div class="flex items-center justify-between flex-wrap gap-4">
+    <div class="grid xl:grid-cols-3 gap-6 sm:gap-8">
+        <div class="xl:col-span-2 space-y-4 sm:space-y-6">
+            <div class="flex flex-col xs:flex-row items-start xs:items-center xs:justify-between flex-wrap gap-3 sm:gap-4">
                 <div>
-                    <h3 class="text-3xl font-black text-gray-900">Aplikasi Beasiswa</h3>
-                    <p class="text-gray-500 font-bold mt-2">Pantau seluruh progress pengajuan Anda.</p>
+                    <h3 class="text-xl sm:text-3xl font-black text-gray-900">Aplikasi Beasiswa</h3>
+                    <p class="text-gray-500 font-bold text-xs sm:text-base mt-1 sm:mt-2">Pantau seluruh progress pengajuan Anda.</p>
                 </div>
-                <a href="{{ route('scholarships.index') }}" class="px-6 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black shadow-lg shadow-blue-500/20 hover:scale-[1.02] transition">
-                    <i class="bi bi-plus-circle-fill mr-2"></i> Apply New
+                <a href="{{ route('scholarships.index') }}" class="px-4 sm:px-6 py-2.5 sm:py-4 rounded-lg sm:rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black shadow-lg shadow-blue-500/20 hover:scale-[1.02] transition text-xs sm:text-base w-full xs:w-auto text-center xs:text-left">
+                    <i class="bi bi-plus-circle-fill mr-1 sm:mr-2"></i> <span class="hidden xs:inline">Apply New</span><span class="inline xs:hidden">Apply</span>
                 </a>
             </div>
 
-            <div class="bg-white rounded-[2rem] border border-gray-100 p-8 shadow-xl hover:shadow-2xl transition duration-300">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-                    <div>
-                        <div class="flex items-center gap-3 mb-5">
-                            <span class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-green-100 text-green-700 border border-green-200 text-sm font-black">
-                                <i class="bi bi-check-circle-fill"></i> DITERIMA
-                            </span>
+            @if($applications->count() > 0)
+                <div class="space-y-4 sm:space-y-6">
+                    @foreach($applications as $application)
+                        <div class="bg-white rounded-lg sm:rounded-[2rem] border border-gray-100 p-4 sm:p-8 shadow-xl hover:shadow-2xl transition duration-300">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 sm:gap-8">
+                                <div>
+                                    <div class="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-5">
+                                        <span class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-black
+                                            @if($application->status === 'diterima') bg-green-100 text-green-700 border border-green-200
+                                            @elseif($application->status === 'ditolak') bg-red-100 text-red-700 border border-red-200
+                                            @elseif($application->status === 'menunggu') bg-yellow-100 text-yellow-700 border border-yellow-200
+                                            @else bg-blue-100 text-blue-700 border border-blue-200 @endif">
+                                            @if($application->status === 'diterima')
+                                                <i class="bi bi-check-circle-fill"></i> <span class="hidden xs:inline">DITERIMA</span><span class="inline xs:hidden">Terima</span>
+                                            @elseif($application->status === 'ditolak')
+                                                <i class="bi bi-x-circle-fill"></i> <span class="hidden xs:inline">DITOLAK</span><span class="inline xs:hidden">Tolak</span>
+                                            @elseif($application->status === 'menunggu')
+                                                <i class="bi bi-clock-fill"></i> <span class="hidden xs:inline">MENUNGGU</span><span class="inline xs:hidden">Tunggu</span>
+                                            @else
+                                                <i class="bi bi-hourglass-split"></i> {{ ucfirst($application->status) }}
+                                            @endif
+                                        </span>
+                                    </div>
+                                    <h4 class="text-lg sm:text-3xl font-black text-gray-900">{{ $application->scholarship->nama_beasiswa ?? 'Beasiswa' }}</h4>
+                                    <p class="text-gray-500 font-bold text-xs sm:text-base mt-2 sm:mt-3">{{ $application->scholarship->provider->nama_provider ?? 'Provider' }}</p>
+                                </div>
+                                <a href="{{ route('applications.show', $application->id_application) }}" class="px-4 sm:px-6 py-2.5 sm:py-4 rounded-lg sm:rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black shadow-lg shadow-blue-500/20 hover:scale-[1.02] transition text-xs sm:text-base w-full sm:w-auto text-center">
+                                    <i class="bi bi-eye-fill mr-1 sm:mr-2"></i> <span class="hidden xs:inline">Lihat Detail</span><span class="inline xs:hidden">Lihat</span>
+                                </a>
+                            </div>
                         </div>
-                        <h4 class="text-3xl font-black text-gray-900">Beasiswa Penuh S1 - UI</h4>
-                        <p class="text-gray-500 font-bold mt-3">Universitas Indonesia</p>
-                    </div>
-                    <button class="px-6 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black shadow-lg shadow-blue-500/20 hover:scale-[1.02] transition">
-                        <i class="bi bi-eye-fill mr-2"></i> Lihat Detail
-                    </button>
+                    @endforeach
                 </div>
-            </div>
+            @else
+                <div class="bg-white rounded-lg sm:rounded-[2rem] border border-gray-100 p-8 sm:p-12 shadow-xl text-center">
+                    <div class="w-20 h-20 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="bi bi-inbox text-blue-600 text-4xl"></i>
+                    </div>
+                    <h4 class="text-lg sm:text-2xl font-black text-gray-900 mb-3">Belum Ada Aplikasi</h4>
+                    <p class="text-gray-500 font-bold text-sm sm:text-base mb-6">Mulai cari dan ajukan beasiswa impian Anda sekarang!</p>
+                    <a href="{{ route('scholarships.index') }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg sm:rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black shadow-lg shadow-blue-500/20 hover:scale-[1.02] transition">
+                        <i class="bi bi-plus-circle-fill"></i> <span class="hidden xs:inline">Cari Beasiswa</span><span class="inline xs:hidden">Cari</span>
+                    </a>
+                </div>
+            @endif
         </div>
 
         <div>
-            <div class="bg-white rounded-[2rem] border border-gray-100 p-8 shadow-xl">
-                <div class="flex items-center gap-5 mb-8">
-                    <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white text-4xl shadow-xl shadow-blue-500/20">
+            <div class="bg-white rounded-lg sm:rounded-[2rem] border border-gray-100 p-4 sm:p-8 shadow-xl">
+                <div class="flex items-center gap-3 sm:gap-5 mb-6 sm:mb-8">
+                    <div class="w-14 sm:w-20 h-14 sm:h-20 rounded-lg sm:rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white text-2xl sm:text-4xl shadow-xl shadow-blue-500/20 flex-shrink-0">
                         <i class="bi bi-person-fill"></i>
                     </div>
                     <div>
-                        <h4 class="text-2xl font-black text-gray-900">{{ Auth::user()->name }}</h4>
-                        <p class="text-gray-500 font-bold mt-1">{{ Auth::user()->email }}</p>
+                        <h4 class="text-base sm:text-2xl font-black text-gray-900">{{ Auth::user()->name }}</h4>
+                        <p class="text-gray-500 font-bold text-xs sm:text-base mt-1">{{ Auth::user()->email }}</p>
                     </div>
                 </div>
-                <div class="space-y-5">
+                <div class="space-y-3 sm:space-y-5">
                     <div class="flex items-center justify-between">
-                        <span class="text-gray-500 font-bold">Role</span>
-                        <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-black">Mahasiswa</span>
+                        <span class="text-gray-500 font-bold text-xs sm:text-base">Role</span>
+                        <span class="bg-blue-100 text-blue-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-black">Mahasiswa</span>
                     </div>
                     <div class="flex items-center justify-between">
-                        <span class="text-gray-500 font-bold">Status</span>
-                        <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-black">Active</span>
+                        <span class="text-gray-500 font-bold text-xs sm:text-base">Status</span>
+                        <span class="bg-green-100 text-green-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-black">Active</span>
                     </div>
                 </div>
-                <a href="{{ route('profile.edit') }}" class="w-full mt-8 inline-flex items-center justify-center py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black hover:scale-[1.02] shadow-xl shadow-blue-500/20 transition duration-300">
-                    <i class="bi bi-pencil-square mr-2"></i> Edit Profile
+                <a href="{{ route('profile.edit') }}" class="w-full mt-6 sm:mt-8 inline-flex items-center justify-center py-2.5 sm:py-4 rounded-lg sm:rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black hover:scale-[1.02] shadow-xl shadow-blue-500/20 transition duration-300 text-xs sm:text-base gap-2">
+                    <i class="bi bi-pencil-square"></i> <span class="hidden xs:inline">Edit Profile</span><span class="inline xs:hidden">Edit</span>
                 </a>
             </div>
         </div>

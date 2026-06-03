@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>ScholarLink</title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -36,6 +37,18 @@
         <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-orange-200 rounded-full blur-3xl opacity-30"></div>
     </div>
 
+    <!-- Navigation Bar -->
+    @auth
+        <x-navbar />
+    @endauth
+
+    @if(isset($slot))
+    {{ $slot }}
+@else
     @yield('content')
+@endif
+
+    {{-- Toast Notification Component --}}
+    <x-toast />
 </body>
 </html>

@@ -63,7 +63,7 @@
                             <select name="id_kategori" class="w-full appearance-none bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-12 py-5 text-gray-900 font-bold focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
                                 <option value="" selected>-- Pilih Kategori --</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->nama_kategori }}</option>
+                                    <option value="{{ $category->id_kategori }}">{{ $category->nama_kategori }}</option>
                                 @endforeach
                             </select>
                             <div class="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400">
@@ -78,7 +78,15 @@
                             <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
                                 <i class="bi bi-bookmark-star-fill"></i>
                             </div>
-                            <input type="text" name="tipe" placeholder="Contoh: Fully Funded" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-5 text-gray-900 font-bold placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
+                            <select name="tipe" class="w-full appearance-none bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-12 py-5 text-gray-900 font-bold focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
+                                <option value="" selected>-- Pilih Tipe --</option>
+                                <option value="Fully Funded">Fully Funded</option>
+                                <option value="Partial">Partial</option>
+                                <option value="Exchange">Exchange</option>
+                            </select>
+                            <div class="absolute right-5 top-1/2 -translate-y-12 text-gray-400">
+                                <i class="bi bi-chevron-down"></i>
+                            </div>
                         </div>
                     </div>
 

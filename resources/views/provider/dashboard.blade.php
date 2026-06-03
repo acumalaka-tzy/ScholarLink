@@ -1,11 +1,7 @@
 @extends('provider.provider')
 
 @section('content')
-<div class="min-h-screen bg-[#f4f7f9] px-4 sm:px-6 lg:px-10 py-10 overflow-hidden">
-    <div class="fixed inset-0 -z-10 overflow-hidden">
-        <div class="absolute top-0 left-0 w-96 h-96 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-orange-200 rounded-full blur-3xl opacity-30"></div>
-    </div>
+<div>
 
     <div class="max-w-7xl mx-auto">
         <div class="mb-10">

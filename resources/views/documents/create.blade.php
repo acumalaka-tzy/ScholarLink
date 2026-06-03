@@ -1,52 +1,62 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-[#f4f7f9] py-12 px-4 sm:px-6 lg:px-10 overflow-hidden">
+<div class="min-h-screen bg-[#f4f7f9] py-6 sm:py-12 px-3 sm:px-6 lg:px-10 overflow-hidden">
     <div class="fixed inset-0 -z-10 overflow-hidden">
-        <div class="absolute top-0 left-0 w-96 h-96 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-orange-200 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute top-0 left-0 w-64 sm:w-96 h-64 sm:h-96 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute bottom-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-orange-200 rounded-full blur-3xl opacity-30"></div>
     </div>
 
     <div class="max-w-6xl mx-auto">
-        <div class="mb-12 text-center">
-            <div class="inline-flex items-center gap-3 bg-white border border-gray-200 rounded-full px-5 py-3 mb-6 shadow-lg">
-                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-sm">
+        {{-- Back Button --}}
+        <div class="mb-4 sm:mb-8">
+            <a href="{{ route('documents.index') }}" class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-black text-xs sm:text-base transition group">
+                <span class="w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl bg-white group-hover:bg-gray-100 flex items-center justify-center border border-gray-200">
+                    <i class="bi bi-arrow-left text-sm sm:text-base"></i>
+                </span>
+                Kembali ke Documents
+            </a>
+        </div>
+
+        <div class="mb-8 sm:mb-12 text-center">
+            <div class="inline-flex items-center gap-2 sm:gap-3 bg-white border border-gray-200 rounded-full px-4 sm:px-5 py-2 sm:py-3 mb-4 sm:mb-6 shadow-lg">
+                <div class="w-6 sm:w-8 h-6 sm:h-8 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-xs sm:text-sm">
                     <i class="bi bi-cloud-arrow-up-fill"></i>
                 </div>
-                <span class="text-gray-700 text-sm font-black tracking-wide">
+                <span class="text-gray-700 text-xs sm:text-sm font-black tracking-wide">
                     ScholarLink Upload Center
                 </span>
             </div>
-            <h1 class="text-5xl sm:text-6xl font-black text-gray-900 tracking-tight leading-tight">
+            <h1 class="text-2xl sm:text-5xl md:text-6xl font-black text-gray-900 tracking-tight leading-tight">
                 Upload Your
                 <span class="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
                     Document
                 </span>
             </h1>
-            <p class="text-gray-500 text-lg mt-6 max-w-3xl mx-auto leading-relaxed font-bold">
+            <p class="text-gray-500 text-xs sm:text-lg mt-3 sm:mt-6 max-w-3xl mx-auto leading-relaxed font-bold px-2">
                 Upload dokumen persyaratan beasiswa dengan tampilan modern, aman, cepat, dan pengalaman upload yang lebih profesional.
             </p>
         </div>
 
-        <div class="relative overflow-hidden bg-white border border-gray-100 rounded-[2.5rem] shadow-[0_25px_80px_rgba(15,23,42,0.08)]">
-            <div class="absolute top-0 left-0 w-80 h-80 bg-cyan-100 blur-3xl rounded-full opacity-50"></div>
-            <div class="absolute bottom-0 right-0 w-80 h-80 bg-orange-100 blur-3xl rounded-full opacity-50"></div>
+        <div class="relative overflow-hidden bg-white border border-gray-100 rounded-xl sm:rounded-[2.5rem] shadow-[0_25px_80px_rgba(15,23,42,0.08)]">
+            <div class="absolute top-0 left-0 w-48 sm:w-80 h-48 sm:h-80 bg-cyan-100 blur-3xl rounded-full opacity-50"></div>
+            <div class="absolute bottom-0 right-0 w-48 sm:w-80 h-48 sm:h-80 bg-orange-100 blur-3xl rounded-full opacity-50"></div>
 
             <div class="relative grid grid-cols-1 lg:grid-cols-2">
-                <div class="hidden lg:flex flex-col justify-center p-14 border-r border-gray-100">
-                    <div class="w-28 h-28 rounded-[2rem] bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white text-6xl shadow-2xl shadow-blue-500/20 mb-10">
+                <div class="hidden lg:flex flex-col justify-center p-8 sm:p-14 border-r border-gray-100">
+                    <div class="w-20 sm:w-28 h-20 sm:h-28 rounded-lg sm:rounded-[2rem] bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white text-4xl sm:text-6xl shadow-2xl shadow-blue-500/20 mb-6 sm:mb-10">
                         <i class="bi bi-folder-fill"></i>
                     </div>
-                    <h2 class="text-5xl font-black text-gray-900 leading-tight mb-6">
+                    <h2 class="text-3xl sm:text-5xl font-black text-gray-900 leading-tight mb-4 sm:mb-6">
                         Secure <br> Upload Center
                     </h2>
-                    <p class="text-gray-500 text-lg leading-relaxed mb-12 font-bold">
+                    <p class="text-gray-500 text-xs sm:text-lg leading-relaxed mb-8 sm:mb-12 font-bold">
                         Pastikan semua dokumen persyaratan beasiswa kamu lengkap dan tersimpan aman di platform ScholarLink.
                     </p>
 
-                    <div class="space-y-6">
-                        <div class="flex items-center gap-5">
-                            <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl">
+                    <div class="space-y-4 sm:space-y-6">
+                        <div class="flex items-center gap-3 sm:gap-5">
+                            <div class="w-10 sm:w-14 h-10 sm:h-14 rounded-lg sm:rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-lg sm:text-2xl flex-shrink-0">
                                 <i class="bi bi-file-earmark-richtext-fill"></i>
                             </div>
                             <div>

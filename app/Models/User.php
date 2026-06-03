@@ -48,4 +48,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Favorite::class, 'id_user', 'id');
     }
+
+    public function getDisplayNameAttribute()
+    {
+        return explode(' ', trim($this->name))[0];
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'user_id', 'id');
+    }
+
+    public function chatParticipants()
+    {
+        return $this->hasMany(ChatParticipant::class, 'id_user', 'id');
+    }
 }
