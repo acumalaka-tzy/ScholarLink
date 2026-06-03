@@ -95,11 +95,11 @@
 
                     <div>
                         <label for="name" class="block text-xs sm:text-sm font-black text-gray-700 mb-2">Nama Lengkap</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 sm:pl-4 text-gray-400 pointer-events-none">
-                                <i class="bi bi-person-fill text-sm sm:text-base"></i>
+                        <div class="flex items-center bg-gray-50 border-2 border-gray-200 rounded-xl focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100 transition duration-300">
+                            <span class="pl-4 sm:pl-5 text-gray-400 flex items-center justify-center">
+                                <i class="bi bi-person-fill text-base sm:text-lg"></i>
                             </span>
-                            <input type="text" id="name" name="name" value="{{ old('name') }}" required autofocus class="w-full pl-10 sm:pl-11 pr-3 sm:pr-4 py-2.5 sm:py-3 bg-gray-50 border-2 border-gray-100 rounded-lg sm:rounded-xl font-semibold text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white transition text-sm sm:text-base">
+                            <input type="text" id="name" name="name" value="{{ old('name') }}" required autofocus class="w-full bg-transparent border-0 focus:ring-0 py-2.5 sm:py-3 px-3 sm:px-4 font-bold text-gray-900 placeholder:text-gray-400 text-sm sm:text-base" placeholder="Nama lengkap Anda">
                         </div>
                         @error('name')
                             <p class="text-red-500 text-xs font-bold mt-1">{{ $message }}</p>
@@ -108,11 +108,11 @@
 
                     <div>
                         <label for="email" class="block text-xs sm:text-sm font-black text-gray-700 mb-2">Alamat Email</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 sm:pl-4 text-gray-400 pointer-events-none">
-                                <i class="bi bi-envelope-fill text-sm sm:text-base"></i>
+                        <div class="flex items-center bg-gray-50 border-2 border-gray-200 rounded-xl focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100 transition duration-300">
+                            <span class="pl-4 sm:pl-5 text-gray-400 flex items-center justify-center">
+                                <i class="bi bi-envelope-fill text-base sm:text-lg"></i>
                             </span>
-                            <input type="email" id="email" name="email" value="{{ old('email') }}" required class="w-full pl-10 sm:pl-11 pr-3 sm:pr-4 py-2.5 sm:py-3 bg-gray-50 border-2 border-gray-100 rounded-lg sm:rounded-xl font-semibold text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white transition text-sm sm:text-base">
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" required class="w-full bg-transparent border-0 focus:ring-0 py-2.5 sm:py-3 px-3 sm:px-4 font-bold text-gray-900 placeholder:text-gray-400 text-sm sm:text-base" placeholder="contoh@email.com">
                         </div>
                         @error('email')
                             <p class="text-red-500 text-xs font-bold mt-1">{{ $message }}</p>
@@ -121,16 +121,16 @@
 
                     <div>
                         <label for="role" class="block text-xs sm:text-sm font-black text-gray-700 mb-2">Daftar Sebagai</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 sm:pl-4 text-gray-400 pointer-events-none">
-                                <i class="bi bi-people-fill text-sm sm:text-base"></i>
+                        <div class="flex items-center bg-gray-50 border-2 border-gray-200 rounded-xl focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100 transition duration-300 relative">
+                            <span class="pl-4 sm:pl-5 text-gray-400 flex items-center justify-center pointer-events-none">
+                                <i class="bi bi-people-fill text-base sm:text-lg"></i>
                             </span>
-                            <select id="role" name="role" required class="w-full pl-10 sm:pl-11 pr-10 py-2.5 sm:py-3 bg-gray-50 border-2 border-gray-100 rounded-lg sm:rounded-xl font-semibold text-gray-900 focus:outline-none focus:border-blue-500 focus:bg-white transition appearance-none text-sm sm:text-base">
-                                <option value="">Pilih Role...</option>
-                                <option value="mahasiswa" {{ old('role') == 'mahasiswa' ? 'selected' : '' }}>Mahasiswa (Pencari Beasiswa)</option>
-                                <option value="provider" {{ old('role') == 'provider' ? 'selected' : '' }}>Provider (Penyedia Beasiswa)</option>
+                            <select id="role" name="role" required class="w-full bg-transparent border-0 focus:ring-0 py-2.5 sm:py-3 pl-3 sm:pl-4 pr-10 font-bold text-gray-900 text-sm sm:text-base appearance-none cursor-pointer">
+                                <option value="" class="bg-white">Pilih Role...</option>
+                                <option value="mahasiswa" {{ old('role') == 'mahasiswa' ? 'selected' : '' }} class="bg-white">Mahasiswa (Pencari Beasiswa)</option>
+                                <option value="provider" {{ old('role') == 'provider' ? 'selected' : '' }} class="bg-white">Provider (Penyedia Beasiswa)</option>
                             </select>
-                            <span class="absolute inset-y-0 right-0 flex items-center pr-3 sm:pr-4 pointer-events-none text-gray-400">
+                            <span class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center pointer-events-none text-gray-400">
                                 <i class="bi bi-chevron-down text-sm sm:text-base"></i>
                             </span>
                         </div>
@@ -141,11 +141,11 @@
 
                     <div>
                         <label for="password" class="block text-xs sm:text-sm font-black text-gray-700 mb-2">Password</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 sm:pl-4 text-gray-400 pointer-events-none">
-                                <i class="bi bi-lock-fill text-sm sm:text-base"></i>
+                        <div class="flex items-center bg-gray-50 border-2 border-gray-200 rounded-xl focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100 transition duration-300">
+                            <span class="pl-4 sm:pl-5 text-gray-400 flex items-center justify-center">
+                                <i class="bi bi-lock-fill text-base sm:text-lg"></i>
                             </span>
-                            <input type="password" id="password" name="password" required class="w-full pl-10 sm:pl-11 pr-3 sm:pr-4 py-2.5 sm:py-3 bg-gray-50 border-2 border-gray-100 rounded-lg sm:rounded-xl font-semibold text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white transition text-sm sm:text-base">
+                            <input type="password" id="password" name="password" required class="w-full bg-transparent border-0 focus:ring-0 py-2.5 sm:py-3 px-3 sm:px-4 font-bold text-gray-900 placeholder:text-gray-400 text-sm sm:text-base" placeholder="Masukkan password">
                         </div>
                         @error('password')
                             <p class="text-red-500 text-xs font-bold mt-1">{{ $message }}</p>
@@ -154,31 +154,15 @@
 
                     <div>
                         <label for="password_confirmation" class="block text-xs sm:text-sm font-black text-gray-700 mb-2">Konfirmasi Password</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 sm:pl-4 text-gray-400 pointer-events-none">
-                                <i class="bi bi-shield-lock-fill text-sm sm:text-base"></i>
+                        <div class="flex items-center bg-gray-50 border-2 border-gray-200 rounded-xl focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100 transition duration-300">
+                            <span class="pl-4 sm:pl-5 text-gray-400 flex items-center justify-center">
+                                <i class="bi bi-shield-lock-fill text-base sm:text-lg"></i>
                             </span>
-                            <input type="password" id="password_confirmation" name="password_confirmation" required class="w-full pl-10 sm:pl-11 pr-3 sm:pr-4 py-2.5 sm:py-3 bg-gray-50 border-2 border-gray-100 rounded-lg sm:rounded-xl font-semibold text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white transition text-sm sm:text-base">
+                            <input type="password" id="password_confirmation" name="password_confirmation" required class="w-full bg-transparent border-0 focus:ring-0 py-2.5 sm:py-3 px-3 sm:px-4 font-bold text-gray-900 placeholder:text-gray-400 text-sm sm:text-base" placeholder="Ulangi password">
                         </div>
                     </div>
 
-                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-2.5 sm:py-4 rounded-lg sm:rounded-xl font-black hover:from-blue-700 hover:to-cyan-700 transition shadow-lg shadow-blue-600/20 text-center block mt-6 sm:mt-8 text-sm sm:text-base">
-                        Daftar Akun Gratis
-                    </button>
-                </form>
-            </div>
-        </div>
-
-    </div>
-
-</body>
-</html>
-                            </span>
-                            <input type="password" id="password_confirmation" name="password_confirmation" required class="w-full pl-11 pr-4 py-3 bg-gray-50 border-2 border-gray-100 rounded-xl font-semibold text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white transition">
-                        </div>
-                    </div>
-
-                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-4 rounded-xl font-black hover:from-blue-700 hover:to-cyan-700 transition shadow-lg shadow-blue-600/20 text-center block mt-6">
+                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-2.5 sm:py-4 rounded-xl font-black hover:from-blue-700 hover:to-cyan-700 transition shadow-lg shadow-blue-600/20 text-center block mt-6 sm:mt-8 text-sm sm:text-base">
                         Daftar Akun Gratis
                     </button>
                 </form>

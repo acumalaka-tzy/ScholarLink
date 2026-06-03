@@ -14,7 +14,7 @@
     <style>
         body, * {
             font-family: 'Nunito', sans-serif !important;
-        }
+        } 
         
         /* Responsive Mobile Fix */
         @media (max-width: 768px) {
@@ -145,21 +145,21 @@
 
                         <div>
                             <label for="email" class="block text-xs sm:text-sm font-black text-gray-700 mb-2">Email Address</label>
-                            <div class="relative">
-                                <div class="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                                    <i class="bi bi-envelope-fill text-sm sm:text-base"></i>
-                                </div>
-                                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="contoh@email.com" class="w-full bg-gray-50 border-2 border-gray-200 rounded-lg sm:rounded-2xl pl-10 sm:pl-14 pr-4 sm:pr-5 py-2.5 sm:py-4 font-bold text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition text-sm sm:text-base">
+                            <div class="flex items-center bg-gray-50 border-2 border-gray-200 rounded-xl sm:rounded-2xl focus-within:border-cyan-500 focus-within:ring-4 focus-within:ring-cyan-100 transition duration-300">
+                                <span class="pl-4 sm:pl-5 text-gray-400 flex items-center justify-center">
+                                    <i class="bi bi-envelope-fill text-base sm:text-lg"></i>
+                                </span>
+                                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="contoh@email.com" class="w-full bg-transparent border-0 focus:ring-0 py-3 sm:py-4 px-3 sm:px-4 font-bold text-gray-900 placeholder:text-gray-400 text-sm sm:text-base">
                             </div>
                         </div>
 
                         <div>
                             <label for="password" class="block text-xs sm:text-sm font-black text-gray-700 mb-2">Password</label>
-                            <div class="relative">
-                                <div class="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                                    <i class="bi bi-lock-fill text-sm sm:text-base"></i>
-                                </div>
-                                <input id="password" type="password" name="password" required autocomplete="current-password" placeholder="Masukkan password" class="w-full bg-gray-50 border-2 border-gray-200 rounded-lg sm:rounded-2xl pl-10 sm:pl-14 pr-4 sm:pr-5 py-2.5 sm:py-4 font-bold text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition text-sm sm:text-base">
+                            <div class="flex items-center bg-gray-50 border-2 border-gray-200 rounded-xl sm:rounded-2xl focus-within:border-cyan-500 focus-within:ring-4 focus-within:ring-cyan-100 transition duration-300">
+                                <span class="pl-4 sm:pl-5 text-gray-400 flex items-center justify-center">
+                                    <i class="bi bi-lock-fill text-base sm:text-lg"></i>
+                                </span>
+                                <input id="password" type="password" name="password" required autocomplete="current-password" placeholder="Masukkan password" class="w-full bg-transparent border-0 focus:ring-0 py-3 sm:py-4 px-3 sm:px-4 font-bold text-gray-900 placeholder:text-gray-400 text-sm sm:text-base">
                             </div>
                         </div>
 
@@ -193,102 +193,6 @@
 
                 <div class="mt-4 sm:mt-6 text-center">
                     <a href="{{ route('home') }}" class="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 text-xs sm:text-sm font-black transition">
-                        <i class="bi bi-arrow-left"></i> Kembali ke halaman utama
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
-                            Gunakan email dan password yang sudah terdaftar untuk melanjutkan perjalanan beasiswa Anda.
-                        </p>
-                    </div>
-
-                    @if (session('status'))
-                        <div class="mb-6 bg-green-50 border border-green-200 rounded-2xl p-5">
-                            <div class="flex items-center gap-3">
-                                <div class="text-green-500 text-xl">
-                                    <i class="bi bi-check-circle-fill"></i>
-                                </div>
-                                <div class="text-sm text-green-700 font-bold">
-                                    {{ session('status') }}
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
-                    @if ($errors->any())
-                        <div class="mb-6 bg-red-50 border border-red-200 rounded-2xl p-5">
-                            <div class="flex items-start gap-3">
-                                <div class="text-red-500 text-xl">
-                                    <i class="bi bi-exclamation-circle-fill"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-black text-red-700 mb-2">Terjadi Kesalahan</h4>
-                                    <ul class="space-y-1 text-sm text-red-600 font-bold">
-                                        @foreach ($errors->all() as $error)
-                                            <li>• {{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('login') }}" class="space-y-5">
-                        @csrf
-
-                        <div>
-                            <label for="email" class="block text-sm font-black text-gray-700 mb-2">Email Address</label>
-                            <div class="relative">
-                                <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
-                                    <i class="bi bi-envelope-fill"></i>
-                                </div>
-                                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="contoh@email.com" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-4 font-bold text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
-                            </div>
-                        </div>
-
-                        <div>
-                            <label for="password" class="block text-sm font-black text-gray-700 mb-2">Password</label>
-                            <div class="relative">
-                                <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
-                                    <i class="bi bi-lock-fill"></i>
-                                </div>
-                                <input id="password" type="password" name="password" required autocomplete="current-password" placeholder="Masukkan password" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-4 font-bold text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
-                            </div>
-                        </div>
-
-                        <div class="flex items-center justify-between gap-4 pt-1">
-                            <label class="flex items-center gap-3 text-sm text-gray-600 font-bold cursor-pointer">
-                                <input type="checkbox" name="remember" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500 w-4 h-4">
-                                Ingat Saya
-                            </label>
-
-                            @if (Route::has('password.request'))
-                                <a href="{{ route('password.request') }}" class="text-sm text-cyan-600 hover:text-cyan-700 font-black transition">
-                                    Lupa password?
-                                </a>
-                            @endif
-                        </div>
-
-                        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-4 rounded-2xl font-black text-lg transition shadow-lg shadow-blue-500/20 hover:shadow-xl hover:scale-[1.01]">
-                            LOG IN
-                        </button>
-                    </form>
-
-                    <div class="mt-8 text-center">
-                        <p class="text-gray-500 font-bold">
-                            Belum punya akun?
-                            <a href="{{ route('register') }}" class="text-orange-500 hover:text-orange-600 font-black transition">
-                                Daftar sekarang
-                            </a>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="mt-6 text-center">
-                    <a href="{{ route('home') }}" class="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 text-sm font-black transition">
                         <i class="bi bi-arrow-left"></i> Kembali ke halaman utama
                     </a>
                 </div>

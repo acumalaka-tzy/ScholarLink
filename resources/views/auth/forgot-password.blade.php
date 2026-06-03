@@ -137,11 +137,11 @@
 
                         <div>
                             <label for="email" class="block text-sm font-black text-gray-700 mb-2">Email Terdaftar</label>
-                            <div class="relative">
-                                <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
-                                    <i class="bi bi-envelope-fill"></i>
-                                </div>
-                                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="contoh@email.com" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-4 font-bold text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
+                            <div class="flex items-center bg-gray-50 border-2 border-gray-200 rounded-2xl focus-within:border-cyan-500 focus-within:ring-4 focus-within:ring-cyan-100 transition duration-300">
+                                <span class="pl-5 text-gray-400 flex items-center justify-center">
+                                    <i class="bi bi-envelope-fill text-lg"></i>
+                                </span>
+                                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="contoh@email.com" class="w-full bg-transparent border-0 focus:ring-0 py-4 px-4 font-bold text-gray-900 placeholder:text-gray-400 text-base">
                             </div>
                         </div>
 
