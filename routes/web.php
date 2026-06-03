@@ -29,7 +29,7 @@ Route::get('/', function () {
 // ==========================
 // ADMIN AREA
 // ==========================
-Route::middleware(['auth', 'admin'])
+Route::middleware(['auth', 'verified', 'admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
@@ -45,7 +45,7 @@ Route::middleware(['auth', 'admin'])
 // ==========================
 // PROVIDER AREA
 // ==========================
-Route::middleware(['auth', 'provider'])
+Route::middleware(['auth', 'verified', 'provider'])
     ->prefix('provider')
     ->name('provider.')
     ->group(function () {
@@ -60,7 +60,7 @@ Route::middleware(['auth', 'provider'])
 // ==========================
 // MAHASISWA & COMMON AREA
 // ==========================
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     // Mahasiswa
     Route::middleware(['mahasiswa'])->group(function () {
         Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
