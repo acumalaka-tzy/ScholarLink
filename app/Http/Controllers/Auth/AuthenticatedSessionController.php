@@ -24,6 +24,27 @@ class AuthenticatedSessionController extends Controller
 
         $user = $request->user();
 
+        $user = $request->user();
+
+    if ($user->role === 'provider') {
+
+    if ($user->status === 'pending') {
+        Auth::logout();
+
+        return back()->withErrors([
+            'email' => 'Akun provider masih menunggu persetujuan admin.',
+        ]);
+    }
+
+    if ($user->status === 'rejected') {
+        Auth::logout();
+
+        return back()->withErrors([
+            'email' => 'Akun provider ditolak admin.',
+        ]);
+    }
+}
+
         if ($user->role === 'admin') {
             return redirect()->intended(route('admin.dashboard'));
         }

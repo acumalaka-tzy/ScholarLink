@@ -93,8 +93,10 @@
                         <i class="bi bi-check-circle-fill"></i>
                     </div>
                     <select name="status" class="w-full appearance-none bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-12 py-4 font-bold text-gray-900 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
-                        <option value="active" {{ old('status', $user->status) == 'active' ? 'selected' : '' }}>Active</option>
-                        <option value="inactive" {{ old('status', $user->status) == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                        <option value="pending" {{ old('status', $user->status) == 'pending' ? 'selected' : '' }}>Pending</option>
+                        <option value="rejected" {{ old('status', $user->status) == 'rejected' ? 'selected' : '' }}>Rejected</option>
+                        <option value="aktif" {{ old('status', $user->status) == 'aktif' ? 'selected' : '' }}>Active</option>
+                        <option value="nonaktif" {{ old('status', $user->status) == 'nonaktif' ? 'selected' : '' }}>Inactive</option>
                     </select>
                     <div class="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
                         <i class="bi bi-chevron-down"></i>

@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\VerifyEmailNotification;
+use Illuminate\Support\Facades\URL;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory;
     use Notifiable;
@@ -17,6 +20,7 @@ class User extends Authenticatable
         'password',
         'role',
         'status',
+        'provider_status',
         'tanggal_daftar',
     ];
 
@@ -62,5 +66,10 @@ class User extends Authenticatable
     public function chatParticipants()
     {
         return $this->hasMany(ChatParticipant::class, 'id_user', 'id');
+    }
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmailNotification());
     }
 }

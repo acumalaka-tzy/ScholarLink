@@ -43,17 +43,22 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
+
+            'status' => 
+                ($request->role === 'provider') 
+                    ? 'pending' 
+                    : aktif,
         ]);
 
         if ($user->role === 'provider') {
             Provider::create([
                 'user_id' => $user->id,
-                'nama_instansi' => '',
-                'deskripsi_instansi' => '',
-                'website' => '',
-                'email_kontak' => '',
-                'no_hp' => '',
-                'alamat' => '',
+                'nama_instansi' => $user->name,
+                'deskripsi_instansi' => $request->deskripsi_instansi,
+                'website' => $request->website,
+                'email_kontak' => $user->email,
+                'no_hp' => $request->no_hp,
+                'alamat' => $request->alamat,
             ]);
         }
 
@@ -61,17 +66,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        switch ($user->role) {
-            case 'admin':
-                return redirect()->route('admin.dashboard');
-
-            case 'provider':
-                return redirect()->route('provider.dashboard');
-
-            default:
-                return redirect()->route('dashboard');
-        }
-
-        return redirect(route('dashboard', absolute: false));
+        return redirect()->route('verification.notice');
     }
 }

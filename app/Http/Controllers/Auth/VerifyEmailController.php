@@ -6,22 +6,46 @@ use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class VerifyEmailController extends Controller
 {
-    /**
-     * Mark the authenticated user's email address as verified.
-     */
-    public function __invoke(EmailVerificationRequest $request): RedirectResponse
+    public function __invoke(
+        EmailVerificationRequest $request
+    ): RedirectResponse
     {
-        if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
+        $user = $request->user();
+
+        if (! $user->hasVerifiedEmail()) {
+
+            if ($user->markEmailAsVerified()) {
+                event(new Verified($user));
+            }
         }
 
-        if ($request->user()->markEmailAsVerified()) {
-            event(new Verified($request->user()));
+        // Provider masih menunggu persetujuan admin
+        if (
+            $user->role === 'provider' &&
+            $user->status === 'pending'
+        ) {
+            Auth::logout();
+
+            return redirect()
+                ->route('login')
+                ->with(
+                    'success',
+                    'Email berhasil diverifikasi. Silakan tunggu persetujuan admin.'
+                );
         }
 
-        return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+
+        if ($user->role === 'provider') {
+            return redirect()->route('provider.dashboard');
+        }
+
+        return redirect()->route('dashboard');
     }
 }

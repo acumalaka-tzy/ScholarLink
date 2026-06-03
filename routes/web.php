@@ -36,7 +36,7 @@ Route::middleware(['auth', 'admin'])
     ->group(function () {
         Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
         Route::resource('users', UserController::class);
-        Route::resource('providers', ProviderController::class);
+        Route::resource('providers', ProviderController::class)->except(['create', 'store']);
         Route::put('providers/{provider}/approve', [ProviderController::class, 'approve'])->name('providers.approve');
         Route::put('providers/{provider}/reject', [ProviderController::class, 'reject'])->name('providers.reject');
         Route::resource('scholarships', AdminScholarshipController::class);
@@ -46,7 +46,7 @@ Route::middleware(['auth', 'admin'])
 // ==========================
 // PROVIDER AREA
 // ==========================
-Route::middleware(['auth', 'provider'])
+Route::middleware(['auth', 'verified', 'provider'])
     ->prefix('provider')
     ->name('provider.')
     ->group(function () {
@@ -61,7 +61,7 @@ Route::middleware(['auth', 'provider'])
 // ==========================
 // MAHASISWA & COMMON AREA
 // ==========================
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     // Mahasiswa
     Route::middleware(['mahasiswa'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
