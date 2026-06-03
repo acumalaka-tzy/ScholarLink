@@ -9,9 +9,6 @@
         <h1 class="text-4xl font-black text-gray-900">Manajemen Provider</h1>
         <p class="text-gray-500 font-bold mt-3 text-lg">Kelola seluruh provider ScholarLink dengan mudah.</p>
     </div>
-    <a href="{{ route('admin.providers.create') }}" class="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-7 py-4 rounded-2xl shadow-lg shadow-blue-500/20 font-black transition hover:scale-[1.02] text-center">
-        + Tambah Provider
-    </a>
 </div>
 
 @if(session('success'))
@@ -21,17 +18,6 @@
                 <i class="bi bi-check-circle-fill"></i>
             </div>
             <div class="text-green-700 font-black">{{ session('success') }}</div>
-        </div>
-    </div>
-@endif
-
-@if(session('rejected'))
-    <div class="mb-6 bg-red-50 border border-red-200 rounded-3xl p-5">
-        <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-2xl bg-red-100 text-red-500 flex items-center justify-center text-xl">
-                <i class="bi bi-x-circle-fill"></i>
-            </div>
-            <div class="text-red-700 font-black">{{ session('rejected') }}</div>
         </div>
     </div>
 @endif
@@ -77,17 +63,21 @@
                         <td class="px-6 py-5 text-gray-600 font-bold">{{ $provider->no_hp }}</td>
                         <td class="px-6 py-5 text-gray-600 font-bold max-w-xs truncate">{{ $provider->alamat }}</td>
                         <td class="px-6 py-5">
-                            @if($provider->status == 'verified')
+                            @if($provider->user->status == 'aktif')
                                 <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 text-green-700 text-xs font-black border border-green-200">
-                                    <i class="bi bi-check-circle-fill"></i> Verified
+                                    <i class="bi bi-check-circle-fill"></i> Aktif
                                 </span>
-                            @elseif($provider->status == 'pending')
+                            @elseif($provider->user->status == 'pending')
                                 <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-100 text-yellow-700 text-xs font-black border border-yellow-200">
                                     <i class="bi bi-clock-fill"></i> Pending
                                 </span>
-                            @else
+                            @elseif($provider->user->status == 'rejected')
                                 <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-100 text-red-700 text-xs font-black border border-red-200">
                                     <i class="bi bi-x-circle-fill"></i> Rejected
+                                </span>
+                            @else
+                                <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-xs font-black border border-gray-200">
+                                    <i class="bi bi-slash-circle-fill"></i> Nonaktif
                                 </span>
                             @endif
                         </td>
@@ -97,12 +87,12 @@
                                     Edit
                                 </a>
 
-                                @if($provider->status == 'pending')
+                                @if($provider->user->status == 'pending')
                                     <form action="{{ route('admin.providers.approve', $provider->id_provider) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <button class="bg-green-100 hover:bg-green-200 text-green-700 px-4 py-2 rounded-xl text-sm font-black transition">
-                                            Verify
+                                            Setujui
                                         </button>
                                     </form>
 
@@ -110,7 +100,7 @@
                                         @csrf
                                         @method('PUT')
                                         <button class="bg-yellow-100 hover:bg-yellow-200 text-yellow-700 px-4 py-2 rounded-xl text-sm font-black transition">
-                                            Reject
+                                            Tolak
                                         </button>
                                     </form>
                                 @endif
@@ -119,7 +109,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button onclick="return confirm('Yakin ingin menghapus provider ini?')" class="bg-red-100 hover:bg-red-200 text-red-700 px-4 py-2 rounded-xl text-sm font-black transition">
-                                        Delete
+                                        Hapus
                                     </button>
                                 </form>
                             </div>

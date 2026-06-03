@@ -29,13 +29,13 @@ Route::get('/', function () {
 // ==========================
 // ADMIN AREA
 // ==========================
-Route::middleware(['auth', 'verified', 'admin'])
+Route::middleware(['auth', 'admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('users', UserController::class);
-        Route::resource('providers', ProviderController::class);
+        Route::resource('providers', ProviderController::class)->except(['create', 'store']);
         Route::put('providers/{provider}/approve', [ProviderController::class, 'approve'])->name('providers.approve');
         Route::put('providers/{provider}/reject', [ProviderController::class, 'reject'])->name('providers.reject');
         Route::resource('scholarships', AdminScholarshipController::class);

@@ -8,111 +8,106 @@ use Illuminate\Http\Request;
 
 class ProviderController extends Controller
 {
+    /**
+     * Display a listing of the provider.
+     */
     public function index()
     {
-        $providers = Provider::all();
+        $providers = Provider::with('user')->get();
+
         return view('admin.providers.index', compact('providers'));
     }
 
-    public function approve($provider)
-{
-    $provider = Provider::findOrFail($provider);
 
-    $provider->status = 'verified';
-    $provider->save();
+    /**
+     * Display the specified provider.
+     */
+    public function show(Provider $provider)
+    {
+        return view('admin.providers.show', compact('provider'));
+    }
 
-    return back()->with('success', 'Provider berhasil diverifikasi');
-}
+    /**
+     * Show the form for editing the specified provider.
+     */
+    public function edit(Provider $provider)
+    {
+        return view('admin.providers.edit', compact('provider'));
+    }
 
-public function reject($provider)
-{
-    $provider = Provider::findOrFail($provider);
+    /**
+     * Update the specified provider in storage.
+     */
+    public function update(Request $request, Provider $provider)
+    {
+        $request->validate([
+            'nama_instansi' => 'required|string|max:255',
+            'email_kontak' => 'required|email|max:255',
+            'website' => 'nullable|url|max:255',
+            'no_hp' => 'required|string|max:20',
+            'alamat' => 'required|string',
+            'deskripsi_instansi' => 'required|string',
+        ]);
 
-    $provider->status = 'rejected';
-    $provider->save();
+        $provider->update([
+            'nama_instansi' => $request->nama_instansi,
+            'email_kontak' => $request->email_kontak,
+            'website' => $request->website,
+            'no_hp' => $request->no_hp,
+            'alamat' => $request->alamat,
+            'deskripsi_instansi' => $request->deskripsi_instansi,
+        ]);
 
-    return back()->with('rejected', 'Provider berhasil ditolak');
-}
+        return redirect()
+            ->route('admin.providers.index')
+            ->with('success', 'Provider berhasil diperbarui');
+    }
 
-public function show($id)
-{
-    $provider = Provider::findOrFail($id);
-    return view('admin.providers.show', compact('provider'));
-}
+    /**
+     * Remove the specified provider from storage.
+     */
+    public function destroy(Provider $provider)
+    {
+        $provider->delete();
 
-public function edit($id)
-{
-    $provider = Provider::findOrFail($id);
-    return view('admin.providers.edit', compact('provider'));
-}
+        return redirect()
+            ->route('admin.providers.index')
+            ->with('success', 'Provider berhasil dihapus');
+    }
 
-public function update(Request $request, $id)
-{
-    $provider = Provider::findOrFail($id);
+    /**
+     * Approve the specified provider's account.
+     */
+    public function approve(Provider $provider)
+    {
+        // Status provider
+        $provider->update([
+            'status' => 'verified',
+        ]);
 
-    $request->validate([
-        'nama_instansi' => 'required',
-        'email_kontak' => 'required|email',
-        'website' => 'nullable|url',
-        'no_hp' => 'required',
-        'alamat' => 'required',
-        'deskripsi_instansi' => 'required',
-    ]);
+        // Status user
+        $provider->user->update([
+            'status' => 'aktif',
+        ]);
 
-    $provider->update([
-        'nama_instansi' => $request->nama_instansi,
-        'email_kontak' => $request->email_kontak,
-        'website' => $request->website,
-        'no_hp' => $request->no_hp,
-        'alamat' => $request->alamat,
-        'deskripsi_instansi' => $request->deskripsi_instansi,
-    ]);
+        return back()->with('success', 'Provider berhasil diverifikasi');
+    }
 
-    return redirect()
-        ->route('admin.providers.index')
-        ->with('success', 'Provider berhasil diperbarui');
-}
+    /**
+     * Reject the specified provider's account.
+     */
+    public function reject(Provider $provider)
+    {
+        // Status provider
+        $provider->update([
+            'status' => 'rejected',
+        ]);
 
-public function destroy($id)
-{
-    $provider = Provider::findOrFail($id);
-    $provider->delete();
+        // Status user
+        $provider->user->update([
+            'status' => 'rejected',
+        ]);
 
-    return redirect()
-        ->route('admin.providers.index')
-        ->with('success', 'Provider berhasil dihapus');
-}
-
-public function create()
-{
-    return view('admin.providers.create');
-}
-
-public function store(Request $request)
-{
-    $request->validate([
-        'nama_instansi' => 'required',
-        'email_kontak' => 'required|email',
-        'website' => 'nullable|url',
-        'no_hp' => 'required',
-        'alamat' => 'required',
-        'deskripsi_instansi' => 'required',
-    ]);
-
-    Provider::create([
-        'nama_instansi' => $request->nama_instansi,
-        'email_kontak' => $request->email_kontak,
-        'website' => $request->website,
-        'no_hp' => $request->no_hp,
-        'alamat' => $request->alamat,
-        'deskripsi_instansi' => $request->deskripsi_instansi,
-        'status' => 'pending',
-        'user_id' => auth()->id(),
-    ]);
-
-    return redirect()
-        ->route('admin.providers.index')
-        ->with('success', 'Provider berhasil ditambahkan');
-}
-
+        return back()->with('success', 'Provider berhasil ditolak');
+    }
 }
