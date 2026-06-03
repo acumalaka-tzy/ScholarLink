@@ -136,4 +136,86 @@
         </table>
     </div>
 </div>
-@endsection
+
+<div class="bg-white rounded-[2rem] border border-gray-100 shadow-xl overflow-hidden mt-10">
+    <div class="px-8 py-7 border-b border-gray-100">
+        <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-600 to-pink-500 text-white flex items-center justify-center text-2xl shadow-lg shadow-purple-500/20">
+                <i class="bi bi-file-earmark-check-fill"></i>
+            </div>
+            <div>
+                <h2 class="text-2xl font-black text-gray-900">Recent Applications</h2>
+                <p class="text-gray-500 font-bold text-sm mt-1">Aplikasi beasiswa terbaru dari mahasiswa</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="w-full min-w-[900px]">
+            <thead class="bg-gray-50 border-b border-gray-100">
+                <tr>
+                    <th class="text-left px-6 py-5 text-sm font-black text-gray-700">Mahasiswa</th>
+                    <th class="text-left px-6 py-5 text-sm font-black text-gray-700">Beasiswa</th>
+                    <th class="text-left px-6 py-5 text-sm font-black text-gray-700">Provider</th>
+                    <th class="text-left px-6 py-5 text-sm font-black text-gray-700">Status</th>
+                    <th class="text-left px-6 py-5 text-sm font-black text-gray-700">Tanggal</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($recentApplications as $application)
+                    <tr class="border-b border-gray-100 hover:bg-purple-50 transition">
+                        <td class="px-6 py-5">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center font-black shadow-md">
+                                    {{ strtoupper(substr($application->user->name ?? 'M', 0, 1)) }}
+                                </div>
+                                <div>
+                                    <div class="font-black text-gray-900">{{ $application->user->name ?? '-' }}</div>
+                                    <div class="text-sm text-gray-500 font-bold mt-1">{{ $application->user->email ?? '-' }}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-5">
+                            <div>
+                                <div class="font-black text-gray-900">{{ $application->scholarship->nama_beasiswa ?? '-' }}</div>
+                                <div class="text-sm text-gray-500 font-bold mt-1">{{ $application->scholarship->category->nama_kategori ?? '-' }}</div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-5">
+                            <div>
+                                <div class="font-black text-gray-900">{{ $application->scholarship->provider->nama_instansi ?? '-' }}</div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-5">
+                            @if($application->status === 'approved')
+                                <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 text-green-700 text-xs font-black border border-green-200">
+                                    <i class="bi bi-check-circle-fill"></i> Approved
+                                </span>
+                            @elseif($application->status === 'rejected')
+                                <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-100 text-red-700 text-xs font-black border border-red-200">
+                                    <i class="bi bi-x-circle-fill"></i> Rejected
+                                </span>
+                            @else
+                                <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-100 text-yellow-700 text-xs font-black border border-yellow-200">
+                                    <i class="bi bi-hourglass-split"></i> Pending
+                                </span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-5 text-gray-600 font-bold">{{ $application->tanggal_apply ? $application->tanggal_apply->format('d M Y H:i') : '-' }}</td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5" class="py-20 text-center">
+                            <div class="flex flex-col items-center">
+                                <div class="w-24 h-24 rounded-full bg-gray-100 flex items-center justify-center text-4xl text-gray-400 mb-5">
+                                    <i class="bi bi-inbox-fill"></i>
+                                </div>
+                                <h3 class="text-2xl font-black text-gray-700 mb-2">Belum Ada Applications</h3>
+                                <p class="text-gray-500 font-bold">Data aplikasi belum tersedia saat ini.</p>
+                            </div>
+                        </td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
