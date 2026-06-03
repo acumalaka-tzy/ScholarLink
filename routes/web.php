@@ -39,7 +39,7 @@ Route::middleware(['auth', 'admin'])
         Route::resource('providers', ProviderController::class)->except(['create', 'store']);
         Route::put('providers/{provider}/approve', [ProviderController::class, 'approve'])->name('providers.approve');
         Route::put('providers/{provider}/reject', [ProviderController::class, 'reject'])->name('providers.reject');
-        Route::resource('scholarships', AdminScholarshipController::class);
+        Route::resource('scholarships', AdminScholarshipController::class)->only(['index', 'update']);
         Route::get('/admin-logs', function () { return "Halaman Admin Logs"; })->name('logs');
     });
 

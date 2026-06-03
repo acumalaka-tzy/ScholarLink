@@ -21,10 +21,6 @@
                 </div>
             </div>
         </div>
-
-        <a href="{{ route('admin.scholarships.create') }}" class="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-7 py-4 rounded-2xl shadow-lg shadow-blue-500/20 font-black transition hover:scale-[1.02] text-center">
-            + Tambah Beasiswa
-        </a>
     </div>
 
     @if(session('success'))
@@ -49,7 +45,6 @@
                         <th class="px-6 py-5 text-left text-sm font-black text-gray-700">Tipe</th>
                         <th class="px-6 py-5 text-left text-sm font-black text-gray-700">Deadline</th>
                         <th class="px-6 py-5 text-left text-sm font-black text-gray-700">Status</th>
-                        <th class="px-6 py-5 text-center text-sm font-black text-gray-700">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -88,40 +83,24 @@
                             </td>
 
                             <td class="px-6 py-5">
-                                @if($scholarship->status == 'aktif')
-                                    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 text-green-700 text-xs font-black border border-green-200">
-                                        <i class="bi bi-check-circle-fill"></i> Aktif
-                                    </span>
-                                @elseif($scholarship->status == 'nonaktif')
-                                    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-100 text-yellow-700 text-xs font-black border border-yellow-200">
-                                        <i class="bi bi-clock-fill"></i> Nonaktif
-                                    </span>
-                                @else
-                                    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-100 text-red-700 text-xs font-black border border-red-200">
-                                        <i class="bi bi-x-circle-fill"></i> Tutup
-                                    </span>
-                                @endif
-                            </td>
-
-                            <td class="px-6 py-5">
-                                <div class="flex items-center justify-center gap-3">
-                                    <a href="{{ route('admin.scholarships.edit', $scholarship->id_beasiswa) }}" class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-xl text-sm font-black transition">
-                                        Edit
-                                    </a>
-
-                                    <form action="{{ route('admin.scholarships.destroy', $scholarship->id_beasiswa) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" onclick="return confirm('Yakin ingin menghapus beasiswa ini?')" class="bg-red-100 hover:bg-red-200 text-red-700 px-4 py-2 rounded-xl text-sm font-black transition">
-                                            Hapus
-                                        </button>
-                                    </form>
-                                </div>
+                                <form action="{{ route('admin.scholarships.update', $scholarship->id_beasiswa) }}" method="POST" class="inline-block">
+                                    @csrf
+                                    @method('PUT')
+                                    <select name="status" onchange="this.form.submit()" class="appearance-none cursor-pointer inline-flex items-center gap-1 px-5 py-2 pr-10 rounded-full text-xs font-black border transition focus:outline-none focus:ring-2 focus:ring-offset-1 
+                                        {{ $scholarship->status == 'aktif' ? 'bg-green-100 border-green-200 text-green-700 focus:ring-green-400' : '' }}
+                                        {{ $scholarship->status == 'nonaktif' ? 'bg-yellow-100 border-yellow-200 text-yellow-700 focus:ring-yellow-400' : '' }}
+                                        {{ $scholarship->status == 'ditutup' ? 'bg-red-100 border-red-200 text-red-700 focus:ring-red-400' : '' }}
+                                    " style="background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 20 20\'%3E%3Cpath stroke=\'%23374151\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M6 8l4 4 4-4\'/%3E%3C/svg%3E'); background-position: right 0.6rem center; background-repeat: no-repeat; background-size: 1.25em 1.25em;">
+                                        <option value="aktif" class="bg-white text-gray-900 font-bold" {{ $scholarship->status == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                                        <option value="nonaktif" class="bg-white text-gray-900 font-bold" {{ $scholarship->status == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
+                                        <option value="ditutup" class="bg-white text-gray-900 font-bold" {{ $scholarship->status == 'ditutup' ? 'selected' : '' }}>Tutup</option>
+                                    </select>
+                                </form>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="py-20 text-center">
+                            <td colspan="4" class="py-20 text-center">
                                 <div class="flex flex-col items-center">
                                     <div class="w-24 h-24 rounded-full bg-gray-100 flex items-center justify-center text-4xl text-gray-400 mb-5">
                                         <i class="bi bi-journal-x"></i>
