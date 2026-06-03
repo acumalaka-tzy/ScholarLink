@@ -92,9 +92,9 @@
                                     <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 text-green-700 text-xs font-black border border-green-200">
                                         <i class="bi bi-check-circle-fill"></i> Aktif
                                     </span>
-                                @elseif($scholarship->status == 'draft')
+                                @elseif($scholarship->status == 'nonaktif')
                                     <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-100 text-yellow-700 text-xs font-black border border-yellow-200">
-                                        <i class="bi bi-clock-fill"></i> Draft
+                                        <i class="bi bi-clock-fill"></i> Nonaktif
                                     </span>
                                 @else
                                     <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-100 text-red-700 text-xs font-black border border-red-200">
