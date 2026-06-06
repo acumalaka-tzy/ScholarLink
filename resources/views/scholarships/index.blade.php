@@ -2,11 +2,11 @@
 
 @section('content')
 
-<a href="{{ url('/') }}" class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-black text-xs sm:text-base transition group">
+<a href="{{ route('home') }}" class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-black text-xs sm:text-base transition group">
     <span class="w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl bg-white group-hover:bg-gray-100 flex items-center justify-center border border-gray-200">
         <i class="bi bi-arrow-left text-sm sm:text-base"></i>
     </span>
-    Kembali ke Beranda
+    Kembali ke halaman utama
 </a>
 
 <div class="min-h-screen bg-[#f4f7f9] py-6 sm:py-10 px-3 sm:px-6 md:px-10 overflow-hidden relative">
