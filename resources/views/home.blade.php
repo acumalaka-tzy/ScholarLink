@@ -407,6 +407,10 @@
                                         <span class="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-black">
                                             🟢 Aktif
                                         </span>
+                                    @elseif($scholarship->status === 'nonaktif')
+                                        <span class="bg-yellow-500/30 backdrop-blur px-3 py-1 rounded-full text-xs font-black">
+                                            🟡 Nonaktif
+                                        </span>
                                     @else
                                         <span class="bg-red-500/30 backdrop-blur px-3 py-1 rounded-full text-xs font-black">
                                             🔴 Ditutup
@@ -589,7 +593,7 @@
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-6 border-t border-cyan-200 pt-8 text-center text-gray-600 text-sm font-black">
-            &copy; 2026 Scholarship Platform. All rights reserved.
+            &copy; 2026 ScholarLink. Semua hak dilindungi.
         </div>
     </footer>
 
