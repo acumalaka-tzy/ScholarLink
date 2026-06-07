@@ -23,7 +23,7 @@ class ProviderController extends Controller
      * Display the specified provider.
      */
     public function show(Provider $provider)
-    {
+    { 
         return view('admin.providers.show', compact('provider'));
     }
 
