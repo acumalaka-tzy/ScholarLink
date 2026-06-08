@@ -37,7 +37,6 @@
         <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-orange-200 rounded-full blur-3xl opacity-30"></div>
     </div>
 
-    <!-- Navigation Bar -->
     @auth
         <x-navbar />
     @endauth
@@ -48,7 +47,6 @@
     @yield('content')
 @endif
 
-    {{-- Toast Notification Component --}}
     <x-toast />
 </body>
 </html>
