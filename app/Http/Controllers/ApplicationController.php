@@ -41,19 +41,16 @@ class ApplicationController extends Controller
         return view('applications.index', compact('applications'));
     }
 
-    public function create()
-    {
-        abort_if(auth()->user()->role !== 'mahasiswa', 403);
+   public function create()
+        {
+            abort_if(auth()->user()->role !== 'mahasiswa', 403);
 
-        $scholarships = Scholarship::with(['provider', 'category'])
-            ->where('status', 'aktif')
-            ->whereDate('deadline', '>=', now())
-            ->latest()
-            ->get();
+            $scholarships = Scholarship::with(['provider', 'category'])
+                ->latest()
+                ->get();
 
-        return view('applications.create', compact('scholarships'));
-    }
-
+            return view('applications.create', compact('scholarships'));
+        }
     public function store(Request $request)
     {
         abort_if(auth()->user()->role !== 'mahasiswa', 403);
