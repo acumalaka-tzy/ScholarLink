@@ -94,7 +94,6 @@ class DocumentController extends Controller
         $application = $document->application;
         $user = auth()->user();
 
-        // Authorization check
         if ($user->role === 'mahasiswa' && $application->id_user !== $user->id) {
             abort(403, 'Unauthorized');
         }
@@ -116,16 +115,12 @@ class DocumentController extends Controller
         $document = Document::findOrFail($id);
         $application = $document->application;
 
-        // Only owner can delete their own documents
         abort_if(auth()->user()->id !== $application->id_user, 403, 'Unauthorized');
 
-        // Can only delete if application is still pending
         abort_if($application->status !== 'pending', 403, 'Tidak dapat menghapus dokumen setelah aplikasi diproses.');
 
-        // Delete file from storage
         \Illuminate\Support\Facades\Storage::disk('public')->delete($document->file_path);
 
-        // Delete document record
         $document->delete();
 
         return back()->with('success', 'Dokumen berhasil dihapus.');

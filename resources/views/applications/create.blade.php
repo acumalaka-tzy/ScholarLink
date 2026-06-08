@@ -34,8 +34,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('applications.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
-                    @csrf
+                <form action="{{ route('applications.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">                    @csrf
 
                     <div>
                         <label class="block text-gray-700 font-black mb-2 sm:mb-3 text-xs sm:text-lg">Pilih Beasiswa</label>

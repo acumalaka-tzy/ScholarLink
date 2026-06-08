@@ -7,8 +7,8 @@ use App\Models\ApplicationStatusLog;
 use App\Models\Document;
 use App\Models\Scholarship;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class ApplicationController extends Controller
 {
@@ -20,6 +20,7 @@ class ApplicationController extends Controller
             'user',
             'scholarship.provider',
             'scholarship.category',
+            'documents',
         ]);
 
         if ($user->role === 'mahasiswa') {
@@ -41,7 +42,7 @@ class ApplicationController extends Controller
         return view('applications.index', compact('applications'));
     }
 
-   public function create()
+    public function create()
     {
         abort_if(auth()->user()->role !== 'mahasiswa', 403);
 
@@ -51,6 +52,7 @@ class ApplicationController extends Controller
 
         return view('applications.create', compact('scholarships'));
     }
+
     public function store(Request $request)
     {
         abort_if(auth()->user()->role !== 'mahasiswa', 403);
@@ -74,8 +76,6 @@ class ApplicationController extends Controller
         ]);
 
         $scholarship = Scholarship::where('id_beasiswa', $request->id_beasiswa)
-            ->where('status', 'aktif')
-            ->whereDate('deadline', '>=', now())
             ->firstOrFail();
 
         $application = Application::create([
@@ -86,13 +86,18 @@ class ApplicationController extends Controller
             'catatan' => $request->catatan ?? null,
         ]);
 
-        // Handle document uploads
         if ($request->has('documents') && is_array($request->documents)) {
             foreach ($request->documents as $document) {
                 if (isset($document['file']) && $document['file'] instanceof \Illuminate\Http\UploadedFile) {
                     $file = $document['file'];
+
                     $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-                    $path = $file->storeAs('applications/' . $application->id_application, $filename, 'public');
+
+                    $path = $file->storeAs(
+                        'applications/' . $application->id_application,
+                        $filename,
+                        'public'
+                    );
 
                     Document::create([
                         'id_application' => $application->id_application,
@@ -114,26 +119,30 @@ class ApplicationController extends Controller
 
         return redirect()
             ->route('applications.index')
-            ->with('success', "Berhasil apply beasiswa {$scholarship->nama_beasiswa}! Data aplikasi Anda telah dikirim ke penyedia beasiswa dan admin.")
-            ->with('scholarship_name', $scholarship->nama_beasiswa)
-            ->with('application_id', $application->id_application);
+            ->with('success', "Berhasil apply beasiswa {$scholarship->nama_beasiswa}! Data aplikasi Anda telah dikirim.");
     }
 
     public function show($id)
     {
-        $application = Application::with(['user', 'scholarship.provider', 'scholarship.category', 'documents', 'statusLogs'])
+        $application = Application::with([
+            'user',
+            'scholarship.provider',
+            'scholarship.category',
+            'documents',
+            'statusLogs',
+        ])
             ->where('id_application', $id)
             ->firstOrFail();
 
         $user = auth()->user();
 
-        // Authorization check
         if ($user->role === 'mahasiswa' && $application->id_user !== $user->id) {
             abort(403, 'Unauthorized');
         }
 
         if ($user->role === 'provider') {
             $provider = $user->provider;
+
             abort_if(! $provider, 403, 'Akun provider belum terhubung dengan data provider.');
             abort_if($application->scholarship->id_provider !== $provider->id_provider, 403, 'Unauthorized');
         }
@@ -207,21 +216,19 @@ class ApplicationController extends Controller
 
     public function destroy($id)
     {
-        $application = Application::findOrFail($id);
+        $application = Application::with('documents')
+            ->where('id_application', $id)
+            ->firstOrFail();
 
-        // Only owner can delete their own applications
         abort_if(auth()->user()->id !== $application->id_user, 403, 'Unauthorized');
 
-        // Can only delete if application is still pending
         abort_if($application->status !== 'pending', 403, 'Tidak dapat membatalkan aplikasi yang sudah diproses.');
 
-        // Delete all associated documents
         foreach ($application->documents as $document) {
             Storage::disk('public')->delete($document->file_path);
             $document->delete();
         }
 
-        // Delete application
         $application->delete();
 
         return redirect()

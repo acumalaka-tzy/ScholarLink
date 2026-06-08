@@ -7,7 +7,6 @@
         <div class="absolute bottom-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-orange-200 rounded-full blur-3xl opacity-30"></div>
     </div>
 
-    {{-- Back Button --}}
     <div class="mb-4 sm:mb-8">
         <a href="{{ route('dashboard') }}" class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-black text-xs sm:text-base transition group">
             <span class="w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl bg-white group-hover:bg-gray-100 flex items-center justify-center border border-gray-200">
@@ -17,7 +16,6 @@
         </a>
     </div>
 
-    {{-- Success Notification Alert --}}
     @if(session('success'))
         <div id="success-alert" class="mb-6 sm:mb-8 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg sm:rounded-2xl p-4 sm:p-6 shadow-lg animate-bounce-in">
             <div class="flex flex-col sm:flex-row sm:items-start gap-4">
@@ -142,19 +140,19 @@
                     </div>
 
                     <div class="mb-8">
-                        @if($application->status == 'pending')
-                            <span class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-yellow-100 text-yellow-700 border border-yellow-200 text-sm font-black">
-                                <i class="bi bi-hourglass-split"></i> Pending
-                            </span>
-                        @elseif($application->status == 'approved')
-                            <span class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-green-100 text-green-700 border border-green-200 text-sm font-black">
-                                <i class="bi bi-check-circle-fill"></i> Approved
-                            </span>
-                        @elseif($application->status == 'rejected')
-                            <span class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-red-100 text-red-700 border border-red-200 text-sm font-black">
-                                <i class="bi bi-x-circle-fill"></i> Rejected
-                            </span>
-                        @endif
+                       @if($application->status == 'pending')
+                        <span class="px-4 py-2 rounded-full bg-yellow-100 text-yellow-700 font-black">
+                            🟡 Pending
+                        </span>
+                    @elseif($application->status == 'approved')
+                        <span class="px-4 py-2 rounded-full bg-green-100 text-green-700 font-black">
+                            🟢 Approved
+                        </span>
+                    @else
+                        <span class="px-4 py-2 rounded-full bg-red-100 text-red-700 font-black">
+                            🔴 Rejected
+                        </span>
+                    @endif
                     </div>
 
                     <div class="flex flex-wrap gap-4">
