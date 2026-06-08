@@ -20,31 +20,64 @@
                 <span class="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-blue-700 px-3 sm:px-5 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-black mb-3 sm:mb-4">
                     <i class="bi bi-mortarboard-fill"></i> {{ $scholarship->category->nama_kategori ?? 'Umum' }}
                 </span>
+                <span class="inline-flex items-center gap-2 bg-green-50 border border-green-100 text-green-700 px-3 sm:px-5 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-black">
+                    <i class="bi bi-award-fill"></i> {{ $scholarship->tipe }}
+                </span>
                 <h1 class="text-2xl sm:text-4xl md:text-6xl font-black text-gray-900 mb-2 sm:mb-4 leading-tight">{{ $scholarship->nama_beasiswa }}</h1>
                 <p class="text-gray-500 text-xs sm:text-lg font-bold">{{ $scholarship->deskripsi }}</p>
             </div>
 
             {{-- Info Cards --}}
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-10">
+            <div class="grid grid-cols-1 sm:grid-cols-{{ auth()->check() && auth()->user()->role == 'mahasiswa' ? '3' : '2' }} gap-4 sm:gap-6 mb-8 sm:mb-10">
+                
+                {{-- Provider --}}
                 <div class="bg-gray-50 p-4 sm:p-6 rounded-lg sm:rounded-2xl border border-gray-100">
                     <p class="text-gray-400 font-bold text-xs uppercase">Provider</p>
                     <h3 class="text-base sm:text-xl font-black mt-2">{{ $scholarship->provider->nama_instansi ?? '-' }}</h3>
                 </div>
+
+                {{-- Deadline --}}
                 <div class="bg-gray-50 p-4 sm:p-6 rounded-lg sm:rounded-2xl border border-gray-100">
                     <p class="text-gray-400 font-bold text-xs uppercase">Deadline</p>
                     <h3 class="text-base sm:text-xl font-black mt-2">{{ \Carbon\Carbon::parse($scholarship->deadline)->format('d F Y') }}</h3>
                 </div>
+
+                {{-- Situs Resmi (Hanya untuk Mahasiswa Login) --}}
+                @auth
+                    @if(auth()->user()->role == 'mahasiswa')
+                        <div class="bg-blue-50 p-4 sm:p-6 rounded-lg sm:rounded-2xl border border-blue-100">
+                            <p class="text-blue-500 font-black text-[10px] sm:text-xs uppercase tracking-wider">Situs Resmi</p>
+                            <a href="{{ $scholarship->provider->website ?? '#' }}" target="_blank" 
+                            class="text-blue-700 font-black mt-1 block hover:underline truncate text-sm sm:text-base">
+                            {{ $scholarship->provider->website ? parse_url($scholarship->provider->website, PHP_URL_HOST) : '-' }}
+                            </a>
+                        </div>
+                    @endif
+                @endauth
             </div>
 
             {{-- Requirements & Benefits --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-10">
                 <div class="bg-blue-50 p-4 sm:p-6 rounded-lg sm:rounded-2xl border border-blue-100">
                     <h2 class="font-black text-base sm:text-lg mb-3">Persyaratan</h2>
-                    <p class="text-gray-600 text-xs sm:text-base leading-relaxed">{{ $scholarship->syarat }}</p>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-600 text-xs sm:text-base leading-relaxed">
+                        @foreach(explode(";", $scholarship->syarat) as $baris)
+                            @if(trim($baris) !== '')
+                                <li>{{ trim($baris) }}</li>
+                            @endif
+                        @endforeach
+                    </ul>
                 </div>
+                
                 <div class="bg-green-50 p-4 sm:p-6 rounded-lg sm:rounded-2xl border border-green-100">
                     <h2 class="font-black text-base sm:text-lg mb-3">Benefit</h2>
-                    <p class="text-gray-600 text-xs sm:text-base leading-relaxed">{{ $scholarship->benefit }}</p>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-600 text-xs sm:text-base leading-relaxed">
+                        @foreach(explode(";", $scholarship->benefit) as $baris)
+                            @if(trim($baris) !== '')
+                                <li>{{ trim($baris) }}</li>
+                            @endif
+                        @endforeach
+                    </ul>
                 </div>
             </div>
 
