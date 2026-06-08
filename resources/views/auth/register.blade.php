@@ -79,18 +79,25 @@
             </div>
 
             <p class="text-gray-400 text-xs lg:text-sm relative z-10 font-bold">
-                &copy; 2026 ScholarLink. Semua hak dilindungi secara berwarna.
+                &copy; 2026 ScholarLink. Semua hak dilindungi.
             </p>
         </div>
 
         <div class="flex items-center justify-center p-4 md:p-6 lg:p-8 lg:p-12 bg-[#f4f7f9] min-h-screen lg:min-h-auto">
-            <div class="w-full max-w-md bg-white p-5 md:p-8 lg:p-10 rounded-2xl md:rounded-[2.5rem] shadow-sm border border-gray-100">
-                <div class="mb-6 md:mb-8">
-                    <h3 class="text-2xl md:text-3xl font-black text-gray-900 mb-2">Buat Akun</h3>
-                    <p class="text-gray-500 font-bold text-xs md:text-sm">Sudah punya akun? <a href="{{ route('login') }}" class="text-blue-600 hover:underline">Masuk di sini</a></p>
-                </div>
+            <div class="w-full flex flex-col items-center">
 
-                <form method="POST" action="{{ route('register') }}" class="register-form space-y-4 md:space-y-5">
+                <!-- CARD REGISTER -->
+                <div class="w-full max-w-md bg-white p-5 md:p-8 lg:p-10 rounded-2xl md:rounded-[2.5rem] shadow-sm border border-gray-100">
+                    
+                    <div class="mb-6 md:mb-8">
+                        <h3 class="text-2xl md:text-3xl font-black text-gray-900 mb-2">Buat Akun</h3>
+                        <p class="text-gray-500 font-bold text-xs md:text-sm">
+                            Sudah punya akun? 
+                            <a href="{{ route('login') }}" class="text-blue-600 hover:underline">Masuk di sini</a>
+                        </p>
+                    </div>
+
+                    <form method="POST" action="{{ route('register') }}" class="register-form space-y-4 md:space-y-5">
                     @csrf
 
                     <div>
@@ -166,9 +173,19 @@
                         Daftar Akun Gratis
                     </button>
                 </form>
+                </div>
+
+                <div class="w-full max-w-md mt-4 md:mt-6 flex justify-center">
+                    <a href="{{ route('home') }}"
+                    class="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 text-xs md:text-sm font-black transition">
+                        <i class="bi bi-arrow-left"></i>
+                        Kembali ke halaman utama
+                    </a>
+                </div>
+
             </div>
         </div>
-
+    
     </div>
 
 </body>
