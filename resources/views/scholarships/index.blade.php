@@ -42,7 +42,6 @@
             @endauth
         </div>
 
-        {{-- Search and Filter Section --}}
         <div class="mb-10 sm:mb-14 bg-white rounded-[2rem] p-6 sm:p-8 border border-gray-100 shadow-sm">
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-4 sm:pl-6 flex items-center pointer-events-none">
@@ -81,7 +80,6 @@
                 data-description="{{ $item->deskripsi }}"
             >
 
-                {{-- Header --}}
                 <div class="relative bg-gradient-to-br from-blue-600 via-cyan-500 to-indigo-600 px-6 py-5 text-white">
 
                     <div class="absolute top-4 right-4">
@@ -114,7 +112,6 @@
 
                 </div>
 
-                {{-- Body --}}
                 <div class="p-6 flex-grow">
 
                     <div class="bg-green-50 border border-green-100 rounded-2xl p-4 mb-5">
@@ -145,7 +142,6 @@
 
                 </div>
 
-                {{-- Footer --}}
                 <div class="p-6 pt-0">
 
                     <div class="flex gap-3">
@@ -178,7 +174,6 @@
             @endforeach
             </div>
 
-            {{-- No Results Message --}}
             <div id="noResults" class="hidden bg-white border border-gray-100 rounded-lg sm:rounded-[2.5rem] shadow-sm p-8 sm:p-16 text-center">
                 <div class="w-20 sm:w-24 h-20 sm:h-24 mx-auto rounded-lg sm:rounded-[2rem] bg-yellow-100 text-yellow-400 flex items-center justify-center text-3xl sm:text-4xl mb-6 sm:mb-8">
                     <i class="bi bi-search"></i>
@@ -208,7 +203,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const category = card.getAttribute('data-category').toLowerCase();
             const description = card.getAttribute('data-description').toLowerCase();
 
-            // Check if search term matches any field
             const matches = 
                 name.includes(searchTerm) ||
                 provider.includes(searchTerm) ||
@@ -218,14 +212,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (searchTerm === '' || matches) {
                 card.style.display = '';
                 visibleCount++;
-                // Add subtle animation
                 card.style.animation = 'fadeIn 0.3s ease-in';
             } else {
                 card.style.display = 'none';
             }
         });
 
-        // Show/hide no results message
         if (visibleCount === 0 && searchTerm !== '') {
             if (scholarshipContainer) scholarshipContainer.style.display = 'none';
             if (noResultsDiv) noResultsDiv.style.display = 'block';
@@ -237,13 +229,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Add event listeners
     if (searchInput) {
         searchInput.addEventListener('input', filterScholarships);
         searchInput.addEventListener('keyup', filterScholarships);
     }
 
-    // Add fade-in animation
     const style = document.createElement('style');
     style.textContent = `
         @keyframes fadeIn {
