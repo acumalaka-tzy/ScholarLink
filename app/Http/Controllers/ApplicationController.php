@@ -42,15 +42,15 @@ class ApplicationController extends Controller
     }
 
    public function create()
-        {
-            abort_if(auth()->user()->role !== 'mahasiswa', 403);
+    {
+        abort_if(auth()->user()->role !== 'mahasiswa', 403);
 
-            $scholarships = Scholarship::with(['provider', 'category'])
-                ->latest()
-                ->get();
+        $scholarships = Scholarship::with(['provider', 'category'])
+            ->latest()
+            ->get();
 
-            return view('applications.create', compact('scholarships'));
-        }
+        return view('applications.create', compact('scholarships'));
+    }
     public function store(Request $request)
     {
         abort_if(auth()->user()->role !== 'mahasiswa', 403);
