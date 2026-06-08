@@ -37,7 +37,11 @@
                 </div>
             </div>
 
-            <form method="post" action="{{ route('profile.update') }}" class="space-y-6 sm:space-y-8">
+            <form method="post"
+                action="{{ route('profile.update') }}"
+                enctype="multipart/form-data"
+                class="space-y-6 sm:space-y-8">                
+      
                 @csrf
                 @method('patch')
 
@@ -87,6 +91,78 @@
                             </div>
                         </div>
                     @endif
+                </div>
+
+                <div>
+                    <x-input-label for="bio" value="Bio" />
+
+                    <textarea id="bio"
+                            name="bio"
+                            rows="4"
+                            class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500"
+                            placeholder="Ceritakan sedikit tentang diri kamu...">{{ old('bio', $user->profile->bio ?? '') }}</textarea>
+
+                    <x-input-error class="mt-2" :messages="$errors->get('bio')" />
+                </div>
+
+                <div>
+                    <x-input-label for="universitas" value="Universitas" />
+
+                    <x-text-input id="universitas"
+                                name="universitas"
+                                type="text"
+                                class="mt-1 block w-full"
+                                value="{{ old('universitas', $user->profile->universitas ?? '') }}"
+                                placeholder="Contoh: Universitas Sumatera Utara" />
+
+                    <x-input-error class="mt-2" :messages="$errors->get('universitas')" />
+                </div>
+
+                <div>
+                    <x-input-label for="nomor_telepon" value="Nomor Telepon" />
+
+                    <x-text-input id="nomor_telepon"
+                                name="nomor_telepon"
+                                type="text"
+                                class="mt-1 block w-full"
+                                value="{{ old('nomor_telepon', $user->profile->nomor_telepon ?? '') }}"
+                                placeholder="Contoh: 081234567890" />
+
+                    <x-input-error class="mt-2" :messages="$errors->get('nomor_telepon')" />
+                </div>
+
+                <div>
+                    <x-input-label for="alamat" value="Alamat" />
+
+                    <textarea id="alamat"
+                            name="alamat"
+                            rows="3"
+                            class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500"
+                            placeholder="Masukkan alamat kamu...">{{ old('alamat', $user->profile->alamat ?? '') }}</textarea>
+
+                    <x-input-error class="mt-2" :messages="$errors->get('alamat')" />
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-black mb-3 text-lg">
+                        Foto Profil
+                    </label>
+
+                    <input type="file"
+                        name="foto_profil"
+                        accept="image/*"
+                        class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4">
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-black mb-3 text-lg">
+                        Foto Sampul
+                    </label>
+
+                    <input type="file"
+                        name="foto_sampul"
+                        accept="image/*"
+                        class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-4">
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-3 sm:gap-5 pt-4">

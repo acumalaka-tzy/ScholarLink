@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\VerifyEmailNotification;
 use Illuminate\Support\Facades\URL;
+use App\Models\Profile;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
