@@ -3,14 +3,12 @@
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-10">
 
-    {{-- Tombol Kembali ke Detail Beasiswa --}}
     <div class="mb-8">
         <a href="{{ route('scholarships.show', $scholarship->id_beasiswa) }}" class="inline-flex items-center gap-2 text-blue-600 hover:text-cyan-600 font-black transition text-lg">
             <i class="bi bi-arrow-left"></i> Kembali ke Beasiswa
         </a>
     </div>
 
-    {{-- Header Section --}}
     <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10">
         <div>
             <div class="flex items-center gap-5">
@@ -24,7 +22,6 @@
             </div>
         </div>
 
-        {{-- Akses Kontrol: Tombol Buat Room hanya untuk Provider --}}
         @if(auth()->user()->role === 'provider')
         <a href="#create-room" class="inline-flex items-center justify-center gap-3 px-7 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black shadow-xl shadow-blue-500/20 hover:scale-[1.02] transition">
             <i class="bi bi-plus-circle-fill"></i> Buat Room
@@ -32,7 +29,6 @@
         @endif
     </div>
 
-    {{-- Session Alerts --}}
     @if(session('success'))
         <div class="mb-8 bg-green-50 border border-green-200 rounded-3xl p-6 text-green-700 font-black flex items-center gap-4">
             <i class="bi bi-check-circle-fill text-2xl"></i> {{ session('success') }}
@@ -45,7 +41,6 @@
         </div>
     @endif
 
-    {{-- Create Room Form: Hanya muncul jika user adalah provider --}}
     @if(auth()->user()->role === 'provider')
     <div id="create-room" class="bg-white border border-gray-100 rounded-[2rem] shadow-2xl overflow-hidden mb-10 scroll-mt-20">
     <div class="h-2 bg-gradient-to-r {{ $config['cardColor'] }}"></div>        <div class="p-8 md:p-10">
@@ -63,7 +58,6 @@
     </div>
     @endif
 
-    {{-- Room Grid --}}
     <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
         @forelse($chatRooms as $room)
             <a href="{{ route('chat-rooms.show', $room->id_room) }}" class="group block bg-white border border-gray-100 rounded-[2rem] p-8 shadow-lg hover:shadow-2xl transition-all hover:scale-[1.02]">

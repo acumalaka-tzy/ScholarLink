@@ -11,8 +11,7 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user();
-        
-        // Get user's applications with scholarships
+
         $applications = Application::where('id_user', $user->id)
             ->with(['scholarship' => function ($query) {
                 $query->with('provider');
@@ -21,7 +20,6 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
         
-        // Get recommended scholarships for the user
         $recommendedScholarships = Scholarship::with('provider')
             ->where('status', 'aktif')
             ->orderByDesc('tanggal_dibuat')
