@@ -47,7 +47,7 @@ class RegisteredUserController extends Controller
             'status' => 
                 ($request->role === 'provider') 
                     ? 'pending' 
-                    : aktif,
+                    : 'aktif',
         ]);
 
         if ($user->role === 'provider') {

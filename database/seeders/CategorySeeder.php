@@ -9,23 +9,17 @@ class CategorySeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('categories')->insert([
+        $categories = [
+            ['nama_kategori' => 'Pemerintah', 'deskripsi' => 'Beasiswa yang diselenggarakan oleh lembaga pemerintah'],
+            ['nama_kategori' => 'BUMN', 'deskripsi' => 'Beasiswa yang diselenggarakan oleh Badan Usaha Milik Negara'],
+            ['nama_kategori' => 'Swasta', 'deskripsi' => 'Beasiswa yang diselenggarakan oleh pihak swasta atau yayasan'],
+        ];
 
-            [
-                'nama_kategori' => 'Teknologi',
-                'deskripsi' => 'Beasiswa bidang teknologi'
-            ],
-
-            [
-                'nama_kategori' => 'Bisnis',
-                'deskripsi' => 'Beasiswa bidang bisnis'
-            ],
-
-            [
-                'nama_kategori' => 'Kesehatan',
-                'deskripsi' => 'Beasiswa bidang kesehatan'
-            ],
-
-        ]);
+        foreach ($categories as $category) {
+            DB::table('categories')->updateOrInsert(
+                ['nama_kategori' => $category['nama_kategori']],
+                ['deskripsi' => $category['deskripsi']]
+            );
+        }
     }
 }

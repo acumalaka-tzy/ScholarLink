@@ -39,7 +39,7 @@ Route::middleware(['auth', 'admin'])
         Route::resource('providers', ProviderController::class)->except(['create', 'store']);
         Route::put('providers/{provider}/approve', [ProviderController::class, 'approve'])->name('providers.approve');
         Route::put('providers/{provider}/reject', [ProviderController::class, 'reject'])->name('providers.reject');
-        Route::resource('scholarships', AdminScholarshipController::class);
+        Route::resource('scholarships', AdminScholarshipController::class)->only(['index', 'update']);
         Route::get('/admin-logs', function () { return "Halaman Admin Logs"; })->name('logs');
     });
 
@@ -61,8 +61,7 @@ Route::middleware(['auth', 'verified', 'provider'])
 // ==========================
 // MAHASISWA & COMMON AREA
 // ==========================
-Route::middleware(['auth', 'verified'])->group(function () {
-    // Mahasiswa
+Route::middleware(['auth'])->group(function () {
     Route::middleware(['mahasiswa'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::post('/favorites/{id}', [FavoriteController::class, 'store'])->name('favorites.store');
@@ -71,15 +70,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('documents', DocumentController::class);
     });
 
-    // Chat Room (Digabung agar bisa diakses semua auth)
     Route::get('/scholarships/{id}/chat-rooms', [ChatRoomController::class, 'index'])->name('chat-rooms.index.scholarship');
-    // Store dengan parameter optional agar bisa dipanggil dari mana saja
     Route::post('/chat-rooms/store/{id_beasiswa?}', [ChatRoomController::class, 'store'])->name('chat-rooms.store');
     Route::get('/chat-rooms/{id}', [ChatRoomController::class, 'show'])->name('chat-rooms.show');
     Route::post('/chat-rooms/{id}/messages', [ChatRoomController::class, 'sendMessage'])->name('chat-rooms.messages.store');
 
-    Route::resource('applications', ApplicationController::class);
-    Route::post('/applications/{id}/approve', [ApplicationController::class, 'approve'])->name('applications.approve');
+    Route::get('/applications', [ApplicationController::class, 'index'])
+        ->name('applications.index');
+
+    Route::get('/applications/create', [ApplicationController::class, 'create'])
+        ->name('applications.create');
+
+    Route::post('/applications', [ApplicationController::class, 'store'])
+        ->name('applications.store');
+
+    Route::get('/applications/{id}', [ApplicationController::class, 'show'])
+        ->name('applications.show');
+
+    Route::delete('/applications/{id}', [ApplicationController::class, 'destroy'])
+        ->name('applications.destroy');    Route::post('/applications/{id}/approve', [ApplicationController::class, 'approve'])->name('applications.approve');
+        
     Route::post('/applications/{id}/reject', [ApplicationController::class, 'reject'])->name('applications.reject');
     Route::get('/documents/{id}/download', [DocumentController::class, 'download'])->name('documents.download');
     Route::delete('/documents/{id}', [DocumentController::class, 'destroy'])->name('documents.destroy');

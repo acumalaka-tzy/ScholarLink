@@ -17,7 +17,6 @@
             font-family: 'Nunito', sans-serif !important;
         }
         
-        /* Responsive Improvements */
         @media (max-width: 768px) {
             .register-form input,
             .register-form select {
@@ -79,18 +78,24 @@
             </div>
 
             <p class="text-gray-400 text-xs lg:text-sm relative z-10 font-bold">
-                &copy; 2026 ScholarLink. Semua hak dilindungi secara berwarna.
+                &copy; 2026 ScholarLink. Semua hak dilindungi.
             </p>
         </div>
 
         <div class="flex items-center justify-center p-4 md:p-6 lg:p-8 lg:p-12 bg-[#f4f7f9] min-h-screen lg:min-h-auto">
-            <div class="w-full max-w-md bg-white p-5 md:p-8 lg:p-10 rounded-2xl md:rounded-[2.5rem] shadow-sm border border-gray-100">
-                <div class="mb-6 md:mb-8">
-                    <h3 class="text-2xl md:text-3xl font-black text-gray-900 mb-2">Buat Akun</h3>
-                    <p class="text-gray-500 font-bold text-xs md:text-sm">Sudah punya akun? <a href="{{ route('login') }}" class="text-blue-600 hover:underline">Masuk di sini</a></p>
-                </div>
+            <div class="w-full flex flex-col items-center">
 
-                <form method="POST" action="{{ route('register') }}" class="register-form space-y-4 md:space-y-5">
+                <div class="w-full max-w-md bg-white p-5 md:p-8 lg:p-10 rounded-2xl md:rounded-[2.5rem] shadow-sm border border-gray-100">
+                    
+                    <div class="mb-6 md:mb-8">
+                        <h3 class="text-2xl md:text-3xl font-black text-gray-900 mb-2">Buat Akun</h3>
+                        <p class="text-gray-500 font-bold text-xs md:text-sm">
+                            Sudah punya akun? 
+                            <a href="{{ route('login') }}" class="text-blue-600 hover:underline">Masuk di sini</a>
+                        </p>
+                    </div>
+
+                    <form method="POST" action="{{ route('register') }}" class="register-form space-y-4 md:space-y-5">
                     @csrf
 
                     <div>
@@ -140,12 +145,29 @@
                     </div>
 
                     <div>
-                        <label for="password" class="block text-xs md:text-sm font-black text-gray-700 mb-2">Password</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 md:pl-4 text-gray-400 pointer-events-none">
-                                <i class="bi bi-lock-fill text-sm md:text-base"></i>
-                            </span>
-                            <input type="password" id="password" name="password" required class="w-full pl-10 md:pl-11 pr-3 md:pr-4 py-2.5 md:py-3 bg-gray-50 border-2 border-gray-100 rounded-lg md:rounded-xl font-semibold text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white transition text-sm md:text-base">
+                        <div>
+                            <label for="password" class="block text-xs md:text-sm font-black text-gray-700 mb-2">Password</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-3 md:pl-4 text-gray-400 pointer-events-none">
+                                    <i class="bi bi-lock-fill text-sm md:text-base"></i>
+                                </span>
+
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    required
+                                    class="w-full pl-10 md:pl-11 pr-12 py-2.5 md:py-3 bg-gray-50 border-2 border-gray-100 rounded-lg md:rounded-xl font-semibold text-gray-900 focus:outline-none focus:border-blue-500 focus:bg-white transition text-sm md:text-base">
+
+                                <button
+                                    type="button"
+                                    onclick="togglePassword()"
+                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 hover:text-blue-600">
+
+                                    <i id="eyeIcon" class="bi bi-eye-fill"></i>
+
+                                </button>
+                            </div>
                         </div>
                         @error('password')
                             <p class="text-red-500 text-xs font-bold mt-1">{{ $message }}</p>
@@ -153,12 +175,30 @@
                     </div>
 
                     <div>
-                        <label for="password_confirmation" class="block text-xs md:text-sm font-black text-gray-700 mb-2">Konfirmasi Password</label>
+                        <label for="password_confirmation" class="block text-xs md:text-sm font-black text-gray-700 mb-2">
+                            Konfirmasi Password
+                        </label>
+
                         <div class="relative">
                             <span class="absolute inset-y-0 left-0 flex items-center pl-3 md:pl-4 text-gray-400 pointer-events-none">
                                 <i class="bi bi-shield-lock-fill text-sm md:text-base"></i>
                             </span>
-                            <input type="password" id="password_confirmation" name="password_confirmation" required class="w-full pl-10 md:pl-11 pr-3 md:pr-4 py-2.5 md:py-3 bg-gray-50 border-2 border-gray-100 rounded-lg md:rounded-xl font-semibold text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white transition text-sm md:text-base">
+
+                            <input
+                                type="password"
+                                id="password_confirmation"
+                                name="password_confirmation"
+                                required
+                                class="w-full pl-10 md:pl-11 pr-12 py-2.5 md:py-3 bg-gray-50 border-2 border-gray-100 rounded-lg md:rounded-xl font-semibold text-gray-900 focus:outline-none focus:border-blue-500 focus:bg-white transition text-sm md:text-base">
+
+                            <button
+                                type="button"
+                                onclick="toggleConfirmPassword()"
+                                class="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 hover:text-blue-600">
+
+                                <i id="eyeConfirmIcon" class="bi bi-eye-fill"></i>
+
+                            </button>
                         </div>
                     </div>
 
@@ -166,10 +206,48 @@
                         Daftar Akun Gratis
                     </button>
                 </form>
+                </div>
+
+                <div class="w-full max-w-md mt-4 md:mt-6 flex justify-center">
+                    <a href="{{ route('home') }}"
+                    class="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 text-xs md:text-sm font-black transition">
+                        <i class="bi bi-arrow-left"></i>
+                        Kembali ke halaman utama
+                    </a>
+                </div>
+
             </div>
         </div>
-
+    
     </div>
+
+    <script>
+        function togglePassword() {
+            const password = document.getElementById('password');
+            const icon = document.getElementById('eyeIcon');
+
+            if (password.type === 'password') {
+                password.type = 'text';
+                icon.classList.replace('bi-eye-fill', 'bi-eye-slash-fill');
+            } else {
+                password.type = 'password';
+                icon.classList.replace('bi-eye-slash-fill', 'bi-eye-fill');
+            }
+        }
+
+        function toggleConfirmPassword() {
+            const password = document.getElementById('password_confirmation');
+            const icon = document.getElementById('eyeConfirmIcon');
+
+            if (password.type === 'password') {
+                password.type = 'text';
+                icon.classList.replace('bi-eye-fill', 'bi-eye-slash-fill');
+            } else {
+                password.type = 'password';
+                icon.classList.replace('bi-eye-slash-fill', 'bi-eye-fill');
+            }
+        }
+        </script>
 
 </body>
 </html>
