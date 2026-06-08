@@ -112,6 +112,10 @@
                             <p class="text-blue-100 text-sm mt-1 font-semibold">
                                 {{ $item->provider->nama_instansi ?? 'Provider' }}
                             </p>
+
+                            <span class="inline-block mt-2 px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-black">
+                                {{ $item->tipe }}
+                            </span>
                         </div>
 
                         <div class="p-6 flex-grow">
@@ -148,15 +152,6 @@
                                     class="flex-1 text-center bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-3.5 rounded-2xl font-black transition-all duration-300">
                                     Detail
                                 </a>
-
-                                @auth
-                                    @if(auth()->user()->role == 'mahasiswa')
-                                        <a href="{{ route('applications.create') }}?id_beasiswa={{ $item->id_beasiswa }}"
-                                           class="bg-green-500 hover:bg-green-600 text-white px-5 py-3.5 rounded-2xl font-black transition">
-                                            Apply
-                                        </a>
-                                    @endif
-                                @endauth
                             </div>
                         </div>
                     </div>
