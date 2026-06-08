@@ -11,35 +11,55 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
     public function edit(Request $request): View
     {
+        $request->user()->load('profile');
+
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $user->fill($request->validated());
+
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        $user->save();
+
+        $fotoProfil = $user->profile->foto_profil ?? null;
+        $fotoSampul = $user->profile->foto_sampul ?? null;
+
+        if ($request->hasFile('foto_profil')) {
+            $fotoProfil = $request->file('foto_profil')
+                ->store('profiles/foto-profil', 'public');
+        }
+
+        if ($request->hasFile('foto_sampul')) {
+            $fotoSampul = $request->file('foto_sampul')
+                ->store('profiles/foto-sampul', 'public');
+        }
+
+        $user->profile()->updateOrCreate(
+            ['user_id' => $user->id],
+            [
+                'bio' => $request->bio,
+                'universitas' => $request->universitas,
+                'nomor_telepon' => $request->nomor_telepon,
+                'alamat' => $request->alamat,
+                'foto_profil' => $fotoProfil,
+                'foto_sampul' => $fotoSampul,
+            ]
+        );
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
-    /**
-     * Delete the user's account.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [

@@ -9,8 +9,14 @@ class Profile extends Model
     protected $table = 'profiles';
 
     protected $fillable = [
-        'user_id',
-    ];
+    'user_id',
+    'bio',
+    'foto_profil',
+    'foto_sampul',
+    'universitas',
+    'alamat',
+    'nomor_telepon',
+];
 
     public function user()
     {
