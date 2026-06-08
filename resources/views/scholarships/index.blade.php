@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
+<a href="{{ route('home') }}" class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-black text-xs sm:text-base transition group">
+    <span class="w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl bg-white group-hover:bg-gray-100 flex items-center justify-center border border-gray-200">
+        <i class="bi bi-arrow-left text-sm sm:text-base"></i>
+    </span>
+    Kembali ke halaman utama
+</a>
+
 <div class="min-h-screen bg-[#f4f7f9] py-6 sm:py-10 px-3 sm:px-6 md:px-10 overflow-hidden relative">
     <div class="fixed inset-0 -z-10 overflow-hidden">
         <div class="absolute top-0 left-0 w-64 sm:w-96 h-64 sm:h-96 bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
@@ -35,7 +43,7 @@
         </div>
 
         {{-- Search and Filter Section --}}
-        <div class="mb-8 sm:mb-12">
+        <div class="mb-10 sm:mb-14 bg-white rounded-[2rem] p-6 sm:p-8 border border-gray-100 shadow-sm">
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-4 sm:pl-6 flex items-center pointer-events-none">
                     <i class="bi bi-search text-gray-400 text-lg sm:text-xl"></i>
@@ -64,51 +72,110 @@
         @else
             <div id="scholarshipContainer" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
                 @foreach($scholarships as $item)
-                    <div 
-                        class="scholarship-card group bg-white border border-gray-100 rounded-lg sm:rounded-[2.5rem] shadow-sm hover:shadow-xl transition-all duration-500 p-5 sm:p-8 flex flex-col"
-                        data-name="{{ $item->nama_beasiswa }}"
-                        data-provider="{{ $item->provider->nama_instansi ?? '' }}"
-                        data-category="{{ $item->category->nama_kategori ?? '' }}"
-                        data-description="{{ $item->deskripsi }}"
-                    >
-                        <div class="flex items-start justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full text-xs font-black border border-blue-100">
-                                    {{ $item->category->nama_kategori ?? 'General' }}
-                                </span>
-                            </div>
-                            <div class="w-14 h-14 rounded-2xl bg-gray-50 text-blue-600 flex items-center justify-center text-2xl shadow-inner">
-                                <i class="bi bi-mortarboard-fill"></i>
-                            </div>
+
+            <div
+                class="scholarship-card group bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col h-full"
+                data-name="{{ $item->nama_beasiswa }}"
+                data-provider="{{ $item->provider->nama_instansi ?? '' }}"
+                data-category="{{ $item->category->nama_kategori ?? '' }}"
+                data-description="{{ $item->deskripsi }}"
+            >
+
+                {{-- Header --}}
+                <div class="relative bg-gradient-to-br from-blue-600 via-cyan-500 to-indigo-600 px-6 py-5 text-white">
+
+                    <div class="absolute top-4 right-4">
+                        @if($item->status == 'aktif')
+                            <span class="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-black">
+                                🟢 Aktif
+                            </span>
+                        @elseif($item->status == 'nonaktif')
+                            <span class="bg-yellow-500/30 backdrop-blur px-3 py-1 rounded-full text-xs font-black">
+                                🟡 Nonaktif
+                            </span>
+                        @else
+                            <span class="bg-red-500/30 backdrop-blur px-3 py-1 rounded-full text-xs font-black">
+                                🔴 Ditutup
+                            </span>
+                        @endif
+                    </div>
+
+                    <span class="inline-block bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-bold mb-3">
+                        {{ $item->category->nama_kategori ?? 'Umum' }}
+                    </span>
+
+                    <h3 class="text-xl font-black leading-tight line-clamp-2">
+                        {{ $item->nama_beasiswa }}
+                    </h3>
+
+                    <p class="text-blue-100 text-sm mt-1 font-semibold">
+                        {{ $item->provider->nama_instansi ?? 'Provider' }}
+                    </p>
+
+                </div>
+
+                {{-- Body --}}
+                <div class="p-6 flex-grow">
+
+                    <div class="bg-green-50 border border-green-100 rounded-2xl p-4 mb-5">
+                        <p class="text-xs font-black uppercase text-green-600 mb-1">
+                            Deskripsi
+                        </p>
+
+                        <p class="text-sm font-bold text-green-900 line-clamp-2">
+                            {{ $item->deskripsi }}
+                        </p>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center">
+                            <i class="bi bi-calendar-event-fill"></i>
                         </div>
 
-                        <h3 class="text-2xl font-black text-gray-900 mb-4 group-hover:text-blue-600 transition">{{ $item->nama_beasiswa }}</h3>
-                        <p class="text-gray-500 font-medium mb-8 flex-grow line-clamp-3">{{ $item->deskripsi }}</p>
+                        <div>
+                            <p class="text-xs text-gray-500 font-black uppercase">
+                                Deadline
+                            </p>
 
-                        <div class="space-y-3 mb-8">
-                            <div class="flex items-center gap-3 text-sm font-bold text-gray-600">
-                                <i class="bi bi-building text-blue-500"></i> {{ $item->provider->nama_instansi ?? '-' }}
-                            </div>
-                            <div class="flex items-center gap-3 text-sm font-bold text-gray-600">
-                                <i class="bi bi-calendar-event text-red-500"></i> {{ \Carbon\Carbon::parse($item->deadline)->format('d M Y') }}
-                            </div>
-                        </div>
-
-                        <div class="flex gap-3 pt-4 border-t border-gray-100">
-                            <a href="{{ route('scholarships.show', $item->id_beasiswa) }}" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-center py-3 rounded-xl font-black transition">Detail</a>
-                            
-                            @auth
-                                @if(auth()->user()->role == 'mahasiswa')
-                                    <form action="{{ route('applications.store') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="id_beasiswa" value="{{ $item->id_beasiswa }}">
-                                        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-black transition">Apply</button>
-                                    </form>
-                                @endif
-                            @endauth
+                            <p class="font-bold text-gray-800">
+                                {{ \Carbon\Carbon::parse($item->deadline)->format('d M Y') }}
+                            </p>
                         </div>
                     </div>
-                @endforeach
+
+                </div>
+
+                {{-- Footer --}}
+                <div class="p-6 pt-0">
+
+                    <div class="flex gap-3">
+
+                        <a href="{{ route('scholarships.show', $item->id_beasiswa) }}"
+                            class="flex-1 text-center bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-3.5 rounded-2xl font-black transition-all duration-300">
+                            Detail
+                        </a>
+
+                        @auth
+                            @if(auth()->user()->role == 'mahasiswa')
+                                <form action="{{ route('applications.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id_beasiswa" value="{{ $item->id_beasiswa }}">
+
+                                    <button type="submit"
+                                        class="bg-green-500 hover:bg-green-600 text-white px-5 py-3.5 rounded-2xl font-black transition">
+                                        Apply
+                                    </button>
+                                </form>
+                            @endif
+                        @endauth
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            @endforeach
             </div>
 
             {{-- No Results Message --}}
