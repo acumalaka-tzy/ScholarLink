@@ -145,39 +145,44 @@
                 </div>
             </div>
 
-            <div class="relative bg-gradient-to-br from-cyan-200 via-[#d1e9f6] to-cyan-200 rounded-[3rem] p-8 flex justify-center items-center h-[500px]">
-                <div class="absolute top-12 left-[-1rem] lg:left-[-2rem] bg-gradient-to-r from-orange-300 to-pink-300 rounded-2xl float-animation p-5 shadow-xl flex flex-col gap-1 z-10 float-animation" style="animation-duration: 3s;">
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="w-10 h-10 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center font-black text-xl"><i class="bi bi-people-fill"></i></div>
-                        <span class="font-black text-2xl text-gray-900">10,000+</span>
-                    </div>
-                    <p class="text-sm text-gray-700 font-bold">Pengguna Aktif</p>
-                </div>
+            <div class="relative bg-gradient-to-br from-cyan-200 via-[#d1e9f6] to-cyan-200 rounded-[3rem] p-8 flex justify-center items-center h-[500px] shadow-2xl">
 
-                <div class="absolute bottom-24 right-[-1rem] lg:right-[-2rem] bg-gradient-to-r from-blue-300 to-fuchsia-300 rounded-2xl float-animation p-5 shadow-xl flex flex-col gap-1 z-10">
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-black text-xl"><i class="bi bi-journals"></i></div>
-                        <span class="font-black text-2xl text-gray-900">1,000+</span>
+            <div class="absolute top-12 left-[-1rem] lg:left-[-2rem] bg-gradient-to-r from-orange-300 to-pink-300 rounded-2xl float-animation p-5 shadow-xl flex flex-col gap-1 z-10" style="animation-duration: 3s;">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-10 h-10 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center font-black text-xl">
+                        <i class="bi bi-people-fill"></i>
                     </div>
-                    <p class="text-sm text-gray-700 font-bold">Beasiswa Tersedia</p>
+                    <span class="font-black text-2xl text-gray-900">10,000+</span>
                 </div>
+                <p class="text-sm text-gray-700 font-bold">Pengguna Aktif</p>
+            </div>
 
-                <div class="absolute bottom-8 left-8 bg-gradient-to-r from-green-300 to-cyan-300 rounded-2xl float-animation p-4 shadow-xl flex items-center gap-3 z-10">
-                    <div class="text-green-700">
-                        <i class="bi bi-check-circle-fill text-3xl"></i>
+            <div class="absolute bottom-80 right-[-1rem] lg:right-[-2rem] bg-gradient-to-r from-blue-300 to-fuchsia-300 rounded-2xl float-animation p-5 shadow-xl flex flex-col gap-1 z-10" style="animation-duration: 4s;">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-black text-xl">
+                        <i class="bi bi-journals"></i>
                     </div>
-                    <div>
-                        <span class="font-black text-lg text-gray-900 block">500+</span>
-                        <span class="text-xs text-gray-700 font-bold">Penerima Beasiswa</span>
-                    </div>
+                    <span class="font-black text-2xl text-gray-900">1,000+</span>
                 </div>
+                <p class="text-sm text-gray-700 font-bold">Beasiswa Tersedia</p>
+            </div>
 
-                <div class="w-full h-full bg-white/60 backdrop-blur-lg rounded-3xl border-4 border-white/60 flex items-center justify-center shadow-2xl">
-                    <span class="text-blue-500 font-black text-center px-4">
-                        [Insert Vibrant Student Image Here]
-                    </span>
+            <div class="absolute bottom-8 left-8 bg-gradient-to-r from-green-300 to-cyan-300 rounded-2xl float-animation p-4 shadow-xl flex items-center gap-3 z-10" style="animation-duration: 3.5s;">
+                <div class="text-green-700">
+                    <i class="bi bi-check-circle-fill text-3xl"></i>
+                </div>
+                <div>
+                    <span class="font-black text-lg text-gray-900 block">500+</span>
+                    <span class="text-xs text-gray-700 font-bold">Penerima Beasiswa</span>
                 </div>
             </div>
+
+            <div class="w-full h-full bg-white/70 backdrop-blur-lg rounded-3xl border-4 border-white/70 flex items-center justify-center shadow-2xl overflow-hidden">
+                <img src="{{ asset('images/student.png') }}"
+                    alt="Student ScholarLink"
+                    class="w-full h-full object-cover rounded-2xl">
+            </div>
+
         </div>
     </section>
 
@@ -222,7 +227,6 @@
 
             <div class="grid lg:grid-cols-2 gap-16 items-center">
 
-                <!-- Kiri -->
                 <div>
 
                     <h2 class="text-3xl lg:text-4xl font-black text-gray-900 mb-6">
@@ -239,7 +243,6 @@
 
                 </div>
 
-                <!-- Kanan -->
                 <div>
                     <div class="bg-gradient-to-br from-blue-50 via-cyan-50 to-orange-50 rounded-[2rem] p-10 border border-blue-100">
 
@@ -399,7 +402,6 @@
 
                         <div class="group bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col h-full">
 
-                            <!-- Header -->
                             <div class="relative bg-gradient-to-br from-blue-600 via-cyan-500 to-indigo-600 px-6 py-4 text-white">
 
                                 <div class="absolute top-4 right-4">
@@ -431,7 +433,6 @@
                                 </p>
                             </div>
 
-                            <!-- Body -->
                             <div class="p-6 flex-grow">
 
                                 <div class="bg-green-50 border border-green-100 rounded-2xl p-4 mb-5">
@@ -462,7 +463,6 @@
 
                             </div>
 
-                            <!-- Footer -->
                             <div class="p-6 pt-0">
 
                                 <a href="{{ route('scholarships.show', $scholarship->id_beasiswa) }}"
