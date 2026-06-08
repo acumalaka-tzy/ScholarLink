@@ -16,7 +16,6 @@
             font-family: 'Nunito', sans-serif !important;
         }
         
-        /* Responsive Mobile Fix */
         @media (max-width: 768px) {
             input, select {
                 font-size: 16px !important;
@@ -155,14 +154,30 @@
 
                         <div>
                             <label for="password" class="block text-xs md:text-sm font-black text-gray-700 mb-2">Password</label>
+
                             <div class="relative">
                                 <div class="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
                                     <i class="bi bi-lock-fill text-sm md:text-base"></i>
                                 </div>
-                                <input id="password" type="password" name="password" required autocomplete="current-password" placeholder="Masukkan password" class="w-full bg-gray-50 border-2 border-gray-200 rounded-lg md:rounded-2xl pl-10 md:pl-14 pr-4 md:pr-5 py-2.5 md:py-4 font-bold text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition text-sm md:text-base">
-                            </div>
-                        </div>
 
+                                <input
+                                    id="password"
+                                    type="password"
+                                    name="password"
+                                    required
+                                    autocomplete="current-password"
+                                    placeholder="Masukkan password"
+                                    class="w-full bg-gray-50 border-2 border-gray-200 rounded-lg md:rounded-2xl pl-10 md:pl-14 pr-12 md:pr-14 py-2.5 md:py-4 font-bold text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition text-sm md:text-base">
+
+                                <button
+                                    type="button"
+                                    onclick="togglePassword()"
+                                    class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-cyan-500">
+
+                                    <i id="eyeIcon" class="bi bi-eye-fill"></i>
+
+                                </button>
+                            </div>
                         <div class="flex items-center justify-between gap-4 pt-1">
                             <label class="flex items-center gap-2 md:gap-3 text-xs md:text-sm text-gray-600 font-bold cursor-pointer">
                                 <input type="checkbox" name="remember" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500 w-4 h-4">
@@ -199,5 +214,22 @@
             </div>
         </div>
     </div>
+<script>
+    function togglePassword() {
+        const password = document.getElementById('password');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        if (password.type === 'password') {
+            password.type = 'text';
+            eyeIcon.classList.remove('bi-eye-fill');
+            eyeIcon.classList.add('bi-eye-slash-fill');
+        } else {
+            password.type = 'password';
+            eyeIcon.classList.remove('bi-eye-slash-fill');
+            eyeIcon.classList.add('bi-eye-fill');
+        }
+    }
+</script>
+
 </body>
 </html>
