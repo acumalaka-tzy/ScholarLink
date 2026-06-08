@@ -21,7 +21,7 @@
         </div>
 
         <div class="bg-white border border-gray-100 rounded-xl sm:rounded-[2rem] shadow-2xl overflow-hidden">
-        <div class="h-2 bg-gradient-to-r {{ $config['cardColor'] }}"></div>
+        <div class="h-2 bg-gradient-to-r from-blue-600 via-cyan-400 to-orange-400"></div>
             <div class="p-5 sm:p-8 md:p-10">
                 @if ($errors->any())
                     <div class="mb-6 sm:mb-8 bg-red-50 border border-red-200 rounded-lg sm:rounded-3xl p-4 sm:p-6">
