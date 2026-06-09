@@ -44,7 +44,7 @@
             <div class="absolute inset-0 bg-black/30"></div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-8 relative z-10">
-                <a href="{{ route('dashboard') }}"
+                <a href="{{ $role === 'provider' ? route('provider.dashboard') : route('dashboard') }}"
                    class="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-full font-black transition">
                     <i class="bi bi-arrow-left"></i>
                     Kembali
