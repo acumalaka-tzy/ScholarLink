@@ -20,7 +20,7 @@
 <body class="bg-[#f4f7f9] text-gray-900 overflow-x-hidden">
 
 <div class="flex min-h-screen overflow-hidden">
-<div id="overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
+    <div id="overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
 
     <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-50 w-72 bg-white/95 backdrop-blur-2xl border-r border-gray-100 shadow-xl transform -translate-x-full lg:translate-x-0 transition duration-300 flex flex-col h-screen overflow-y-auto">
         <div class="px-8 py-8 border-b border-gray-100">
@@ -36,32 +36,32 @@
         </div>
 
         <nav class="flex-1 px-6 py-8 space-y-3">
-            <a href="{{ route('admin.dashboard') }}" class="group flex items-center gap-4 px-5 py-4 rounded-3xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/20 transition hover:scale-[1.02]">
-                <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-xl">
+            <a href="{{ route('admin.dashboard') }}" class="group flex items-center gap-4 px-5 py-4 rounded-3xl transition {{ request()->routeIs('admin.dashboard') ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/20 hover:scale-[1.02]' : 'hover:bg-gray-100' }}">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl {{ request()->routeIs('admin.dashboard') ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-500' }}">
                     <i class="bi bi-grid-fill"></i>
                 </div>
-                <span class="font-black text-lg">Dashboard</span>
+                <span class="font-black text-lg {{ request()->routeIs('admin.dashboard') ? 'text-white' : 'text-gray-700' }}">Dashboard</span>
             </a>
 
-            <a href="{{ route('admin.users.index') }}" class="group flex items-center gap-4 px-5 py-4 rounded-3xl hover:bg-gray-100 transition">
-                <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-xl">
+            <a href="{{ route('admin.users.index') }}" class="group flex items-center gap-4 px-5 py-4 rounded-3xl transition {{ request()->routeIs('admin.users.*') ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/20 hover:scale-[1.02]' : 'hover:bg-gray-100' }}">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl {{ request()->routeIs('admin.users.*') ? 'bg-white/20 text-white' : 'bg-blue-100 text-blue-600' }}">
                     <i class="bi bi-people-fill"></i>
                 </div>
-                <span class="font-black text-lg text-gray-700">Users</span>
+                <span class="font-black text-lg {{ request()->routeIs('admin.users.*') ? 'text-white' : 'text-gray-700' }}">Users</span>
             </a>
 
-            <a href="{{ route('admin.providers.index') }}" class="group flex items-center gap-4 px-5 py-4 rounded-3xl hover:bg-gray-100 transition">
-                <div class="w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-600 flex items-center justify-center text-xl">
+            <a href="{{ route('admin.providers.index') }}" class="group flex items-center gap-4 px-5 py-4 rounded-3xl transition {{ request()->routeIs('admin.providers.*') ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/20 hover:scale-[1.02]' : 'hover:bg-gray-100' }}">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl {{ request()->routeIs('admin.providers.*') ? 'bg-white/20 text-white' : 'bg-cyan-100 text-cyan-600' }}">
                     <i class="bi bi-buildings-fill"></i>
                 </div>
-                <span class="font-black text-lg text-gray-700">Providers</span>
+                <span class="font-black text-lg {{ request()->routeIs('admin.providers.*') ? 'text-white' : 'text-gray-700' }}">Providers</span>
             </a>
 
-            <a href="{{ route('admin.scholarships.index') }}" class="group flex items-center gap-4 px-5 py-4 rounded-3xl hover:bg-gray-100 transition">
-                <div class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center text-xl">
+            <a href="{{ route('admin.scholarships.index') }}" class="group flex items-center gap-4 px-5 py-4 rounded-3xl transition {{ request()->routeIs('admin.scholarships.*') ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/20 hover:scale-[1.02]' : 'hover:bg-gray-100' }}">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl {{ request()->routeIs('admin.scholarships.*') ? 'bg-white/20 text-white' : 'bg-orange-100 text-orange-600' }}">
                     <i class="bi bi-mortarboard-fill"></i>
                 </div>
-                <span class="font-black text-lg text-gray-700">Scholarships</span>
+                <span class="font-black text-lg {{ request()->routeIs('admin.scholarships.*') ? 'text-white' : 'text-gray-700' }}">Scholarships</span>
             </a>
         </nav>
 
