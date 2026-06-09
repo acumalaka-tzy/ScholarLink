@@ -12,9 +12,7 @@ class VerifyEmailNotification extends Notification
 {
     use Queueable;
 
-    /**
-     * Create a new notification instance.
-     */
+
     public function __construct()
     {
         //
@@ -30,9 +28,6 @@ class VerifyEmailNotification extends Notification
         return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     */
     public function toMail($notifiable)
     {
         $url = URL::temporarySignedRoute(

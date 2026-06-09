@@ -8,7 +8,6 @@
     </div>
 
     <div class="max-w-7xl mx-auto">
-        {{-- Back Button --}}
         <div class="mb-4 sm:mb-8">
             <a href="{{ route('dashboard') }}" class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-black text-xs sm:text-base transition group">
                 <span class="w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl bg-white group-hover:bg-gray-100 flex items-center justify-center border border-gray-200">

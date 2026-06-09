@@ -10,9 +10,6 @@ use App\Models\Category;
 
 class ScholarshipController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $scholarships = Scholarship::where(
@@ -26,9 +23,6 @@ class ScholarshipController extends Controller
         );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $categories = Category::all();
@@ -36,9 +30,6 @@ class ScholarshipController extends Controller
         return view('provider.scholarships.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         Scholarship::create([
@@ -64,9 +55,6 @@ class ScholarshipController extends Controller
             ->with('success', 'Scholarship berhasil dibuat');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $scholarship = Scholarship::where(
@@ -80,9 +68,6 @@ class ScholarshipController extends Controller
         );
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
         $scholarship = Scholarship::where(
@@ -105,9 +90,6 @@ class ScholarshipController extends Controller
             ->with('success', 'Scholarship berhasil diperbarui');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         $scholarship = Scholarship::where(
