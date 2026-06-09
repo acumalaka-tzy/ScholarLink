@@ -7,7 +7,6 @@
         <p class="text-gray-500 font-bold">Kelola ruang chat untuk semua program beasiswa Anda</p>
     </div>
 
-    {{-- Form Section --}}
     <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 mb-8">
         <form method="POST" action="{{ route('chat-rooms.store', ['id_beasiswa' => 0]) }}" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
             @csrf
@@ -37,7 +36,6 @@
         </form>
     </div>
 
-    {{-- Tabel Section (Responsif) --}}
     <div class="bg-white rounded-[2rem] shadow-sm border border-gray-100 overflow-x-auto">
         <table class="w-full text-left min-w-[600px]">
             <thead class="bg-gradient-to-r from-cyan-500 to-blue-500 text-white">
