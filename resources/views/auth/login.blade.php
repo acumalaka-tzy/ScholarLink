@@ -90,8 +90,11 @@
             <div class="w-full max-w-md">
                 <div class="lg:hidden text-center mb-6">
                     <a href="{{ route('home') }}" class="inline-flex items-center gap-2">
-                        <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-cyan-400 rounded-lg flex items-center justify-center text-white font-black text-lg shadow-lg">
-                            S
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-r from-white-600 to-white-500 flex items-center justify-center overflow-hidden shadow-md">
+                            <img
+                                src="{{ asset('images/logo-scholarlink.png') }}"
+                                alt="ScholarLink"
+                                class="w-8 h-8 object-contain rounded-full">
                         </div>
                         <span class="text-2xl font-black tracking-tight text-gray-900">ScholarLink</span>
                     </a>
