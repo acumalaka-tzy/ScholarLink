@@ -44,7 +44,7 @@
                 </a>
             </div>
 
-            <div class="max-w-xl relative z-10">
+            <div class="max-w-2xl mx-auto relative z-10">
                 <div class="inline-flex items-center gap-2 px-3 lg:px-4 py-2 rounded-full bg-orange-100 text-orange-700 font-bold text-xs lg:text-sm mb-4 lg:mb-6 border border-orange-200">
                     <i class="bi bi-mortarboard-fill"></i> Join ScholarLink
                 </div>
