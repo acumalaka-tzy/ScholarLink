@@ -65,7 +65,7 @@
         <h2 class="text-5xl font-black text-gray-900">{{ $totalApplications }}</h2>
     </div>
 </div>
-<!-- Kartu 1: User Terbaru (Paling Atas) -->
+
 <div class="bg-white rounded-[2rem] border border-gray-100 shadow-xl overflow-hidden mb-8">
     <div class="px-6 py-6 border-b border-gray-100">
         <div class="flex items-center gap-4">
@@ -137,7 +137,6 @@
     </div>
 </div>
 
-<!-- Kartu 2: Aplikasi Terbaru (Di Bawah) -->
 <div class="bg-white rounded-[2rem] border border-gray-100 shadow-xl overflow-hidden">
     <div class="px-6 py-6 border-b border-gray-100">
         <div class="flex items-center gap-4">

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Provider;
 use App\Models\Scholarship;
-use App\Models\ChatRoom; // Ditambahkan
+use App\Models\ChatRoom; 
 use Illuminate\Http\Request;
 
 class ScholarshipController extends Controller
@@ -25,10 +25,8 @@ class ScholarshipController extends Controller
             ->where('id_beasiswa', $id)
             ->firstOrFail();
 
-        // Mencari chat room berdasarkan id_beasiswa
         $chatRoom = ChatRoom::where('id_beasiswa', $id)->first();
 
-        // Mengirim $chatRoom ke view
         return view('scholarships.show', compact('scholarship', 'chatRoom'));
     }
 

@@ -11,17 +11,11 @@ use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
-    /**
-     * Show the login form
-     */
     public function showLogin()
     {
         return view('auth.login');
     }
 
-    /**
-     * Handle login
-     */
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -39,17 +33,11 @@ class AuthController extends Controller
         ])->onlyInput('email');
     }
 
-    /**
-     * Show the registration form
-     */
     public function showRegister()
     {
         return view('auth.register');
     }
 
-    /**
-     * Handle registration
-     */
     public function register(Request $request)
     {
         $validated = $request->validate([
@@ -76,16 +64,12 @@ class AuthController extends Controller
                 'password' => Hash::make($validated['password']),
             ]);
 
-            // Redirect ke login setelah pendaftaran sukses
             return redirect('/login')->with('success', 'Pendaftaran berhasil! Silakan login dengan akun Anda.');
         } catch (\Exception $e) {
             return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
         }
     }
 
-    /**
-     * Handle logout
-     */
     public function logout(Request $request)
     {
         Auth::logout();

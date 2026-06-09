@@ -30,7 +30,6 @@ class FavoriteController extends Controller
             'id_beasiswa' => $scholarship->id_beasiswa,
         ]);
 
-        // Check if this is AJAX request
         if (request()->ajax() || request()->wantsJson()) {
             return response()->json([
                 'success' => true,
@@ -58,7 +57,6 @@ class FavoriteController extends Controller
 
         $favorite->delete();
 
-        // Check if this is AJAX request
         if (request()->ajax() || request()->wantsJson()) {
             return response()->json([
                 'success' => true,
