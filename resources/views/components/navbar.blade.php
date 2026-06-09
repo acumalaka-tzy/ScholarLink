@@ -3,9 +3,7 @@
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
                 <a href="{{ route('dashboard') }}" class="flex items-center gap-2 hover:opacity-80 transition">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 flex items-center justify-center text-white text-lg font-black">
-                        <i class="bi bi-mortarboard-fill"></i>
-                    </div>
+                    <img src="{{ asset('images/logobaru.png') }}" class="w-10 h-10 rounded-full shadow-sm object-cover" alt="ScholarLink Logo">
                     <span class="hidden sm:inline font-black text-gray-900 text-sm md:text-base">ScholarLink</span>
                 </a>
             </div>

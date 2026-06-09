@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - ScholarLink</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logobaru.png') }}">
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=nunito:400,500,600,700,800,900" rel="stylesheet" />
@@ -33,9 +34,7 @@
         <div class="hidden lg:flex flex-col justify-between p-6 lg:p-8 xl:p-12 relative overflow-hidden">
             <div>
                 <a href="{{ route('home') }}" class="flex items-center gap-2">
-                    <div class="w-10 lg:w-12 h-10 lg:h-12 bg-gradient-to-br from-blue-600 to-cyan-400 rounded-lg lg:rounded-2xl flex items-center justify-center text-white font-black text-xl lg:text-2xl shadow-lg">
-                        S
-                    </div>
+                    <img src="{{ asset('images/logobaru.png') }}" class="w-10 lg:w-12 h-10 lg:h-12 rounded-full shadow-lg object-cover" alt="ScholarLink Logo">
                     <div>
                         <h1 class="text-xl lg:text-3xl font-black tracking-tight text-gray-900">ScholarLink</h1>
                         <p class="text-gray-500 font-bold text-xs lg:text-sm">Platform Beasiswa Terpercaya</p>
@@ -90,9 +89,7 @@
             <div class="w-full max-w-md">
                 <div class="lg:hidden text-center mb-6">
                     <a href="{{ route('home') }}" class="inline-flex items-center gap-2">
-                        <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-cyan-400 rounded-lg flex items-center justify-center text-white font-black text-lg shadow-lg">
-                            S
-                        </div>
+                        <img src="{{ asset('images/logobaru.png') }}" class="w-10 h-10 rounded-full shadow-lg object-cover" alt="ScholarLink Logo">
                         <span class="text-2xl font-black tracking-tight text-gray-900">ScholarLink</span>
                     </a>
                 </div>

@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'ScholarLink') }}</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logobaru.png') }}">
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=nunito:400,500,600,700,800,900" rel="stylesheet" />
@@ -42,8 +43,8 @@
         <div class="w-full max-w-md">
             <div class="text-center mb-10">
                 <a href="/" class="inline-flex items-center gap-4">
-                    <div class="w-16 h-16 rounded-[2rem] bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-3xl shadow-xl shadow-blue-500/20">
-                        <i class="bi bi-mortarboard-fill"></i>
+                    <div class="w-16 h-16 rounded-[2rem] shadow-xl shadow-blue-500/20 overflow-hidden">
+                        <img src="{{ asset('images/logobaru.png') }}" class="w-full h-full object-cover" alt="ScholarLink Logo">
                     </div>
                     <div class="text-left">
                         <h1 class="text-4xl font-black text-gray-900 tracking-tight">ScholarLink</h1>

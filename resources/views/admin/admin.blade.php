@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ScholarLink Admin</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logobaru.png') }}">
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=nunito:400,500,600,700,800,900" rel="stylesheet" />
@@ -25,8 +26,8 @@
     <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-50 w-72 bg-white/95 backdrop-blur-2xl border-r border-gray-100 shadow-xl transform -translate-x-full lg:translate-x-0 transition duration-300 flex flex-col h-screen overflow-y-auto">
         <div class="px-8 py-8 border-b border-gray-100">
             <div class="flex items-center gap-4">
-                <div class="w-16 h-16 rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-3xl shadow-lg shadow-blue-500/20">
-                    <i class="bi bi-mortarboard-fill"></i>
+                <div class="w-16 h-16 rounded-[2rem] shadow-lg shadow-blue-500/20 overflow-hidden">
+                    <img src="{{ asset('images/logobaru.png') }}" class="w-full h-full object-cover" alt="ScholarLink Logo">
                 </div>
                 <div>
                     <h1 class="text-3xl font-black tracking-tight text-gray-900">ScholarLink</h1>
