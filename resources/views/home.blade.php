@@ -41,7 +41,7 @@
         }
     </style>
 </head>
-<body class="bg-[#f4f7f9] text-gray-900 antialiased selection:bg-blue-600 selection:text-white">
+<body class="bg-[#f4f7f9] text-gray-900 antialiased selection:bg-blue-600 selection:text-white overflow-x-hidden">
     <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         <div class="absolute top-0 left-0 w-96 h-96 bg-cyan-300/20 rounded-full blur-3xl"></div>
         <div class="absolute top-40 right-0 w-96 h-96 bg-orange-300/20 rounded-full blur-3xl"></div>

@@ -26,7 +26,7 @@
         }
     </style>
 </head>
-<body class="bg-[#f4f7f9] text-gray-900 antialiased selection:bg-blue-600 selection:text-white">
+<body class="bg-[#f4f7f9] text-gray-900 antialiased selection:bg-blue-600 selection:text-white overflow-x-hidden">
 
     <div class="min-h-screen grid lg:grid-cols-2">
         
