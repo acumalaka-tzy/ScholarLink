@@ -10,35 +10,46 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('users')->insert([
-
+        $users = [
             [
-                'name' => 'Admin ScholarLink',
-                'email' => 'admin@gmail.com',
-                'password' => Hash::make('password'),
-                'role' => 'admin',
-                'status' => 'aktif',
-                'tanggal_daftar' => now(),
+                'name' => 'Admin ScholarLink', 
+                'email' => 'admin@gmail.com', 
+                'password' => Hash::make('password'), 
+                'role' => 'admin', 
+                'status' => 'aktif', 
+                'tanggal_daftar' => now()
             ],
-
             [
-                'name' => 'Budi Mahasiswa',
-                'email' => 'budi@gmail.com',
-                'password' => Hash::make('password'),
-                'role' => 'mahasiswa',
-                'status' => 'aktif',
-                'tanggal_daftar' => now(),
+                'name' => 'Budi Mahasiswa', 
+                'email' => 'budi@gmail.com', 
+                'password' => Hash::make('password'), 
+                'role' => 'mahasiswa', 
+                'status' => 'aktif', 
+                'tanggal_daftar' => now()
             ],
-
             [
-                'name' => 'Provider Scholarship',
-                'email' => 'provider@gmail.com',
-                'password' => Hash::make('password'),
-                'role' => 'provider',
-                'status' => 'aktif',
-                'tanggal_daftar' => now(),
+                'name' => 'Provider Scholarship', 
+                'email' => 'provider@gmail.com', 
+                'password' => Hash::make('password'), 
+                'role' => 'provider', 
+                'status' => 'aktif', 
+                'tanggal_daftar' => now()
             ],
+            [
+                'name' => 'Provider BSI', 
+                'email' => 'provider_bsi@gmail.com', 
+                'password' => Hash::make('password'), 
+                'role' => 'provider', 
+                'status' => 'aktif', 
+                'tanggal_daftar' => now()
+                ],
+        ];
 
-        ]);
+        foreach ($users as $user) {
+            \App\Models\User::updateOrCreate(
+                ['email' => $user['email']], // Syarat unik
+                $user // Data yang dimasukkan
+            );
+        }
     }
 }
