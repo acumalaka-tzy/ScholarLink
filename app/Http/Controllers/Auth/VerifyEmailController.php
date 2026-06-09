@@ -23,7 +23,6 @@ class VerifyEmailController extends Controller
             }
         }
 
-        // Provider masih menunggu persetujuan admin
         if (
             $user->role === 'provider' &&
             $user->status === 'pending'

@@ -12,13 +12,11 @@ class DashboardController extends Controller
     {
         $providerId = auth()->user()->provider->id_provider;
 
-        // Total scholarship
         $totalScholarships = Scholarship::where(
             'id_provider',
             $providerId
         )->count();
 
-        // Active scholarship
         $activeScholarships = Scholarship::where(
             'id_provider',
             $providerId
@@ -26,7 +24,6 @@ class DashboardController extends Controller
         ->where('status', 'aktif') 
         ->count();
 
-        // Total applications
         $totalApplications = Application::whereHas(
             'scholarship',
             function ($query) use ($providerId) {
@@ -34,7 +31,6 @@ class DashboardController extends Controller
             }
         )->count();
 
-        // Recent applications
         $recentApplications = Application::whereHas(
             'scholarship',
             function ($query) use ($providerId) {

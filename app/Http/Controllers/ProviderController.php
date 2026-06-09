@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 
 class ProviderController extends Controller
 {
-    // LIST
     public function index()
     {
         $scholarships = Scholarship::with([
@@ -25,7 +24,6 @@ class ProviderController extends Controller
         );
     }
 
-    // FORM CREATE
     public function create()
     {
         $providers = Provider::all();
@@ -38,7 +36,6 @@ class ProviderController extends Controller
         );
     }
 
-    // STORE
     public function store(Request $request)
     {
         $request->validate([
@@ -62,7 +59,6 @@ class ProviderController extends Controller
             ->with('success', 'Scholarship berhasil ditambahkan');
     }
 
-    // FORM EDIT
     public function edit($id)
     {
         $scholarship = Scholarship::findOrFail($id);
@@ -81,7 +77,6 @@ class ProviderController extends Controller
         );
     }
 
-    // UPDATE
     public function update(Request $request, $id)
     {
         $scholarship = Scholarship::findOrFail($id);
@@ -99,7 +94,6 @@ class ProviderController extends Controller
             ->with('success', 'Scholarship berhasil diupdate');
     }
 
-    // DELETE
     public function destroy($id)
     {
         $scholarship = Scholarship::findOrFail($id);
@@ -111,7 +105,6 @@ class ProviderController extends Controller
             ->with('success', 'Scholarship berhasil dihapus');
     }
 
-    // SHOW
     public function show($id)
     {
         $scholarship = Scholarship::with([

@@ -62,9 +62,15 @@
     <nav class="w-full bg-white/80 backdrop-blur-xl px-6 py-4 flex items-center justify-between shadow-lg border-b border-white/30 sticky top-0 z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
             
-            <a href="#hero" class="flex items-center gap-3">
-                <img src="{{ asset('images/logobaru.png') }}" class="w-10 h-10 rounded-full shadow-md object-cover" alt="ScholarLink Logo">
-                <span class="text-2xl font-black tracking-tight text-gray-900">
+            <a href="{{ route('home') }}" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-r from-white-600 to-white-500 flex items-center justify-center overflow-hidden shadow-md">
+                    <img
+                        src="{{ asset('images/logo-scholarlink.png') }}"
+                        alt="ScholarLink"
+                        class="w-8 h-8 object-contain rounded-full">
+                </div>
+
+                <span class="font-black text-gray-900 text-2xl">
                     ScholarLink
                 </span>
             </a>

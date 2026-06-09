@@ -2,14 +2,16 @@
     <div class="px-4 sm:px-6 lg:px-10 py-3 sm:py-4">
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <a href="{{ route('dashboard') }}" class="flex items-center gap-2 hover:opacity-80 transition">
-                    <img src="{{ asset('images/logobaru.png') }}" class="w-10 h-10 rounded-full shadow-sm object-cover" alt="ScholarLink Logo">
+                <a href="{{ Auth::user()->role === 'provider' ? route('provider.dashboard') : route('dashboard') }}" class="flex items-center gap-2 hover:opacity-80 transition">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 flex items-center justify-center text-white text-lg font-black">
+                        <i class="bi bi-mortarboard-fill"></i>
+                    </div>
                     <span class="hidden sm:inline font-black text-gray-900 text-sm md:text-base">ScholarLink</span>
                 </a>
             </div>
 
             <div class="flex items-center gap-2 sm:gap-4">
-                <a href="{{ route('dashboard') }}" class="px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-bold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition {{ request()->routeIs('dashboard') ? 'bg-blue-100 text-blue-600' : '' }}">
+                <a href="{{ Auth::user()->role === 'provider' ? route('provider.dashboard') : route('dashboard') }}" class="px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-bold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition {{ request()->routeIs('dashboard', 'provider.dashboard') ? 'bg-blue-100 text-blue-600' : '' }}">
                     <i class="bi bi-house-fill mr-1 hidden sm:inline"></i>
                     <span class="hidden xs:inline">Home</span><span class="inline xs:hidden">H</span>
                 </a>

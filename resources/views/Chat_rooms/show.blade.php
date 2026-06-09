@@ -7,9 +7,7 @@
             <i class="bi bi-arrow-left"></i> Kembali ke Chat Rooms
     </a>
 
-    {{-- Main Chat Container --}}
     <div class="flex-1 flex flex-col bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-gray-100">
-        {{-- Header --}}
         <div class="p-6 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
             <div>
                 <h1 class="text-xl font-black text-gray-900">{{ $chatRoom->nama_room }}</h1>
@@ -20,7 +18,6 @@
             </span>
         </div>
 
-        {{-- Messages Area --}}
         <div id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-4 bg-white">
             @forelse($chatRoom->messages->sortBy('waktu_kirim') as $message)
                 @php $isMine = $message->id_user === auth()->id(); @endphp
@@ -35,7 +32,6 @@
             @endforelse
         </div>
 
-        {{-- Input Area --}}
         <form method="POST" action="{{ route('chat-rooms.messages.store', $chatRoom->id_room) }}" class="p-4 border-t border-gray-100">
             @csrf
             <div class="flex gap-2">
