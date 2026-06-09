@@ -32,8 +32,8 @@
 
     <div class="w-full max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
+            <div class="hidden lg:flex lg:col-span-7 flex-col justify-center pl-32 xl:pl-40">
             
-            <div class="hidden lg:flex lg:col-span-7 flex-col justify-center space-y-8 xl:space-y-10">
                 <div>
                     <a href="{{ route('home') }}" class="flex items-center gap-3">
                         <div class="w-11 h-11 bg-gradient-to-br from-blue-600 to-cyan-400 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg">
@@ -46,7 +46,7 @@
                     </a>
                 </div>
 
-                <div class="max-w-xl">
+                <div class="max-w-2xl mt-4">
                     <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-100 text-orange-700 font-bold text-xs mb-4 border border-orange-200">
                         <i class="bi bi-mortarboard-fill"></i> Welcome Back
                     </div>
@@ -89,7 +89,7 @@
                 </div>
             </div>
 
-            <div class="lg:col-span-5 flex items-center justify-center lg:justify-end">
+            <div class="lg:col-span-5 flex items-center justify-center">
                 <div class="w-full max-w-md">
                     
                     <div class="lg:hidden text-center mb-6">
