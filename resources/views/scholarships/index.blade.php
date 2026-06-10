@@ -159,6 +159,7 @@
                         </div>
                     </div>
                 @endforeach
+            </div>
             <div class="mt-10">
                 {{ $scholarships->links() }}
             </div>
