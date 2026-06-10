@@ -17,7 +17,8 @@ class UserSeeder extends Seeder
                 'password' => 'password', 
                 'role' => 'admin', 
                 'status' => 'aktif', 
-                'tanggal_daftar' => now()
+                'tanggal_daftar' => now(),
+                'email_verified_at' => now()
             ],
             [
                 'name' => 'Budi Mahasiswa', 
@@ -25,7 +26,8 @@ class UserSeeder extends Seeder
                 'password' => 'password', 
                 'role' => 'mahasiswa', 
                 'status' => 'aktif', 
-                'tanggal_daftar' => now()
+                'tanggal_daftar' => now(),
+                'email_verified_at' => now()
             ],
             [
                 'name' => 'Provider Scholarship', 
@@ -33,7 +35,8 @@ class UserSeeder extends Seeder
                 'password' => 'password', 
                 'role' => 'provider', 
                 'status' => 'aktif', 
-                'tanggal_daftar' => now()
+                'tanggal_daftar' => now(),
+                'email_verified_at' => now()
             ],
             [
                 'name' => 'Provider BSI', 
@@ -41,7 +44,8 @@ class UserSeeder extends Seeder
                 'password' => 'password', 
                 'role' => 'provider', 
                 'status' => 'aktif', 
-                'tanggal_daftar' => now()
+                'tanggal_daftar' => now(),
+                'email_verified_at' => now()
                 ],
         ];
 
