@@ -20,8 +20,8 @@ return [
 
     'mailtrap' => [
         'default' => [
-            'api_key' => env('MAILTRAP_API_KEY'),
-            'inbox_id' => env('MAILTRAP_INBOX_ID'),
+            'api_key' => '3ca1645b06bd4b5856c356dd62906a93',
+            'inbox_id' => '4686319',
         ],
     ],
 
