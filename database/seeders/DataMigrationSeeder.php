@@ -331,7 +331,7 @@ class DataMigrationSeeder extends Seeder
   'created_at' => '2026-06-08 12:52:13',
   'updated_at' => '2026-06-08 12:52:13',
   'user_id' => 3,
-  'STATUS' => 'pending',
+  'status' => 'pending',
 ),
             array (
   'id_provider' => 2,
@@ -344,7 +344,7 @@ class DataMigrationSeeder extends Seeder
   'created_at' => '2026-06-08 12:52:13',
   'updated_at' => '2026-06-09 12:20:59',
   'user_id' => NULL,
-  'STATUS' => 'pending',
+  'status' => 'pending',
 ),
             array (
   'id_provider' => 3,
@@ -357,7 +357,7 @@ class DataMigrationSeeder extends Seeder
   'created_at' => '2026-06-08 12:52:13',
   'updated_at' => '2026-06-09 12:20:59',
   'user_id' => NULL,
-  'STATUS' => 'pending',
+  'status' => 'pending',
 ),
             array (
   'id_provider' => 4,
@@ -370,7 +370,7 @@ class DataMigrationSeeder extends Seeder
   'created_at' => '2026-06-08 12:52:13',
   'updated_at' => '2026-06-09 12:20:59',
   'user_id' => 13,
-  'STATUS' => 'pending',
+  'status' => 'pending',
 ),
             array (
   'id_provider' => 5,
@@ -383,7 +383,7 @@ class DataMigrationSeeder extends Seeder
   'created_at' => '2026-06-08 12:52:13',
   'updated_at' => '2026-06-09 12:20:59',
   'user_id' => NULL,
-  'STATUS' => 'pending',
+  'status' => 'pending',
 ),
             array (
   'id_provider' => 6,
@@ -396,7 +396,7 @@ class DataMigrationSeeder extends Seeder
   'created_at' => '2026-06-08 12:52:13',
   'updated_at' => '2026-06-09 12:20:59',
   'user_id' => NULL,
-  'STATUS' => 'pending',
+  'status' => 'pending',
 ),
             array (
   'id_provider' => 7,
@@ -409,7 +409,7 @@ class DataMigrationSeeder extends Seeder
   'created_at' => '2026-06-08 12:52:13',
   'updated_at' => '2026-06-09 12:20:59',
   'user_id' => NULL,
-  'STATUS' => 'pending',
+  'status' => 'pending',
 ),
             array (
   'id_provider' => 8,
@@ -422,7 +422,7 @@ class DataMigrationSeeder extends Seeder
   'created_at' => '2026-06-08 12:52:13',
   'updated_at' => '2026-06-09 12:20:59',
   'user_id' => NULL,
-  'STATUS' => 'pending',
+  'status' => 'pending',
 ),
             array (
   'id_provider' => 9,
@@ -435,7 +435,7 @@ class DataMigrationSeeder extends Seeder
   'created_at' => '2026-06-08 12:52:13',
   'updated_at' => '2026-06-09 12:20:59',
   'user_id' => NULL,
-  'STATUS' => 'pending',
+  'status' => 'pending',
 ),
             array (
   'id_provider' => 10,
@@ -448,7 +448,7 @@ class DataMigrationSeeder extends Seeder
   'created_at' => '2026-06-08 12:52:13',
   'updated_at' => '2026-06-09 12:20:59',
   'user_id' => NULL,
-  'STATUS' => 'pending',
+  'status' => 'pending',
 ),
             array (
   'id_provider' => 11,
@@ -461,7 +461,7 @@ class DataMigrationSeeder extends Seeder
   'created_at' => '2026-06-10 04:49:43',
   'updated_at' => '2026-06-10 04:49:43',
   'user_id' => 15,
-  'STATUS' => 'pending',
+  'status' => 'pending',
 ),
             array (
   'id_provider' => 12,
@@ -474,7 +474,7 @@ class DataMigrationSeeder extends Seeder
   'created_at' => '2026-06-10 11:48:59',
   'updated_at' => '2026-06-10 11:48:59',
   'user_id' => 21,
-  'STATUS' => 'pending',
+  'status' => 'pending',
 ),
             array (
   'id_provider' => 13,
@@ -487,7 +487,7 @@ class DataMigrationSeeder extends Seeder
   'created_at' => '2026-06-10 16:30:05',
   'updated_at' => '2026-06-10 16:30:05',
   'user_id' => 24,
-  'STATUS' => 'pending',
+  'status' => 'pending',
 ),
             array (
   'id_provider' => 14,
@@ -500,7 +500,7 @@ class DataMigrationSeeder extends Seeder
   'created_at' => '2026-06-10 16:33:08',
   'updated_at' => '2026-06-10 16:33:08',
   'user_id' => 25,
-  'STATUS' => 'pending',
+  'status' => 'pending',
 ),
         ]);
 
