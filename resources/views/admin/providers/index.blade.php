@@ -63,21 +63,21 @@
                         <td class="px-6 py-5 text-gray-600 font-bold">{{ $provider->no_hp }}</td>
                         <td class="px-6 py-5 text-gray-600 font-bold max-w-xs truncate">{{ $provider->alamat }}</td>
                         <td class="px-6 py-5">
-                            @if($provider->user->status == 'aktif')
+                            @if($provider->user?->status == 'aktif')
                                 <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 text-green-700 text-xs font-black border border-green-200">
                                     <i class="bi bi-check-circle-fill"></i> Aktif
                                 </span>
-                            @elseif($provider->user->status == 'pending')
+                            @elseif($provider->user?->status == 'pending')
                                 <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-100 text-yellow-700 text-xs font-black border border-yellow-200">
                                     <i class="bi bi-clock-fill"></i> Pending
                                 </span>
-                            @elseif($provider->user->status == 'rejected')
+                            @elseif($provider->user?->status == 'rejected')
                                 <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-100 text-red-700 text-xs font-black border border-red-200">
                                     <i class="bi bi-x-circle-fill"></i> Rejected
                                 </span>
                             @else
-                                <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-xs font-black border border-gray-200">
-                                    <i class="bi bi-slash-circle-fill"></i> Nonaktif
+                                <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-xs font-black">
+                                    <i class="bi bi-question-circle-fill"></i> Tidak Ada User
                                 </span>
                             @endif
                         </td>
@@ -87,7 +87,7 @@
                                     Edit
                                 </a>
 
-                                @if($provider->user->status == 'pending')
+                                @if($provider->user?->status == 'pending')
                                     <form action="{{ route('admin.providers.approve', $provider->id_provider) }}" method="POST">
                                         @csrf
                                         @method('PUT')

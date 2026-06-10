@@ -6,6 +6,7 @@ use App\Models\ChatRoom;
 use App\Models\Scholarship;
 use App\Models\Message;
 use App\Models\ChatParticipant;
+use App\Models\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -61,12 +62,12 @@ class ChatRoomController extends Controller
         }
 
         $request->validate([
-            'id_beasiswa' => 'required|exists:scholarships,id_beasiswa', // Validasi input dropdown
+            'id_beasiswa' => 'required|exists:scholarships,id_beasiswa',
             'nama_room'   => 'required|string|max:255',
             'tipe'        => 'required|in:public,private',
         ]);
 
-        ChatRoom::create([
+        $room = ChatRoom::create([
             'id_beasiswa'    => $request->id_beasiswa,
             'dibuat_oleh'    => Auth::id(),
             'nama_room'      => $request->nama_room,
@@ -74,13 +75,35 @@ class ChatRoomController extends Controller
             'tanggal_dibuat' => now(),
         ]);
 
-        if ($id_beasiswa == 0 || $id_beasiswa == null) {
-            return redirect()->route('provider.chat-rooms.index')->with('success', 'Room berhasil dibuat.');
+                // Jika room private, masukkan semua pendaftar beasiswa sebagai peserta
+        if ($request->tipe === 'private') {
+
+            $applications = Application::where(
+                'id_beasiswa',
+                $request->id_beasiswa
+            )->get();
+
+            foreach ($applications as $application) {
+
+                ChatParticipant::firstOrCreate([
+                    'id_room' => $room->id_room,
+                    'id_user' => $application->id_user,
+                ]);
+            }
         }
 
-        return redirect()->route('chat-rooms.index.scholarship', $id_beasiswa)->with('success', 'Room berhasil dibuat.');
-    }
+        // Jika datang dari halaman provider, kembalikan ke sana
+        if ($id_beasiswa == 0 || $id_beasiswa == null) {
+            return redirect()
+                ->route('provider.chat-rooms.index')
+                ->with('success', 'Room berhasil dibuat.');
+        }
 
+        return redirect()
+            ->route('chat-rooms.index.scholarship', $id_beasiswa)
+            ->with('success', 'Room berhasil dibuat.');
+    }
+    
     public function show($id)
     {
         $chatRoom = ChatRoom::with(['scholarship.provider', 'creator', 'messages.user'])
