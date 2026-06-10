@@ -17,6 +17,7 @@ use App\Http\Controllers\Provider\ScholarshipController as ProviderScholarshipCo
 use App\Http\Controllers\Provider\ApplicationController as ProviderApplicationController;
 use App\Http\Controllers\Provider\DashboardController as ProviderDashboardController;
 use App\Http\Controllers\Admin\ScholarshipController as AdminScholarshipController;
+use App\Http\Controllers\Admin\AdminLogController;
 
 Route::get('/', function () {
     $scholarships = Scholarship::with(['provider', 'category'])
@@ -24,7 +25,11 @@ Route::get('/', function () {
         ->orderByDesc('tanggal_dibuat')
         ->take(6)
         ->get();
-    return view('home', compact('scholarships'));
+    $userCount = \App\Models\User::count();
+    $scholarshipCount = \App\Models\Scholarship::count();
+    $awardeeCount = \App\Models\Application::where('status', 'approved')->count();
+
+    return view('home', compact('scholarships', 'userCount', 'scholarshipCount', 'awardeeCount'));
 })->name('home');
 
 // ==========================
@@ -40,7 +45,7 @@ Route::middleware(['auth', 'admin'])
         Route::put('providers/{provider}/approve', [ProviderController::class, 'approve'])->name('providers.approve');
         Route::put('providers/{provider}/reject', [ProviderController::class, 'reject'])->name('providers.reject');
         Route::resource('scholarships', AdminScholarshipController::class)->only(['index', 'update']);
-        Route::get('/admin-logs', function () { return "Halaman Admin Logs"; })->name('logs');
+        Route::get('/admin-logs', [AdminLogController::class, 'index'])->name('logs');
     });
 
 // ==========================

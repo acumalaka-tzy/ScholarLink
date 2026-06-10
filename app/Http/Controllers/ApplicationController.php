@@ -50,7 +50,12 @@ class ApplicationController extends Controller
             ->latest()
             ->get();
 
-        return view('applications.create', compact('scholarships'));
+        $selectedScholarship = null;
+        if (request()->has('id_beasiswa')) {
+            $selectedScholarship = Scholarship::find(request('id_beasiswa'));
+        }
+
+        return view('applications.create', compact('scholarships', 'selectedScholarship'));
     }
 
     public function store(Request $request)

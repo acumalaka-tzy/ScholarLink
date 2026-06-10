@@ -96,7 +96,7 @@
                             </div>
                         </div>
 
-                        <a href="{{ route('kategori.detail', $item->id_beasiswa) }}" class="group/button relative overflow-hidden block w-full text-center bg-gradient-to-r from-blue-600 via-cyan-500 to-orange-400 py-5 rounded-2xl font-black text-lg text-white shadow-[0_15px_50px_rgba(59,130,246,0.3)] hover:scale-[1.02] transition duration-300">
+                        <a href="{{ route('kategori.detail', $item->id_beasiswa) }}" class="group/button relative overflow-hidden block w-full text-center bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-7 py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20 transition hover:scale-[1.02] active:scale-[0.98] hover:scale-[1.02] transition duration-300">
                             <span class="absolute inset-0 bg-white/10 opacity-0 group-hover/button:opacity-100 transition"></span>
                             <span class="relative flex items-center justify-center gap-3">
                                 <i class="bi bi-eye-fill"></i>

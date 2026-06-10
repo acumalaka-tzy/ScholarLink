@@ -42,6 +42,7 @@ class ScholarshipController extends Controller
             'nama_beasiswa' => $request->nama_beasiswa,
             'deskripsi' => $request->deskripsi,
             'syarat' => $request->syarat,
+            'required_documents' => array_values(array_filter($request->input('required_documents', []))),
             'benefit' => $request->benefit,
             'tipe' => $request->tipe,
             'deadline' => $request->deadline,
@@ -80,6 +81,7 @@ class ScholarshipController extends Controller
             'nama_beasiswa' => $request->nama_beasiswa,
             'deskripsi' => $request->deskripsi,
             'syarat' => $request->syarat,
+            'required_documents' => array_values(array_filter($request->input('required_documents', []))),
             'benefit' => $request->benefit,
             'deadline' => $request->deadline,
 

@@ -100,6 +100,17 @@
                         <textarea name="syarat" rows="5" placeholder="Tulis persyaratan scholarship" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-5 text-gray-900 font-bold placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition resize-none"></textarea>
                     </div>
 
+                    <div class="border-t border-gray-200 pt-6">
+                        <label class="block text-gray-700 font-black mb-3 text-lg">Required Documents</label>
+                        <p class="text-sm text-gray-500 font-bold mb-4">Tambahkan daftar dokumen yang wajib diunggah pelamar beasiswa ini (misalnya: Scan KTP, CV, Ijazah, Transkrip Nilai).</p>
+
+                        <div id="documents-container" class="space-y-4"></div>
+
+                        <button type="button" onclick="addDocumentField()" class="mt-4 flex items-center gap-2 text-purple-600 hover:text-purple-700 font-black text-xs sm:text-base">
+                            <i class="bi bi-plus-circle-fill"></i> Tambah Syarat Dokumen
+                        </button>
+                    </div>
+
                     <div>
                         <label class="block text-gray-700 font-black mb-3 text-lg">Benefits</label>
                         <textarea name="benefit" rows="5" placeholder="Tulis benefit scholarship" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl px-5 py-5 text-gray-900 font-bold placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition resize-none"></textarea>
@@ -111,12 +122,12 @@
                             <div class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
                                 <i class="bi bi-calendar-event-fill"></i>
                             </div>
-                            <input type="date" name="deadline" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-5 text-gray-900 font-bold focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
+                            <input type="date" name="deadline" onclick="this.showPicker()" class="w-full cursor-pointer bg-gray-50 border-2 border-gray-200 rounded-2xl pl-14 pr-5 py-5 text-gray-900 font-bold focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 transition">
                         </div>
                     </div>
 
                     <div class="pt-4 flex flex-col sm:flex-row gap-4">
-                        <button type="submit" class="group relative overflow-hidden inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 via-cyan-500 to-orange-400 hover:scale-[1.02] transition duration-300 px-8 py-5 rounded-2xl font-black text-white shadow-[0_15px_50px_rgba(59,130,246,0.3)]">
+                        <button type="submit" class="group relative overflow-hidden inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-7 py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20 transition hover:scale-[1.02] active:scale-[0.98]">
                             <span class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition"></span>
                             <span class="relative flex items-center gap-3">
                                 <i class="bi bi-save-fill"></i> Save Scholarship
@@ -132,4 +143,35 @@
         </div>
     </div>
 </div>
+
+<script>
+let documentCount = 0;
+
+function addDocumentField() {
+    const container = document.getElementById('documents-container');
+    const id = documentCount++;
+
+    const documentHTML = `
+        <div class="document-entry flex gap-3 items-center" id="document-${id}">
+            <input type="text" name="required_documents[]" placeholder="Contoh: KTP, Ijazah, Transkrip Nilai" class="flex-1 bg-white border-2 border-gray-200 rounded-xl px-4 py-3 font-bold text-gray-900 focus:outline-none focus:border-purple-500" required>
+            <button type="button" onclick="removeDocumentField(${id})" class="w-12 h-12 rounded-xl bg-red-100 text-red-500 hover:bg-red-200 flex items-center justify-center flex-shrink-0 transition">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+    `;
+
+    container.insertAdjacentHTML('beforeend', documentHTML);
+}
+
+function removeDocumentField(id) {
+    const element = document.getElementById(`document-${id}`);
+    if (element) {
+        element.remove();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    addDocumentField();
+});
+</script>
 @endsection

@@ -76,9 +76,7 @@
                         </h3>
 
                         <div class="bg-blue-50 border border-blue-100 rounded-2xl p-5">
-                            <p class="text-gray-700 font-bold whitespace-pre-wrap">
-                                {{ $application->catatan }}
-                            </p>
+                            <p class="text-gray-700 font-bold whitespace-pre-wrap">{{ $application->catatan }}</p>
                         </div>
                     </div>
                 @endif
@@ -120,7 +118,7 @@
                                             </p>
 
                                             <p class="text-xs text-gray-500 font-bold">
-                                                {{ \Carbon\Carbon::parse($document->tanggal_upload)->format('d M Y H:i') }}
+                                                {{ \Carbon\Carbon::parse($document->tanggal_upload)->format('d M Y H:i:s') }}
                                             </p>
                                         </div>
                                     </div>
@@ -246,12 +244,12 @@
                                 </p>
 
                                 <p class="text-xs text-gray-500 font-bold">
-                                    {{ \Carbon\Carbon::parse($log->tanggal_status)->format('d M Y H:i') }}
+                                    {{ \Carbon\Carbon::parse($log->tanggal_status)->format('d M Y') }}
                                 </p>
 
                                 @if($log->catatan)
                                     <p class="text-sm text-gray-700 font-bold mt-1">
-                                        {{ $log->catatan }}
+                                        {!! nl2br(preg_replace('/(https?:\/\/[^\s]+)/', '<a href="$1" target="_blank" class="text-blue-600 hover:underline break-all">$1</a>', e($log->catatan))) !!}
                                     </p>
                                 @endif
                             </div>
@@ -261,6 +259,16 @@
                             </p>
                         @endforelse
                     </div>
+                    
+                    @if($application->status === 'approved' && $application->link_wa)
+                        <div class="mt-6 pt-6 border-t border-gray-100">
+                            <h4 class="font-black text-gray-900 mb-3 text-sm">Grup Komunikasi</h4>
+                            <a href="{{ str_starts_with($application->link_wa, 'http') ? $application->link_wa : 'https://' . $application->link_wa }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-black px-6 py-3 rounded-xl transition shadow-lg shadow-green-500/20">
+                                <i class="bi bi-whatsapp text-lg"></i>
+                                Bergabung dengan Grup WhatsApp
+                            </a>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="bg-blue-50 border-2 border-blue-100 rounded-[2rem] p-8">

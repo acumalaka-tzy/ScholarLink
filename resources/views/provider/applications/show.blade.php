@@ -40,9 +40,13 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         <div class="lg:col-span-1 bg-white rounded-3xl p-6 border border-gray-100 flex flex-col items-center text-center shadow-sm h-fit">
-            <div class="w-24 h-24 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center text-white text-3xl font-black shadow-lg shadow-blue-500/20 mb-4">
-                {{ strtoupper(substr($application->user->name ?? 'M', 0, 1)) }}
-            </div>
+            @if($application->user->profile && $application->user->profile->foto_profil)
+                <img src="{{ asset('storage/' . $application->user->profile->foto_profil) }}" alt="Profile" class="w-24 h-24 rounded-2xl object-cover shadow-lg shadow-blue-500/20 mb-4">
+            @else
+                <div class="w-24 h-24 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center text-white text-3xl font-black shadow-lg shadow-blue-500/20 mb-4">
+                    {{ strtoupper(substr($application->user->name ?? 'M', 0, 1)) }}
+                </div>
+            @endif
             
             <h2 class="text-xl font-black text-gray-900">
                 {{ $application->user->name ?? 'Nama Pelamar' }}
@@ -116,7 +120,7 @@
 
                                         <p class="text-xs font-bold text-gray-400 mt-1">
                                             Upload:
-                                            {{ $document->tanggal_upload ? \Carbon\Carbon::parse($document->tanggal_upload)->format('d M Y H:i') : '-' }}
+                                            {{ $document->tanggal_upload ? \Carbon\Carbon::parse($document->tanggal_upload)->format('d M Y H:i:s') : '-' }}
                                         </p>
                                     </div>
                                 </div>
@@ -148,6 +152,22 @@
                     "{{ $application->catatan ?? 'Pelamar tidak menyertakan esai atau catatan tambahan.' }}"
                 </div>
             </div>
+
+            @if($application->status === 'approved' && $application->link_wa)
+                <div class="bg-emerald-50 border border-emerald-100 rounded-3xl p-6 mt-6">
+                    <h3 class="text-sm font-black text-emerald-800 mb-2 flex items-center gap-2">
+                        <i class="bi bi-whatsapp"></i> Link Grup WhatsApp
+                    </h3>
+                    <div class="flex items-center justify-between bg-white rounded-2xl px-4 py-3 border border-emerald-100 shadow-sm">
+                        <a href="{{ $application->link_wa }}" target="_blank" class="text-emerald-600 font-bold text-sm hover:underline truncate mr-4">
+                            {{ $application->link_wa }}
+                        </a>
+                        <a href="{{ $application->link_wa }}" target="_blank" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs rounded-xl transition flex-shrink-0">
+                            Buka
+                        </a>
+                    </div>
+                </div>
+            @endif
 
             @if($application->status === 'pending')
                 <div class="bg-gray-50/50 border border-gray-100 rounded-3xl p-4 flex gap-4 justify-end items-center">

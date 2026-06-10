@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="flex flex-col xs:flex-row xs:items-center gap-3 sm:gap-5 pt-4">
-                    <button type="submit" class="group relative overflow-hidden inline-flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-blue-600 via-cyan-500 to-orange-400 hover:scale-[1.02] transition duration-300 px-4 sm:px-8 py-2.5 sm:py-5 rounded-lg sm:rounded-2xl font-black text-white shadow-[0_15px_50px_rgba(59,130,246,0.3)] text-xs sm:text-base w-full xs:w-auto">
+                    <button type="submit" class="group relative overflow-hidden inline-flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-7 py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20 transition hover:scale-[1.02] active:scale-[0.98] text-xs sm:text-base w-full xs:w-auto">
                         <span class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition"></span>
                         <span class="relative flex items-center gap-2">
                             <i class="bi bi-save-fill"></i> <span class="hidden xs:inline">Save Password</span><span class="inline xs:hidden">Simpan</span>

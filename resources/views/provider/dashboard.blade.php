@@ -25,12 +25,12 @@
                             Kelola scholarship, pantau application mahasiswa, dan berinteraksi dengan sistem provider modern ScholarLink secara profesional.
                         </p>
                     </div>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="{{ route('provider.scholarships.create') }}" class="group relative overflow-hidden inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 via-cyan-500 to-orange-400 hover:scale-[1.03] transition duration-300 px-7 py-5 rounded-2xl font-black text-white shadow-[0_15px_50px_rgba(59,130,246,0.3)]">
+                    <div class="flex flex-col sm:flex-row flex-wrap gap-4">
+                        <a href="{{ route('provider.scholarships.create') }}" class="group relative overflow-hidden inline-flex items-center justify-center w-full sm:w-[220px] gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-7 py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20 transition hover:scale-[1.02] active:scale-[0.98]">
                             <span class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition"></span>
-                            <span class="relative flex items-center gap-3"><i class="bi bi-plus-circle-fill text-xl"></i> Tambah Beasiswa</span>
+                            <span class="relative flex items-center justify-center gap-3"><i class="bi bi-plus-circle-fill text-xl"></i> Tambah Beasiswa</span>
                         </a>
-                        <a href="{{ route('provider.applications.index') }}" class="inline-flex items-center gap-3 bg-white border border-gray-200 hover:border-cyan-400 hover:bg-cyan-50 transition px-7 py-5 rounded-2xl font-black text-gray-700 shadow-lg">
+                        <a href="{{ route('provider.applications.index') }}" class="inline-flex items-center justify-center w-full sm:w-[220px] gap-3 bg-white border border-gray-200 hover:border-cyan-400 hover:bg-cyan-50 transition px-7 py-5 rounded-2xl font-black text-gray-700 shadow-lg">
                             <i class="bi bi-folder-check text-xl text-cyan-600"></i> Lihat Lamaran
                         </a>
                     </div>
@@ -98,9 +98,13 @@
                             <tr class="border-b border-gray-100 hover:bg-cyan-50/40 transition duration-300">
                                 <td class="py-5 px-6">
                                     <div class="flex items-center gap-4">
-                                        <div class="w-14 h-14 rounded-[1.2rem] bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-xl font-black shadow-xl shadow-blue-500/20">
-                                            {{ strtoupper(substr($application->user->name ?? 'M', 0, 1)) }}
-                                        </div>
+                                        @if($application->user->profile && $application->user->profile->foto_profil)
+                                            <img src="{{ asset('storage/' . $application->user->profile->foto_profil) }}" alt="Profile" class="w-14 h-14 rounded-[1.2rem] object-cover shadow-xl shadow-blue-500/20">
+                                        @else
+                                            <div class="w-14 h-14 rounded-[1.2rem] bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-xl font-black shadow-xl shadow-blue-500/20">
+                                                {{ strtoupper(substr($application->user->name ?? 'M', 0, 1)) }}
+                                            </div>
+                                        @endif
                                         <div>
                                             <h3 class="font-black text-gray-900 text-lg">{{ $application->user->name ?? 'Mahasiswa' }}</h3>
                                             <p class="text-sm text-gray-500 font-bold mt-1">{{ $application->user->email ?? '-' }}</p>
@@ -117,7 +121,7 @@
                                         <span class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-yellow-100 border border-yellow-200 text-yellow-700 font-black text-sm"><i class="bi bi-hourglass-split"></i> Pending</span>
                                     @endif
                                 </td>
-                                <td class="py-5 px-6 text-gray-500 font-bold">{{ $application->created_at ? $application->created_at->format('d M Y H:i') : '-' }}</td>
+                                <td class="py-5 px-6 text-gray-500 font-bold">{{ $application->created_at ? $application->created_at->format('d M Y H:i:s') : '-' }}</td>
                                 <td class="py-5 px-6 text-right">
                                     <a href="{{ route('provider.applications.show', $application->id_application) }}" class="inline-flex items-center gap-3 bg-gray-100 hover:bg-gray-200 border border-gray-200 transition px-5 py-3 rounded-2xl font-black text-gray-700">
                                         <i class="bi bi-eye-fill"></i> Detail

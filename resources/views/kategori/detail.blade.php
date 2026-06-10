@@ -144,9 +144,8 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('applications.create') }}" class="w-full inline-flex items-center justify-center gap-3 py-5 bg-gradient-to-r from-blue-600 via-cyan-500 to-orange-400 hover:scale-[1.02] transition duration-300 rounded-2xl text-white font-black text-lg shadow-[0_15px_50px_rgba(59,130,246,0.3)]">
-                        <i class="bi bi-send-fill"></i>
-                        Daftar Sekarang
+                    <a href="{{ route('applications.create') }}" class="w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-7 py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20 transition hover:scale-[1.02] active:scale-[0.98]">
+                        <i class="bi bi-send-fill"></i> Daftar Sekarang
                     </a>
 
                     <p class="text-center text-xs text-gray-400 mt-5 leading-relaxed font-bold px-2">

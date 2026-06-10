@@ -16,6 +16,7 @@ class Application extends Model
         'tanggal_apply',
         'status',
         'catatan',
+        'link_wa',
     ];
 
     protected function casts(): array

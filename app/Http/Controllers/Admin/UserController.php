@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Provider;
 use App\Models\User;
+use App\Models\AdminLog;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -30,7 +32,7 @@ class UserController extends Controller
             'role' => 'required|in:admin,provider,mahasiswa',
         ]);
 
-        User::create([
+        $newUser = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
@@ -38,6 +40,12 @@ class UserController extends Controller
             'status' => $request->role === 'provider'
                 ? 'pending'
                 : 'aktif',
+        ]);
+
+        AdminLog::create([
+            'id_admin' => Auth::id(),
+            'aktivitas' => 'Menambahkan User Baru',
+            'keterangan' => 'Admin menambahkan user baru dengan email: ' . $newUser->email . ' sebagai ' . $newUser->role
         ]);
 
         return redirect()
@@ -104,6 +112,12 @@ class UserController extends Controller
             }
         }
 
+        AdminLog::create([
+            'id_admin' => Auth::id(),
+            'aktivitas' => 'Memperbarui User',
+            'keterangan' => 'Admin memperbarui data user: ' . $user->email
+        ]);
+
         return redirect()
             ->route('admin.users.index')
             ->with('success', 'User berhasil diperbarui');
@@ -111,7 +125,14 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        $email = $user->email;
         $user->delete();
+
+        AdminLog::create([
+            'id_admin' => Auth::id(),
+            'aktivitas' => 'Menghapus User',
+            'keterangan' => 'Admin menghapus user dengan email: ' . $email
+        ]);
 
         return redirect()
             ->route('admin.users.index')

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Provider;
+use App\Models\AdminLog;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ProviderController extends Controller
@@ -46,6 +48,12 @@ class ProviderController extends Controller
             'deskripsi_instansi' => $request->deskripsi_instansi,
         ]);
 
+        AdminLog::create([
+            'id_admin' => Auth::id(),
+            'aktivitas' => 'Memperbarui Provider',
+            'keterangan' => 'Admin memperbarui profil provider: ' . $provider->nama_instansi
+        ]);
+
         return redirect()
             ->route('admin.providers.index')
             ->with('success', 'Provider berhasil diperbarui');
@@ -53,7 +61,14 @@ class ProviderController extends Controller
 
     public function destroy(Provider $provider)
     {
+        $nama_instansi = $provider->nama_instansi;
         $provider->delete();
+
+        AdminLog::create([
+            'id_admin' => Auth::id(),
+            'aktivitas' => 'Menghapus Provider',
+            'keterangan' => 'Admin menghapus provider: ' . $nama_instansi
+        ]);
 
         return redirect()
             ->route('admin.providers.index')
@@ -70,6 +85,12 @@ class ProviderController extends Controller
             'status' => 'aktif',
         ]);
 
+        AdminLog::create([
+            'id_admin' => Auth::id(),
+            'aktivitas' => 'Memverifikasi Provider',
+            'keterangan' => 'Admin memverifikasi (approve) provider: ' . $provider->nama_instansi
+        ]);
+
         return back()->with('success', 'Provider berhasil diverifikasi');
     }
 
@@ -81,6 +102,12 @@ class ProviderController extends Controller
 
         $provider->user->update([
             'status' => 'rejected',
+        ]);
+
+        AdminLog::create([
+            'id_admin' => Auth::id(),
+            'aktivitas' => 'Menolak Provider',
+            'keterangan' => 'Admin menolak (reject) provider: ' . $provider->nama_instansi
         ]);
 
         return back()->with('success', 'Provider berhasil ditolak');

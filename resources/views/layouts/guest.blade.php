@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'ScholarLink') }}</title>
-    <link rel="icon" type="image/png" href="{{ asset('images/logobaru.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo-scholarlink.png') }}">
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=nunito:400,500,600,700,800,900" rel="stylesheet" />
@@ -33,18 +33,19 @@
         }
     </style>
 </head>
-<body class="min-h-screen bg-[#f4f7f9] overflow-hidden antialiased">
+<body class="min-h-screen bg-[#f4f7f9] overflow-y-auto overflow-x-hidden antialiased flex flex-col">
     <div class="fixed inset-0 -z-10 overflow-hidden">
         <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
         <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-orange-200 rounded-full blur-3xl opacity-30"></div>
     </div>
 
-    <div class="min-h-screen flex items-center justify-center px-6 py-12">
+    <div class="flex-1 flex flex-col min-h-0">
+        <div class="flex-1 flex items-center justify-center px-6 py-12">
         <div class="w-full max-w-md">
             <div class="text-center mb-10">
                 <a href="/" class="inline-flex items-center gap-4">
                     <div class="w-16 h-16 rounded-[2rem] shadow-xl shadow-blue-500/20 overflow-hidden">
-                        <img src="{{ asset('images/logobaru.png') }}" class="w-full h-full object-cover" alt="ScholarLink Logo">
+                        <img src="{{ asset('images/logo-scholarlink.png') }}" class="w-full h-full object-cover" alt="ScholarLink Logo">
                     </div>
                     <div class="text-left">
                         <h1 class="text-4xl font-black text-gray-900 tracking-tight">ScholarLink</h1>
@@ -63,6 +64,9 @@
                 </div>
             </div>
         </div>
+    </div>
+        </div>
+        <x-footer />
     </div>
 </body>
 </html>

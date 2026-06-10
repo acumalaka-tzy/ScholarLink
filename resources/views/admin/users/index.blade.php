@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <a href="{{ route('admin.users.create') }}" class="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-7 py-4 rounded-2xl shadow-lg shadow-blue-500/20 font-black transition hover:scale-[1.02] text-center">
+    <a href="{{ route('admin.users.create') }}" class="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-7 py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20 transition hover:scale-[1.02] active:scale-[0.98]">
         + Tambah User
     </a>
 </div>
@@ -52,9 +52,13 @@
                     <tr class="border-b border-gray-100 hover:bg-gray-50 transition user-row">
                         <td class="px-6 py-5">
                             <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center font-black shadow-md">
-                                    {{ strtoupper(substr($user->name, 0, 1)) }}
-                                </div>
+                                @if($user->profile?->foto_profil)
+                                    <img src="{{ asset('storage/' . $user->profile->foto_profil) }}" alt="{{ $user->name }}" class="w-12 h-12 rounded-2xl object-cover shadow-md border border-gray-100">
+                                @else
+                                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center font-black shadow-md">
+                                        {{ strtoupper(substr($user->name, 0, 1)) }}
+                                    </div>
+                                @endif
                                 <div>
                                     <div class="user-name font-black text-gray-900">{{ $user->name }}</div>
                                     <div class="text-sm text-gray-500 font-bold mt-1">ScholarLink User</div>

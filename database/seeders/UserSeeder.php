@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Admin ScholarLink', 
                 'email' => 'admin@gmail.com', 
-                'password' => Hash::make('password'), 
+                'password' => 'password', 
                 'role' => 'admin', 
                 'status' => 'aktif', 
                 'tanggal_daftar' => now()
@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Budi Mahasiswa', 
                 'email' => 'budi@gmail.com', 
-                'password' => Hash::make('password'), 
+                'password' => 'password', 
                 'role' => 'mahasiswa', 
                 'status' => 'aktif', 
                 'tanggal_daftar' => now()
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Provider Scholarship', 
                 'email' => 'provider@gmail.com', 
-                'password' => Hash::make('password'), 
+                'password' => 'password', 
                 'role' => 'provider', 
                 'status' => 'aktif', 
                 'tanggal_daftar' => now()
@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Provider BSI', 
                 'email' => 'provider_bsi@gmail.com', 
-                'password' => Hash::make('password'), 
+                'password' => 'password', 
                 'role' => 'provider', 
                 'status' => 'aktif', 
                 'tanggal_daftar' => now()

@@ -105,7 +105,7 @@
 
                                 <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full border font-black bg-gray-100 text-gray-700 border-gray-200">
                                     <i class="bi bi-calendar-event-fill"></i>
-                                    Bergabung {{ $user->created_at ? $user->created_at->format('d M Y') : 'N/A' }}
+                                    Bergabung {{ $user->tanggal_daftar ? $user->tanggal_daftar->format('d M Y') : ($user->created_at ? $user->created_at->format('d M Y') : 'N/A') }}
                                 </span>
                             </div>
 
@@ -227,17 +227,7 @@
                         <div class="h-2 bg-gradient-to-r {{ $config['cover'] }}"></div>
                         <div class="p-6 sm:p-8">
                             @include('profile.partials.update-password-form')
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-[2rem] shadow-xl border border-red-100 overflow-hidden">
-                        <div class="h-2 bg-gradient-to-r from-red-500 via-rose-500 to-orange-400"></div>
-                        <div class="p-6 sm:p-8">
-                            @include('profile.partials.delete-user-form')
-                        </div>
-                    </div>
                 </div>
-
             </div>
         </div>
     </div>

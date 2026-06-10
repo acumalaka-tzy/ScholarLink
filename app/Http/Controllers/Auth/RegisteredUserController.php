@@ -13,12 +13,17 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use App\Models\Scholarship;
+use App\Models\Application;
 
 class RegisteredUserController extends Controller
 {
     public function create(): View
     {
-        return view('auth.register');
+        $scholarshipCount = Scholarship::count();
+        $awardeeCount = Application::where('status', 'diterima')->count();
+        
+        return view('auth.register', compact('scholarshipCount', 'awardeeCount'));
     }
 
     /**
@@ -38,7 +43,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
             'role' => $request->role,
 
             'status' => 

@@ -25,7 +25,27 @@ class DashboardController extends Controller
             ->orderByDesc('tanggal_dibuat')
             ->take(3)
             ->get();
+            
+        $totalScholarships = Scholarship::where('status', 'aktif')->count();
+        $totalApplications = Application::where('id_user', $user->id)->count();
+        $totalAccepted = Application::where('id_user', $user->id)->where('status', 'approved')->count();
         
-        return view('dashboard', compact('applications', 'recommendedScholarships'));
+        // Menghitung kelengkapan profil (asumsi sederhana)
+        $profileCompleteness = 50; // default (nama & email)
+        if ($user->hasVerifiedEmail()) $profileCompleteness += 25;
+        if (\App\Models\Document::whereHas('application', function($q) use ($user) {
+            $q->where('id_user', $user->id);
+        })->exists()) {
+            $profileCompleteness += 25;
+        }
+        
+        return view('dashboard', compact(
+            'applications', 
+            'recommendedScholarships',
+            'totalScholarships',
+            'totalApplications',
+            'totalAccepted',
+            'profileCompleteness'
+        ));
     }
 }

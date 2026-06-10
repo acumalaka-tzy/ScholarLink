@@ -10,11 +10,15 @@ use Illuminate\Http\Request;
 
 class ScholarshipController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $scholarships = Scholarship::with(['provider', 'category'])
-            ->latest()
-            ->get();
+        $query = Scholarship::with(['provider', 'category'])->latest();
+
+        if ($request->filled('search')) {
+            $query->where('nama_beasiswa', 'like', '%' . $request->search . '%');
+        }
+
+        $scholarships = $query->paginate(6)->withQueryString();
 
         return view('scholarships.index', compact('scholarships'));
     }

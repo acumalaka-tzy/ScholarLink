@@ -134,10 +134,22 @@ class ChatRoomController extends Controller
             if (!$isAllowed) abort(403);
         }
 
+        // Daftar kata tidak sopan dari config
+        $badWords = config('profanity', []);
+
+        $pesan = $request->pesan;
+
+        // Ganti kata-kata kotor dengan asterisks (case-insensitive)
+        foreach ($badWords as $word) {
+            $pattern = '/\b' . preg_quote($word, '/') . '\b/i';
+            $replacement = str_repeat('*', mb_strlen($word));
+            $pesan = preg_replace($pattern, $replacement, $pesan);
+        }
+
         Message::create([
             'id_room' => $chatRoom->id_room,
             'id_user' => Auth::id(),
-            'pesan' => $request->pesan,
+            'pesan' => $pesan,
             'waktu_kirim' => now(),
         ]);
 

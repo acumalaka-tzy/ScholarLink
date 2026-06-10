@@ -23,7 +23,7 @@
                     Kelola seluruh data scholarship provider dengan tampilan modern, profesional, dan pengalaman terbaik.
                 </p>
             </div>
-            <a href="{{ route('provider.scholarships.create') }}" class="group relative overflow-hidden inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 via-cyan-500 to-orange-400 px-8 py-5 rounded-2xl font-black text-white shadow-[0_15px_50px_rgba(59,130,246,0.3)] hover:scale-[1.03] transition duration-300">
+            <a href="{{ route('provider.scholarships.create') }}" class="group relative overflow-hidden inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-7 py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20 transition hover:scale-[1.02] active:scale-[0.98] hover:scale-[1.03] transition duration-300">
                 <span class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition"></span>
                 <span class="relative flex items-center gap-3"><i class="bi bi-plus-circle-fill text-xl"></i> Tambah Beasiswa</span>
             </a>
@@ -120,7 +120,7 @@
                                         </div>
                                         <h2 class="text-5xl font-black text-gray-900 mb-5">No Scholarships Found</h2>
                                         <p class="text-gray-500 text-lg max-w-3xl leading-relaxed font-bold mb-10">Anda belum memiliki data scholarship. Tambahkan scholarship baru untuk mulai membuka peluang bagi mahasiswa.</p>
-                                        <a href="{{ route('provider.scholarships.create') }}" class="group relative overflow-hidden inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 via-cyan-500 to-orange-400 px-8 py-5 rounded-2xl font-black text-white shadow-[0_15px_50px_rgba(59,130,246,0.3)] hover:scale-[1.03] transition duration-300">
+                                        <a href="{{ route('provider.scholarships.create') }}" class="group relative overflow-hidden inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-7 py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20 transition hover:scale-[1.02] active:scale-[0.98] hover:scale-[1.03] transition duration-300">
                                             <span class="relative flex items-center gap-3"><i class="bi bi-plus-circle-fill"></i> Tambah Scholarship</span>
                                         </a>
                                     </div>

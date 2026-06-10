@@ -78,7 +78,7 @@
                 @auth
                     @if(auth()->user()->role == 'mahasiswa')
                         <a href="{{ route('applications.create') }}?id_beasiswa={{ $scholarship->id_beasiswa }}"
-                        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 px-6 py-3 rounded-lg sm:rounded-2xl font-black text-white shadow-lg hover:shadow-xl transition text-sm sm:text-base">
+                        class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-7 py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20 transition hover:scale-[1.02] active:scale-[0.98] text-sm sm:text-base">
                             <i class="bi bi-send-fill"></i> Apply Now
                         </a>
 

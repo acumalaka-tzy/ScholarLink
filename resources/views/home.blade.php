@@ -123,7 +123,7 @@
     <section id="hero" class="fade-up max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-20 relative overflow-hidden">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             
-            <div class="max-w-xl order-2 lg:order-1 text-center lg:text-left">
+            <div class="max-w-xl text-center lg:text-left">
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 text-orange-700 font-bold text-xs sm:text-sm mb-6 border border-orange-200">
                     <i class="bi bi-mortarboard-fill"></i> Platform Beasiswa Terpadu untuk Mahasiswa
                 </div>
@@ -157,14 +157,14 @@
                 </div>
             </div>
 
-            <div class="order-1 lg:order-2 relative bg-gradient-to-br from-cyan-200 via-[#d1e9f6] to-cyan-200 rounded-[2rem] sm:rounded-[3rem] p-4 sm:p-8 flex justify-center items-center h-[380px] sm:h-[500px] shadow-2xl">
+            <div class="relative bg-gradient-to-br from-cyan-200 via-[#d1e9f6] to-cyan-200 rounded-[2rem] sm:rounded-[3rem] p-4 sm:p-8 flex justify-center items-center h-[380px] sm:h-[500px] shadow-2xl">
                 
                 <div class="absolute top-6 sm:top-12 left-2 sm:left-[-1rem] lg:left-[-2rem] bg-gradient-to-r from-orange-300 to-pink-300 rounded-2xl float-animation p-3 sm:p-5 shadow-xl flex flex-col gap-0.5 z-10" style="animation-duration: 3s;">
                     <div class="flex items-center gap-2 sm:gap-3 mb-1">
                         <div class="w-7 h-7 sm:w-10 sm:h-10 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center font-black text-sm sm:text-xl">
                             <i class="bi bi-people-fill"></i>
                         </div>
-                        <span class="font-black text-lg sm:text-2xl text-gray-900">10,000+</span>
+                        <span class="font-black text-lg sm:text-2xl text-gray-900">{{ number_format($userCount) }}+</span>
                     </div>
                     <p class="text-xs sm:text-sm text-gray-700 font-bold">Pengguna Aktif</p>
                 </div>
@@ -174,7 +174,7 @@
                         <div class="w-7 h-7 sm:w-10 sm:h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-black text-sm sm:text-xl">
                             <i class="bi bi-journals"></i>
                         </div>
-                        <span class="font-black text-lg sm:text-2xl text-gray-900">1,000+</span>
+                        <span class="font-black text-lg sm:text-2xl text-gray-900">{{ number_format($scholarshipCount) }}+</span>
                     </div>
                     <p class="text-xs sm:text-sm text-gray-700 font-bold">Beasiswa Tersedia</p>
                 </div>
@@ -184,7 +184,7 @@
                         <i class="bi bi-check-circle-fill text-xl sm:text-3xl"></i>
                     </div>
                     <div>
-                        <span class="font-black text-sm sm:text-lg text-gray-900 block">500+</span>
+                        <span class="font-black text-sm sm:text-lg text-gray-900 block">{{ number_format($awardeeCount) }}+</span>
                         <span class="text-[10px] sm:text-xs text-gray-700 font-bold">Penerima Beasiswa</span>
                     </div>
                 </div>
@@ -487,45 +487,7 @@
         </div>
     </section>
 
-    <footer class="bg-gradient-to-br from-cyan-100 via-[#d1e9f6] to-cyan-100 text-gray-900 py-12 sm:py-16 border-t border-cyan-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-12">
-            <div>
-                <div class="flex items-center gap-2 mb-4">
-                    <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-cyan-400 rounded-lg flex items-center justify-center text-white font-black">S</div>
-                    <h4 class="font-black text-xl text-gray-900">ScholarLink</h4>
-                </div>
-                <p class="text-gray-700 text-sm font-bold leading-relaxed">Platform terpercaya dan bersemangat untuk menemukan beasiswa impian Anda.</p>
-            </div>
-            <div>
-                <h4 class="font-black text-gray-900 mb-4 sm:mb-6 text-base">Navigasi</h4>
-                <ul class="text-gray-700 text-sm space-y-2 sm:space-y-3 font-bold">
-                    <li><a href="#about" class="hover:text-blue-600 transition">Tentang</a></li>
-                    <li><a href="#scholarships" class="hover:text-blue-600 transition">Beasiswa</a></li>
-                    <li><a href="#steps" class="hover:text-blue-600 transition">Cara Kerja</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-black text-gray-900 mb-4 sm:mb-6 text-base">Platform</h4>
-                <ul class="text-gray-700 text-sm space-y-2 sm:space-y-3 font-bold">
-                    <li>Mahasiswa</li>
-                    <li>Provider Beasiswa</li>
-                    <li>Manajemen Pendaftaran</li>
-                    <li>Pemantauan Status</li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-black text-gray-900 mb-4 sm:mb-6 text-base">Kontak</h4>
-                <ul class="text-gray-700 text-sm space-y-2 sm:space-y-3 font-bold">
-                    <li><i class="bi bi-envelope-fill mr-2 text-cyan-600"></i> info@scholarlink.id</li>
-                    <li><i class="bi bi-telephone-fill mr-2 text-cyan-600"></i> +62 812-3456-7890</li>
-                    <li><i class="bi bi-geo-alt-fill mr-2 text-cyan-600"></i> Indonesia</li>
-                </ul>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-cyan-200 pt-8 text-center text-gray-600 text-sm font-black">
-            &copy; 2026 ScholarLink. Semua hak dilindungi.
-        </div>
-    </footer>
+    <x-footer />
 
     <script>
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

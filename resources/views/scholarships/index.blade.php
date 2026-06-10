@@ -40,28 +40,31 @@
             @endauth
         </div>
 
-        <div class="mb-10 sm:mb-14 bg-white rounded-[2rem] p-6 sm:p-8 border border-gray-100 shadow-sm">
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-4 sm:pl-6 flex items-center pointer-events-none">
-                    <i class="bi bi-search text-gray-400 text-lg sm:text-xl"></i>
-                </div>
+        <form action="" method="GET" class="mb-10 sm:mb-14 bg-white rounded-[2rem] p-6 sm:p-8 border border-gray-100 shadow-sm">
+            <div class="flex flex-col sm:flex-row gap-4">
+                <div class="relative flex-1">
+                    <div class="absolute inset-y-0 left-0 pl-4 sm:pl-6 flex items-center pointer-events-none">
+                        <i class="bi bi-search text-gray-400 text-lg sm:text-xl"></i>
+                    </div>
 
-                <input 
-                    type="text" 
-                    id="scholarshipSearch" 
-                    placeholder="Cari beasiswa, provider, atau kategori..." 
-                    class="w-full pl-12 sm:pl-16 pr-4 sm:pr-6 py-3 sm:py-4 bg-white border-2 border-gray-200 rounded-lg sm:rounded-2xl font-semibold text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition text-sm sm:text-base"
-                >
-
-                <div class="absolute inset-y-0 right-0 pr-4 sm:pr-6 flex items-center pointer-events-none">
-                    <span class="text-xs sm:text-sm font-black text-gray-400" id="searchResultCount"></span>
+                    <input 
+                        type="text" 
+                        name="search"
+                        value="{{ request('search') }}"
+                        id="scholarshipSearch" 
+                        placeholder="Cari nama beasiswa..." 
+                        class="w-full pl-12 sm:pl-16 pr-4 sm:pr-6 py-3 sm:py-4 bg-white border-2 border-gray-200 rounded-lg sm:rounded-2xl font-semibold text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition text-sm sm:text-base"
+                    >
                 </div>
+                <button type="submit" class="bg-gradient-to-r from-blue-600 to-cyan-500 hover:scale-[1.03] text-white px-8 py-4 sm:py-0 rounded-2xl font-black shadow-lg shadow-blue-500/20 transition">
+                    Cari
+                </button>
             </div>
 
-            <p class="text-xs sm:text-sm text-gray-500 mt-2 font-bold">
-                Ketik nama beasiswa, penyedia, atau kategori untuk memfilter hasil pencarian
+            <p class="text-xs sm:text-sm text-gray-500 mt-4 font-bold">
+                Ketik nama beasiswa lalu tekan Cari atau Enter untuk memfilter hasil pencarian
             </p>
-        </div>
+        </form>
 
         @if($scholarships->isEmpty())
             <div class="bg-white border border-gray-100 rounded-lg sm:rounded-[2.5rem] shadow-sm p-8 sm:p-16 text-center">
@@ -156,70 +159,11 @@
                         </div>
                     </div>
                 @endforeach
-            </div>
-
-            <div id="noResults" class="hidden bg-white border border-gray-100 rounded-lg sm:rounded-[2.5rem] shadow-sm p-8 sm:p-16 text-center">
-                <div class="w-20 sm:w-24 h-20 sm:h-24 mx-auto rounded-lg sm:rounded-[2rem] bg-yellow-100 text-yellow-400 flex items-center justify-center text-3xl sm:text-4xl mb-6 sm:mb-8">
-                    <i class="bi bi-search"></i>
-                </div>
-
-                <h2 class="text-xl sm:text-3xl font-black text-gray-900 mb-2 sm:mb-3">Beasiswa Tidak Ditemukan</h2>
-
-                <p class="text-gray-500 font-bold text-xs sm:text-base max-w-md mx-auto">
-                    Kami tidak menemukan beasiswa yang sesuai dengan pencarian Anda. Coba cari dengan kata kunci lain.
-                </p>
+            <div class="mt-10">
+                {{ $scholarships->links() }}
             </div>
         @endif
     </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('scholarshipSearch');
-    const scholarshipCards = document.querySelectorAll('.scholarship-card');
-    const scholarshipContainer = document.getElementById('scholarshipContainer');
-    const noResultsDiv = document.getElementById('noResults');
-    const searchResultCount = document.getElementById('searchResultCount');
-
-    function filterScholarships() {
-        const searchTerm = searchInput.value.toLowerCase().trim();
-        let visibleCount = 0;
-
-        scholarshipCards.forEach(card => {
-            const name = card.getAttribute('data-name').toLowerCase();
-            const provider = card.getAttribute('data-provider').toLowerCase();
-            const category = card.getAttribute('data-category').toLowerCase();
-            const description = card.getAttribute('data-description').toLowerCase();
-
-            const matches =
-                name.includes(searchTerm) ||
-                provider.includes(searchTerm) ||
-                category.includes(searchTerm) ||
-                description.includes(searchTerm);
-
-            if (searchTerm === '' || matches) {
-                card.style.display = '';
-                visibleCount++;
-            } else {
-                card.style.display = 'none';
-            }
-        });
-
-        if (visibleCount === 0 && searchTerm !== '') {
-            if (scholarshipContainer) scholarshipContainer.style.display = 'none';
-            if (noResultsDiv) noResultsDiv.style.display = 'block';
-            if (searchResultCount) searchResultCount.textContent = '0 hasil';
-        } else {
-            if (scholarshipContainer) scholarshipContainer.style.display = 'grid';
-            if (noResultsDiv) noResultsDiv.style.display = 'none';
-            if (searchResultCount) searchResultCount.textContent = searchTerm === '' ? '' : `${visibleCount} hasil`;
-        }
-    }
-
-    if (searchInput) {
-        searchInput.addEventListener('input', filterScholarships);
-        searchInput.addEventListener('keyup', filterScholarships);
-    }
-});
-</script>
 @endsection

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Register - ScholarLink</title>
-    <link rel="icon" type="image/png" href="{{ asset('images/logobaru.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo-scholarlink.png') }}">
     
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=nunito:400,500,600,700,800,900" rel="stylesheet" />
@@ -36,7 +36,7 @@
 
             <div class="relative z-10">
                 <a href="{{ route('home') }}" class="flex items-center gap-2">
-                    <img src="{{ asset('images/logobaru.png') }}" class="w-8 lg:w-10 h-8 lg:h-10 rounded-full shadow-md object-cover" alt="ScholarLink Logo">
+                    <img src="{{ asset('images/logo-scholarlink.png') }}" class="w-8 lg:w-10 h-8 lg:h-10 rounded-full shadow-md object-cover" alt="ScholarLink Logo">
                     <span class="text-lg lg:text-2xl font-black tracking-tight text-gray-900">
                         ScholarLink
                     </span>
@@ -60,18 +60,18 @@
 
                 <div class="grid grid-cols-3 gap-3 lg:gap-4">
                     <div class="bg-white rounded-2xl lg:rounded-3xl p-3 lg:p-5 border border-gray-100 shadow-sm text-center">
-                        <p class="text-2xl lg:text-3xl font-black text-blue-600">1K+</p>
+                        <p class="text-2xl lg:text-3xl font-black text-blue-600">{{ $scholarshipCount }}+</p>
                         <p class="text-gray-500 text-xs mt-1 font-bold">Beasiswa</p>
                     </div>
 
                     <div class="bg-white rounded-2xl lg:rounded-3xl p-3 lg:p-5 border border-gray-100 shadow-sm text-center">
-                        <p class="text-2xl lg:text-3xl font-black text-orange-500">500+</p>
+                        <p class="text-2xl lg:text-3xl font-black text-orange-500">{{ $awardeeCount }}+</p>
                         <p class="text-gray-500 text-xs mt-1 font-bold">Penerima</p>
                     </div>
 
                     <div class="bg-white rounded-2xl lg:rounded-3xl p-3 lg:p-5 border border-gray-100 shadow-sm text-center">
-                        <p class="text-2xl lg:text-3xl font-black text-green-600">Gratis</p>
-                        <p class="text-gray-500 text-xs mt-1 font-bold">Daftar</p>
+                        <p class="text-2xl lg:text-3xl font-black text-green-600">24/7</p>
+                        <p class="text-gray-500 text-xs mt-1 font-bold">Akses</p>
                     </div>
                 </div>
             </div>
@@ -201,7 +201,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-3 md:py-4 rounded-lg md:rounded-xl font-black hover:from-blue-700 hover:to-cyan-700 transition shadow-lg shadow-blue-600/20 text-center block mt-6 md:mt-8 text-sm md:text-base active:scale-[0.99]">
+                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-3 md:py-4 rounded-xl md:rounded-2xl font-black text-sm md:text-base tracking-wide transition shadow-lg shadow-blue-500/20 hover:shadow-xl hover:scale-[1.01] active:scale-[0.99] block mt-6 md:mt-8">
                         Daftar Akun Gratis
                     </button>
                 </form>

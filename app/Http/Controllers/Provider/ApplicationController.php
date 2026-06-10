@@ -40,16 +40,17 @@ class ApplicationController extends Controller
             'link_wa' => 'required|url',
         ]);
 
+        $linkWA = $request->input('link_wa');
+
         $application = Application::findOrFail($id);
         $application->status = 'approved';
+        $application->link_wa = $linkWA;
         $application->save();
-
-        $linkWA = $request->input('link_wa');
 
         ApplicationStatusLog::create([
             'id_application' => $application->id_application, 
             'status'         => 'approved',
-            'catatan'        => 'Application approved by provider. Group WA Link: ' . $linkWA,
+            'catatan'        => 'Application approved by provider.',
             'tanggal_status' => now(),
         ]);
 

@@ -93,9 +93,13 @@
                     <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
                         <td class="px-6 py-5">
                             <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center font-black shadow-md flex-shrink-0">
-                                    {{ strtoupper(substr($user->name, 0, 1)) }}
-                                </div>
+                                @if($user->profile?->foto_profil)
+                                    <img src="{{ asset('storage/' . $user->profile->foto_profil) }}" alt="{{ $user->name }}" class="w-12 h-12 rounded-2xl object-cover shadow-md border border-gray-100">
+                                @else
+                                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center font-black shadow-md">
+                                        {{ strtoupper(substr($user->name, 0, 1)) }}
+                                    </div>
+                                @endif
                                 <div>
                                     <div class="font-black text-gray-900">{{ $user->name }}</div>
                                     <div class="text-sm text-gray-500 font-bold mt-1">ScholarLink User</div>
@@ -165,9 +169,13 @@
                     <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
                         <td class="px-6 py-5">
                             <div class="flex items-center gap-4 flex-shrink-0">
-                                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center font-black shadow-md flex-shrink-0">
-                                    {{ strtoupper(substr($application->user->name ?? 'M', 0, 1)) }}
-                                </div>
+                                @if($application->user?->profile?->foto_profil)
+                                    <img src="{{ asset('storage/' . $application->user->profile->foto_profil) }}" alt="{{ $application->user->name ?? 'Unknown' }}" class="w-10 h-10 rounded-2xl object-cover shadow-md border border-gray-100">
+                                @else
+                                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center font-black text-sm shadow-md">
+                                        {{ strtoupper(substr($application->user->name ?? 'M', 0, 1)) }}
+                                    </div>
+                                @endif
                                 <div>
                                     <div class="font-black text-gray-900">{{ $application->user->name ?? '-' }}</div>
                                     <div class="text-sm text-gray-500 font-bold mt-1">{{ $application->user->email ?? '-' }}</div>
@@ -197,7 +205,7 @@
                                 </span>
                             @endif
                         </td>
-                        <td class="px-6 py-5 text-gray-600 font-bold">{{ $application->tanggal_apply ? $application->tanggal_apply->format('d M Y H:i') : '-' }}</td>
+                        <td class="px-6 py-5 text-gray-600 font-bold">{{ $application->tanggal_apply ? $application->tanggal_apply->format('d M Y H:i:s') : '-' }}</td>
                     </tr>
                 @empty
                     <tr>

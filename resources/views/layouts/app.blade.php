@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>ScholarLink</title>
-    <link rel="icon" type="image/png" href="{{ asset('images/logobaru.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo-scholarlink.png') }}">
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=nunito:400,500,600,700,800,900" rel="stylesheet" />
@@ -32,7 +32,7 @@
         }
     </style>
 </head>
-<body class="bg-[#f4f7f9] text-gray-900 min-h-screen overflow-x-hidden antialiased">
+<body class="bg-[#f4f7f9] text-gray-900 min-h-screen overflow-x-hidden antialiased flex flex-col">
     <div class="fixed inset-0 -z-10 overflow-hidden">
         <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-200 rounded-full blur-3xl opacity-30"></div>
         <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-orange-200 rounded-full blur-3xl opacity-30"></div>
@@ -42,11 +42,16 @@
         <x-navbar />
     @endauth
 
-    @if(isset($slot))
-    {{ $slot }}
-@else
-    @yield('content')
-@endif
+    <main class="flex-1 flex flex-col min-h-0">
+        <div class="flex-1">
+            @if(isset($slot))
+                {{ $slot }}
+            @else
+                @yield('content')
+            @endif
+        </div>
+        <x-footer />
+    </main>
 
     <x-toast />
 </body>

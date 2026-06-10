@@ -99,7 +99,7 @@
         </div>
 
         <div class="mt-10 flex flex-wrap gap-4">
-            <button type="submit" class="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-8 py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20 transition hover:scale-[1.02]">
+            <button type="submit" class="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-7 py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20 transition hover:scale-[1.02] active:scale-[0.98]">
                 Simpan Perubahan
             </button>
             <a href="{{ route('admin.providers.index') }}" class="bg-gray-100 hover:bg-gray-200 border border-gray-200 text-gray-700 px-8 py-4 rounded-2xl font-black transition">

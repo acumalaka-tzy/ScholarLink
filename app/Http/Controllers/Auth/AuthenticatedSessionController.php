@@ -8,12 +8,17 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Models\Scholarship;
+use App\Models\Application;
 
 class AuthenticatedSessionController extends Controller
 {
     public function create(): View
     {
-        return view('auth.login');
+        $scholarshipCount = Scholarship::count();
+        $awardeeCount = Application::where('status', 'diterima')->count();
+        
+        return view('auth.login', compact('scholarshipCount', 'awardeeCount'));
     }
 
     public function store(LoginRequest $request): RedirectResponse

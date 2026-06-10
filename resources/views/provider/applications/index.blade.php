@@ -30,9 +30,13 @@
                         
                         <td class="p-5">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center font-black text-white shadow-md shadow-blue-500/20">
-                                    {{ strtoupper(substr($application->user->name ?? 'M', 0, 1)) }}
-                                </div>
+                                @if($application->user->profile && $application->user->profile->foto_profil)
+                                    <img src="{{ asset('storage/' . $application->user->profile->foto_profil) }}" alt="Profile" class="w-10 h-10 rounded-xl object-cover shadow-md">
+                                @else
+                                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center font-black text-white shadow-md shadow-blue-500/20">
+                                        {{ strtoupper(substr($application->user->name ?? 'M', 0, 1)) }}
+                                    </div>
+                                @endif
 
                                 <div>
                                     <p class="font-black text-base text-slate-900 tracking-wide">
@@ -47,7 +51,7 @@
                         </td>
 
                         <td class="p-5">
-                            <span class="font-black text-xs text-blue-700 tracking-wide bg-blue-50 px-3 py-1.5 rounded-xl border border-blue-100 uppercase">
+                            <span class="inline-block whitespace-nowrap font-black text-xs text-blue-700 tracking-wide bg-blue-50 px-3 py-1.5 rounded-xl border border-blue-100 uppercase">
                                 {{ $application->scholarship->nama_beasiswa ?? '-' }}
                             </span>
                         </td>
@@ -97,15 +101,10 @@
                                 </a>
 
                                 @if($application->status == 'pending')
-                                    <form action="{{ route('provider.applications.approve', $application->id_application) }}" method="POST">
-                                        @csrf
-                                        @method('PATCH')
-
-                                        <button type="submit"
-                                                class="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white transition font-black text-xs tracking-wider shadow-lg shadow-emerald-500/20 uppercase">
-                                            Approve
-                                        </button>
-                                    </form>
+                                    <button type="button" onclick="openModalWA('{{ route('provider.applications.approve', $application->id_application) }}')"
+                                            class="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white transition font-black text-xs tracking-wider shadow-lg shadow-emerald-500/20 uppercase">
+                                        Approve
+                                    </button>
 
                                     <form action="{{ route('provider.applications.reject', $application->id_application) }}" method="POST">
                                         @csrf
@@ -137,5 +136,49 @@
         </table>
     </div>
 </div>
+
+<div id="modalWA" class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+    <div class="bg-white border border-gray-100 rounded-3xl p-6 max-w-md w-full mx-4 shadow-2xl">
+        <h3 class="text-xl font-black text-gray-900 mb-2">
+            Konfirmasi Lolos
+        </h3>
+
+        <p class="text-sm font-bold text-gray-500 mb-6">
+            Masukkan link grup WhatsApp agar mahasiswa bisa bergabung.
+        </p>
+
+        <form id="approveForm" method="POST" action="">
+            @csrf
+            @method('PATCH')
+
+            <input type="url"
+                   name="link_wa"
+                   required
+                   placeholder="https://chat.whatsapp.com/..."
+                   class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl mb-6 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+            <div class="flex gap-3 justify-end">
+                <button type="button" onclick="closeModalWA()" class="px-5 py-2.5 bg-gray-100 text-gray-600 rounded-2xl font-black text-sm">
+                    Batal
+                </button>
+
+                <button type="submit" class="px-6 py-2.5 bg-emerald-500 text-white rounded-2xl font-black text-sm">
+                    Konfirmasi
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function openModalWA(actionUrl) {
+        document.getElementById('approveForm').action = actionUrl;
+        document.getElementById('modalWA').classList.remove('hidden');
+    }
+    
+    function closeModalWA() {
+        document.getElementById('modalWA').classList.add('hidden');
+    }
+</script>
 
 @endsection

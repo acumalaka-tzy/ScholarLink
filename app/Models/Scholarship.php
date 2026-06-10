@@ -21,6 +21,7 @@ class Scholarship extends Model
         'deadline',
         'tanggal_dibuat',
         'status',
+        'required_documents',
     ];
 
     protected function casts(): array
@@ -28,6 +29,7 @@ class Scholarship extends Model
         return [
             'deadline' => 'date',
             'tanggal_dibuat' => 'date',
+            'required_documents' => 'array',
         ];
     }
 

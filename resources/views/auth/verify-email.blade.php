@@ -126,9 +126,9 @@
                     @endif
 
                     <div class="mt-8 space-y-4">
-                        <form method="POST" action="{{ route('verification.send') }}">
+                        <form method="POST" action="{{ route('verification.send') }}" onsubmit="document.getElementById('resend-btn').disabled = true; document.getElementById('resend-btn').innerText = 'MENGIRIM...';">
                             @csrf
-                            <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-4 rounded-2xl font-black text-lg transition shadow-lg shadow-blue-500/20 hover:shadow-xl hover:scale-[1.01]">
+                            <button id="resend-btn" type="submit" class="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-4 rounded-2xl font-black text-lg transition shadow-lg shadow-blue-500/20 hover:shadow-xl hover:scale-[1.01] disabled:opacity-70 disabled:cursor-not-allowed">
                                 KIRIM ULANG EMAIL VERIFIKASI
                             </button>
                         </form>
