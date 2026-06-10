@@ -83,9 +83,19 @@
                                     </div>
                                 </td>
                                 <td class="px-8 py-6">
-                                    <span class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-green-100 border border-green-200 text-green-700 font-black text-sm">
-                                        <i class="bi bi-check-circle-fill"></i> {{ $s->status }}
-                                    </span>
+                                    @if($s->status == 'aktif')
+                                        <span class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-green-100 border border-green-200 text-green-700 font-black text-sm">
+                                            <i class="bi bi-check-circle-fill"></i> Aktif
+                                        </span>
+                                    @elseif($s->status == 'nonaktif')
+                                        <span class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-yellow-100 border border-yellow-200 text-yellow-700 font-black text-sm">
+                                            <i class="bi bi-clock-fill"></i> Nonaktif
+                                        </span>
+                                    @else
+                                        <span class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-red-100 border border-red-200 text-red-700 font-black text-sm">
+                                            <i class="bi bi-x-circle-fill"></i> Tutup
+                                        </span>
+                                    @endif
                                 </td>
                                 <td class="px-8 py-6">
                                     <div class="flex items-center justify-center gap-4">
