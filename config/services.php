@@ -18,6 +18,13 @@ return [
         'key' => env('POSTMARK_API_KEY'),
     ],
 
+    'mailtrap' => [
+        'default' => [
+            'api_key' => env('MAILTRAP_API_KEY'),
+            'inbox_id' => env('MAILTRAP_INBOX_ID'),
+        ],
+    ],
+
     'resend' => [
         'key' => env('RESEND_API_KEY'),
     ],

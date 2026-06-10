@@ -60,6 +60,10 @@ return [
             //     'timeout' => 5,
             // ],
         ],
+        
+        'mailtrap' => [
+            'transport' => 'mailtrap',
+        ],
 
         'resend' => [
             'transport' => 'resend',
