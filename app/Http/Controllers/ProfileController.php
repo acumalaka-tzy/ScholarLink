@@ -32,8 +32,17 @@ class ProfileController extends Controller
 
         $user->save();
 
-        $fotoProfil = $user->profile->foto_profil ?? null;
-        $fotoSampul = $user->profile->foto_sampul ?? null;
+    $fotoProfil = $user->profile->foto_profil ?? null;
+    $fotoSampul = $user->profile->foto_sampul ?? null;
+
+dd(
+    [
+        'hasFile_foto_profil' => $request->hasFile('foto_profil'),
+        'foto_profil' => $request->file('foto_profil'),
+        'hasFile_foto_sampul' => $request->hasFile('foto_sampul'),
+        'foto_sampul' => $request->file('foto_sampul'),
+    ]
+);
 
         if ($request->hasFile('foto_profil')) {
             $fotoProfil = $request->file('foto_profil')
