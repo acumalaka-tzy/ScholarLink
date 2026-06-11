@@ -43,8 +43,8 @@
 
     @if(auth()->user()->role === 'provider')
     <div id="create-room" class="bg-white border border-gray-100 rounded-[2rem] shadow-2xl overflow-hidden mb-10 scroll-mt-20">
-    <div class="h-2 bg-gradient-to-r {{ $config['cardColor'] }}"></div>        <div class="p-8 md:p-10">
-            <h2 class="text-2xl font-black text-gray-900 mb-6">Buat Room Diskusi Baru</h2>
+    <div class="h-2 bg-gradient-to-r from-blue-600 to-cyan-500"></div>        <div class="p-8 md:p-10">
+        <h2 class="text-2xl font-black text-gray-900 mb-6">Buat Room Diskusi Baru</h2>
             <form method="POST" action="{{ route('chat-rooms.store', $scholarship->id_beasiswa) }}" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
                 @csrf
                 <input type="text" name="nama_room" required placeholder="Nama Room" class="bg-gray-50 border-2 border-gray-200 rounded-2xl p-4 font-bold focus:ring-4 focus:ring-blue-100 outline-none">
