@@ -113,4 +113,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Route khusus untuk mengakali masalah symlink foto/storage di Railway
+Route::get('/storage/{path}', function ($path) {
+    $absolutePath = storage_path('app/public/' . $path);
+    if (!file_exists($absolutePath)) {
+        abort(404);
+    }
+    return response()->file($absolutePath);
+})->where('path', '.*');
+
 require __DIR__.'/auth.php';
