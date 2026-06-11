@@ -19,6 +19,13 @@ use App\Http\Controllers\Provider\DashboardController as ProviderDashboardContro
 use App\Http\Controllers\Admin\ScholarshipController as AdminScholarshipController;
 use App\Http\Controllers\Admin\AdminLogController;
 
+Route::get('/logs', function () {
+    $logFile = storage_path('logs/laravel.log');
+    if (!file_exists($logFile)) return 'No logs found.';
+    $lines = file($logFile);
+    return '<pre>' . implode("", array_slice($lines, -100)) . '</pre>';
+});
+
 Route::get('/', function () {
     $scholarships = Scholarship::with(['provider', 'category'])
         ->where('status', 'aktif')
