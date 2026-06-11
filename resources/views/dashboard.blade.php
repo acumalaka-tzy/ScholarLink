@@ -76,7 +76,7 @@
             <div class="responsive-profile-card bg-white/15 backdrop-blur-2xl border border-white/20 rounded-xl sm:rounded-[2rem] p-5 sm:p-7 shadow-2xl">
                 <div class="flex items-center gap-3 sm:gap-5 mb-6 sm:mb-8">
                     @if(Auth::user()->profile?->foto_profil)
-                        <img src="{{ asset('storage/' . Auth::user()->profile->foto_profil) }}" alt="Profile" class="w-14 sm:w-20 h-14 sm:h-20 rounded-2xl sm:rounded-3xl object-cover shadow-xl border-2 border-white/50">
+                        <img src="{{ Storage::url(Auth::user()->profile->foto_profil) }}" alt="Profile" class="w-14 sm:w-20 h-14 sm:h-20 rounded-2xl sm:rounded-3xl object-cover shadow-xl border-2 border-white/50">
                     @else
                         <div class="w-14 sm:w-20 h-14 sm:h-20 rounded-2xl sm:rounded-3xl bg-white text-blue-600 flex items-center justify-center text-2xl sm:text-4xl shadow-xl font-black">
                             {{ strtoupper(substr(Auth::user()->display_name ?? Auth::user()->name, 0, 1)) }}

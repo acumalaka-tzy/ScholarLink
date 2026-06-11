@@ -106,7 +106,7 @@
                             </div>
 
                             <div class="flex flex-col sm:flex-row gap-4">
-                                <a href="{{ asset('storage/' . $document->file_path) }}" target="_blank" class="flex-1 inline-flex justify-center items-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-5 py-4 rounded-2xl font-black transition duration-300 shadow-lg shadow-blue-500/20">
+                                <a href="{{ Storage::url($document->file_path) }}" target="_blank" class="flex-1 inline-flex justify-center items-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-5 py-4 rounded-2xl font-black transition duration-300 shadow-lg shadow-blue-500/20">
                                     <i class="bi bi-eye-fill"></i>
                                     View
                                 </a>

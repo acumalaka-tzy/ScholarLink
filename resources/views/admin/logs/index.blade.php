@@ -43,7 +43,7 @@
                     <td class="px-6 py-5 whitespace-nowrap">
                         <div class="flex items-center gap-3">
                             @if($log->admin?->profile?->foto_profil)
-                                <img src="{{ asset('storage/' . $log->admin->profile->foto_profil) }}" alt="{{ $log->admin->name }}" class="w-8 h-8 rounded-full object-cover shadow-md border border-gray-100">
+                                <img src="{{ Storage::url($log->admin->profile->foto_profil) }}" alt="{{ $log->admin->name }}" class="w-8 h-8 rounded-full object-cover shadow-md border border-gray-100">
                             @else
                                 <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center font-bold text-xs shadow-md">
                                     {{ strtoupper(substr($log->admin->name ?? '?', 0, 1)) }}

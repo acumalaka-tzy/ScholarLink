@@ -31,7 +31,7 @@
                         <td class="p-5">
                             <div class="flex items-center gap-3">
                                 @if($application->user->profile && $application->user->profile->foto_profil)
-                                    <img src="{{ asset('storage/' . $application->user->profile->foto_profil) }}" alt="Profile" class="w-10 h-10 rounded-xl object-cover shadow-md">
+                                    <img src="{{ Storage::url($application->user->profile->foto_profil) }}" alt="Profile" class="w-10 h-10 rounded-xl object-cover shadow-md">
                                 @else
                                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center font-black text-white shadow-md shadow-blue-500/20">
                                         {{ strtoupper(substr($application->user->name ?? 'M', 0, 1)) }}

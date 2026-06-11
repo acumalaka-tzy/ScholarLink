@@ -100,8 +100,7 @@ class ApplicationController extends Controller
 
                     $path = $file->storeAs(
                         'applications/' . $application->id_application,
-                        $filename,
-                        'public'
+                        $filename
                     );
 
                     Document::create([
@@ -230,7 +229,7 @@ class ApplicationController extends Controller
         abort_if($application->status !== 'pending', 403, 'Tidak dapat membatalkan aplikasi yang sudah diproses.');
 
         foreach ($application->documents as $document) {
-            Storage::disk('public')->delete($document->file_path);
+            Storage::delete($document->file_path);
             $document->delete();
         }
 

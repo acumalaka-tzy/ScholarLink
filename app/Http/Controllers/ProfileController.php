@@ -37,12 +37,12 @@ class ProfileController extends Controller
 
         if ($request->hasFile('foto_profil')) {
             $fotoProfil = $request->file('foto_profil')
-                ->store('profiles/foto-profil', 'public');
+                ->store('profiles/foto-profil');
         }
 
         if ($request->hasFile('foto_sampul')) {
             $fotoSampul = $request->file('foto_sampul')
-                ->store('profiles/foto-sampul', 'public');
+                ->store('profiles/foto-sampul');
         }
 
         $user->profile()->updateOrCreate(

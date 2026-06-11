@@ -53,7 +53,7 @@
                         <td class="px-6 py-5">
                             <div class="flex items-center gap-4">
                                 @if($user->profile?->foto_profil)
-                                    <img src="{{ asset('storage/' . $user->profile->foto_profil) }}" alt="{{ $user->name }}" class="w-12 h-12 rounded-2xl object-cover shadow-md border border-gray-100">
+                                    <img src="{{ Storage::url($user->profile->foto_profil) }}" alt="{{ $user->name }}" class="w-12 h-12 rounded-2xl object-cover shadow-md border border-gray-100">
                                 @else
                                     <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center font-black shadow-md">
                                         {{ strtoupper(substr($user->name, 0, 1)) }}

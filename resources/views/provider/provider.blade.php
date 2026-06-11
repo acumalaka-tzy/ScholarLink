@@ -81,7 +81,7 @@
                 <div class="flex items-center gap-4">
                     <div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center overflow-hidden text-blue-600 font-black text-xl">
                         @if($fotoProfil)
-                            <img src="{{ asset('storage/' . $fotoProfil) }}" class="w-full h-full object-cover" alt="Profile Photo">
+                            <img src="{{ Storage::url($fotoProfil) }}" class="w-full h-full object-cover" alt="Profile Photo">
                         @else
                             {{ $initials }}
                         @endif
@@ -117,7 +117,7 @@
 
                 <button onclick="toggleProfileMenu()" class="w-10 h-10 sm:w-16 sm:h-16 flex-shrink-0 rounded-full sm:rounded-3xl bg-blue-600 text-white flex items-center justify-center font-black text-lg sm:text-2xl shadow-md sm:shadow-lg shadow-blue-500/20 hover:scale-105 transition overflow-hidden border-2 border-white/50">
                     @if($fotoProfil)
-                        <img src="{{ asset('storage/' . $fotoProfil) }}" class="w-full h-full object-cover" alt="Profile Photo">
+                        <img src="{{ Storage::url($fotoProfil) }}" class="w-full h-full object-cover" alt="Profile Photo">
                     @else
                         {{ $initials }}
                     @endif
@@ -128,7 +128,7 @@
                         <div class="flex items-center gap-4">
                             <div class="w-16 h-16 rounded-3xl bg-blue-600 text-white flex items-center justify-center font-black text-2xl overflow-hidden">
                                 @if($fotoProfil)
-                                    <img src="{{ asset('storage/' . $fotoProfil) }}" class="w-full h-full object-cover" alt="Profile Photo">
+                                    <img src="{{ Storage::url($fotoProfil) }}" class="w-full h-full object-cover" alt="Profile Photo">
                                 @else
                                     {{ $initials }}
                                 @endif

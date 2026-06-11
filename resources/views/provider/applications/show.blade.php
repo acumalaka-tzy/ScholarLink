@@ -41,7 +41,7 @@
         
         <div class="lg:col-span-1 bg-white rounded-3xl p-6 border border-gray-100 flex flex-col items-center text-center shadow-sm h-fit">
             @if($application->user->profile && $application->user->profile->foto_profil)
-                <img src="{{ asset('storage/' . $application->user->profile->foto_profil) }}" alt="Profile" class="w-24 h-24 rounded-2xl object-cover shadow-lg shadow-blue-500/20 mb-4">
+                <img src="{{ Storage::url($application->user->profile->foto_profil) }}" alt="Profile" class="w-24 h-24 rounded-2xl object-cover shadow-lg shadow-blue-500/20 mb-4">
             @else
                 <div class="w-24 h-24 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center text-white text-3xl font-black shadow-lg shadow-blue-500/20 mb-4">
                     {{ strtoupper(substr($application->user->name ?? 'M', 0, 1)) }}
@@ -125,7 +125,7 @@
                                     </div>
                                 </div>
 
-                                <a href="{{ asset('storage/' . $document->file_path) }}"
+                                <a href="{{ Storage::url($document->file_path) }}"
                                    target="_blank"
                                    class="ml-3 px-4 py-1.5 bg-white border border-gray-200 text-gray-700 hover:text-blue-600 hover:border-blue-200 text-xs font-black rounded-xl transition shadow-sm flex-shrink-0">
                                     Buka

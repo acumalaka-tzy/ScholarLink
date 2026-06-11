@@ -71,8 +71,7 @@ class DocumentController extends Controller
 
         $path = $file->storeAs(
             'documents/' . auth()->id(),
-            $filename,
-            'public'
+            $filename
         );
 
         Document::create([
@@ -104,8 +103,8 @@ class DocumentController extends Controller
             abort_if($application->scholarship->id_provider !== $provider->id_provider, 403, 'Unauthorized');
         }
 
-        return response()->download(
-            storage_path('app/public/' . $document->file_path),
+        return \Illuminate\Support\Facades\Storage::download(
+            $document->file_path,
             $document->nama_file
         );
     }
@@ -119,7 +118,7 @@ class DocumentController extends Controller
 
         abort_if($application->status !== 'pending', 403, 'Tidak dapat menghapus dokumen setelah aplikasi diproses.');
 
-        \Illuminate\Support\Facades\Storage::disk('public')->delete($document->file_path);
+        \Illuminate\Support\Facades\Storage::delete($document->file_path);
 
         $document->delete();
 

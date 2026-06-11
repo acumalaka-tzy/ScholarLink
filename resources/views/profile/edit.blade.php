@@ -34,7 +34,7 @@
 
         <div class="relative h-72 overflow-hidden">
             @if($user->profile?->foto_sampul)
-                <img src="{{ asset('storage/' . $user->profile->foto_sampul) }}"
+                <img src="{{ Storage::url($user->profile->foto_sampul) }}"
                      alt="Foto Sampul"
                      class="absolute inset-0 w-full h-full object-cover">
             @else
@@ -66,7 +66,7 @@
                     <div class="flex flex-col md:flex-row md:items-end gap-6">
 
                         @if($user->profile?->foto_profil)
-                            <img src="{{ asset('storage/' . $user->profile->foto_profil) }}"
+                            <img src="{{ Storage::url($user->profile->foto_profil) }}"
                                  alt="Foto Profil"
                                  class="w-36 h-36 rounded-full object-cover border-8 border-white shadow-xl">
                         @else
