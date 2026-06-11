@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('scholarships', function (Blueprint $table) {
-            $table->json('required_documents')->nullable()->after('syarat');
-        });
+        if (!Schema::hasColumn('scholarships', 'required_documents')) {
+            Schema::table('scholarships', function (Blueprint $table) {
+                $table->json('required_documents')->nullable()->after('syarat');
+            });
+        }
     }
 
     /**
