@@ -77,12 +77,6 @@
                             <i class="bi bi-save-fill"></i> <span class="hidden xs:inline">Save Password</span><span class="inline xs:hidden">Simpan</span>
                         </span>
                     </button>
-
-                    @if (session('status') === 'password-updated')
-                        <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2500)" class="inline-flex items-center gap-2 sm:gap-3 bg-green-100 border border-green-200 text-green-700 px-3 sm:px-5 py-2 sm:py-4 rounded-lg sm:rounded-2xl font-black shadow-sm text-xs sm:text-base">
-                            <i class="bi bi-check-circle-fill"></i> <span class="hidden xs:inline">Password berhasil diperbarui</span><span class="inline xs:hidden">Berhasil</span>
-                        </div>
-                    @endif
                 </div>
             </form>
         </div>

@@ -54,5 +54,21 @@
     </main>
 
     <x-toast />
+
+    @if(session('status') || session('success') || session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                @if(session('status') === 'profile-updated')
+                    showToast('Profil berhasil diperbarui!', 'success');
+                @elseif(session('status') === 'password-updated')
+                    showToast('Password berhasil diperbarui!', 'success');
+                @elseif(session('success'))
+                    showToast("{{ session('success') }}", 'success');
+                @elseif(session('error'))
+                    showToast("{{ session('error') }}", 'error');
+                @endif
+            });
+        </script>
+    @endif
 </body>
 </html>

@@ -32,28 +32,18 @@ class ProfileController extends Controller
 
         $user->save();
 
-    $fotoProfil = $user->profile->foto_profil ?? null;
-$fotoSampul = $user->profile->foto_sampul ?? null;
+        $fotoProfil = $user->profile->foto_profil ?? null;
+        $fotoSampul = $user->profile->foto_sampul ?? null;
 
-if ($request->hasFile('foto_profil')) {
+        if ($request->hasFile('foto_profil')) {
+            $fotoProfil = $request->file('foto_profil')
+                ->store('profiles/foto-profil');
+        }
 
-    \Log::info('FOTO PROFIL TERDETEKSI');
-
-    $fotoProfil = $request->file('foto_profil')
-        ->store('profiles/foto-profil');
-
-    \Log::info('FOTO PROFIL TERSIMPAN', [
-        'path' => $fotoProfil
-    ]);
-}
-else {
-    \Log::info('FOTO PROFIL TIDAK TERDETEKSI');
-}
-
-if ($request->hasFile('foto_sampul')) {
-    $fotoSampul = $request->file('foto_sampul')
-        ->store('profiles/foto-sampul');
-}
+        if ($request->hasFile('foto_sampul')) {
+            $fotoSampul = $request->file('foto_sampul')
+                ->store('profiles/foto-sampul');
+        }
 
         $user->profile()->updateOrCreate(
             ['user_id' => $user->id],

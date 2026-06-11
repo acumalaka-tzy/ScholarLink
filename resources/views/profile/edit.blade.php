@@ -223,10 +223,30 @@
                 </div>
 
                 <div class="space-y-8">
-                    <div class="bg-white rounded-[2rem] shadow-xl border border-gray-100 overflow-hidden">
+                    <div class="bg-white rounded-[2rem] shadow-xl border border-gray-100 overflow-hidden" x-data="{ open: false }">
                         <div class="h-2 bg-gradient-to-r {{ $config['cover'] }}"></div>
-                        <div class="p-6 sm:p-8">
-                            @include('profile.partials.update-password-form')
+                        
+                        <button @click="open = !open" type="button" class="w-full p-6 sm:p-8 flex items-center justify-between text-left focus:outline-none hover:bg-gray-50 transition">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl">
+                                    <i class="bi bi-shield-lock-fill"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-black text-gray-900">Ubah Password</h3>
+                                    <p class="text-gray-500 text-sm font-bold mt-1">Klik di sini jika ingin mengganti password</p>
+                                </div>
+                            </div>
+                            <div class="text-gray-400 transition-transform duration-300" :class="{'rotate-180': open}">
+                                <i class="bi bi-chevron-down text-2xl"></i>
+                            </div>
+                        </button>
+
+                        <div x-show="open" x-collapse x-cloak>
+                            <div class="p-6 sm:p-8 border-t border-gray-100">
+                                @include('profile.partials.update-password-form')
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

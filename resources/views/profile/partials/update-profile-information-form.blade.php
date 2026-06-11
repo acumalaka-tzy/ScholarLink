@@ -166,18 +166,12 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-3 sm:gap-5 pt-4">
-                    <button type="submit" class="group relative overflow-hidden inline-flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-7 py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20 transition hover:scale-[1.02] active:scale-[0.98] text-xs sm:text-base">
+                    <button type="submit" class="group relative overflow-hidden inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-8 py-4 rounded-2xl font-black shadow-lg shadow-blue-500/20 transition hover:scale-[1.02] active:scale-[0.98]">
                         <span class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition"></span>
-                        <span class="relative flex items-center gap-2 sm:gap-3">
-                            <i class="bi bi-save-fill"></i> <span class="hidden xs:inline">Save Changes</span>
+                        <span class="relative flex items-center gap-2">
+                            <i class="bi bi-save-fill"></i> Save Changes
                         </span>
                     </button>
-
-                    @if (session('status') === 'profile-updated')
-                        <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2500)" class="inline-flex items-center gap-3 bg-green-100 border border-green-200 text-green-700 px-5 py-4 rounded-2xl font-black shadow-sm">
-                            <i class="bi bi-check-circle-fill"></i> Profile berhasil diperbarui
-                        </div>
-                    @endif
                 </div>
             </form>
         </div>
