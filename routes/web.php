@@ -114,7 +114,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // Route khusus untuk mengakali masalah symlink foto/storage di Railway
-Route::get('/storage/{path}', function ($path) {
+Route::get('/file/{path}', function ($path) {
     $absolutePath = storage_path('app/public/' . $path);
     if (!file_exists($absolutePath)) {
         abort(404);
