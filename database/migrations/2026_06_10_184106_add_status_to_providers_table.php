@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('providers', function (Blueprint $table) {
-            $table->string('status')->default('pending');
-        });
+        if (!Schema::hasColumn('providers', 'status')) {
+            Schema::table('providers', function (Blueprint $table) {
+                $table->string('status')->default('pending');
+            });
+        }
     }
 
     /**
