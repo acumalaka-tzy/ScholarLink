@@ -68,6 +68,13 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('verification.notice');
+        // Trik Bypass Verifikasi Email Otomatis
+        $user->markEmailAsVerified();
+
+        if ($user->role === 'provider') {
+            return redirect()->route('provider.dashboard');
+        }
+
+        return redirect()->route('dashboard');
     }
 }
