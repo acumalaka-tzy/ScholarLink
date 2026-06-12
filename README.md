@@ -382,13 +382,13 @@ Progress fitur saat ini:
 | Authentication | ✅ Selesai |
 | Role-based redirect | ✅ Selesai |
 | Home page | ✅ Selesai |
-| Admin panel | ✅ Tersedia |
-| Provider dashboard | ✅ Tersedia |
-| Scholarship management | ✅ Tersedia |
-| Application management | ✅ Tersedia |
-| Document upload | ✅ Tersedia |
-| Favorites | ✅ Tersedia |
-| Chat rooms | ✅ Tersedia |
+| Admin panel | ✅ Selesai |
+| Provider dashboard | ✅ Selesai |
+| Scholarship management | ✅ Selesai |
+| Application management | ✅ Selesai |
+| Document upload | ✅ Selesai |
+| Favorites | ✅ Selesai |
+| Chat rooms | ✅ Selesai |
 | Realtime chat | ⏳ Pengembangan selanjutnya |
 | Notification system | ⏳ Pengembangan selanjutnya |
 
@@ -467,7 +467,7 @@ Project **ScholarLink** dikembangkan oleh tim berikut:
 
 ## 📄 Lisensi
 
-Project ini dibuat untuk kebutuhan pembelajaran, pengembangan aplikasi web, dan demonstrasi sistem pengelolaan beasiswa.
+Project ini dibuat untuk memenuhi Tugas Project Pemrograman Web Lanjutan dan Praktikum Pemrograman Web Lanjutan. 
 
 ---
 
