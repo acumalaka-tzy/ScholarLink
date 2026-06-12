@@ -6,6 +6,12 @@ Aplikasi ini dirancang untuk membantu mahasiswa menemukan beasiswa yang sesuai, 
 
 ---
 
+## Link Deployment
+
+https://scholarlink.up.railway.app/
+
+---
+
 ## ✨ Preview Singkat
 
 ScholarLink memiliki tiga jenis pengguna utama:
