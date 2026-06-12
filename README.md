@@ -6,7 +6,7 @@ Aplikasi ini dirancang untuk membantu mahasiswa menemukan beasiswa yang sesuai, 
 
 ---
 
-## Link Deployment
+## 📎 Link Deployment
 
 https://scholarlink.up.railway.app/
 
